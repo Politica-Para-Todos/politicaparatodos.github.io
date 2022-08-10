@@ -1,9 +1,11 @@
+@import './colors';
+
 .header {
   display: flex;
   width: 100%;
   height: auto;
   padding: 0;
-  background-color: $darkGrey;
+  background-color: $darkerGrey;
   min-height: 80px;
 
   .ant-row-flex {
