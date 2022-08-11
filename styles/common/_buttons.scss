@@ -1,0 +1,63 @@
+@import './colors';
+
+.button,
+.ant-button {
+  display: inline-block;
+  padding: 10px 30px;
+  background-color: $darkGrey;
+  border-radius: 3px;
+  color: white;
+  text-decoration: none;
+  transition: background-color .15s ease-in-out, color .15s ease-in-out;
+  outline: none;
+
+  a {
+    border: none;
+    border-color: transparent;
+    background-color: $lightGrey;
+    color: white;
+    text-decoration: none;
+
+    &:hover,
+    &:focus,
+    &:active {
+      border: none;
+      border-color: transparent;
+      background-color: $lightGrey;
+      color: white;
+      text-decoration: none;
+    }
+  }
+}
+
+.button--white {
+  background-color: $washedWhite;
+  border: none;
+  border-color: transparent;
+  color: black;
+
+  &:hover,
+  &:focus,
+  &:active {
+    border: none;
+    border-color: transparent;
+    background-color: $lightGrey;
+    color: black;
+  }
+}
+
+.button--grey {
+  background-color: $darkerGrey;
+  border: none;
+  border-color: transparent;
+  color: white;
+
+  &:hover,
+  &:focus,
+  &:active {
+    border: none;
+    border-color: transparent;
+    background-color: $darkGrey;
+    color: white;
+  }
+}
