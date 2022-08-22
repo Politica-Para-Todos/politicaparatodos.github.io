@@ -1,0 +1,11 @@
+@import 'antd/dist/antd.css';
+
+@import '/styles/common/all.scss';
+@import '/styles/partials/all.scss';
+
+@import 'home/home.scss';
+@import 'party-detail/party-detail.scss';
+@import 'party-candidates/party-candidates.scss';
+@import 'party-manifesto/party-manifesto.scss';
+@import './pages/about-us/about-us';
+@import './pages/debates/debates';
