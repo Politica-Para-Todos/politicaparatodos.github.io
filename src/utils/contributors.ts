@@ -1,4 +1,4 @@
-const contributors: string[] = [
+export const contributors: string[] = [
   "Nuno Carneiro",
   "Rui Gonçalves",
   "Hugo Barroca",
@@ -33,4 +33,12 @@ const contributors: string[] = [
   "Catarina Tomé"
 ]
 
-export default contributors;
+export const shuffleList = (contributors: string[]) => {
+  const shuffledList: string[] = contributors;  
+  
+  shuffledList.forEach((element: string, index: number) => {
+    const random = Math.floor(Math.random() * (index + 1));
+    [shuffledList[index], shuffledList[random]] = [shuffledList[random], shuffledList[index]];
+  })
+  return shuffledList;
+}
