@@ -1,6 +1,5 @@
 import { Col, Row } from "antd"
 import Image from "next/image"
-import Infographic from '../../public/infographic.svg'
 
 const HomeMissionInfographic = () => {
   return (
@@ -11,7 +10,7 @@ const HomeMissionInfographic = () => {
           <p>Promover a participação activa dos cidadãos nos processos eleitorais em Portugal.</p>
         </Col>
         <Col span={24} lg={10} className="home-our-mission-img">
-          <Image alt="infographic" src={Infographic} />
+          <img alt="infographic" src='infographic.svg' />
         </Col>
       </Row>
     </section>

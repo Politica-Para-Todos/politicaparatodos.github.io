@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Row, Col, Button } from "antd";
-import VideoMask from "../../public/video_mask.jpg";
 import YouTubePlayer from "react-player/youtube";
 
 interface Video {
@@ -40,7 +39,7 @@ const renderEpisodeButtons = (currentEpisode: any, setState: any) => {
       <Button
         key={`episode-${index}`}
         className={classNames}
-        onClick={() => setState({ currentEpisode: index })}>
+        onClick={() => setState(currentEpisode)}>
         Ep. {index + 1}
       </Button>
     );
@@ -50,6 +49,7 @@ const renderEpisodeButtons = (currentEpisode: any, setState: any) => {
 const HomeMedia = () => {
 
   const [currentEpisode, setState] = useState(0);
+
   const { url, caption } = videos[currentEpisode];
 
   return (
@@ -63,7 +63,7 @@ const HomeMedia = () => {
             <YouTubePlayer
               className='home-videos-react-player'
               url={url}
-              poster={VideoMask}
+              poster='video_mask.jpg'
               width='100%'
               height='100%'
               controls
