@@ -1,7 +1,6 @@
 import { ObjectMapper } from "jackson-js";
 import { GetStaticProps, NextPage } from "next";
 import { Legislature, DeputyDetails, ParlamentaryGroupDetails } from "../src/dtos/base-info";
-import * as json from '../src/dtos/InformacaoBaseXV.json';
 
 const Parlament: NextPage = (data: any) => {
   const mapper = new ObjectMapper();
