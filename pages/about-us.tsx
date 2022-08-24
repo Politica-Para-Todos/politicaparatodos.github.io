@@ -18,7 +18,7 @@ const AboutUs: NextPage = () => (
     />
     <LayoutHeader />
     <Layout.Content className="about-us-section">
-      <img src='rows-people.svg' className="about-us__header-img" />
+      <img src='rows-people.svg' className="about-us__header-img" alt="people" />
       <AboutUsContributors />
       <Divider />
       <AboutUsMotivation />

@@ -10,7 +10,7 @@ const AboutUsFooter = () => (
   <Footer className="about-us-footer footer">
     <SocialSharing socialMediaList={socialMediaOptions} />
     <Link href="/">
-      <img className="footer_logo" src='vertical_logo.jpg' />
+      <img className="footer_logo" src='vertical_logo.jpg' alt='PPT logo' />
     </Link>
   </Footer>
 );
