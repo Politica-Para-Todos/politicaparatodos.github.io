@@ -1,34 +1,27 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Este projecto engloba o site público do Política Para Todos.
 
-## Getting Started
+## Para começar
 
-First, run the development server:
+Primeiro, garantir que tem instalado [npm][npm] ou [yarn][yarn] e assim, estando no directório do projecto, a primeira vez, correr:
 
 ```bash
 npm run dev
 # or
-yarn dev
+yarn install && yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Assim, irão ser instaladas todas as dependências necessárias ao projecto e após isso a aplicação irá correr (em modo desenvolvimento) no servidor local - [http://localhost:3000][localhost] - que consegue aceder através do browser para assim ver o resultado.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Contribuir
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+É aconselhado que cada contribuição seja feita através de um `Pull Request - PR` para poder ser revista por outros membros da equipa e assim existir uma percepção mais alargada do que vai ser modificado e faz com que cada alteração seja feita com mais confiança antes de ser merged. 
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Deploy
 
-## Learn More
+Para cada novo push feito para a branch `main` é accionado um processo 'build' e 'deploy' para uma GitHub Page, onde o site se encontra alojado. 
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+[nextjs]: https://nextjs.org/
+[npm]: https://www.npmjs.com/
+[yarn]: https://yarnpkg.com/
+[localhost]: http://localhost:3000
