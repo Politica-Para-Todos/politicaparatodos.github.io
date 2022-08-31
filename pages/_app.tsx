@@ -1,7 +1,7 @@
 import '../styles/index.scss';
 import type { AppProps } from 'next/app';
 
-const MyApp = ({ Component, pageProps}: AppProps) => {
+const App = ({ Component, pageProps}: AppProps) => {
 
   if (typeof window === 'undefined') {
     return <></>
@@ -9,4 +9,4 @@ const MyApp = ({ Component, pageProps}: AppProps) => {
   return <Component {...pageProps} />
 }
 
-export default MyApp;
+export default App;
