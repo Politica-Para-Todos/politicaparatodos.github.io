@@ -279,9 +279,13 @@ export class DeputySituationDetails {
   @JsonProperty({value: 'sioDtInicio'})
   startDate: string;
 
-  constructor(description: string, starDate: string) {
+  @JsonProperty({value: 'sioDtFim'})
+  endDate: string | null
+
+  constructor(description: string, starDate: string, endDate: string | null) {
     this.description = description;
     this.startDate = starDate;
+    this.endDate = endDate;
   }
 }
 
