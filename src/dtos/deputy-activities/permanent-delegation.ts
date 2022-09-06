@@ -1,4 +1,12 @@
-import { JsonClassType, JsonDeserialize, JsonFormat, JsonFormatShape, JsonIgnoreProperties, JsonManagedReference, JsonProperty } from "jackson-js";
+import { 
+  JsonClassType,
+  JsonDeserialize,
+  JsonFormat,
+  JsonFormatShape,
+  JsonIgnoreProperties,
+  JsonManagedReference,
+  JsonProperty 
+} from "jackson-js";
 import { buildArray } from "../../utils/parlamento-api";
 
 export class PermanentDelagation {
