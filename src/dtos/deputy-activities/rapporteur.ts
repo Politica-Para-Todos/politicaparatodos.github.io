@@ -9,29 +9,29 @@ import {
 } from "jackson-js";
 import { buildArray } from "../../utils/parlamento-api";
 
-export class Relator {
+export class Rapporteur {
 
   @JsonProperty({ value: 'relatoresIniciativas' })
-  @JsonManagedReference() @JsonClassType({ type: () => [RelatorInitiative] })
-  initiative: RelatorInitiative | null;
+  @JsonManagedReference() @JsonClassType({ type: () => [InitiativeRapporteur] })
+  initiative: InitiativeRapporteur | null;
 
   @JsonProperty({ value: 'relatoresPeticoes' })
-  @JsonManagedReference() @JsonClassType({ type: () => [RelatorPetition] })
-  petition: RelatorPetition | null;
+  @JsonManagedReference() @JsonClassType({ type: () => [PetitionRapporteur] })
+  petition: PetitionRapporteur | null;
 
   @JsonProperty({ value: 'relatoresIniEuropeias' })
-  @JsonManagedReference() @JsonClassType({ type: () => [RelatorEuropeanInitiative] })
-  europeanInitiative: RelatorEuropeanInitiative | null;
+  @JsonManagedReference() @JsonClassType({ type: () => [EuropeanInitiativeRapporteur] })
+  europeanInitiative: EuropeanInitiativeRapporteur | null;
 
   @JsonProperty({ value: 'relatoresContasPublicas' })
-  @JsonManagedReference() @JsonClassType({ type: () => [RelatorContasPublicas] })
-  contasPublicas: RelatorContasPublicas | null;
+  @JsonManagedReference() @JsonClassType({ type: () => [PublicFundsRapporteur] })
+  contasPublicas: PublicFundsRapporteur | null;
 
   constructor(
-    initiative: RelatorInitiative | null,
-    petition: RelatorPetition | null,
-    europeanInitiative: RelatorEuropeanInitiative | null,
-    contasPublicas: RelatorContasPublicas | null
+    initiative: InitiativeRapporteur | null,
+    petition: PetitionRapporteur | null,
+    europeanInitiative: EuropeanInitiativeRapporteur | null,
+    contasPublicas: PublicFundsRapporteur | null
   ) {
     this.initiative = initiative;
     this.petition = petition;
@@ -40,68 +40,68 @@ export class Relator {
   }
 }
 
-export class RelatorInitiative {
+export class InitiativeRapporteur {
 
   @JsonProperty({ value: 'pt_gov_ar_wsar_objectos_RelatoresIniciativasOut' })
-  @JsonManagedReference() @JsonClassType({ type: () => [Array, [RelatorInitiativeDetails]] })
+  @JsonManagedReference() @JsonClassType({ type: () => [Array, [InitiativeRapporteurDetails]] })
   @JsonFormat({ shape: JsonFormatShape.ARRAY })
   @JsonDeserialize({
     using: buildArray
   })
-  details: RelatorInitiativeDetails[]
+  details: InitiativeRapporteurDetails[]
 
-  constructor(details: RelatorInitiativeDetails[]) {
+  constructor(details: InitiativeRapporteurDetails[]) {
     this.details = details;
   }
 }
 
-export class RelatorPetition {
+export class PetitionRapporteur {
 
   @JsonProperty({ value: 'pt_gov_ar_wsar_objectos_RelatoresPeticoesOut' })
-  @JsonManagedReference() @JsonClassType({ type: () => [Array, [RelatorPetitionDetails]] })
+  @JsonManagedReference() @JsonClassType({ type: () => [Array, [PetitionRapporteurDetails]] })
   @JsonFormat({ shape: JsonFormatShape.ARRAY })
   @JsonDeserialize({
     using: buildArray
   })
-  details: RelatorPetitionDetails[]
+  details: PetitionRapporteurDetails[]
 
-  constructor(details: RelatorPetitionDetails[]) {
+  constructor(details: PetitionRapporteurDetails[]) {
     this.details = details;
   }
 }
 
-export class RelatorEuropeanInitiative {
+export class EuropeanInitiativeRapporteur {
 
   @JsonProperty({ value: 'pt_gov_ar_wsar_objectos_RelatoresIniEuropeiasOut' })
-  @JsonManagedReference() @JsonClassType({ type: () => [Array, [RelatorEuropeanInitiativeDetails]] })
+  @JsonManagedReference() @JsonClassType({ type: () => [Array, [EuropeanInitiativeRapporteurDetails]] })
   @JsonFormat({ shape: JsonFormatShape.ARRAY })
   @JsonDeserialize({
     using: buildArray
   })
-  details: RelatorEuropeanInitiativeDetails[]
+  details: EuropeanInitiativeRapporteurDetails[]
 
-  constructor(details: RelatorEuropeanInitiativeDetails[]) {
+  constructor(details: EuropeanInitiativeRapporteurDetails[]) {
     this.details = details;
   }
 }
 
-export class RelatorContasPublicas {
+export class PublicFundsRapporteur {
 
   @JsonProperty({ value: 'pt_gov_ar_wsar_objectos_RelatoresContasPublicasOut' })
-  @JsonManagedReference() @JsonClassType({ type: () => [Array, [RelatorContasPublicasDetails]] })
+  @JsonManagedReference() @JsonClassType({ type: () => [Array, [PublicFundsRapporteurDetails]] })
   @JsonFormat({ shape: JsonFormatShape.ARRAY })
   @JsonDeserialize({
     using: buildArray
   })
-  details: RelatorContasPublicasDetails[]
+  details: PublicFundsRapporteurDetails[]
 
-  constructor(details: RelatorContasPublicasDetails[]) {
+  constructor(details: PublicFundsRapporteurDetails[]) {
     this.details = details;
   }
 }
 
 @JsonIgnoreProperties({ value: ['legislature'] })
-export class RelatorInitiativeDetails {
+export class InitiativeRapporteurDetails {
 
   @JsonProperty({ value: 'iniTi' })
   title: string;
@@ -144,7 +144,7 @@ export class RelatorInitiativeDetails {
 }
 
 @JsonIgnoreProperties({ value: ['legislature'] })
-export class RelatorPetitionDetails {
+export class PetitionRapporteurDetails {
 
   @JsonProperty({ value: 'petId' })
   id: number;
@@ -182,7 +182,7 @@ export class RelatorPetitionDetails {
 }
 
 @JsonIgnoreProperties({ value: ['legislature'] })
-export class RelatorEuropeanInitiativeDetails {
+export class EuropeanInitiativeRapporteurDetails {
 
   @JsonProperty({ value: 'ineId' })
   id: number;
@@ -214,7 +214,7 @@ export class RelatorEuropeanInitiativeDetails {
   }
 }
 
-export class RelatorContasPublicasDetails {
+export class PublicFundsRapporteurDetails {
 
   @JsonProperty({ value: 'actAs' })
   subject: string;
