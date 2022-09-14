@@ -31,6 +31,9 @@ export class SubComissionWorkingGroupDetails {
   @JsonProperty({ value: 'scmComLg' })
   legislature: string;
 
+  @JsonProperty({ value: 'cmsCargo' })
+  cmsCargo: string | null;
+
   @JsonProperty({ value: 'cmsSituacao' })
   cmsSituacao: string;
 
@@ -39,12 +42,14 @@ export class SubComissionWorkingGroupDetails {
     scmCd: number,
     scmComCd: number,
     legislature: string,
+    cmsCargo: string | null,
     cmsSituacao: string,
   ) {
     this.ccmDscom = ccmDscom;
     this.scmCd = scmCd;
     this.scmComCd = scmComCd;
     this.legislature = legislature;
+    this.cmsCargo = cmsCargo;
     this.cmsSituacao = cmsSituacao;
   }
 }
