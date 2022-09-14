@@ -4,20 +4,20 @@ import { buildArray } from "../../utils/parlamento-api";
 export class SubComissionWorkingGroup {
 
   @JsonProperty({ value: 'pt_gov_ar_wsar_objectos_SubComissoesGruposTrabalhoOut' })
-  @JsonManagedReference() @JsonClassType({ type: () => [Array, [SubComissionOfWorkingGroupDetails]] })
+  @JsonManagedReference() @JsonClassType({ type: () => [Array, [SubComissionWorkingGroupDetails]] })
   @JsonFormat({ shape: JsonFormatShape.ARRAY })
   @JsonDeserialize({
     using: buildArray
   })
-  details: SubComissionOfWorkingGroupDetails[];
+  details: SubComissionWorkingGroupDetails[];
 
-  constructor(details: SubComissionOfWorkingGroupDetails[]) {
+  constructor(details: SubComissionWorkingGroupDetails[]) {
     this.details = details;
   }
 }
 
 @JsonIgnoreProperties({ value: ['legislature'] })
-export class SubComissionOfWorkingGroupDetails {
+export class SubComissionWorkingGroupDetails {
 
   @JsonProperty({ value: 'ccmDscom' })
   ccmDscom: string;
