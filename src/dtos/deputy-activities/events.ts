@@ -1,15 +1,15 @@
 import { JsonIgnoreProperties, JsonProperty } from "jackson-js";
 import { ActivityEvent } from "./activity-event";
 
-export class Deslocacao extends ActivityEvent {
+export class Event extends ActivityEvent {
 
-  constructor(details: DeslocacaoDetails[]) {
-    super(details);
+  constructor(eventDetails: EventDetails[]) {
+    super(eventDetails);
   }
 }
 
-@JsonIgnoreProperties({ value: ['legislature'] })
-export class DeslocacaoDetails {
+@JsonIgnoreProperties({ value: ['actLg'] })
+export class EventDetails {
 
   @JsonProperty({ value: 'actId' })
   id: number;
@@ -17,20 +17,17 @@ export class DeslocacaoDetails {
   @JsonProperty({ value: 'actAs' })
   subject: string;
 
-  @JsonProperty({ value: 'actDtdes1' })
-  actDtdes1: string;
-
-  @JsonProperty({ value: 'actDtdes2' })
-  actDtdes2: string;
+  @JsonProperty({ value: 'actDtent' })
+  date: string;
 
   @JsonProperty({ value: 'actLoc' })
   location: string;
 
   @JsonProperty({ value: 'actTp' })
-  typeCode: string;
+  actTp: string;
 
   @JsonProperty({ value: 'actTpdesc' })
-  typeDescription: string;
+  description: string;
 
   @JsonProperty({ value: 'actLg' })
   legislature: string;
@@ -41,27 +38,35 @@ export class DeslocacaoDetails {
   @JsonProperty({ value: 'cmsAb' })
   cmsAb: string;
 
+  @JsonProperty({ value: 'tevTp' })
+  tevTp: string;
+
+  @JsonProperty({ value: 'actSl' })
+  actSl: string;
+
   constructor(
     id: number,
     subject: string,
-    actDtdes1: string,
-    actDtdes2: string,
+    date: string,
     location: string,
-    typeCode: string,
-    typeDescription: string,
+    actTp: string,
+    description: string,
     legislature: string,
     cmsNo: string,
     cmsAb: string,
+    tevTp: string,
+    actSl: string
   ) {
     this.id = id;
     this.subject = subject;
-    this.actDtdes1 = actDtdes1;
-    this.actDtdes2 = actDtdes2;
+    this.date = date;
     this.location = location;
-    this.typeCode = typeCode;
-    this.typeDescription = typeDescription;
+    this.actTp = actTp;
+    this.description = description;
     this.legislature = legislature;
     this.cmsNo = cmsNo;
     this.cmsAb = cmsAb;
+    this.tevTp = tevTp;
+    this.actSl = actSl;
   }
 }
