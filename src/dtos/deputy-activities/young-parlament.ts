@@ -1,23 +1,23 @@
 import { JsonClassType, JsonDeserialize, JsonFormat, JsonFormatShape, JsonIgnoreProperties, JsonManagedReference, JsonProperty } from "jackson-js";
 import { buildArray } from "../../utils/parlamento-api";
 
-export class YoungParlament {
+export class YoungParliament {
 
   @JsonProperty({ value: 'pt_ar_wsgode_objectos_DadosDeputado' })
-  @JsonManagedReference() @JsonClassType({ type: () => [Array, [YoungParlamentDetails]] })
+  @JsonManagedReference() @JsonClassType({ type: () => [Array, [YoungParliamentDetails]] })
   @JsonFormat({ shape: JsonFormatShape.ARRAY })
   @JsonDeserialize({
     using: buildArray
   })
-  youngParlamentDetails: YoungParlamentDetails | YoungParlamentDetails[];
+  details: YoungParliamentDetails[];
 
-  constructor(youngParlamentDetails: YoungParlamentDetails | YoungParlamentDetails[]) {
-    this.youngParlamentDetails = youngParlamentDetails;
+  constructor(details: YoungParliamentDetails[]) {
+    this.details = details;
   }
 }
 
 @JsonIgnoreProperties({ value: ['legislature'] })
-export class YoungParlamentDetails {
+export class YoungParliamentDetails {
 
   @JsonProperty({ value: 'legislatura' })
   legislature: string;
