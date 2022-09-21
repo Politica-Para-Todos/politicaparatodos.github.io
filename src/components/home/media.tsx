@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Row, Col, Button } from "antd";
 import YouTubePlayer from "react-player/youtube";
-import VideoMask from '../../../public/video_mask.jpg'
+import VideoMask from '../../../public/video_mask.jpg';
 
 interface Video {
   url: string,
@@ -64,7 +64,7 @@ const HomeMedia = () => {
             <YouTubePlayer
               className='home-videos-react-player'
               url={url}
-              poster={VideoMask}
+              light={VideoMask.src}
               width='100%'
               height='100%'
               controls

@@ -1,32 +1,33 @@
-import { JsonClassType, JsonIgnore, JsonIgnoreProperties, JsonManagedReference, JsonProperty } from "jackson-js";
+import { JsonClassType, JsonDeserialize, JsonFormat, JsonFormatShape, JsonIgnore, JsonIgnoreProperties, JsonManagedReference, JsonProperty } from "jackson-js";
+import { buildArray } from "../utils/parlamento-api";
 
-@JsonIgnoreProperties({value: ['xmlSchema', 'xmlSchemaInstance']})
+@JsonIgnoreProperties({ value: ['xmlSchema', 'xmlSchemaInstance'] })
 export class Legislature {
-  
-  @JsonProperty({value: '@xmlns:xsd'})
+
+  @JsonProperty({ value: '@xmlns:xsd' })
   xmlSchema: string;
 
-  @JsonProperty({value: '@xmlns:xsi'})
+  @JsonProperty({ value: '@xmlns:xsi' })
   xmlSchemaInstance: string;
 
-  @JsonProperty({value: 'SessoesLegislativas'})
-  @JsonManagedReference() @JsonClassType({type: () => [LegislativeSession]})
+  @JsonProperty({ value: 'SessoesLegislativas' })
+  @JsonManagedReference() @JsonClassType({ type: () => [LegislativeSession] })
   legislativeSession: LegislativeSession;
 
-  @JsonProperty({value: 'GruposParlamentares'})
-  @JsonManagedReference() @JsonClassType({type: () => [ParlamentaryGroup]})
+  @JsonProperty({ value: 'GruposParlamentares' })
+  @JsonManagedReference() @JsonClassType({ type: () => [ParlamentaryGroup] })
   parlamentaryGroup: ParlamentaryGroup;
 
-  @JsonProperty({value: 'CirculosEleitorais'})
-  @JsonManagedReference() @JsonClassType({type: () => [ElectoralCircle]})
+  @JsonProperty({ value: 'CirculosEleitorais' })
+  @JsonManagedReference() @JsonClassType({ type: () => [ElectoralCircle] })
   electoralCircle: ElectoralCircle;
 
-  @JsonProperty({value: 'Deputados'})
-  @JsonManagedReference() @JsonClassType({type: () => [Deputy]})
+  @JsonProperty({ value: 'Deputados' })
+  @JsonManagedReference() @JsonClassType({ type: () => [Deputy] })
   deputy: Deputy;
 
-  @JsonProperty({value: 'DetalheLegislatura'})
-  @JsonManagedReference() @JsonClassType({type: () => [LegislatureDetails]})
+  @JsonProperty({ value: 'DetalheLegislatura' })
+  @JsonManagedReference() @JsonClassType({ type: () => [LegislatureDetails] })
   legislatureDetails: LegislatureDetails;
 
   constructor(
@@ -49,9 +50,9 @@ export class Legislature {
 }
 
 export class LegislativeSession {
-  
-  @JsonProperty({value: 'pt_gov_ar_objectos_SessaoLegislativaOut'})
-  @JsonManagedReference() @JsonClassType({type: () => [Session]})
+
+  @JsonProperty({ value: 'pt_gov_ar_objectos_SessaoLegislativaOut' })
+  @JsonManagedReference() @JsonClassType({ type: () => [Session] })
   session: Session;
 
   constructor(session: Session) {
@@ -60,11 +61,11 @@ export class LegislativeSession {
 }
 
 export class Session {
-  
-  @JsonProperty({value: 'numSessao'})
+
+  @JsonProperty({ value: 'numSessao' })
   sessionNumber: string;
 
-  @JsonProperty({value: 'dataInicio'})
+  @JsonProperty({ value: 'dataInicio' })
   startDate: string;
 
   constructor(sessionNumber: string, startDate: string) {
@@ -75,8 +76,8 @@ export class Session {
 
 export class ParlamentaryGroup {
 
-  @JsonProperty({value: 'pt_gov_ar_objectos_GPOut'})
-  @JsonManagedReference() @JsonClassType({type: () => [Array, [ParlamentaryGroupDetails]]})
+  @JsonProperty({ value: 'pt_gov_ar_objectos_GPOut' })
+  @JsonManagedReference() @JsonClassType({ type: () => [Array, [ParlamentaryGroupDetails]] })
   details: ParlamentaryGroupDetails[];
 
   constructor(details: ParlamentaryGroupDetails[]) {
@@ -86,10 +87,10 @@ export class ParlamentaryGroup {
 
 export class ParlamentaryGroupDetails {
 
-  @JsonProperty({value: 'sigla'})
+  @JsonProperty({ value: 'sigla' })
   acronym: string;
 
-  @JsonProperty({value: 'nome'})
+  @JsonProperty({ value: 'nome' })
   name: string;
 
   constructor(acronym: string, name: string) {
@@ -100,8 +101,8 @@ export class ParlamentaryGroupDetails {
 
 export class ElectoralCircle {
 
-  @JsonProperty({value: 'pt_ar_wsgode_objectos_DadosCirculoEleitoralList'})
-  @JsonManagedReference() @JsonClassType({type: () => [Array, [ElectoralCircleDetails]]})
+  @JsonProperty({ value: 'pt_ar_wsgode_objectos_DadosCirculoEleitoralList' })
+  @JsonManagedReference() @JsonClassType({ type: () => [Array, [ElectoralCircleDetails]] })
   details: ElectoralCircleDetails[];
 
   constructor(details: ElectoralCircleDetails[]) {
@@ -110,14 +111,14 @@ export class ElectoralCircle {
 }
 
 export class ElectoralCircleDetails {
-  
-  @JsonProperty({value: 'cpId'})
+
+  @JsonProperty({ value: 'cpId' })
   id: number;
 
-  @JsonProperty({value: 'cpDes'})
+  @JsonProperty({ value: 'cpDes' })
   description: string;
 
-  @JsonProperty({value: 'legDes'})
+  @JsonProperty({ value: 'legDes' })
   legislatureAcronym: string;
 
   constructor(id: number, description: string, legislatureAcronym: string) {
@@ -129,8 +130,8 @@ export class ElectoralCircleDetails {
 
 export class Deputy {
 
-  @JsonProperty({value: 'pt_ar_wsgode_objectos_DadosDeputadoSearch'})
-  @JsonManagedReference() @JsonClassType({type: () => [Array, [DeputyDetails]]})
+  @JsonProperty({ value: 'pt_ar_wsgode_objectos_DadosDeputadoSearch' })
+  @JsonManagedReference() @JsonClassType({ type: () => [Array, [DeputyDetails]] })
   details: DeputyDetails[];
 
   constructor(details: DeputyDetails[]) {
@@ -140,39 +141,39 @@ export class Deputy {
 
 export class DeputyDetails {
 
-  @JsonProperty({value: 'depId'})
+  @JsonProperty({ value: 'depId' })
   id: number;
-  
-  @JsonProperty({value: 'depCadId'})
+
+  @JsonProperty({ value: 'depCadId' })
   chairId: number;
-  
-  @JsonProperty({value: 'depNomeParlamentar'})
+
+  @JsonProperty({ value: 'depNomeParlamentar' })
   name: string;
-  
-  @JsonProperty({value: 'depGP'})
-  @JsonManagedReference() @JsonClassType({type: () => [DeputyParlamentaryGroup]})
+
+  @JsonProperty({ value: 'depGP' })
+  @JsonManagedReference() @JsonClassType({ type: () => [DeputyParlamentaryGroup] })
   parlamentaryGroup: DeputyParlamentaryGroup;
-  
-  @JsonProperty({value: 'depCPId'})
+
+  @JsonProperty({ value: 'depCPId' })
   electoralCircleId: number;
-  
-  @JsonProperty({value: 'depCPDes'})
+
+  @JsonProperty({ value: 'depCPDes' })
   electoralCircleDescription: string;
-  
-  @JsonProperty({value: 'legDes'})
+
+  @JsonProperty({ value: 'legDes' })
   legislatureAcronym: string;
-  
-  @JsonProperty({value: 'depCargo'})
-  @JsonManagedReference() @JsonClassType({type: () => [DeputyPosition]})
+
+  @JsonProperty({ value: 'depCargo' })
+  @JsonManagedReference() @JsonClassType({ type: () => [DeputyPosition] })
   position: DeputyPosition | null;
-  
-  @JsonProperty({value: 'depSituacao'})
-  @JsonManagedReference() @JsonClassType({type: () => [DeputySituation]})
+
+  @JsonProperty({ value: 'depSituacao' })
+  @JsonManagedReference() @JsonClassType({ type: () => [DeputySituation] })
   situation: DeputySituation;
-  
-  @JsonProperty({value: 'depNomeCompleto'})
+
+  @JsonProperty({ value: 'depNomeCompleto' })
   fullName: string;
-  
+
   constructor(
     id: number,
     chairId: number,
@@ -198,12 +199,12 @@ export class DeputyDetails {
   }
 }
 
-export class  DeputyParlamentaryGroup {
+export class DeputyParlamentaryGroup {
 
-  @JsonProperty({value: 'pt_ar_wsgode_objectos_DadosSituacaoGP'})
-  @JsonManagedReference() @JsonClassType({type: () => [DeputyParlamentaryGroupDetails]})
+  @JsonProperty({ value: 'pt_ar_wsgode_objectos_DadosSituacaoGP' })
+  @JsonManagedReference() @JsonClassType({ type: () => [DeputyParlamentaryGroupDetails] })
   details: DeputyParlamentaryGroupDetails;
-  
+
   constructor(details: DeputyParlamentaryGroupDetails) {
     this.details = details;
   }
@@ -211,16 +212,16 @@ export class  DeputyParlamentaryGroup {
 
 export class DeputyParlamentaryGroupDetails {
 
-  @JsonProperty({value: 'gpId'})
+  @JsonProperty({ value: 'gpId' })
   id: number;
 
-  @JsonProperty({value: 'gpSigla'})
+  @JsonProperty({ value: 'gpSigla' })
   acronym: string;
 
-  @JsonProperty({value: 'gpDtInicio'})
+  @JsonProperty({ value: 'gpDtInicio' })
   startDate: string;
 
-  @JsonProperty({value: 'gpDtFim'})
+  @JsonProperty({ value: 'gpDtFim' })
   endDate: string;
 
   constructor(id: number, acronym: string, startDate: string, endDate: string) {
@@ -233,24 +234,24 @@ export class DeputyParlamentaryGroupDetails {
 
 export class DeputyPosition {
 
-  @JsonProperty({value: 'pt_ar_wsgode_objectos_DadosCargoDeputado'})
-  @JsonManagedReference() @JsonClassType({type: () => [DeputyPositionDetails]})
+  @JsonProperty({ value: 'pt_ar_wsgode_objectos_DadosCargoDeputado' })
+  @JsonManagedReference() @JsonClassType({ type: () => [DeputyPositionDetails] })
   details: DeputyPositionDetails;
-  
+
   constructor(details: DeputyPositionDetails) {
-  this.details = details;
+    this.details = details;
   }
 }
 
 export class DeputyPositionDetails {
-  
-  @JsonProperty({value: 'carId'})
+
+  @JsonProperty({ value: 'carId' })
   id: number;
-  
-  @JsonProperty({value: 'carDes'})
+
+  @JsonProperty({ value: 'carDes' })
   description: string;
 
-  @JsonProperty({value: 'carDtInicio'})
+  @JsonProperty({ value: 'carDtInicio' })
   startDate: string;
 
   constructor(id: number, description: string, startDate: string) {
@@ -262,24 +263,28 @@ export class DeputyPositionDetails {
 
 export class DeputySituation {
 
-  @JsonProperty({value: 'pt_ar_wsgode_objectos_DadosSituacaoDeputado'})
-  @JsonManagedReference() @JsonClassType({type: () => [DeputySituationDetails]})
-  deputySituationDetails: DeputySituationDetails;
+  @JsonProperty({ value: 'pt_ar_wsgode_objectos_DadosSituacaoDeputado' })
+  @JsonManagedReference() @JsonClassType({ type: () => [Array, [DeputySituationDetails]] })
+  @JsonFormat({ shape: JsonFormatShape.ARRAY })
+  @JsonDeserialize({
+    using: buildArray
+  })
+  deputySituationDetails: DeputySituationDetails[];
 
-  constructor(deputySituationDetails: DeputySituationDetails) {
+  constructor(deputySituationDetails: DeputySituationDetails[]) {
     this.deputySituationDetails = deputySituationDetails;
   }
 }
 
 export class DeputySituationDetails {
-  
-  @JsonProperty({value: 'sioDes'})
+
+  @JsonProperty({ value: 'sioDes' })
   description: string;
-  
-  @JsonProperty({value: 'sioDtInicio'})
+
+  @JsonProperty({ value: 'sioDtInicio' })
   startDate: string;
 
-  @JsonProperty({value: 'sioDtFim'})
+  @JsonProperty({ value: 'sioDtFim' })
   endDate: string | null
 
   constructor(description: string, starDate: string, endDate: string | null) {
@@ -290,17 +295,17 @@ export class DeputySituationDetails {
 }
 
 export class LegislatureDetails {
-  
-  @JsonProperty({value: 'sigla'})
+
+  @JsonProperty({ value: 'sigla' })
   acronym: string;
 
-  @JsonProperty({value: 'dtini'})
+  @JsonProperty({ value: 'dtini' })
   startDate: string;
 
-  @JsonProperty({value: 'siglaAntiga'})
+  @JsonProperty({ value: 'siglaAntiga' })
   previousAcronym: string;
 
-  @JsonProperty({value: 'id'})
+  @JsonProperty({ value: 'id' })
   id: number;
 
   constructor(

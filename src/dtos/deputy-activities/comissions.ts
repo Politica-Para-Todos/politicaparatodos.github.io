@@ -9,7 +9,7 @@ import {
 } from "jackson-js";
 import { buildArray } from "../../utils/parlamento-api";
 
-export class Comissions {
+export class Comission {
 
   @JsonProperty({ value: 'pt_gov_ar_wsar_objectos_ComissoesOut' })
   @JsonManagedReference() @JsonClassType({ type: () => [Array, [ComissionDetails]] })
