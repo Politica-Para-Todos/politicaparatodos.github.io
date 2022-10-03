@@ -1,5 +1,4 @@
 import { Col, Row } from "antd"
-import Image from "next/image"
 
 const HomeMissionInfographic = () => {
   return (

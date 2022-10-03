@@ -1,12 +1,11 @@
 import '../styles/index.scss';
 import type { AppProps } from 'next/app';
+import { ApolloProvider } from '@apollo/client';
+import apolloClient from '../src/graphql/apollo-service';
 
-const App = ({ Component, pageProps}: AppProps) => {
-
-  // if (typeof window === 'undefined') {
-  //   return <></>
-  // }
-  return <Component {...pageProps} />
-}
+const App = ({ Component, pageProps }: AppProps) =>
+  <ApolloProvider client={apolloClient}>
+    <Component {...pageProps} />
+  </ ApolloProvider>
 
 export default App;
