@@ -1,14 +1,18 @@
+import { ApolloClient, gql, InMemoryCache } from "@apollo/client";
 import { ObjectMapper } from "jackson-js";
 import { DeputyActivities, DeputyActivity } from "../../dtos/deputy-activities/deputy-activities";
+import { apolloClient } from "../../graphql/apollo-client";
 
 const Hemicycle = (props: any) => {
-  const mapper = new ObjectMapper();
+  // const mapper = new ObjectMapper();
 
-  const { deputyActivitiesResponse } = props;
-  const deputyActivities: DeputyActivities = mapper.parse<DeputyActivities>(JSON.stringify(deputyActivitiesResponse.ArrayOfAtividadeDeputado), { mainCreator: () => [DeputyActivities] })
-  const deputies = deputyActivities.activities.map((activity: DeputyActivity) => activity.deputy);
-  const hemicyleDeputies = deputies.filter(dep => !dep.position);
-  
+  //console.log(props);
+
+  // const { deputyActivitiesResponse } = props;
+  // const deputyActivities: DeputyActivities = mapper.parse<DeputyActivities>(JSON.stringify(deputyActivitiesResponse.ArrayOfAtividadeDeputado), { mainCreator: () => [DeputyActivities] })
+  // const deputies = deputyActivities.activities.map((activity: DeputyActivity) => activity.deputy);
+  // const hemicyleDeputies = deputies.filter(dep => !dep.position);
+
   return (
     <div>
       {/* <div>
@@ -34,7 +38,7 @@ const Hemicycle = (props: any) => {
         <h3>Total: {legislature.deputy.details.filter(deputy => deputy.position).length}</h3>
       </div> */}
       <div>
-        <h3>Deputados</h3>
+        {/* <h3>Deputados</h3>
         <ul>
           {
             hemicyleDeputies.map(dep => 
@@ -42,10 +46,30 @@ const Hemicycle = (props: any) => {
             )
           }
         </ul>
-        <h3>Total: { hemicyleDeputies.length }</h3>
+        <h3>Total: { hemicyleDeputies.length }</h3> */}
       </div>
     </div>
   )
+}
+
+// export const getStaticProps = async () => {
+//   const { data } = await apolloClient.query({
+//     query: gql`
+//       # query Parties {
+//       #   getAllParties {
+//       #     id
+//       #     name
+//       #     acronym
+//       #   }
+//       # }
+//       `
+//   });
+
+  return {
+    props: {
+      parties: data
+    }
+  }
 }
 
 export default Hemicycle;
