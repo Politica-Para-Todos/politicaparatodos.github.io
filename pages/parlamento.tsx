@@ -2,7 +2,6 @@ import { NextPage } from "next";
 import { Layout } from 'antd';
 import LayoutHeader from "../src/components/layout-header";
 import MetaTags from "../src/components/meta-tags";
-import Hemicycle from "../src/components/parlament/hemicycle";
 
 const Parlament: NextPage = () => (
   <Layout>
@@ -15,7 +14,6 @@ const Parlament: NextPage = () => (
     />
     <LayoutHeader />
     <Layout.Content>
-      <Hemicycle />
     </Layout.Content>
   </Layout>
 )
