@@ -1,7 +1,10 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 
+// TODO - return the specific endpoint according with the environment
+const endpoint = () => 'http://localhost:3000/api/graphql';
+
 const apolloClient = new ApolloClient({
-  uri: '',
+  uri: endpoint(),
   cache: new InMemoryCache()
 });
 
