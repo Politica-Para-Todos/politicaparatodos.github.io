@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Row, Col, Button } from "antd";
 import YouTubePlayer from "react-player/youtube";
-import VideoMask from '../../../public/video_mask.jpg'
+// import YouTubePlayer from "react-player/lib/players/YouTube";
+import VideoMask from '../../../public/video_mask.jpg';
+import ReactPlayer from "react-player/youtube";
 
 interface Video {
   url: string,
@@ -27,7 +29,7 @@ const videos: Video[] = [
   }
 ]
 
-const renderEpisodeButtons = (currentEpisode: any, setState: any) => {
+const renderEpisodeButtons = (currentEpisode: number, setState: any) => {
   return videos.map((video: Video, index: number) => {
     let classNames = "home-videos__episode-button";
 
@@ -40,7 +42,7 @@ const renderEpisodeButtons = (currentEpisode: any, setState: any) => {
       <Button
         key={`episode-${index}`}
         className={classNames}
-        onClick={() => setState(currentEpisode)}>
+        onClick={() => setState({ currentEpisode: index })}>
         Ep. {index + 1}
       </Button>
     );
@@ -49,9 +51,11 @@ const renderEpisodeButtons = (currentEpisode: any, setState: any) => {
 
 const HomeMedia = () => {
 
-  const [currentEpisode, setState] = useState(0);
+  const [episode, setState] = useState({
+    currentEpisode: 0
+  });
 
-  const { url, caption } = videos[currentEpisode];
+  const { url, caption } = videos[episode.currentEpisode];
 
   return (
     <section className="home-videos">
@@ -61,13 +65,14 @@ const HomeMedia = () => {
         </Col>
         <Col span={24} lg={18}>
           <div className='home-videos-player-wrapper'>
-            <YouTubePlayer
+            <ReactPlayer
               className='home-videos-react-player'
-              url={url}
-              poster={VideoMask}
+              url={`https://www.youtube.com/embed/up0Gfd5c0cM?autoplay=0&mute=0&controls=1&origin=https%3A%2F%2Fwww.politicaparatodos.pt&playsinline=1&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1&widgetid=1`}
+              light='../../../public/video_mask.jpg'
               width='100%'
               height='100%'
-              controls
+              controls={true}
+              pip={true}
             />
           </div>
         </Col>
@@ -75,7 +80,7 @@ const HomeMedia = () => {
           <p>{caption}</p>
         </Col>
         <Col>
-          {renderEpisodeButtons(currentEpisode, setState)}
+          {renderEpisodeButtons(episode.currentEpisode, setState)}
         </Col>
       </Row>
     </section>
