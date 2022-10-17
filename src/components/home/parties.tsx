@@ -1,5 +1,6 @@
 import { Col, Row, Select, Switch } from "antd"
 import { useState } from "react"
+import { Party } from "../../dtos/party-dto"
 import { circles, PartyCircle, shuffleParties } from "../../utils/manipuation"
 import AvatarList from "./avatar-list"
 
@@ -10,20 +11,6 @@ interface HomePartiesProp {
 interface HomePartiesState {
   alphabeticalOrder: boolean,
   districtFilter: string
-}
-
-export interface Party {
-  id: string
-  acronym: string
-  logo: string | null
-  name: string
-  website: string
-  email: string | null
-  description: string | null
-  descriptionSource: string | null
-  descriptionUpdatedAt: string | null
-  createdAt: Date
-  updatedAt: Date | null
 }
 
 let sortedParties: Party[];
@@ -103,7 +90,9 @@ const HomeParties = ({ parties }: HomePartiesProp) => {
                 onChange={filterDisctrict}
               >
                 {circles.map((circle: PartyCircle) => (
-                  <Select.Option key={circle.value} value={circle.label}>{circle.label}</Select.Option>
+                  <Select.Option key={circle.value} value={circle.label}>
+                    {circle.label}
+                  </Select.Option>
                 ))}
               </Select>
             </Col>

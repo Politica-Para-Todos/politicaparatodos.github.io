@@ -100,7 +100,7 @@ const LayoutHeader = () => {
                 Junta-te a Nós!
               </a>
               <div className="header-social-media">
-                <SocialSharing socialMediaList={socialMediaOptions} theme='' />
+                <SocialSharing socialMediaList={socialMediaOptions} theme={''} />
               </div>
             </nav>
 

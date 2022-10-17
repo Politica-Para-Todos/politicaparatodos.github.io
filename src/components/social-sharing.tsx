@@ -1,24 +1,28 @@
-import Link from "next/link";
-import { MediaPlatform, MediaPlatformOption, socialMediaOptions } from "../utils/media-platform";
+import { OnlinePlatform } from "../dtos/party-dto";
 import SocialIcon from "./social-icon";
 
-const getHrefFromUrl = (type: MediaPlatform, url: string) => {
-  return type.valueOf() === MediaPlatform.EMAIL.valueOf() ? `mailto:${url}` : url;
+interface SocialSharingProps {
+  socialMediaList: OnlinePlatform[],
+  theme: string
 }
 
-const SocialSharing = (props: any) => {
+const getHrefFromUrl = (media: OnlinePlatform) => {
+  return media.name === 'email' ? `mailto:${media.url}` : media.url;
+}
+
+const SocialSharing = (props: SocialSharingProps) => {
   const { socialMediaList, theme } = props;
 
   return (
     <ul className="social-media-list">
-      {socialMediaOptions.map((media: MediaPlatformOption) => (
-        <li key={media.type.toString()}>
+      {socialMediaList.map((sn: OnlinePlatform) => (
+        <li key={sn.name}>
           <a
-            href={getHrefFromUrl(media.type, media.url)}
+            href={getHrefFromUrl(sn)}
             target='_blank'
             rel="noopener noreferrer"
           >
-            <SocialIcon icon={media.type.toString()} theme={theme} />
+            <SocialIcon icon={sn.name} theme={theme} />
           </a>
         </li>
       ))}

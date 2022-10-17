@@ -1,4 +1,4 @@
-import { Party } from "../components/home/parties";
+import { Party } from "../dtos/party-dto";
 
 export const slugify = (expression: string) => {
   expression = expression.replace(/^\s+|\s+$/g, '');
@@ -126,7 +126,7 @@ export const circles: PartyCircle[] = [
 // Shuffle array
 export function shuffleParties(parties: Party[]) {
   const shuffledParties: Party[] = [...parties];
-  
+
   shuffledParties.forEach((party, index) => {
     const random = Math.floor(Math.random() * (index + 1));
     [shuffledParties[index], shuffledParties[random]] = [shuffledParties[random], shuffledParties[index]];
@@ -135,7 +135,7 @@ export function shuffleParties(parties: Party[]) {
 }
 
 // Sort array by key
-export function sortArrayByKey(array: [], key: string) {
+export function sortArrayByKey(array: any[], key: string): any[] {
   return array.sort(function (a, b) {
     var x = a[key];
     var y = b[key];

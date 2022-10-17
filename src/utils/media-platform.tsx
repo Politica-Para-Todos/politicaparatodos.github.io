@@ -1,40 +1,42 @@
+import { OnlinePlatform } from "../dtos/party-dto";
+
 export interface MediaPlatformOption {
-  type: MediaPlatform;
+  type: MediaPlatformEnum;
   url: string;
 }
 
-export enum MediaPlatform {
-  TWITTER,
-  FACEBOOK,
-  MEDIUM,
-  EMAIL,
-  INSTAGRAM,
-  GITHUB
+export enum MediaPlatformEnum {
+  TWITTER = 'Twitter',
+  FACEBOOK = 'Facebook',
+  EMAIL = 'Email',
+  INSTAGRAM = 'Instagram',
+  MEDIUM = 'Medium',
+  GITHUB = 'Github'
 }
 
-export const socialMediaOptions: MediaPlatformOption[] = [
+export const socialMediaOptions: OnlinePlatform[] = [
   {
-    type: MediaPlatform.TWITTER,
+    name: MediaPlatformEnum.TWITTER,
     url: 'https://twitter.com/politicaparatds'
   },
   {
-    type: MediaPlatform.FACEBOOK,
+    name: MediaPlatformEnum.FACEBOOK,
     url: 'http://fb.me/politicaparatodos.pt'
   },
   {
-    type: MediaPlatform.MEDIUM,
+    name: MediaPlatformEnum.MEDIUM,
     url: 'https://medium.com/politica-para-todos'
   },
   {
-    type: MediaPlatform.EMAIL,
+    name: MediaPlatformEnum.EMAIL,
     url: 'contacto@politicaparatodos.pt'
   },
   {
-    type: MediaPlatform.INSTAGRAM,
+    name: MediaPlatformEnum.INSTAGRAM,
     url: 'https://www.instagram.com/politica_para_todos/'
   },
   {
-    type: MediaPlatform.GITHUB,
+    name: MediaPlatformEnum.GITHUB,
     url: 'https://github.com/Politica-Para-Todos/'
   },
 ]

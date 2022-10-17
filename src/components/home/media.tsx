@@ -68,7 +68,7 @@ const HomeMedia = () => {
             <ReactPlayer
               className='home-videos-react-player'
               url={`https://www.youtube.com/embed/up0Gfd5c0cM?autoplay=0&mute=0&controls=1&origin=https%3A%2F%2Fwww.politicaparatodos.pt&playsinline=1&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1&widgetid=1`}
-              light='../../../public/video_mask.jpg'
+              light={VideoMask.src}
               width='100%'
               height='100%'
               controls={true}

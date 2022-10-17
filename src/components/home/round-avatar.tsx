@@ -1,6 +1,6 @@
 import React from "react";
 import dynamic from "next/dynamic";
-import { Party } from "./parties";
+import { Party } from "../../dtos/party-dto";
 
 const Avatar = dynamic(import('antd/es/avatar'), { ssr: false });
 
@@ -8,7 +8,7 @@ const RoundAvatar = (party: Party) => {
   const logoUrl = `party-logos/${party.logo}`;
 
   return (
-    <a className="avatar-list-item" href={party.website}>
+    <a className="avatar-list-item" href={`/party/${party.acronym.toLowerCase()}`}>
       <div className="avatar-list-item__content">
         <Avatar size={120} src={logoUrl} icon="user" />
         <h3 className="avatar-list-item__content-title">{party.acronym}</h3>

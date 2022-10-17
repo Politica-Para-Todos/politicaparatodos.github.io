@@ -1,5 +1,6 @@
+import Link from "next/link";
 import React from "react";
-import { Party } from "./parties";
+import { Party } from "../../dtos/party-dto";
 import RoundAvatar from "./round-avatar";
 
 interface AvatarListProp {
@@ -8,7 +9,7 @@ interface AvatarListProp {
 }
 
 const AvatarList = (props: AvatarListProp) => {
-  const {theme, parties } = props;
+  const { theme, parties } = props;
 
   return (
     <div className={`avatar-list-container avatar-list-container avatar-list-container--${theme}`}>
