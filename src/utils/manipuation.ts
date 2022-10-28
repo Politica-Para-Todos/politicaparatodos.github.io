@@ -1,3 +1,4 @@
+import { HomePageParty } from "../components/home/parties";
 import { Party } from "../dtos/party-dto";
 
 export const slugify = (expression: string) => {
@@ -23,108 +24,8 @@ export const slugify = (expression: string) => {
   return expression;
 }
 
-export interface PartyCircle {
-  value: string,
-  label: string
-}
-
-export const circles: PartyCircle[] = [
-  {
-    value: "all",
-    label: "Todos"
-  },
-  {
-    value: "acores",
-    label: "Açores"
-  },
-  {
-    value: "aveiro",
-    label: "Aveiro"
-  },
-  {
-    value: "beja",
-    label: "Beja"
-  },
-  {
-    value: "braga",
-    label: "Braga"
-  },
-  {
-    value: "braganca",
-    label: "Bragança"
-  },
-  {
-    value: "castelo-branco",
-    label: "Castelo Branco"
-  },
-  {
-    value: "coimbra",
-    label: "Coimbra"
-  },
-  {
-    value: "evora",
-    label: "Évora"
-  },
-  {
-    value: "europa",
-    label: "Europa"
-  },
-  {
-    value: "faro",
-    label: "Faro"
-  },
-  {
-    value: "fora-da-europa",
-    label: "Fora da Europa"
-  },
-  {
-    value: "guarda",
-    label: "Guarda"
-  },
-  {
-    value: "leiria",
-    label: "Leiria"
-  },
-  {
-    value: "lisboa",
-    label: "Lisboa"
-  },
-  {
-    value: "madeira",
-    label: "Madeira"
-  },
-  {
-    value: "portalegre",
-    label: "Portalegre"
-  },
-  {
-    value: "porto",
-    label: "Porto"
-  },
-  {
-    value: "santarem",
-    label: "Santarém"
-  },
-  {
-    value: "setubal",
-    label: "Setúbal"
-  },
-  {
-    value: "viana-do-castelo",
-    label: "Viana do Castelo"
-  },
-  {
-    value: "vila-real",
-    label: "Vila Real"
-  },
-  {
-    value: "viseu",
-    label: "Viseu"
-  }
-];
-
 // Shuffle array
-export function shuffleParties(parties: Party[]) {
+export function shuffleParties(parties: Party[]): Party[] {
   const shuffledParties: Party[] = [...parties];
 
   shuffledParties.forEach((party, index) => {
