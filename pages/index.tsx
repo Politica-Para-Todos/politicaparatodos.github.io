@@ -7,29 +7,10 @@ import { HomeMission, HomeMissionInfographic } from '../src/components/home/miss
 import HomeMedia from '../src/components/home/media';
 import MetaTags from '../src/components/meta-tags';
 import HomeParties from '../src/components/home/parties';
-import { gql, useQuery } from '@apollo/client';
+import { Party } from '../src/dtos/party-dto';
+import { retrieveJsonData } from '../src/retriever/api';
 
-const Home: NextPage = () => {
-
-  const QUERY = gql`
-    query {
-      getAllParties {
-        id
-        logo
-        name
-        acronym
-        website
-      }
-    }`
-  const { data, loading, error } = useQuery(QUERY);
-
-  // Need this to avoid `data` to be 'undefined' => don't understand why
-  if (loading) {
-    return null;
-  }
-  if (error) {
-    return null;
-  }
+const Home: NextPage = ({ parties }: any) => {
 
   return (
     <Layout>
@@ -46,12 +27,20 @@ const Home: NextPage = () => {
         <HomeCountdown />
         <HomeMission />
         <HomeMedia />
-        <HomeParties parties={data.getAllParties} />
+        <HomeParties parties={parties} />
         <div className="getsocial gs-inline-group"></div>
       </Layout.Content>
       <AboutUsFooter />
     </Layout>
   )
+}
+
+export const getStaticProps = async () => {
+  const parties: Party[] = retrieveJsonData();
+
+  return {
+    props: { parties }
+  }
 }
 
 export default Home;
