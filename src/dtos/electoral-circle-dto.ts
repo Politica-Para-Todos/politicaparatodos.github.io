@@ -122,4 +122,3 @@ export const electoralCircleDropdown = () => [
 export const convertToLabel = (circle: string) =>
   electoralCircleDropdown()
     .filter((element: any) => element.value == circle)[0].label;
-
