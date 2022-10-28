@@ -1,4 +1,3 @@
-import { gql, useQuery } from "@apollo/client";
 import { Layout, Typography } from "antd";
 import LayoutFooter from "../../src/components/layout-footer";
 import LayoutHeader from "../../src/components/layout-header";
@@ -7,47 +6,17 @@ import PartyCandidatesList from "../../src/components/party/candidate-list";
 import PartyHeader from "../../src/components/party/header";
 import PartyIntro from "../../src/components/party/intro";
 import { electoralCircleDropdown } from "../../src/dtos/electoral-circle-dto";
-import { Party } from "../../src/dtos/party-dto";
-import { slugify } from "../../src/utils/manipuation";
+import { getParty } from "../../src/retriever/api";
 
 const { Paragraph } = Typography;
 
-const GET_PARTY_QUERY = gql`
-  query {
-    getParty {
-      id
-      logo
-      name
-      acronym
-      website
-      description
-      descriptionSource
-      mediaPlatforms
-      electoralCircles
-      candidates
-      manifesto {
-        title
-        source
-        sections {
-          position
-          content
-        }
-      }
-    }
-  }
-`
+interface PartyHomeProps {
+  acronym: string
+}
 
-const PartyHome = () => {
+const PartyHome = ({ party }: any) => {
 
-  const { data, loading, error } = useQuery(GET_PARTY_QUERY);
-
-  if (loading) {
-    return null;
-  }
-  if (error) {
-    return null;
-  }
-  const party: Party = data.getParty;
+  console.log('<<<<<<<<<<<< >>>>>>>>', party);
 
   return (
     <Layout>
@@ -57,12 +26,12 @@ const PartyHome = () => {
           pageDescription={`Nesta página encontrarás o programa e os candidatos, por círculo eleitoral, do ${party.name}`}
           socialTitle={`Política Para Todos - Conhece o programa e os candidatos do ${party.acronym}`}
           socialDescription={`Nesta página encontrarás o programa e os candidatos, por círculo eleitoral, do ${party.name}`}
-          socialImage={`/images/share/banner-${slugify(party.acronym)}.jpg`}
+          socialImage={`/party-logos/${party.logo}`}
         />
       )}
       <LayoutHeader />
       <Layout.Content className="party-section">
-        <PartyHeader party={party} />
+        <PartyHeader party={party} subtitle='' />
         <PartyIntro spokesperson={null} title='Descrição do Partido'>
           <Paragraph>{party.description}</Paragraph>
           {
@@ -74,9 +43,24 @@ const PartyHome = () => {
         </PartyIntro>
         <PartyCandidatesList candidates={party.candidates} circles={electoralCircleDropdown()} acronym={party.acronym} />
       </Layout.Content>
-      <LayoutFooter />
+      {/* <LayoutFooter /> */}
     </Layout>
   )
+}
+
+export const getStaticPaths = async () => {
+  return {
+    paths: [{ params: { acronym: 'adn' } }],
+    fallback: false
+  }
+}
+
+export const getStaticProps = async (context: any) => {
+  const party = getParty(context.params.acronym);
+
+  return {
+    props: { party }
+  }
 }
 
 const thematics = [
@@ -113,5 +97,11 @@ const analytics = {
   reading: "302 min",
   comments: "3.5K"
 };
+
+// PartyHome.getInitialProps = (appContext: any) => {
+//   return {
+//     acronym: appContext.query.acronym
+//   }
+// }
 
 export default PartyHome;

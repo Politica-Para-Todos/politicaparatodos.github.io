@@ -1,6 +1,4 @@
-import { gql, useQuery } from "@apollo/client";
 import { Layout, Typography } from "antd";
-import { useRouter } from "next/router";
 import LayoutFooter from "../../../../src/components/layout-footer";
 import LayoutHeader from "../../../../src/components/layout-header";
 import MetaTags from "../../../../src/components/meta-tags";
@@ -9,49 +7,20 @@ import PartyIntro from "../../../../src/components/party/intro";
 import PartyCandidatesTable from "../../../../src/components/party/party-candidate-table";
 import { Candidate } from "../../../../src/dtos/candidate-dto";
 import { convertToLabel } from "../../../../src/dtos/electoral-circle-dto";
-import { slugify } from "../../../../src/utils/manipuation";
+import { getParty, getPartyCandidates } from "../../../../src/retriever/api";
 
 const { Paragraph } = Typography;
 
 interface PartyCandidateProps {
-  candidates: any,
-  circles: any,
-  acronym: String
+  acronym: string
+  electoralCircle: string
 }
 
-const PartyCandidate = () => {
+const PartyCandidate = ({acronym, electoralCircle}: PartyCandidateProps) => {
 
-  const router = useRouter();
-  const { acronym, electoralCircle } = router.query;
+  const party = getParty(acronym);
+  const candidates = getPartyCandidates(acronym, electoralCircle);
 
-  const getElectoralCirclePartyCandidates = gql`
-    query {
-      getElectoralCirclePartyCandidates {
-        id
-        name
-        acronym
-        manifesto
-        mediaPlatforms
-        candidates {
-          id
-          name
-          isLeadCandidate
-          electoralCircle
-        }
-      }
-    }
-  `
-  const { data, loading, error } = useQuery(getElectoralCirclePartyCandidates);
-
-  if (loading) {
-    return null;
-  }
-  if (error) {
-    return null;
-  }
-
-  const party = data.getElectoralCirclePartyCandidates;
-  const { candidates } = party;
   const circleAsLabel = convertToLabel(electoralCircle!.toString());
   const leadCandidate = candidates.filter((candidate: Candidate) => candidate.isLeadCandidate)[0];
 
@@ -66,7 +35,7 @@ const PartyCandidate = () => {
           pageDescription={`Informações sobre o ${party.name} no círculo eleitoral de ${leadCandidate.electoralCircle}`}
           socialTitle={`${party.name} - Círculo eleitoral de ${leadCandidate.electoralCircle}`}
           socialDescription={`Informações sobre o ${party.name} no círculo eleitoral de ${leadCandidate.electoralCircle}`}
-          socialImage={`/images/share/banner-${slugify(party.acronym)}.jpg`}
+          socialImage={`/party-logos/${party.logo}`}
         />
       )}
       <LayoutHeader />
@@ -88,6 +57,13 @@ const PartyCandidate = () => {
       <LayoutFooter />
     </Layout>
   );
+}
+
+PartyCandidate.getInitialProps = (appContext: any) => {
+  return {
+    acronym: appContext.query.acronym,
+    electoralCircle: appContext.query.electoralCircle
+  }
 }
 
 export default PartyCandidate;
