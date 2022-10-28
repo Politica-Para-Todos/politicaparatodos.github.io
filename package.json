@@ -9,15 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@apollo/client": "^3.6.9",
     "@types/body-scroll-lock": "^3.1.0",
     "@types/react-helmet": "^6.1.5",
     "@zeit/next-sass": "^1.0.1",
     "antd": "^4.22.4",
-    "apollo-server-micro": "^3.10.3",
     "body-scroll-lock": "^4.0.0-beta.0",
-    "graphql": "^16.6.0",
-    "jackson-js": "^1.1.0",
     "micro": "^9.4.1",
     "next": "12.2.4",
     "prop-types": "^15.8.1",
