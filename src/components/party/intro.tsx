@@ -24,9 +24,9 @@ const PartyIntro = (props: PartyIntroProps) => {
           </div>
         </Col>
         {spokesperson && (<Col span={24} lg={8} className="party-intro__spokesperson">
-          <Avatar size={160} src={spokesperson.photo} icon="user" />
+          <Avatar size={160} src={`/party-candidates/${spokesperson.photo}`} icon="user" />
           <Title className="party-intro__spokesperson-name" level={3}>{spokesperson.name}</Title>
-          <Paragraph className="party-intro__spokesperson-description">{spokesperson.position}</Paragraph>
+          <Paragraph className="party-intro__spokesperson-description">Cabeça de lista</Paragraph>
         </Col>
         )}
       </Row>

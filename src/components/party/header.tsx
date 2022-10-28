@@ -1,10 +1,10 @@
 import React, { Fragment } from "react";
 import { Row, Col, Divider, Avatar, Button } from "antd";
 import SocialSharing from "../social-sharing";
-import { OnlinePlatform, Party, Plaftorm } from "../../dtos/party-dto";
+import { OnlinePlatform, OnlinePlatformType } from "../../dtos/party-dto";
 
 interface PartyHeaderProps {
-  party: Party
+  party: any
   subtitle: string
 }
 
@@ -12,8 +12,7 @@ const PartyHeader = (props: PartyHeaderProps) => {
 
   const { party, subtitle } = props;
   const hasSections = party.manifesto.sections.length > 0;
-  const onlinePlatforms = party.platforms;
-  const website = onlinePlatforms.filter((op: OnlinePlatform) => op.platform == Plaftorm.WEBSITE)[0];
+  const website = party.platforms.filter((op: OnlinePlatform) => op.type == OnlinePlatformType.WEBSITE)[0];
 
   return (
     <section className="party-header">
@@ -30,12 +29,12 @@ const PartyHeader = (props: PartyHeaderProps) => {
       </Row>
       <Row typeof='flex' justify="center">
         <Col>
-          <Avatar size={200} src={party.logo} icon='user' />
+          <Avatar size={200} src={`/party-logos/${party.logo}`} icon='user' />
           {party.manifesto && hasSections && (
             <div className="party-header__program-cta">
               <Button
                 className='button--grey party-header__program-button'
-                href={`/party/${party.acronym}/manifesto`}
+                href={`/partido/${party.acronym}/manifesto`}
                 rel='noopener'>
                 {`Ver Programa ${party.acronym}`}
               </Button>
@@ -52,8 +51,8 @@ const PartyHeader = (props: PartyHeaderProps) => {
         </Col>
       </Row>
       <Row typeof='flex' justify="end" align="middle" className="party-header__social">
-        <a href={website.address} rel="noopener noreferrer" target="_blank">{website.platform}</a>
-        <SocialSharing socialMediaList={onlinePlatforms} theme={"#c4c4c4"} />
+        <a href={website.address} rel="noopener noreferrer" target="_blank">{website.address}</a>
+        <SocialSharing onlinePlatforms={party.platforms} theme={"#c4c4c4"} />
       </Row>
     </section>
   )

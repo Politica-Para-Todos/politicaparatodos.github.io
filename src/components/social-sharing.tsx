@@ -1,28 +1,24 @@
-import { OnlinePlatform } from "../dtos/party-dto";
+import { OnlinePlatform, OnlinePlatformType } from "../dtos/party-dto";
 import SocialIcon from "./social-icon";
 
 interface SocialSharingProps {
-  socialMediaList: OnlinePlatform[],
+  onlinePlatforms: OnlinePlatform[],
   theme: string
 }
 
-const getHrefFromUrl = (media: OnlinePlatform) => {
-  return media.name === 'email' ? `mailto:${media.url}` : media.url;
-}
-
 const SocialSharing = (props: SocialSharingProps) => {
-  const { socialMediaList, theme } = props;
+  const { onlinePlatforms, theme } = props;
 
   return (
     <ul className="social-media-list">
-      {socialMediaList.map((sn: OnlinePlatform) => (
-        <li key={sn.name}>
+      {onlinePlatforms.map((op: OnlinePlatform) => (
+        <li key={op.type}>
           <a
-            href={getHrefFromUrl(sn)}
+            href={op.type === OnlinePlatformType.EMAIL ? `mailto:${op.address}` : op.address}
             target='_blank'
             rel="noopener noreferrer"
           >
-            <SocialIcon icon={sn.name} theme={theme} />
+            <SocialIcon icon={op.type} theme={theme} />
           </a>
         </li>
       ))}

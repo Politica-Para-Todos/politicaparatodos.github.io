@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { Row, Col, Typography, Select, Avatar } from "antd";
 import { Candidate } from "../../dtos/candidate-dto";
+import { convertToLabel } from "../../dtos/electoral-circle-dto";
 
 const { Title, Paragraph } = Typography;
 const { Option } = Select;
 
 interface PartyCandidatesListProps {
-  circles: {}[],
-  candidates: Candidate[],
+  circles: any[],
+  candidates: any[],
   acronym: string
 }
 
@@ -23,6 +24,8 @@ const PartyCandidatesList = (props: PartyCandidatesListProps) => {
   }
 
   const { circles, candidates, acronym } = props;
+
+  console.log(candidates);
 
   return (
     <section className="party-candidates">
@@ -48,7 +51,7 @@ const PartyCandidatesList = (props: PartyCandidatesListProps) => {
       <Row typeof='flex' className="party-candidates__list">
         {
           candidates.filter((candidate: Candidate) =>
-            candidate.id === state.selectedCircle || state.selectedCircle === 'all'
+            candidate.electoralCircle === state.selectedCircle || state.selectedCircle === 'all'
           ).map((candidate: Candidate, index: number) => {
             return (
               <Col
@@ -59,17 +62,14 @@ const PartyCandidatesList = (props: PartyCandidatesListProps) => {
                 xl={4}
                 className="party-candidate"
               >
-                <a className="avatar-list-item" href={`/party/${acronym.toLowerCase()}/candidates/${encodeURIComponent(candidate.electoralCircle)}`}>
+                <a className="avatar-list-item" href={`/partido/${acronym.toLowerCase()}/candidatos/${encodeURIComponent(candidate.electoralCircle)}`}>
                   <div className="party-candidate__content">
-                    <Avatar size={120} src={candidate.photo} icon="user" />
+                    <Avatar size={120} src={`/party-candidates/${candidate.photo}`} icon="user" />
                     {candidate.electoralCircle && (
-                      <Paragraph className="party-candidate__content-circle">{candidate.electoralCircle}</Paragraph>
+                      <Paragraph className="party-candidate__content-circle">{convertToLabel(candidate.electoralCircle)}</Paragraph>
                     )}
                     {candidate.name && (
                       <Title className="party-candidate__content-title" level={3}>{candidate.name}</Title>
-                    )}
-                    {candidate.biography && (
-                      <Paragraph className="party-candidate__content-biography">{candidate.biography}</Paragraph>
                     )}
                   </div>
                 </a>

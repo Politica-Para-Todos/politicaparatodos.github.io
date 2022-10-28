@@ -1,8 +1,16 @@
 import { Col, Row, Select, Switch } from "antd"
 import { useState } from "react"
+import { electoralCircleDropdown } from "../../dtos/electoral-circle-dto"
 import { Party } from "../../dtos/party-dto"
-import { circles, PartyCircle, shuffleParties } from "../../utils/manipuation"
+import { shuffleParties } from "../../utils/manipuation"
 import AvatarList from "./avatar-list"
+
+export interface HomePageParty {
+  name: string,
+  acronym: string,
+  logo: string,
+  website: string
+}
 
 interface HomePartiesProp {
   parties: Party[]
@@ -15,8 +23,9 @@ interface HomePartiesState {
 
 let sortedParties: Party[];
 
-const HomeParties = ({ parties }: HomePartiesProp) => {
+const HomeParties = (props: HomePartiesProp) => {
 
+  const { parties } = props;
   const startState: HomePartiesState = {
     alphabeticalOrder: false,
     districtFilter: 'Todos'
@@ -89,7 +98,7 @@ const HomeParties = ({ parties }: HomePartiesProp) => {
                 placeholder="Escolha o Círculo Eleitoral"
                 onChange={filterDisctrict}
               >
-                {circles.map((circle: PartyCircle) => (
+                {electoralCircleDropdown().map(circle => (
                   <Select.Option key={circle.value} value={circle.label}>
                     {circle.label}
                   </Select.Option>

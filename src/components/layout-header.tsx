@@ -2,7 +2,7 @@ import { Button, Col, Drawer, Layout, Menu, Row } from "antd"
 import Link from "next/link";
 import React, { Fragment, memo, useState } from "react"
 import SocialSharing from "./social-sharing";
-import { socialMediaOptions } from '../utils/media-platform';
+import { socialMediaOptions } from '../utils/online-platform';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
 const LayoutHeader = () => {
@@ -45,7 +45,7 @@ const LayoutHeader = () => {
         <Row justify='space-between' align='middle' typeof="flex">
           <Col span={24} lg={24}>
             <Link href="/">
-              <img src='horizontal_logo.svg' alt='header logo' className='header_logo' />
+              <img src='/horizontal_logo.svg' alt='header logo' className='header_logo' />
             </Link>
 
             <Button
@@ -53,7 +53,7 @@ const LayoutHeader = () => {
               type='primary'
               onClick={showDrawer}
             >
-              <img className='header__mobile-burger' src='burger.svg' alt='burger menu' />
+              <img className='header__mobile-burger' src='/burger.svg' alt='burger menu' />
             </Button>
 
             <nav className='header__desktop-menu'>
@@ -100,7 +100,7 @@ const LayoutHeader = () => {
                 Junta-te a Nós!
               </a>
               <div className="header-social-media">
-                <SocialSharing socialMediaList={socialMediaOptions} theme={''} />
+                <SocialSharing onlinePlatforms={socialMediaOptions} theme={''} />
               </div>
             </nav>
 
@@ -136,7 +136,7 @@ const LayoutHeader = () => {
             rel="noopener noreferrer"
           >Junta-te a Nós!</a>
           <div className="header-social-media">
-            <SocialSharing socialMediaList={socialMediaOptions} theme="#666" />
+            <SocialSharing onlinePlatforms={socialMediaOptions} theme="#666" />
           </div>
         </Drawer>
       </Layout.Header>
