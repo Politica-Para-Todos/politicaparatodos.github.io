@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Row, Col, Button } from "antd";
 import YouTubePlayer from "react-player/youtube";
 // import YouTubePlayer from "react-player/lib/players/YouTube";
@@ -51,11 +51,23 @@ const renderEpisodeButtons = (currentEpisode: number, setState: any) => {
 
 const HomeMedia = () => {
 
-  const [episode, setState] = useState({
-    currentEpisode: 0
+  const [media, setMedia] = useState({
+    currentEpisode: 0,
+    hasMounted: false
   });
 
-  const { url, caption } = videos[episode.currentEpisode];
+  useEffect(() => {
+    setMedia({
+      currentEpisode: media.currentEpisode,
+      hasMounted: true
+    })
+  }, []);
+
+  if (!media.hasMounted) {
+    return null;
+  }
+
+  const { url, caption } = videos[media.currentEpisode];
 
   return (
     <section className="home-videos">
@@ -80,7 +92,7 @@ const HomeMedia = () => {
           <p>{caption}</p>
         </Col>
         <Col>
-          {renderEpisodeButtons(episode.currentEpisode, setState)}
+          {renderEpisodeButtons(media.currentEpisode, setMedia)}
         </Col>
       </Row>
     </section>

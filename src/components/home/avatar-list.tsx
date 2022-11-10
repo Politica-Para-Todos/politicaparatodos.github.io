@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { HomeParty } from "../../dtos/party-dto";
 import RoundAvatar from "./round-avatar";
 
@@ -9,6 +9,16 @@ interface AvatarListProp {
 
 const AvatarList = (props: AvatarListProp) => {
   const { theme, parties } = props;
+
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  if (!hasMounted) {
+    return null;
+  }
 
   return (
     <div className={`avatar-list-container avatar-list-container avatar-list-container--${theme}`}>

@@ -9,7 +9,7 @@ const HomeMissionInfographic = () => {
           <p>Promover a participação activa dos cidadãos nos processos eleitorais em Portugal.</p>
         </Col>
         <Col span={24} lg={10} className="home-our-mission-img">
-          <img alt="infographic" src='infographic.svg' />
+          <img alt="infographic" src='/infographic.svg' />
         </Col>
       </Row>
     </section>
