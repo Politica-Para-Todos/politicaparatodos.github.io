@@ -26,3 +26,9 @@ export enum OnlinePlatformType {
   MEDIUM = 'Medium',
   GITHUB = 'Github'
 }
+
+export interface HomeParty {
+  name: string,
+  acronym: string,
+  logo: string
+}

@@ -1,12 +1,10 @@
-import Link from "next/link";
 import React from "react";
-import { Party } from "../../dtos/party-dto";
-import { HomePageParty } from "./parties";
+import { HomeParty } from "../../dtos/party-dto";
 import RoundAvatar from "./round-avatar";
 
 interface AvatarListProp {
   theme: string
-  parties: HomePageParty[]
+  parties: HomeParty[]
 }
 
 const AvatarList = (props: AvatarListProp) => {

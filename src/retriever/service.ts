@@ -53,3 +53,15 @@ export const electoralCirclePage = (acronym: string, electoralCircle: string) =>
 }
 
 export const getAllData = () => retrieveData(seeds, partyAcronyms, electoralCircles);
+
+export const getHomepageParties = () => {
+  return parties.map(party => {
+    return {
+      name: party.name,
+      acronym: party.acronym,
+      logo: party.logo
+    }
+  })
+}
+
+export const getPartyAcronyms = () => partyAcronyms;

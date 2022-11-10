@@ -7,10 +7,14 @@ import { HomeMission, HomeMissionInfographic } from '../src/components/home/miss
 import HomeMedia from '../src/components/home/media';
 import MetaTags from '../src/components/meta-tags';
 import HomeParties from '../src/components/home/parties';
+import { retrieveHomepageParties } from '../src/retriever/api';
 import { Party } from '../src/dtos/party-dto';
-import { retrieveJsonData } from '../src/retriever/api';
 
-const Home: NextPage = ({ parties }: any) => {
+interface HomePageParty {
+  homepageParties: Party[]
+}
+
+const Home: NextPage<HomePageParty> = ({ homepageParties }) => {
 
   return (
     <Layout>
@@ -19,7 +23,7 @@ const Home: NextPage = ({ parties }: any) => {
         pageDescription="A comunidade Política Para Todos nasceu no verão de 2019 com o objetivo de promover a participação ativa dos cidadãos nos processos eleitorais em Portugal. É composta por voluntários de várias partes do país e diferentes áreas profissionais."
         socialTitle="Quem somos"
         socialDescription="A comunidade Política Para Todos nasceu no verão de 2019 com o objetivo de promover a participação ativa dos cidadãos nos processos eleitorais em Portugal. É composta por voluntários de várias partes do país e diferentes áreas profissionais."
-        socialImage="../public/vertical_logo.jpg"
+        socialImage='/vertical_logo.jpg'
       />
       <LayoutHeader />
       <Layout.Content>
@@ -27,7 +31,7 @@ const Home: NextPage = ({ parties }: any) => {
         <HomeCountdown />
         <HomeMission />
         <HomeMedia />
-        <HomeParties parties={parties} />
+        <HomeParties parties={homepageParties} />
         <div className="getsocial gs-inline-group"></div>
       </Layout.Content>
       <AboutUsFooter />
@@ -36,10 +40,10 @@ const Home: NextPage = ({ parties }: any) => {
 }
 
 export const getStaticProps = async () => {
-  const parties: Party[] = retrieveJsonData();
-
   return {
-    props: { parties }
+    props: {
+      homepageParties: retrieveHomepageParties()
+    }
   }
 }
 

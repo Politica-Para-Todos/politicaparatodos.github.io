@@ -1,10 +1,9 @@
 import React from "react";
 import dynamic from "next/dynamic";
-import { HomePageParty } from "./parties";
 
 const Avatar = dynamic(import('antd/es/avatar'), { ssr: false });
 
-const RoundAvatar = (party: HomePageParty) => (
+const RoundAvatar = (party: any) => (
   <a className="avatar-list-item" href={`/partido/${party.acronym.toLowerCase()}`}>
     <div className="avatar-list-item__content">
       <Avatar size={120} src={`/party-logos/${party.logo}`} icon="user" />

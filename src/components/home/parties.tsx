@@ -1,19 +1,12 @@
 import { Col, Row, Select, Switch } from "antd"
 import { useState } from "react"
 import { electoralCircleDropdown } from "../../dtos/electoral-circle-dto"
-import { Party } from "../../dtos/party-dto"
+import { HomeParty } from "../../dtos/party-dto"
 import { shuffleParties } from "../../utils/manipuation"
 import AvatarList from "./avatar-list"
 
-export interface HomePageParty {
-  name: string,
-  acronym: string,
-  logo: string,
-  website: string
-}
-
 interface HomePartiesProp {
-  parties: Party[]
+  parties: HomeParty[]
 }
 
 interface HomePartiesState {
@@ -21,15 +14,15 @@ interface HomePartiesState {
   districtFilter: string
 }
 
-let sortedParties: Party[];
-
 const HomeParties = (props: HomePartiesProp) => {
 
+  let sortedParties: HomeParty[];
   const { parties } = props;
   const startState: HomePartiesState = {
     alphabeticalOrder: false,
     districtFilter: 'Todos'
   };
+
   const [state, setState] = useState(startState);
 
   const onChange = () => {
@@ -47,11 +40,11 @@ const HomeParties = (props: HomePartiesProp) => {
   }
 
   // if (state.districtFilter !== "Todos") {
-  //   parties = parties.filter(party => party.districts.includes(district));
+  //   sortedParties = parties.filter((party: Party) => party.includes(district));
   // }
-  
+
   if (state.alphabeticalOrder) {
-    const partiesToSort= [...parties];
+    const partiesToSort = [...parties];
     sortedParties = partiesToSort.sort((party1, party2) => {
       const partyName1 = party1.acronym.toLowerCase();
       const partyName2 = party2.acronym.toLowerCase();
