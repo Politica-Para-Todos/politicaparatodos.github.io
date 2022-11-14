@@ -76,14 +76,14 @@ const LayoutHeader = () => {
                 {/* <Menu.Item key={3}>
                   <Link href='/' onClick={closeDrawer}>Parlamento</Link>
                 </Menu.Item> */}
-                <Menu.Item key={4}>
+                <Menu.Item key={3}>
                   <Link href='/' passHref>
                     <a onClick={closeDrawer}>
                       Debates 2022
                     </a>
                   </Link>
                 </Menu.Item>
-                <Menu.Item key={5}>
+                <Menu.Item key={4}>
                   <Link href='/about-us'>
                     <a onClick={closeDrawer}>
                       Quem Somos

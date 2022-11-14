@@ -7,7 +7,7 @@ import PartyIntro from "../../../../src/components/party/intro";
 import PartyCandidatesTable from "../../../../src/components/party/party-candidate-table";
 import { Candidate } from "../../../../src/dtos/candidate-dto";
 import { convertToLabel } from "../../../../src/dtos/electoral-circle-dto";
-import { getParty, getPartyCandidates } from "../../../../src/retriever/api";
+import { retrieveParty, getPartyCandidates } from "../../../../src/retriever/api";
 
 const { Paragraph } = Typography;
 
@@ -18,7 +18,7 @@ interface PartyCandidateProps {
 
 const PartyCandidate = ({acronym, electoralCircle}: PartyCandidateProps) => {
 
-  const party = getParty(acronym);
+  const party = retrieveParty(acronym);
   const candidates = getPartyCandidates(acronym, electoralCircle);
 
   const circleAsLabel = convertToLabel(electoralCircle!.toString());

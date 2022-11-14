@@ -1,10 +1,20 @@
+import { useEffect, useState } from "react";
 import { shuffleList, contributors } from "../utils/contributors";
 
-const ContributorsList = () => (
-  <p>Quem esteve envolvido no projecto: {
-    shuffleList(contributors).join(", ")
+const ContributorsList = () => {
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  if (!hasMounted) {
+    return null;
   }
-  </p>
-)
+
+  return (
+    <p>Quem esteve envolvido no projecto: {shuffleList(contributors).join(", ")}</p>
+  )
+}
 
 export default ContributorsList;

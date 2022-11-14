@@ -1,11 +1,11 @@
 import { Col, Layout, Row } from "antd";
 import Image from "next/image";
-import VerticalLogo from '../../public/vertical_logo.jpg'
 import ContributorsList from "./contributors";
 import { memo } from "react";
 import Link from "next/link";
 import SocialSharing from "./social-sharing";
 import { socialMediaOptions } from "../utils/online-platform";
+import { VerticalLogo } from "./logos";
 
 const HomeFooter = () => {
 
@@ -16,7 +16,7 @@ const HomeFooter = () => {
       <Row justify="space-between">
         <Col span={24} md={{ offset: 4, span: 16 }} lg={{ offset: 0, span: 6 }} className="footer-social">
           <SocialSharing onlinePlatforms={socialMediaOptions} theme={"#c4c4c4"} />
-          <Image alt="vertical_logo" src={VerticalLogo}/>
+          <VerticalLogo/>
         </Col>
         <Col span={24} md={{ offset: 4, span: 16 }} lg={{ offset: 0, span: 12 }} className="footer-info">
           <h2>Quem Somos</h2>

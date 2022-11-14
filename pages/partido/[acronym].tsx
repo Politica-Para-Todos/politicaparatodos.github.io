@@ -6,18 +6,19 @@ import PartyCandidatesList from "../../src/components/party/candidate-list";
 import PartyHeader from "../../src/components/party/header";
 import PartyIntro from "../../src/components/party/intro";
 import { electoralCircleDropdown } from "../../src/dtos/electoral-circle-dto";
-import { getParty } from "../../src/retriever/api";
+import { Party } from "../../src/dtos/party-dto";
+import { retrieveParty, retrievePartyAcronyms } from "../../src/retriever/api";
 
 const { Paragraph } = Typography;
 
 interface PartyHomeProps {
-  acronym: string
+  party: Party
 }
 
-const PartyHome = ({ party }: any) => {
+const PartyHome = (props: PartyHomeProps) => {
 
-  console.log('<<<<<<<<<<<< >>>>>>>>', party);
-
+  const { party } = props
+  console.log(party.manifesto);
   return (
     <Layout>
       {party.name && (
@@ -43,26 +44,35 @@ const PartyHome = ({ party }: any) => {
         </PartyIntro>
         <PartyCandidatesList candidates={party.candidates} circles={electoralCircleDropdown()} acronym={party.acronym} />
       </Layout.Content>
-      {/* <LayoutFooter /> */}
+      <LayoutFooter />
     </Layout>
   )
 }
 
 export const getStaticPaths = async () => {
+  const params: object[] = retrievePartyAcronyms().map((acro: string) => {
+    return {
+      params: {
+        acronym: acro.toLowerCase()
+      }
+    }
+  })
+
   return {
-    paths: [{ params: { acronym: 'adn' } }],
+    paths: params,
     fallback: false
   }
 }
 
 export const getStaticProps = async (context: any) => {
-  const party = getParty(context.params.acronym);
+  const party = retrieveParty(context.params.acronym);
 
   return {
     props: { party }
   }
 }
 
+// Don't know where this was used..
 const thematics = [
   {
     value: 10,
@@ -97,11 +107,5 @@ const analytics = {
   reading: "302 min",
   comments: "3.5K"
 };
-
-// PartyHome.getInitialProps = (appContext: any) => {
-//   return {
-//     acronym: appContext.query.acronym
-//   }
-// }
 
 export default PartyHome;

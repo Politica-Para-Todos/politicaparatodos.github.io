@@ -1,17 +1,17 @@
 import React, { Fragment } from "react";
 import { Row, Col, Divider, Avatar, Button } from "antd";
 import SocialSharing from "../social-sharing";
-import { OnlinePlatform, OnlinePlatformType } from "../../dtos/party-dto";
+import { OnlinePlatform, OnlinePlatformType, Party } from "../../dtos/party-dto";
 
 interface PartyHeaderProps {
-  party: any
+  party: Party
   subtitle: string
 }
 
 const PartyHeader = (props: PartyHeaderProps) => {
 
   const { party, subtitle } = props;
-  const hasSections = party.manifesto.sections.length > 0;
+  const hasManifesto = party.manifesto ?? false;
   const website = party.platforms.filter((op: OnlinePlatform) => op.type == OnlinePlatformType.WEBSITE)[0];
 
   return (
@@ -30,17 +30,17 @@ const PartyHeader = (props: PartyHeaderProps) => {
       <Row typeof='flex' justify="center">
         <Col>
           <Avatar size={200} src={`/party-logos/${party.logo}`} icon='user' />
-          {party.manifesto && hasSections && (
+          {hasManifesto && (
             <div className="party-header__program-cta">
               <Button
                 className='button--grey party-header__program-button'
-                href={`/partido/${party.acronym}/manifesto`}
+                href={`/partido/${party.acronym.toLowerCase()}/manifesto`}
                 rel='noopener'>
                 {`Ver Programa ${party.acronym}`}
               </Button>
             </div>
           )}
-          {party.manifesto && !hasSections && (
+          {!hasManifesto && (
             <div className="party-header__program-cta">
               <p>
                 Este partido ainda não apresentou programa eleitoral. <br />
