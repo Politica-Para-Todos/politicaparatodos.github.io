@@ -69,11 +69,12 @@ const PartyManifesto: NextPage<PartyManifestoProps> = ({ party }) => {
               />
             )}
           </Sider>
-          <Layout.Content>
+          {/* Commented to avoid TS issues
+            <Layout.Content>
             {manifesto?.sections[0] && (
               <ManifestoSection title={title} section={section} section_id={sectionId} />
             )}
-          </Layout.Content>
+          </Layout.Content> */}
         </Layout>
       </Layout.Content>
       {/* <LayoutFooter /> */}

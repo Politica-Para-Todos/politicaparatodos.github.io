@@ -12,39 +12,39 @@ const renderMenuItem = (id: string, title: string, party_acronym: string) => (
   </Menu.Item>
 );
 
-const renderMenuSubitems = (subsections: SubSection[], party_acronym: string) => {
-  if (!subsections) {
-    return null;
-  }
+// const renderMenuSubitems = (subsections: SubSection[], party_acronym: string) => {
+//   if (!subsections) {
+//     return null;
+//   }
 
-  return subsections.map(({ id, title }) => {
-    return renderMenuItem(id, title, party_acronym);
-  });
-}
+//   return subsections.map(({ id, title }) => {
+//     return renderMenuItem(id, title, party_acronym);
+//   });
+// }
 
-const renderMenuItems = (props: any) => {
-  const { sections, party_acronym } = props;
+// const renderMenuItems = (props: any) => {
+//   const { sections, party_acronym } = props;
 
-  if (!sections) {
-    return null;
-  }
+//   if (!sections) {
+//     return null;
+//   }
 
-  return sections.map(section => {
-    if (Array.isArray(section.subsections) && section.subsections.length > 0) {
-      return (
-        <SubMenu
-          key={section.id}
-          title={section.title}
-          className={`section-mobile-${section.id}`}
-        >
-          {renderMenuSubitems(section.subsections, party_acronym)}
-        </SubMenu>
-      )
-    } else {
-      return renderMenuItem(section.id, section.title, party_acronym);
-    }
-  })
-}
+//   return sections.map(section => {
+//     if (Array.isArray(section.subsections) && section.subsections.length > 0) {
+//       return (
+//         <SubMenu
+//           key={section.id}
+//           title={section.title}
+//           className={`section-mobile-${section.id}`}
+//         >
+//           {renderMenuSubitems(section.subsections, party_acronym)}
+//         </SubMenu>
+//       )
+//     } else {
+//       return renderMenuItem(section.id, section.title, party_acronym);
+//     }
+//   })
+// }
 
 const ManifestoSider = (props: any) => {
   //   const { section_id, selectedKey, openKey } = this.props;
