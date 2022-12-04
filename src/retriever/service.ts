@@ -1,6 +1,8 @@
-import seeds from '../../resources/seeds.json';
+import seedsJSON from '../../resources/seeds.json';
 import { OnlinePlatformType, Party } from '../dtos/party-dto';
 import { retrieveData } from './utils';
+
+const seeds = seedsJSON as any;
 
 const partyAcronyms = Object.keys(seeds.parties).sort();
 const electoralCircles = Object.keys(seeds.parties[partyAcronyms[0]].candidates);
