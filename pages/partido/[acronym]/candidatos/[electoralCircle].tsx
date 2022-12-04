@@ -7,25 +7,27 @@ import PartyIntro from "../../../../src/components/party/intro";
 import PartyCandidatesTable from "../../../../src/components/party/party-candidate-table";
 import { Candidate } from "../../../../src/dtos/candidate-dto";
 import { convertToLabel } from "../../../../src/dtos/electoral-circle-dto";
-import { retrieveParty, getPartyCandidates } from "../../../../src/retriever/api";
+import { Party } from "../../../../src/dtos/party-dto";
+import {
+  retrieveParty,
+  getPartyCandidates,
+} from "../../../../src/retriever/api";
 
 const { Paragraph } = Typography;
 
 interface PartyCandidateProps {
-  acronym: string
-  electoralCircle: string
+  acronym: string;
+  electoralCircle: string;
 }
 
-const PartyCandidate = ({acronym, electoralCircle}: PartyCandidateProps) => {
-
-  const party = retrieveParty(acronym);
+const PartyCandidate = ({ acronym, electoralCircle }: PartyCandidateProps) => {
+  const party = retrieveParty(acronym) as Party;
   const candidates = getPartyCandidates(acronym, electoralCircle);
 
   const circleAsLabel = convertToLabel(electoralCircle!.toString());
-  const leadCandidate = candidates.filter((candidate: Candidate) => candidate.isLeadCandidate)[0];
-
-  const hasBiography = leadCandidate.biographySource;
-  const hasParliament = leadCandidate.parliamentLink;
+  const leadCandidate = candidates.filter(
+    (candidate: Candidate) => candidate.isLeadCandidate
+  )[0];
 
   return (
     <Layout>
@@ -40,30 +42,51 @@ const PartyCandidate = ({acronym, electoralCircle}: PartyCandidateProps) => {
       )}
       <LayoutHeader />
       <Layout.Content>
-        <PartyHeader party={party} subtitle={`${party.acronym} - Círculo eleitoral de ${circleAsLabel}`} />
+        <PartyHeader
+          party={party}
+          subtitle={`${party.acronym} - Círculo eleitoral de ${circleAsLabel}`}
+        />
         <PartyIntro spokesperson={leadCandidate} title={leadCandidate.name}>
-          <Paragraph className="party-desc">{leadCandidate.biography}</Paragraph>
-          {hasBiography && (
-            <Paragraph>Biografia: <a href={leadCandidate.biographySource} target="_blank" rel="noopener noreferrer">aqui</a></Paragraph>
-          )}
-          {hasParliament && (
-            <Paragraph>Página do Parlamento: <a href={leadCandidate.parliamentLink} target="_blank" rel="noopener noreferrer">aqui</a></Paragraph>
-          )}
+          <Paragraph className="party-desc">
+            {leadCandidate.biography}
+          </Paragraph>
+          {leadCandidate.biographySource ? (
+            <Paragraph>
+              Biografia:{" "}
+              <a
+                href={leadCandidate.biographySource}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                aqui
+              </a>
+            </Paragraph>
+          ) : null}
+          {leadCandidate.parliamentLink ? (
+            <Paragraph>
+              Página do Parlamento:{" "}
+              <a
+                href={leadCandidate.parliamentLink}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                aqui
+              </a>
+            </Paragraph>
+          ) : null}
         </PartyIntro>
-        {candidates && (
-          <PartyCandidatesTable candidates={candidates} />
-        )}
+        {candidates && <PartyCandidatesTable candidates={candidates} />}
       </Layout.Content>
       <LayoutFooter />
     </Layout>
   );
-}
+};
 
 PartyCandidate.getInitialProps = (appContext: any) => {
   return {
     acronym: appContext.query.acronym,
-    electoralCircle: appContext.query.electoralCircle
-  }
-}
+    electoralCircle: appContext.query.electoralCircle,
+  };
+};
 
 export default PartyCandidate;
