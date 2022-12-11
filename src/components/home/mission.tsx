@@ -1,4 +1,5 @@
-import { Col, Row } from "antd"
+import Image from "next/image";
+import { Col, Row } from "antd";
 
 const HomeMissionInfographic = () => {
   return (
@@ -9,7 +10,7 @@ const HomeMissionInfographic = () => {
           <p>Promover a participação activa dos cidadãos nos processos eleitorais em Portugal.</p>
         </Col>
         <Col span={24} lg={10} className="home-our-mission-img">
-          <img alt="infographic" src='/infographic.svg' />
+          <Image src='/infographic.svg' height={186} width={440} alt="infographic" />
         </Col>
       </Row>
     </section>

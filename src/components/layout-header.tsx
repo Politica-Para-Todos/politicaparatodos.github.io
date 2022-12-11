@@ -1,12 +1,12 @@
-import { Button, Col, Drawer, Layout, Menu, Row } from "antd"
+import Image from "next/image";
 import Link from "next/link";
+import { Button, Col, Drawer, Layout, Menu, Row } from "antd"
 import React, { Fragment, memo, useState } from "react"
 import SocialSharing from "./social-sharing";
 import { socialMediaOptions } from '../utils/online-platform';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
 const LayoutHeader = () => {
-
   const [headerState, setState] = useState({
     visible: false
   });
@@ -45,7 +45,7 @@ const LayoutHeader = () => {
         <Row justify='space-between' align='middle' typeof="flex">
           <Col span={24} lg={24}>
             <Link href="/">
-              <img src='/horizontal_logo.svg' alt='header logo' className='header_logo' />
+              <Image src='/horizontal_logo.svg' width={200} height={41} alt='header logo' className='header_logo' />
             </Link>
 
             <Button
@@ -53,7 +53,7 @@ const LayoutHeader = () => {
               type='primary'
               onClick={showDrawer}
             >
-              <img className='header__mobile-burger' src='/burger.svg' alt='burger menu' />
+              <Image className='header__mobile-burger' src='/burger.svg' height={25} width={25} alt='burger menu' />
             </Button>
 
             <nav className='header__desktop-menu'>

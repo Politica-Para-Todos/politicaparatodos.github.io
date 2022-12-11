@@ -1,5 +1,6 @@
 import { Divider, Layout } from "antd";
 import { NextPage } from "next";
+import Image from "next/image";
 import AboutUsFooter from "../src/components/about-us/footer";
 import AboutUsJoinUs from "../src/components/about-us/join-us";
 import AboutUsMotivation from "../src/components/about-us/motivation";
@@ -18,7 +19,7 @@ const AboutUs: NextPage = () => (
     />
     <LayoutHeader />
     <Layout.Content className="about-us-section">
-      <img src='rows-people.svg' className="about-us__header-img" alt="people" />
+      <Image src='rows-people.svg' className="about-us__header-img" layout="responsive" width={1440} height={351} alt="people" />
       <AboutUsContributors />
       <Divider />
       <AboutUsMotivation />
