@@ -1,5 +1,4 @@
 .party-intro__text {
-
   p,
   .ant-typography {
     color: $darkerGrey;
@@ -10,15 +9,14 @@
       color: $darkerGrey;
       font-weight: 700;
       text-decoration: underline;
-      transition: color .15s ease-in-out;
+      transition: color 0.15s ease-in-out;
 
       &:hover,
       &:focus {
-        color: rgba($darkerGrey, .7);
+        color: rgba($darkerGrey, 0.7);
       }
     }
   }
-
 }
 
 .party-intro__spokesperson {

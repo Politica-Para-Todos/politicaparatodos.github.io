@@ -1,11 +1,11 @@
 import CountdownUnit from "./countdown-unit";
 
 export interface Countdown {
-  days: number,
-  hours: number,
-  minutes: number,
-  seconds: number,
-  completed: boolean
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+  completed: boolean;
 }
 
 const CountdownRenderer = (countdown: Countdown) => {
@@ -19,7 +19,7 @@ const CountdownRenderer = (countdown: Countdown) => {
       <span className="countdown-unit-separator">:</span>
       <CountdownUnit label="Segundos" value={countdown.seconds} />
     </div>
-  )
-}
+  );
+};
 
 export default CountdownRenderer;

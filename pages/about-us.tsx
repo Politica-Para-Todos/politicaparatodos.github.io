@@ -19,7 +19,14 @@ const AboutUs: NextPage = () => (
     />
     <LayoutHeader />
     <Layout.Content className="about-us-section">
-      <Image src='rows-people.svg' className="about-us__header-img" layout="responsive" width={1440} height={351} alt="people" />
+      <Image
+        src="rows-people.svg"
+        className="about-us__header-img"
+        layout="responsive"
+        width={1440}
+        height={351}
+        alt="people"
+      />
       <AboutUsContributors />
       <Divider />
       <AboutUsMotivation />

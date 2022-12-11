@@ -1,21 +1,21 @@
 /** @type {import('next').NextConfig} */
 
-const path = require('path');
+const path = require("path");
 
-module.exports =  {
+module.exports = {
   reactStrictMode: true,
   swcMinify: true,
-}
+};
 
 module.exports = {
   sassOptions: {
-    includePaths: [path.join(__dirname, 'styles')],
-  }
-}
+    includePaths: [path.join(__dirname, "styles")],
+  },
+};
 
 module.exports = {
   images: {
-    loader: 'akamai',
-    path: ''
-  }
-}
+    loader: "akamai",
+    path: "",
+  },
+};

@@ -33,7 +33,7 @@ section.home-videos {
     left: 0;
   }
 
-  .home-videos__episode-button~.home-videos__episode-button {
+  .home-videos__episode-button ~ .home-videos__episode-button {
     margin-left: 20px;
   }
 }

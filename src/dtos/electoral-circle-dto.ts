@@ -1,124 +1,124 @@
 export enum ElectoralCircle {
-  ALL = 'all',
-  ACORES = 'acores',
-  AVEIRO = 'aveiro',
-  BEJA = 'beja',
-  BRAGA = 'braga',
-  BRAGANCA = 'braganca',
-  CASTELO_BRANCO = 'castelo-branco',
-  COIMBRA = 'coimbra',
-  EVORA = 'evora',
-  EUROPA = 'europa',
-  FARO = 'faro',
-  FORA_EUROPA = 'fora-europa',
-  GUARDA = 'guarda',
-  LEIRIA = 'leiria',
-  LISBOA = 'lisboa',
-  MADEIRA = 'madeira',
-  PORTALEGRE = 'portalegre',
-  PORTO = 'porto',
-  SANTAREM = 'santarem',
-  SETUBAL = 'setubal',
-  VIANA_DO_CASTELO = 'viana-do-castelo',
-  VILA_REAL = 'vila-real',
-  VISEU = 'viseu'
+  ALL = "all",
+  ACORES = "acores",
+  AVEIRO = "aveiro",
+  BEJA = "beja",
+  BRAGA = "braga",
+  BRAGANCA = "braganca",
+  CASTELO_BRANCO = "castelo-branco",
+  COIMBRA = "coimbra",
+  EVORA = "evora",
+  EUROPA = "europa",
+  FARO = "faro",
+  FORA_EUROPA = "fora-europa",
+  GUARDA = "guarda",
+  LEIRIA = "leiria",
+  LISBOA = "lisboa",
+  MADEIRA = "madeira",
+  PORTALEGRE = "portalegre",
+  PORTO = "porto",
+  SANTAREM = "santarem",
+  SETUBAL = "setubal",
+  VIANA_DO_CASTELO = "viana-do-castelo",
+  VILA_REAL = "vila-real",
+  VISEU = "viseu",
 }
 
 export const electoralCircleDropdown = () => [
   {
     value: ElectoralCircle.ALL,
-    label: 'Todos'
+    label: "Todos",
   },
   {
     value: ElectoralCircle.ACORES,
-    label: 'Açores'
+    label: "Açores",
   },
   {
     value: ElectoralCircle.AVEIRO,
-    label: 'Aveiro'
+    label: "Aveiro",
   },
   {
     value: ElectoralCircle.BEJA,
-    label: 'Beja'
+    label: "Beja",
   },
   {
     value: ElectoralCircle.BRAGA,
-    label: 'Braga'
+    label: "Braga",
   },
   {
     value: ElectoralCircle.BRAGANCA,
-    label: 'Bragança'
+    label: "Bragança",
   },
   {
     value: ElectoralCircle.CASTELO_BRANCO,
-    label: 'Castelo Branco'
+    label: "Castelo Branco",
   },
   {
     value: ElectoralCircle.COIMBRA,
-    label: 'Coimbra'
+    label: "Coimbra",
   },
   {
     value: ElectoralCircle.EVORA,
-    label: 'Évora'
+    label: "Évora",
   },
   {
     value: ElectoralCircle.EUROPA,
-    label: 'Europa'
+    label: "Europa",
   },
   {
     value: ElectoralCircle.FARO,
-    label: 'Faro'
+    label: "Faro",
   },
   {
     value: ElectoralCircle.FORA_EUROPA,
-    label: 'Fora da Europa'
+    label: "Fora da Europa",
   },
   {
     value: ElectoralCircle.GUARDA,
-    label: 'Guarda'
+    label: "Guarda",
   },
   {
     value: ElectoralCircle.LEIRIA,
-    label: 'Leiria'
+    label: "Leiria",
   },
   {
     value: ElectoralCircle.LISBOA,
-    label: 'Lisboa'
+    label: "Lisboa",
   },
   {
     value: ElectoralCircle.MADEIRA,
-    label: 'Madeira'
+    label: "Madeira",
   },
   {
     value: ElectoralCircle.PORTALEGRE,
-    label: 'Portalegre'
+    label: "Portalegre",
   },
   {
     value: ElectoralCircle.PORTO,
-    label: 'Porto'
+    label: "Porto",
   },
   {
     value: ElectoralCircle.SANTAREM,
-    label: 'Santarém'
+    label: "Santarém",
   },
   {
     value: ElectoralCircle.SETUBAL,
-    label: 'Setúbal'
+    label: "Setúbal",
   },
   {
     value: ElectoralCircle.VIANA_DO_CASTELO,
-    label: 'Viana do Castelo'
+    label: "Viana do Castelo",
   },
   {
     value: ElectoralCircle.VILA_REAL,
-    label: 'Vila Real'
+    label: "Vila Real",
   },
   {
     value: ElectoralCircle.VISEU,
-    label: 'Viseu'
-  }
+    label: "Viseu",
+  },
 ];
 
 export const convertToLabel = (circle: string) =>
-  electoralCircleDropdown()
-    .filter((element: any) => element.value == circle)[0].label;
+  electoralCircleDropdown().filter((element: any) => element.value == circle)[0]
+    .label;

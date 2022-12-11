@@ -1,26 +1,25 @@
-import { Col, Row, Select, Switch } from "antd"
-import { useState } from "react"
-import { electoralCircleDropdown } from "../../dtos/electoral-circle-dto"
-import { HomeParty } from "../../dtos/party-dto"
-import { shuffleParties } from "../../utils/manipuation"
-import AvatarList from "./avatar-list"
+import { Col, Row, Select, Switch } from "antd";
+import { useState } from "react";
+import { electoralCircleDropdown } from "../../dtos/electoral-circle-dto";
+import { HomeParty } from "../../dtos/party-dto";
+import { shuffleParties } from "../../utils/manipuation";
+import AvatarList from "./avatar-list";
 
 interface HomePartiesProp {
-  parties: HomeParty[]
+  parties: HomeParty[];
 }
 
 interface HomePartiesState {
-  alphabeticalOrder: boolean,
-  districtFilter: string
+  alphabeticalOrder: boolean;
+  districtFilter: string;
 }
 
 const HomeParties = (props: HomePartiesProp) => {
-
   let sortedParties: HomeParty[];
   const { parties } = props;
   const startState: HomePartiesState = {
     alphabeticalOrder: false,
-    districtFilter: 'Todos'
+    districtFilter: "Todos",
   };
 
   const [state, setState] = useState(startState);
@@ -28,16 +27,16 @@ const HomeParties = (props: HomePartiesProp) => {
   const onChange = () => {
     setState({
       alphabeticalOrder: !state.alphabeticalOrder,
-      districtFilter: state.districtFilter
-    })
-  }
+      districtFilter: state.districtFilter,
+    });
+  };
 
   const filterDisctrict = (district: string) => {
     setState({
       alphabeticalOrder: state.alphabeticalOrder,
-      districtFilter: district
-    })
-  }
+      districtFilter: district,
+    });
+  };
 
   // if (state.districtFilter !== "Todos") {
   //   sortedParties = parties.filter((party: Party) => party.includes(district));
@@ -55,14 +54,17 @@ const HomeParties = (props: HomePartiesProp) => {
       if (partyName1 < partyName2) {
         return -1;
       }
-      return 0
+      return 0;
     });
   } else {
     sortedParties = shuffleParties(parties);
-  };
+  }
 
   return (
-    <section id="parties-section" className="section-home-parties-list section--grey">
+    <section
+      id="parties-section"
+      className="section-home-parties-list section--grey"
+    >
       <Row>
         <Col span={24} lg={24}>
           <p className="home-parties-list_disclaimer">
@@ -76,7 +78,8 @@ const HomeParties = (props: HomePartiesProp) => {
             </Col>
             <Col span={24} md={12}>
               <div className="alphabetic-order">
-                <Switch className="alphabetic-order__switch"
+                <Switch
+                  className="alphabetic-order__switch"
                   size="small"
                   onChange={onChange}
                 />
@@ -91,7 +94,7 @@ const HomeParties = (props: HomePartiesProp) => {
                 placeholder="Escolha o Círculo Eleitoral"
                 onChange={filterDisctrict}
               >
-                {electoralCircleDropdown().map(circle => (
+                {electoralCircleDropdown().map((circle) => (
                   <Select.Option key={circle.value} value={circle.label}>
                     {circle.label}
                   </Select.Option>
@@ -103,7 +106,7 @@ const HomeParties = (props: HomePartiesProp) => {
         </Col>
       </Row>
     </section>
-  )
-}
+  );
+};
 
 export default HomeParties;

@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { Layout } from 'antd';
+import { Layout } from "antd";
 import LayoutHeader from "../src/components/layout-header";
 import MetaTags from "../src/components/meta-tags";
 
@@ -13,9 +13,8 @@ const Parlament: NextPage = () => (
       socialImage="/images/share/banner-PPT.jpg"
     />
     <LayoutHeader />
-    <Layout.Content>
-    </Layout.Content>
+    <Layout.Content></Layout.Content>
   </Layout>
-)
+);
 
 export default Parlament;
