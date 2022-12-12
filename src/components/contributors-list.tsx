@@ -12,9 +12,7 @@ const ContributorsList = () => {
     return null;
   }
 
-  return (
-    <p>Quem esteve envolvido no projecto: {shuffleList(contributors).join(", ")}</p>
-  )
+  return <>{shuffleList(contributors).join(", ")}.</>;
 }
 
 export default ContributorsList;

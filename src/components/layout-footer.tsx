@@ -1,5 +1,5 @@
 import { Col, Layout, Row } from "antd";
-import ContributorsList from "./contributors";
+import ContributorsList from "./contributors-list";
 import { memo } from "react";
 import Link from "next/link";
 import SocialSharing from "./social-sharing";
@@ -40,7 +40,7 @@ const HomeFooter = () => {
           <p>Podes consultar <TeamLink /> a equipa por detrás do projecto e as suas motivações.
           </p>
           <br />
-          <ContributorsList />
+          <p>Quem esteve envolvido no projecto: <ContributorsList /></p>
         </Col>
       </Row>
     </Footer>
