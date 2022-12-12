@@ -13,11 +13,11 @@
   p a {
     color: $darkerGrey;
     text-decoration: underline;
-    transition: color .15s ease-in-out;
+    transition: color 0.15s ease-in-out;
 
     &:hover,
     &:focus {
-      color: rgba($darkerGrey, .7);
+      color: rgba($darkerGrey, 0.7);
     }
   }
 }

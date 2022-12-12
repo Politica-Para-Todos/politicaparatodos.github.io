@@ -37,7 +37,9 @@ const HomeFooter = () => {
           className="footer-info"
         >
           <h2>Quem Somos</h2>
-          <p>Podes consultar <TeamLink /> a equipa por detrás do projecto e as suas motivações.
+          <p>
+            Podes consultar <TeamLink /> a equipa por detrás do projecto e as
+            suas motivações.
           </p>
           <br />
           <p>Quem esteve envolvido no projecto: <ContributorsList /></p>

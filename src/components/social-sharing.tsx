@@ -2,8 +2,8 @@ import { OnlinePlatform, OnlinePlatformType } from "../dtos/party-dto";
 import SocialIcon from "./social-icon";
 
 interface SocialSharingProps {
-  onlinePlatforms: OnlinePlatform[],
-  theme: string
+  onlinePlatforms: OnlinePlatform[];
+  theme: string;
 }
 
 const SocialSharing = (props: SocialSharingProps) => {
@@ -14,16 +14,20 @@ const SocialSharing = (props: SocialSharingProps) => {
       {onlinePlatforms.map((op: OnlinePlatform) => (
         <li key={op.type}>
           <a
-            href={op.type === OnlinePlatformType.EMAIL ? `mailto:${op.address}` : op.address}
-            target='_blank'
+            href={
+              op.type === OnlinePlatformType.EMAIL
+                ? `mailto:${op.address}`
+                : op.address
+            }
+            target="_blank"
             rel="noopener noreferrer"
           >
             <SocialIcon icon={op.type} theme={theme} />
           </a>
         </li>
       ))}
-    </ul >
+    </ul>
   );
-}
+};
 
-export default SocialSharing
+export default SocialSharing;

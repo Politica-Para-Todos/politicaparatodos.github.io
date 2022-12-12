@@ -50,11 +50,11 @@
     color: white;
     border: none;
     text-decoration: none;
-    transition: color .15s ease-in-out;
+    transition: color 0.15s ease-in-out;
 
     &:hover,
     &:focus {
-      color: rgba(white, .7);
+      color: rgba(white, 0.7);
       border: none;
     }
   }
@@ -111,7 +111,7 @@
   text-decoration: none;
   line-height: 38px;
   padding: 0 10px;
-  transition: background-color .15s ease-in-out;
+  transition: background-color 0.15s ease-in-out;
 
   &:hover,
   &:focus,
@@ -133,7 +133,6 @@
     align-items: center;
   }
 }
-
 
 .header__mobile-burger,
 .header__mobile-menu {

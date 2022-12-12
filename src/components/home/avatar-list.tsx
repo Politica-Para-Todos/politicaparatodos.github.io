@@ -3,8 +3,8 @@ import { HomeParty } from "../../dtos/party-dto";
 import RoundAvatar from "./round-avatar";
 
 interface AvatarListProp {
-  theme: string
-  parties: HomeParty[]
+  theme: string;
+  parties: HomeParty[];
 }
 
 const AvatarList = (props: AvatarListProp) => {
@@ -21,14 +21,14 @@ const AvatarList = (props: AvatarListProp) => {
   }
 
   return (
-    <div className={`avatar-list-container avatar-list-container avatar-list-container--${theme}`}>
-      {
-        parties.map(party => (
-          <RoundAvatar key={party.acronym} {...party} />
-        ))
-      }
-    </div >
-  )
-}
+    <div
+      className={`avatar-list-container avatar-list-container avatar-list-container--${theme}`}
+    >
+      {parties.map((party) => (
+        <RoundAvatar key={party.acronym} {...party} />
+      ))}
+    </div>
+  );
+};
 
 export default AvatarList;

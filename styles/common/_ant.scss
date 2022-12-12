@@ -1,12 +1,12 @@
 .ant-layout {
   flex-flow: row wrap;
   position: relative;
-  overflow-X: hidden;
+  overflow-x: hidden;
   width: 100%;
   background-color: white;
 
   @media only screen and (min-width: 992px) {
-    overflow-X: initial;
+    overflow-x: initial;
   }
 }
 
@@ -45,7 +45,9 @@
   box-shadow: none;
 }
 
-.ant-select-dropdown-menu-item:hover:not(.ant-select-dropdown-menu-item-disabled),
+.ant-select-dropdown-menu-item:hover:not(
+    .ant-select-dropdown-menu-item-disabled
+  ),
 .ant-select-dropdown-menu-item-selected,
 .ant-select-dropdown-menu-item-active {
   background-color: $lightGrey;

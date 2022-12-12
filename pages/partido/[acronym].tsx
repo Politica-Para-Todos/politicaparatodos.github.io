@@ -12,12 +12,11 @@ import { retrieveParty, retrievePartyAcronyms } from "../../src/retriever/api";
 const { Paragraph } = Typography;
 
 interface PartyHomeProps {
-  party: Party
+  party: Party;
 }
 
 const PartyHome = (props: PartyHomeProps) => {
-
-  const { party } = props
+  const { party } = props;
   console.log(party.manifesto);
   return (
     <Layout>
@@ -32,80 +31,88 @@ const PartyHome = (props: PartyHomeProps) => {
       )}
       <LayoutHeader />
       <Layout.Content className="party-section">
-        <PartyHeader party={party} subtitle='' />
-        <PartyIntro spokesperson={null} title='Descrição do Partido'>
+        <PartyHeader party={party} subtitle="" />
+        <PartyIntro spokesperson={null} title="Descrição do Partido">
           <Paragraph>{party.description}</Paragraph>
-          {
-            party.descriptionSource.split('\n').map((desc: string, index: number) =>
+          {party.descriptionSource
+            .split("\n")
+            .map((desc: string, index: number) => (
               <Paragraph key={index}>
-                Fonte: <a href={desc} target="_blank" rel="noopener noreferrer">Wikipedia</a>
-              </Paragraph>)
-          }
+                Fonte:{" "}
+                <a href={desc} target="_blank" rel="noopener noreferrer">
+                  Wikipedia
+                </a>
+              </Paragraph>
+            ))}
         </PartyIntro>
-        <PartyCandidatesList candidates={party.candidates} circles={electoralCircleDropdown()} acronym={party.acronym} />
+        <PartyCandidatesList
+          candidates={party.candidates}
+          circles={electoralCircleDropdown()}
+          acronym={party.acronym}
+        />
       </Layout.Content>
       <LayoutFooter />
     </Layout>
-  )
-}
+  );
+};
 
 export const getStaticPaths = async () => {
   const params: object[] = retrievePartyAcronyms().map((acro: string) => {
     return {
       params: {
-        acronym: acro.toLowerCase()
-      }
-    }
-  })
+        acronym: acro.toLowerCase(),
+      },
+    };
+  });
 
   return {
     paths: params,
-    fallback: false
-  }
-}
+    fallback: false,
+  };
+};
 
 export const getStaticProps = async (context: any) => {
   const party = retrieveParty(context.params.acronym);
 
   return {
-    props: { party }
-  }
-}
+    props: { party },
+  };
+};
 
 // Don't know where this was used..
 const thematics = [
   {
     value: 10,
     icon: "build",
-    color: "green"
+    color: "green",
   },
   {
     value: 30,
     icon: "build",
-    color: "yellow"
+    color: "yellow",
   },
   {
     value: 20,
     icon: "build",
-    color: "red"
+    color: "red",
   },
   {
     value: 25,
     icon: "build",
-    color: "blue"
+    color: "blue",
   },
   {
     value: 15,
     icon: "build",
-    color: "gray"
-  }
+    color: "gray",
+  },
 ];
 
 const analytics = {
   words: "310K",
   views: "310K",
   reading: "302 min",
-  comments: "3.5K"
+  comments: "3.5K",
 };
 
 export default PartyHome;

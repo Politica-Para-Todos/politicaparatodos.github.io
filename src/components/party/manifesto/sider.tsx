@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
-import { Link } from 'react-router-dom'
-import { Menu } from 'antd';
-import Media from 'react-media';
+import { Link } from "react-router-dom";
+import { Menu } from "antd";
+import Media from "react-media";
 import { SubSection } from "../../../dtos/manifesto-dto";
 
 const { SubMenu } = Menu;
@@ -52,9 +52,7 @@ const ManifestoSider = (props: any) => {
   const { selectedKey, openKey } = props;
 
   return (
-    <div>
-      Hello World !
-    </div>
+    <div>Hello World !</div>
     // <Fragment>
     //   <Media query="(max-width: 768px)" render={() => (
     //     <Menu
@@ -84,6 +82,6 @@ const ManifestoSider = (props: any) => {
     //   )} />
     // </Fragment>
   );
-}
+};
 
 export default ManifestoSider;

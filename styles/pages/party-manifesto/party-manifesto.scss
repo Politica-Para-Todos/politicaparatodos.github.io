@@ -138,19 +138,19 @@ section.party-manifesto-body {
   .ant-menu-submenu-active,
   .ant-menu-submenu-title:hover,
   .ant-menu-item a:hover {
-    color: rgba($darkerGrey, .7)
+    color: rgba($darkerGrey, 0.7);
   }
 
-  .ant-menu-sub.ant-menu-inline>.ant-menu-item,
-  .ant-menu-sub.ant-menu-inline>.ant-menu-submenu>.ant-menu-submenu-title,
-  .ant-menu-vertical>.ant-menu-item,
-  .ant-menu-vertical-left>.ant-menu-item,
-  .ant-menu-vertical-right>.ant-menu-item,
-  .ant-menu-inline>.ant-menu-item,
-  .ant-menu-vertical>.ant-menu-submenu>.ant-menu-submenu-title,
-  .ant-menu-vertical-left>.ant-menu-submenu>.ant-menu-submenu-title,
-  .ant-menu-vertical-right>.ant-menu-submenu>.ant-menu-submenu-title,
-  .ant-menu-inline>.ant-menu-submenu>.ant-menu-submenu-title {
+  .ant-menu-sub.ant-menu-inline > .ant-menu-item,
+  .ant-menu-sub.ant-menu-inline > .ant-menu-submenu > .ant-menu-submenu-title,
+  .ant-menu-vertical > .ant-menu-item,
+  .ant-menu-vertical-left > .ant-menu-item,
+  .ant-menu-vertical-right > .ant-menu-item,
+  .ant-menu-inline > .ant-menu-item,
+  .ant-menu-vertical > .ant-menu-submenu > .ant-menu-submenu-title,
+  .ant-menu-vertical-left > .ant-menu-submenu > .ant-menu-submenu-title,
+  .ant-menu-vertical-right > .ant-menu-submenu > .ant-menu-submenu-title,
+  .ant-menu-inline > .ant-menu-submenu > .ant-menu-submenu-title {
     height: auto;
     padding: 5px 45px 5px 24px;
     margin: 0;
@@ -165,7 +165,7 @@ section.party-manifesto-body {
     border: 1px solid;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color .15s ease-in-out;
+    transition: background-color 0.15s ease-in-out;
 
     &:hover {
       background-color: $darkGrey;

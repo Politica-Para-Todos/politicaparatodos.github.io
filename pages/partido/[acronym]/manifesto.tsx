@@ -6,38 +6,40 @@ import PartyHeader from "../../../src/components/party/header";
 import ManifestoSider from "../../../src/components/party/manifesto/sider";
 import { Section } from "../../../src/dtos/manifesto-dto";
 import { Party } from "../../../src/dtos/party-dto";
-import { retrieveParty, retrievePartyAcronyms } from "../../../src/retriever/api";
-import ManifestoSection from '../../../src/components/party/manifesto/section';
+import {
+  retrieveParty,
+  retrievePartyAcronyms,
+} from "../../../src/retriever/api";
+import ManifestoSection from "../../../src/components/party/manifesto/section";
 
 const Sider = Layout.Sider;
 
 interface PartyManifestoProps {
-  party: Party
+  party: Party;
   // sections: any, //Section[],
   // section: any,
   // sectionId: string,
   // title: string
 }
 
-const getSelectedKey = (section_id: string) => section_id ? [section_id] : [];
+const getSelectedKey = (section_id: string) => (section_id ? [section_id] : []);
 
 const getOpenKey = (sections: Section[], section_id: string) => {
   let openKey: any = [];
 
-  sections.forEach(section => {
+  sections.forEach((section) => {
     if (section.subSections !== undefined && section.subSections.length > 0) {
-      section.subSections.forEach(subsection => {
+      section.subSections.forEach((subsection) => {
         if (subsection.position.toString() === section_id) {
-          openKey = [section.position.toString()]
+          openKey = [section.position.toString()];
         }
-      })
+      });
     }
   });
   return openKey ? openKey : [];
-}
+};
 
 const PartyManifesto: NextPage<PartyManifestoProps> = ({ party }) => {
-
   const manifesto = party.manifesto;
 
   return (
@@ -53,10 +55,7 @@ const PartyManifesto: NextPage<PartyManifestoProps> = ({ party }) => {
       )}
       <LayoutHeader />
       <Layout.Content>
-        <PartyHeader
-          party={party}
-          subtitle={`${party.acronym} - Programa`}
-        />
+        <PartyHeader party={party} subtitle={`${party.acronym} - Programa`} />
         <Layout>
           <Sider width={400} className="party-manifesto-sider">
             {manifesto?.sections.length && (
@@ -64,8 +63,13 @@ const PartyManifesto: NextPage<PartyManifestoProps> = ({ party }) => {
                 sections={manifesto?.sections}
                 party_acronym={party.acronym}
                 section_id={manifesto?.sections[0].position}
-                selectedKey={getSelectedKey(manifesto?.sections[0].position.toString())}
-                openKey={getOpenKey(manifesto?.sections, manifesto?.sections[0].position.toString())}
+                selectedKey={getSelectedKey(
+                  manifesto?.sections[0].position.toString()
+                )}
+                openKey={getOpenKey(
+                  manifesto?.sections,
+                  manifesto?.sections[0].position.toString()
+                )}
               />
             )}
           </Sider>
@@ -79,30 +83,30 @@ const PartyManifesto: NextPage<PartyManifestoProps> = ({ party }) => {
       </Layout.Content>
       {/* <LayoutFooter /> */}
     </Layout>
-  )
-}
+  );
+};
 
 export const getStaticPaths = async () => {
   const params: object[] = retrievePartyAcronyms().map((acro: string) => {
     return {
       params: {
-        acronym: acro.toLowerCase()
-      }
-    }
-  })
+        acronym: acro.toLowerCase(),
+      },
+    };
+  });
 
   return {
     paths: params,
-    fallback: false
-  }
-}
+    fallback: false,
+  };
+};
 
 export const getStaticProps = (context: any) => {
   return {
     props: {
-      party: retrieveParty(context.params.acronym)
-    }
-  }
-}
+      party: retrieveParty(context.params.acronym),
+    },
+  };
+};
 
 export default PartyManifesto;

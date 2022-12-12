@@ -13,6 +13,6 @@ const ContributorsList = () => {
   }
 
   return <>{shuffleList(contributors).join(", ")}.</>;
-}
+};
 
 export default ContributorsList;

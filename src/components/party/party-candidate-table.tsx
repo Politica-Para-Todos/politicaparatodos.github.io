@@ -6,14 +6,19 @@ import { sortArrayByKey } from "../../utils/manipuation";
 const { Title } = Typography;
 
 interface PartyCandidatesTableProps {
-  candidates: Candidate[]
+  candidates: Candidate[];
 }
 
 const PartyCandidatesTable = (props: PartyCandidatesTableProps) => {
-
   const { candidates } = props;
-  const mainCandidates = sortArrayByKey(candidates.filter((c: Candidate) => c.type === 'main'), 'position');
-  const secondaryCandidates = sortArrayByKey(candidates.filter(c => c.type === 'secundary'), 'position');
+  const mainCandidates = sortArrayByKey(
+    candidates.filter((c: Candidate) => c.type === "main"),
+    "position"
+  );
+  const secondaryCandidates = sortArrayByKey(
+    candidates.filter((c) => c.type === "secundary"),
+    "position"
+  );
 
   return (
     <section className="party-candidates-table">
@@ -26,7 +31,9 @@ const PartyCandidatesTable = (props: PartyCandidatesTableProps) => {
             <List
               bordered={false}
               dataSource={mainCandidates}
-              renderItem={canditate => <List.Item>{`${canditate.position} - ${canditate.name}`}</List.Item>}
+              renderItem={(canditate) => (
+                <List.Item>{`${canditate.position} - ${canditate.name}`}</List.Item>
+              )}
               className="party-candidates-table__items"
             />
           </Col>
@@ -41,14 +48,16 @@ const PartyCandidatesTable = (props: PartyCandidatesTableProps) => {
             <List
               bordered={false}
               dataSource={secondaryCandidates}
-              renderItem={item => <List.Item>{`${item.position} - ${item.name}`}</List.Item>}
+              renderItem={(item) => (
+                <List.Item>{`${item.position} - ${item.name}`}</List.Item>
+              )}
               className="party-candidates-table__items"
             />
           </Col>
         </Row>
       </div>
     </section>
-  )
+  );
 };
 
 export default PartyCandidatesTable;
