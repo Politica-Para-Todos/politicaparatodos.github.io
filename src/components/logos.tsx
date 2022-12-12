@@ -1,13 +1,21 @@
 import Image from "next/image";
+import footer_logo from "../../public/vertical_logo.jpg";
+import header_logo from "../../public/horizontal_logo.svg";
 
-const VerticalLogo = () => (
+export const HeaderLogo = () =>
   <Image
-    alt="vertical_logo"
-    src="vertical_logo.jpg"
-    className="footer_logo"
-    width={240}
-    height={100}
+    src={`/${header_logo.src}`}
+    width="200"
+    height="41"
+    alt="Header Logo"
+    className="header_logo"
   />
-);
 
-export { VerticalLogo };
+export const FooterLogo = () =>
+  <Image
+    src={`/${footer_logo.src}`}
+    width="240px"
+    height="100%"
+    alt="Footer Logo"
+    className="footer_logo"
+  />

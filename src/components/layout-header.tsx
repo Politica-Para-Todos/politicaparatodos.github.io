@@ -5,6 +5,7 @@ import React, { Fragment, memo, useState } from "react";
 import SocialSharing from "./social-sharing";
 import { socialMediaOptions } from "../utils/online-platform";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
+import { HeaderLogo } from "./logos";
 
 const LayoutHeader = () => {
   const [headerState, setState] = useState({
@@ -45,13 +46,7 @@ const LayoutHeader = () => {
         <Row justify="space-between" align="middle" typeof="flex">
           <Col span={24} lg={24}>
             <Link href="/">
-              <Image
-                src="/horizontal_logo.svg"
-                width={200}
-                height={41}
-                alt="header logo"
-                className="header_logo"
-              />
+              <HeaderLogo />
             </Link>
 
             <Button
@@ -109,7 +104,6 @@ const LayoutHeader = () => {
               <div className="header-social-media">
                 <SocialSharing
                   onlinePlatforms={socialMediaOptions}
-                  theme={""}
                 />
               </div>
             </nav>

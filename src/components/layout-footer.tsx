@@ -4,7 +4,7 @@ import { memo } from "react";
 import Link from "next/link";
 import SocialSharing from "./social-sharing";
 import { socialMediaOptions } from "../utils/online-platform";
-import { VerticalLogo } from "./logos";
+import { FooterLogo } from "./logos";
 
 const HomeFooter = () => {
   const { Footer } = Layout;
@@ -26,9 +26,8 @@ const HomeFooter = () => {
         >
           <SocialSharing
             onlinePlatforms={socialMediaOptions}
-            theme={"#c4c4c4"}
           />
-          <VerticalLogo />
+          <FooterLogo />
         </Col>
         <Col
           span={24}
