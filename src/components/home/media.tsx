@@ -4,6 +4,7 @@ import YouTubePlayer from "react-player/youtube";
 // import YouTubePlayer from "react-player/lib/players/YouTube";
 import VideoMask from "../../../public/video_mask.jpg";
 import ReactPlayer from "react-player/youtube";
+import { YOUTUBE_VIDEO_EP1, YOUTUBE_VIDEO_EP2, YOUTUBE_VIDEO_EP3, YOUTUBE_VIDEO_EP4 } from "../../utils/constants";
 
 interface Video {
   url: string;
@@ -12,22 +13,22 @@ interface Video {
 
 const videos: Video[] = [
   {
-    url: "https://www.youtube.com/watch?v=up0Gfd5c0cM",
+    url: YOUTUBE_VIDEO_EP1,
     caption:
       "Mas afinal para que serve votar? Este é o primeiro de uma série de vídeos que explicam como funcionam as eleições legislativas e a nossa Assembleia da República.",
   },
   {
-    url: "https://www.youtube.com/watch?v=2nBGppKe1z4",
+    url: YOUTUBE_VIDEO_EP2,
     caption:
       "Em semana de eleições continuamos a desconstruir o que está em causa no próximo dia 6 de Outubro, com este episódio a focar-se na Assembleia da República e os Círculos Eleitorais.",
   },
   {
-    url: "https://www.youtube.com/watch?v=OERxKenLIo8",
+    url: YOUTUBE_VIDEO_EP3,
     caption:
       "Depois de no último vídeo nos termos debruçado sobre a Assembleia da República e os círculos eleitorais, neste episódio hoje ficarás a saber como se convertem os votos em mandatos.",
   },
   {
-    url: "https://www.youtube.com/watch?v=v-Uj7kwfG5o",
+    url: YOUTUBE_VIDEO_EP4,
     caption:
       "No quarto e último episódio desta série, explicamos-te como é que, após as eleições legislativas, é formado o Executivo.",
   },
