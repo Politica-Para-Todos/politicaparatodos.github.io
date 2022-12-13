@@ -7,9 +7,7 @@ interface AvatarListProp {
   parties: HomeParty[];
 }
 
-const AvatarList = (props: AvatarListProp) => {
-  const { theme, parties } = props;
-
+const AvatarList = ({ theme, parties }: AvatarListProp) => {
   const [hasMounted, setHasMounted] = useState(false);
 
   useEffect(() => {
