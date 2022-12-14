@@ -9,7 +9,7 @@ const Footer = Layout.Footer;
 
 const AboutUsFooter = () => (
   <Footer className="about-us-footer footer">
-    <SocialSharing onlinePlatforms={socialMediaOptions} theme={"#c4c4c4"} />
+    <SocialSharing onlinePlatforms={socialMediaOptions} />
     <Link href="/">
       <Image
         className="footer_logo"
