@@ -3,14 +3,13 @@ import { Row, Col, Typography, List } from "antd";
 import { Candidate } from "../../dtos/candidate-dto";
 import { sortArrayByKey } from "../../utils/manipuation";
 
-const { Title } = Typography;
-
 interface PartyCandidatesTableProps {
   candidates: Candidate[];
 }
 
-const PartyCandidatesTable = (props: PartyCandidatesTableProps) => {
-  const { candidates } = props;
+const { Title } = Typography;
+
+const PartyCandidatesTable = ({ candidates }: PartyCandidatesTableProps) => {
   const mainCandidates = sortArrayByKey(
     candidates.filter((c: Candidate) => c.type === "main"),
     "position"

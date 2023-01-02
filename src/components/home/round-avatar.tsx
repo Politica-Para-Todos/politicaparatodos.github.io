@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 
 const Avatar = dynamic(import("antd/es/avatar"), { ssr: false });
 
-const RoundAvatar = (party: any) => (
+const RoundAvatar = (party: any) =>
   <a
     className="avatar-list-item"
     href={`/partido/${party.acronym.toLowerCase()}`}
@@ -14,6 +14,5 @@ const RoundAvatar = (party: any) => (
       <h4 className="avatar-list-item__content-subtitle">{party.name}</h4>
     </div>
   </a>
-);
 
 export default RoundAvatar;

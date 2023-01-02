@@ -5,7 +5,7 @@ import { HomeParty } from "../../dtos/party-dto";
 import { shuffleParties } from "../../utils/manipuation";
 import AvatarList from "./avatar-list";
 
-interface HomePartiesProp {
+interface HomePartiesProps {
   parties: HomeParty[];
 }
 
@@ -14,9 +14,8 @@ interface HomePartiesState {
   districtFilter: string;
 }
 
-const HomeParties = (props: HomePartiesProp) => {
+const HomeParties = ({ parties }: HomePartiesProps) => {
   let sortedParties: HomeParty[];
-  const { parties } = props;
   const startState: HomePartiesState = {
     alphabeticalOrder: false,
     districtFilter: "Todos",
