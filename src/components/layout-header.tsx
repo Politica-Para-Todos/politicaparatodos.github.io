@@ -6,6 +6,7 @@ import SocialSharing from "./social-sharing";
 import { socialMediaOptions } from "../utils/online-platform";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 import { HeaderLogo } from "./logos";
+import { LOOMIO_PPT_URL } from "../utils/constants";
 
 const LayoutHeader = () => {
   const [headerState, setState] = useState({
@@ -94,7 +95,7 @@ const LayoutHeader = () => {
               </Menu>
               <a
                 className="header-join-us"
-                href="https://www.loomio.org/g/ZqT2uPv6/politica-para-todos"
+                href={LOOMIO_PPT_URL}
                 target="_blank"
                 rel="noopener noreferrer"
               >Junta-te a Nós!
@@ -138,7 +139,7 @@ const LayoutHeader = () => {
           </Menu>
           <a
             className="header-join-us"
-            href="https://www.loomio.org/g/ZqT2uPv6/politica-para-todos"
+            href={LOOMIO_PPT_URL}
             target="_blank"
             rel="noopener noreferrer"
           >Junta-te a Nós!</a>

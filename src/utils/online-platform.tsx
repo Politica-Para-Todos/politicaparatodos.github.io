@@ -1,28 +1,29 @@
+import { EMAIL_PPT, FACEBOOK_PPT, GITHUB_PPT, INSTAGRAM_PPT, MEDIUM_PPT, TWITTER_PPT } from "./constants";
 import { OnlinePlatform, OnlinePlatformType } from "../dtos/party-dto";
 
 export const socialMediaOptions: OnlinePlatform[] = [
   {
     type: OnlinePlatformType.TWITTER,
-    address: "https://twitter.com/politicaparatds",
+    address: TWITTER_PPT,
   },
   {
     type: OnlinePlatformType.FACEBOOK,
-    address: "http://fb.me/politicaparatodos.pt",
+    address: FACEBOOK_PPT,
   },
   {
     type: OnlinePlatformType.MEDIUM,
-    address: "https://medium.com/politica-para-todos",
+    address: MEDIUM_PPT,
   },
   {
     type: OnlinePlatformType.EMAIL,
-    address: "contacto@politicaparatodos.pt",
+    address: EMAIL_PPT,
   },
   {
     type: OnlinePlatformType.INSTAGRAM,
-    address: "https://www.instagram.com/politica_para_todos/",
+    address: INSTAGRAM_PPT,
   },
   {
     type: OnlinePlatformType.GITHUB,
-    address: "https://github.com/Politica-Para-Todos/",
+    address: GITHUB_PPT,
   },
 ];

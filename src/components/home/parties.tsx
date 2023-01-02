@@ -5,7 +5,7 @@ import { HomeParty } from "../../dtos/party-dto";
 import { shuffleParties } from "../../utils/manipuation";
 import AvatarList from "./avatar-list";
 
-interface HomePartiesProp {
+interface HomePartiesProps {
   parties: HomeParty[];
 }
 
