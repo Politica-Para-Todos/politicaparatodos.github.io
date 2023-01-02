@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col } from "antd";
 
-const AboutUsMotivation = () => (
+const AboutUsMotivation = () =>
   <section className="about-us-motivation">
     <Row typeof="flex">
       <Col span={24} md={{ offset: 2, span: 20 }}>
@@ -58,6 +58,5 @@ const AboutUsMotivation = () => (
       </Col>
     </Row>
   </section>
-);
 
 export default AboutUsMotivation;
