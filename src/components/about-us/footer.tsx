@@ -5,17 +5,20 @@ import SocialSharing from "../social-sharing";
 import { socialMediaOptions } from "../../utils/online-platform";
 import { FooterLogo } from "../logos";
 
-const AboutUsFooter = () => {
-  const { Footer } = Layout
+const { Footer } = Layout;
 
-  return (
-    <Footer className="about-us-footer footer">
-      <SocialSharing onlinePlatforms={socialMediaOptions} theme={"#c4c4c4"} />
-      <Link href="/">
-        <FooterLogo />
-      </Link>
-    </Footer>
-  )
-}
+const AboutUsFooter = () =>
+  <Footer className="about-us-footer footer">
+    <SocialSharing onlinePlatforms={socialMediaOptions} />
+    <Link href="/">
+      <Image
+        className="footer_logo"
+        src="vertical_logo.jpg"
+        height={100}
+        width={240}
+        alt="PPT logo"
+      />
+    </Link>
+  </Footer>
 
 export default AboutUsFooter;
