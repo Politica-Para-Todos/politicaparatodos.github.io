@@ -70,27 +70,26 @@ const LayoutHeader = () => {
             <nav className="header__desktop-menu">
               <Menu mode="horizontal">
                 <Menu.Item key={1}>
-                  <Link href="/" passHref>
-                    <a onClick={closeDrawer}>Home</a>
-                    {/* <MenuTitle>Home</MenuTitle> */}
+                  <Link href="/" onClick={closeDrawer}>
+                    Home
                   </Link>
                 </Menu.Item>
                 <Menu.Item key={2}>
-                  <Link href="/" passHref>
-                    <a onClick={closeDrawer}>Partidos</a>
+                  <Link href="/#parties-section" style={{ scrollBehavior: "smooth" }} onClick={closeDrawer}>
+                    Partidos
                   </Link>
                 </Menu.Item>
                 {/* <Menu.Item key={3}>
                   <Link href='/' onClick={closeDrawer}>Parlamento</Link>
                 </Menu.Item> */}
                 <Menu.Item key={3}>
-                  <Link href="/" passHref>
-                    <a onClick={closeDrawer}>Debates 2022</a>
+                  <Link href="/debates-2022" onClick={closeDrawer}>
+                    Debates 2022
                   </Link>
                 </Menu.Item>
                 <Menu.Item key={4}>
-                  <Link href="/about-us">
-                    <a onClick={closeDrawer}>Quem Somos</a>
+                  <Link href="/quem-somos" onClick={closeDrawer}>
+                    Quem Somos
                   </Link>
                 </Menu.Item>
               </Menu>
@@ -99,13 +98,10 @@ const LayoutHeader = () => {
                 href={LOOMIO_PPT_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-              >
-                Junta-te a Nós!
+              >Junta-te a Nós!
               </a>
               <div className="header-social-media">
-                <SocialSharing
-                  onlinePlatforms={socialMediaOptions}
-                />
+                <SocialSharing onlinePlatforms={socialMediaOptions} />
               </div>
             </nav>
           </Col>
@@ -115,7 +111,7 @@ const LayoutHeader = () => {
           placement="right"
           closable={false}
           onClose={closeDrawer}
-          visible={headerState.visible}
+          open={headerState.visible}
           getContainer={false}
           style={{ position: "absolute" }}
         >
@@ -146,15 +142,13 @@ const LayoutHeader = () => {
             href={LOOMIO_PPT_URL}
             target="_blank"
             rel="noopener noreferrer"
-          >
-            Junta-te a Nós!
-          </a>
+          >Junta-te a Nós!</a>
           <div className="header-social-media">
             <SocialSharing onlinePlatforms={socialMediaOptions} theme="#666" />
           </div>
         </Drawer>
       </Layout.Header>
-    </Fragment>
+    </Fragment >
   );
 };
 

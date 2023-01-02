@@ -9,19 +9,13 @@ interface HomePartiesProps {
   parties: HomeParty[];
 }
 
-interface HomePartiesState {
-  alphabeticalOrder: boolean;
-  districtFilter: string;
-}
-
-const HomeParties = ({ parties }: HomePartiesProps) => {
+const HomeParties = ({ parties }: HomePartiesProp) => {
   let sortedParties: HomeParty[];
-  const startState: HomePartiesState = {
+
+  const [state, setState] = useState({
     alphabeticalOrder: false,
     districtFilter: "Todos",
-  };
-
-  const [state, setState] = useState(startState);
+  });
 
   const onChange = () => {
     setState({
