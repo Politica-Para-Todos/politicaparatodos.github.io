@@ -17,7 +17,8 @@ interface PartyHomeProps {
 
 const PartyHome = (props: PartyHomeProps) => {
   const { party } = props;
-  console.log(party.manifesto);
+
+  console.log("PARTY MANIFESTO: ", party.manifesto);
   return (
     <Layout>
       {party.name && (

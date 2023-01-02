@@ -3,33 +3,31 @@ import { NextPage } from "next";
 import LayoutHeader from "../../../src/components/layout-header";
 import MetaTags from "../../../src/components/meta-tags";
 import PartyHeader from "../../../src/components/party/header";
-import ManifestoSider from "../../../src/components/party/manifesto/sider";
 import { Section } from "../../../src/dtos/manifesto-dto";
 import { Party } from "../../../src/dtos/party-dto";
-import {
-  retrieveParty,
-  retrievePartyAcronyms,
-} from "../../../src/retriever/api";
+import { retrieveParty, retrievePartyAcronyms } from "../../../src/retriever/api";
 import ManifestoSection from "../../../src/components/party/manifesto/section";
+import LayoutFooter from "../../../src/components/layout-footer";
+import ManifestoSider from "../../../src/components/party/manifesto/sider";
+import { useState } from "react";
 
-const Sider = Layout.Sider;
+const { Sider } = Layout;
 
 interface PartyManifestoProps {
-  party: Party;
-  // sections: any, //Section[],
-  // section: any,
-  // sectionId: string,
-  // title: string
+  party: Party
 }
 
-const getSelectedKey = (section_id: string) => (section_id ? [section_id] : []);
+const getSelectedKey = (section_id: string) => section_id ? [section_id] : [];
 
 const getOpenKey = (sections: Section[], section_id: string) => {
   let openKey: any = [];
 
-  sections.forEach((section) => {
+  sections.forEach(section => {
+
     if (section.subSections !== undefined && section.subSections.length > 0) {
-      section.subSections.forEach((subsection) => {
+
+      section.subSections.forEach(subsection => {
+
         if (subsection.position.toString() === section_id) {
           openKey = [section.position.toString()];
         }
@@ -40,7 +38,15 @@ const getOpenKey = (sections: Section[], section_id: string) => {
 };
 
 const PartyManifesto: NextPage<PartyManifestoProps> = ({ party }) => {
-  const manifesto = party.manifesto;
+  const [manifesto, setManifesto] = useState({
+    currentSection: party.manifesto?.sections[0],
+    visible: true
+  });
+
+  if (!party.manifesto) {
+    return null;
+  }
+  const { title, sections } = party.manifesto;
 
   return (
     <Layout className="party-manifesto">
@@ -58,30 +64,22 @@ const PartyManifesto: NextPage<PartyManifestoProps> = ({ party }) => {
         <PartyHeader party={party} subtitle={`${party.acronym} - Programa`} />
         <Layout>
           <Sider width={400} className="party-manifesto-sider">
-            {manifesto?.sections.length && (
+            {sections.length && (
               <ManifestoSider
-                sections={manifesto?.sections}
-                party_acronym={party.acronym}
-                section_id={manifesto?.sections[0].position}
-                selectedKey={getSelectedKey(
-                  manifesto?.sections[0].position.toString()
-                )}
-                openKey={getOpenKey(
-                  manifesto?.sections,
-                  manifesto?.sections[0].position.toString()
-                )}
+                sections={sections}
+                selectedKey={getSelectedKey("1")}
+                openKey={getOpenKey(sections, "1")}
               />
             )}
           </Sider>
-          {/* Commented to avoid TS issues
-            <Layout.Content>
-            {manifesto?.sections[0] && (
-              <ManifestoSection title={title} section={section} section_id={sectionId} />
+          <Layout.Content>
+            {sections && (
+              <ManifestoSection title={title} section={manifesto.currentSection!} />
             )}
-          </Layout.Content> */}
+          </Layout.Content>
         </Layout>
       </Layout.Content>
-      {/* <LayoutFooter /> */}
+      <LayoutFooter />
     </Layout>
   );
 };
@@ -101,10 +99,10 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = (context: any) => {
+export const getStaticProps = async (context: any) => {
   return {
     props: {
-      party: retrieveParty(context.params.acronym),
+      party: retrieveParty(context.params.acronym)
     },
   };
 };

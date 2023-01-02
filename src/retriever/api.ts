@@ -5,7 +5,7 @@ import {
   getHomepageParties,
   getPartyAcronyms,
   homePageParties,
-  partyHomePage as getParty,
+  partyHomePage,
 } from "./service";
 
 export const getHomeParties = () => homePageParties();
@@ -14,5 +14,5 @@ export const getPartyCandidates = (acronym: string, electoralCircle: string) =>
 export const retrieveJsonData = (): Party[] => getAllData();
 
 export const retrieveHomepageParties = () => getHomepageParties();
-export const retrieveParty = (acronym: string) => getParty(acronym);
+export const retrieveParty = (acronym: string) => partyHomePage(acronym);
 export const retrievePartyAcronyms = () => getPartyAcronyms();

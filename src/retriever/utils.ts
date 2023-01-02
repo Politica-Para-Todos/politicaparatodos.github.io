@@ -1,13 +1,15 @@
+import { ObjectMapper } from "jackson-js";
 import { Candidate } from "../dtos/candidate-dto";
 import { ElectoralCircle } from "../dtos/electoral-circle-dto";
+import { Manifesto, ManifestoDeserialized, Section, SubSection, Topic } from "../dtos/manifesto-dto";
 import { OnlinePlatformType, Party } from "../dtos/party-dto";
 
 const buildParty = (
-  rawData: any,
+  parties: any,
   acronym: string,
   electoralCircles: string[]
 ): Party => {
-  const party = rawData.parties[acronym];
+  const party = parties[acronym];
 
   return {
     name: party.name,
@@ -37,9 +39,9 @@ const buildParty = (
         address: party.instagram,
       },
     ],
-    manifesto: retrievePartyManifest(rawData.manifestos, acronym),
+    manifesto: null,
     candidates: retrievePartyCandidates(
-      rawData.parties,
+      parties,
       acronym,
       electoralCircles
     ),
@@ -47,17 +49,17 @@ const buildParty = (
 };
 
 const retrieveParties = (
-  rawData: any,
+  parties: any,
   acronyms: string[],
   electoralCircles: string[]
 ) => {
-  let parties = [];
+  let resultParties = [];
   const size = acronyms.length;
 
   for (let i = 0; i < size; i++) {
-    parties.push(buildParty(rawData, acronyms[i], electoralCircles));
+    resultParties.push(buildParty(parties, acronyms[i], electoralCircles));
   }
-  return parties;
+  return resultParties;
 };
 
 const retrievePartyCandidates = (
@@ -114,19 +116,77 @@ const retrievePartyCandidates = (
   return candidatesList;
 };
 
-export const retrievePartyManifest = (rawManifests: any, acronym: string) => {
-  if (rawManifests[acronym] === undefined) {
+const retrieveTopic = (raw: any): Topic => {
+  return {
+    html: raw.html,
+    position: raw.position
+  }
+}
+
+const retrieveTopics = (raw: any): Topic[] =>
+  raw.map((topic: Topic) => retrieveTopic(topic))
+
+
+const retrieveSubSections = (raw: any) => {
+  raw.map((subSection: any) => {
+    if (subSection.content !== undefined) {
+      return retrieveTopics(subSection)
+    }
+    return {
+      topics: retrieveTopics(subSection.topics),
+      position: subSection.position,
+      title: subSection.title
+    }
+  })
+}
+
+export const retrievePartyManifesto = (manifestos: any, acronym: string): Manifesto | null => {
+
+  const partyManifesto = manifestos[acronym];
+  if (partyManifesto === undefined) {
     return null;
   }
+  // const mapper = new ObjectMapper()
+  // const deserialised = mapper.parse<Manifesto>(JSON.stringify(manifestos[acronym]), { mainCreator: () => [ManifestoDeserialized] });
 
-  const rawPartyManifest = rawManifests[acronym];
-
-  return {
-    partyAcronym: acronym,
-    title: rawPartyManifest.title,
-    sections: rawPartyManifest.sections,
-  };
+  const result = {
+    title: partyManifesto.title,
+    sections: retrieveManifestoSections(partyManifesto.sections)
+  }
+  return result;
 };
+
+const retrieveManifestoSections = (rawSections: any): Section[] =>
+  rawSections.map((section: any) => {
+    return {
+      positions: section.position,
+      title: section.title,
+      subSections: retrieveManifestoSubSections(section.content),
+      topics: retrieveManifestoTopics(section.content)
+    }
+  })
+
+const retrieveManifestoSubSections = (rawSubSections: any): SubSection[] => {
+  const result = rawSubSections.map((subSection: any) => {
+    if (subSection.content !== undefined) {
+      return {
+        position: subSection.position,
+        title: subSection.title,
+        topics: retrieveManifestoTopics(subSection.content)
+      }
+    }
+  })
+  return result !== undefined ? result : undefined
+}
+
+
+const retrieveManifestoTopics = (rawTopics: any): Topic[] =>
+  rawTopics.map((topic: any) => {
+    return {
+      html: topic.html,
+      position: topic.position
+    }
+  })
 
 export const convertToElectoralCircle = (region: string): ElectoralCircle => {
   switch (region) {
@@ -180,9 +240,9 @@ export const convertToElectoralCircle = (region: string): ElectoralCircle => {
 };
 
 export const retrieveData = (
-  rawData: any,
+  parties: any,
   partyAcronyms: string[],
   electoralCircles: string[]
-) => retrieveParties(rawData, partyAcronyms, electoralCircles);
+) => retrieveParties(parties, partyAcronyms, electoralCircles);
 
 const validateField = (value: string | undefined) => (value ? value : null);

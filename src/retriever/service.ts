@@ -1,48 +1,32 @@
-import seedsJSON from "../../resources/seeds.json";
+import seeds from "../../resources/seeds.json";
+import { Manifesto } from "../dtos/manifesto-dto";
 import { OnlinePlatformType, Party } from "../dtos/party-dto";
-import { retrieveData } from "./utils";
+import { retrieveData, retrievePartyManifesto } from "./utils";
 
-const seeds = seedsJSON as any;
+const file = seeds as any;
+const { parties, manifestos } = file;
 
-const partyAcronyms = Object.keys(seeds.parties).sort();
-const electoralCircles = Object.keys(
-  seeds.parties[partyAcronyms[0]].candidates
-);
-electoralCircles[0] = electoralCircles.splice(1, 1, electoralCircles[0])[0];
-const parties: Party[] = retrieveData(seeds, partyAcronyms, electoralCircles);
+const partyAcronyms = Object.keys(parties).sort();
 
-export const homePageParties = () => {
-  const website = parties.map((party: any) =>
-    party.platforms.filter(
-      (platform: any) => platform.type === OnlinePlatformType.WEBSITE
-    )
-  )[0];
+const electoralCircles = () => {
+  const randomParty = partyAcronyms[1] // randomize a party with guarantees of having candidates in all electoral circles 
+  return Object.keys(parties[randomParty].candidates);
+};
 
-  return parties.map((party: any) => {
+const convertedParties: Party[] = retrieveData(parties, partyAcronyms, electoralCircles());
+
+export const homePageParties = () =>
+  convertedParties.map(party => {
     return {
       name: party.name,
       acronym: party.acronym,
       logo: party.logo,
-      website: website[0].address,
+      website: websiteAddress(party),
     };
   });
-};
 
 export const partyHomePage = (acronym: string) => {
-  console.log(acronym);
-  const party = parties.filter(
-    (party) => party.acronym.toLowerCase() === acronym
-  )[0];
-  const partyCandidates = party.candidates
-    .filter((candidate) => candidate.isLeadCandidate)
-    .map((candidate) => {
-      return {
-        name: candidate.name,
-        photo: candidate.photo,
-        electoralCircle: candidate.electoralCircle,
-        biography: candidate.biography,
-      };
-    });
+  const party = getParty(acronym);
 
   return {
     name: party.name,
@@ -51,8 +35,8 @@ export const partyHomePage = (acronym: string) => {
     description: party.description,
     descriptionSource: party.descriptionSource,
     platforms: party.platforms,
-    candidates: partyCandidates,
-    manifesto: party.manifesto,
+    candidates: leadCandidates(party),
+    manifesto: getManifesto(acronym)
   };
 };
 
@@ -60,26 +44,51 @@ export const electoralCirclePage = (
   acronym: string,
   electoralCircle: string
 ) => {
-  const party = parties.filter(
-    (party) => party.acronym.toLowerCase() === acronym
-  )[0];
-  return party.candidates.filter(
-    (candidate) =>
-      candidate.electoralCircle.toString().toLowerCase() == electoralCircle
+  const party = getParty(acronym);
+
+  return party.candidates.filter(candidate =>
+    candidate.electoralCircle.toString().toLowerCase() == electoralCircle
   );
 };
 
 export const getAllData = () =>
-  retrieveData(seeds, partyAcronyms, electoralCircles);
+  retrieveData(seeds, partyAcronyms, electoralCircles());
 
-export const getHomepageParties = () => {
-  return parties.map((party) => {
+export const getHomepageParties = () =>
+  convertedParties.map(party => {
     return {
       name: party.name,
       acronym: party.acronym,
       logo: party.logo,
     };
   });
-};
 
 export const getPartyAcronyms = () => partyAcronyms;
+
+export const getManifesto = (acronym: string): Manifesto | null => retrievePartyManifesto(manifestos, acronym.toUpperCase())
+
+// Aux functions
+const getParty = (acronym: string) => {
+  const party = convertedParties.find(party => party.acronym.toLowerCase() === acronym)
+
+  if (party === undefined) {
+    throw Error("Something's wrong.");
+  }
+  return party;
+}
+
+const websiteAddress = (party: Party): string =>
+  party.platforms.find(platform =>
+    platform.type === OnlinePlatformType.WEBSITE
+  )?.address ?? ""
+
+const leadCandidates = (party: Party) =>
+  party.candidates.filter(candidate => candidate.isLeadCandidate)
+    .map(leadCandidate => {
+      return {
+        name: leadCandidate.name,
+        photo: leadCandidate.photo,
+        electoralCircle: leadCandidate.electoralCircle,
+        biography: leadCandidate.biography,
+      };
+    });
