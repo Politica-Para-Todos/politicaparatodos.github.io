@@ -3,15 +3,17 @@ import Link from "next/link";
 import { Col, Row, Button } from "antd";
 import Countdown from "react-countdown-now";
 import CountdownRenderer from "../countdown-renderer";
+import { PORTAL_ELEITOR_URL } from "../../utils/constants";
+import { VotingImage } from "../logos";
 
-const HomeCountdown = () => (
+const HomeCountdown = () =>
   <section className="home-voting-countdown section--grey">
     <Row>
       <Col span={24} lg={24}>
-        <Image src="/voting.svg" width={150} height={150} alt="voting" />
+        <VotingImage />
         <Countdown date="2022-01-30T09:00:00" renderer={CountdownRenderer} />
         <Link
-          href="https://www.portaldoeleitor.pt/Default.aspx"
+          href={PORTAL_ELEITOR_URL}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -22,6 +24,5 @@ const HomeCountdown = () => (
       </Col>
     </Row>
   </section>
-);
 
 export default HomeCountdown;

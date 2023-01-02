@@ -12,8 +12,7 @@ interface PartyHeaderProps {
   subtitle: string;
 }
 
-const PartyHeader = (props: PartyHeaderProps) => {
-  const { party, subtitle } = props;
+const PartyHeader = ({ party, subtitle }: PartyHeaderProps) => {
   const hasManifesto = party.manifesto ?? false;
   const website = party.platforms.filter(
     (op: OnlinePlatform) => op.type == OnlinePlatformType.WEBSITE

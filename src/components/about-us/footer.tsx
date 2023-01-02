@@ -1,15 +1,15 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { Layout } from "antd";
 import SocialSharing from "../social-sharing";
 import { socialMediaOptions } from "../../utils/online-platform";
+import { FooterLogo } from "../logos";
 
-const Footer = Layout.Footer;
+const { Footer } = Layout;
 
-const AboutUsFooter = () => (
+const AboutUsFooter = () =>
   <Footer className="about-us-footer footer">
-    <SocialSharing onlinePlatforms={socialMediaOptions} theme={"#c4c4c4"} />
+    <SocialSharing onlinePlatforms={socialMediaOptions} />
     <Link href="/">
       <Image
         className="footer_logo"
@@ -20,6 +20,5 @@ const AboutUsFooter = () => (
       />
     </Link>
   </Footer>
-);
 
 export default AboutUsFooter;

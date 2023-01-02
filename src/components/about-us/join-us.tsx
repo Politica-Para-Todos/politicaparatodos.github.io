@@ -1,7 +1,8 @@
 import React from "react";
 import { Row, Col } from "antd";
+import { LOOMIO_PPT_URL } from "../../utils/constants";
 
-const AboutUsJoinUs = () => (
+const AboutUsJoinUs = () =>
   <section className="about-us-join-us section--grey">
     <Row typeof="flex">
       <Col span={24} md={{ offset: 2, span: 20 }}>
@@ -15,7 +16,7 @@ const AboutUsJoinUs = () => (
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://www.loomio.org/g/ZqT2uPv6/politica-para-todos"
+            href={LOOMIO_PPT_URL}
           >
             neste link
           </a>{" "}
@@ -25,6 +26,5 @@ const AboutUsJoinUs = () => (
       </Col>
     </Row>
   </section>
-);
 
 export default AboutUsJoinUs;
