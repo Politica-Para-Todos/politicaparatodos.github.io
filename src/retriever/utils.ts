@@ -131,40 +131,48 @@ export const retrievePartyManifesto = (manifestos: any, acronym: string): Manife
 
 const retrieveManifestoSections = (rawSections: any): Section[] =>
   rawSections.map((section: any, index: number) => {
-    console.log('>>>>>>>>>>>>>>>> section: ', index);
 
-    if (index === 5) {
-      const test = retrieveManifestoSubSections(section.content);
+    // console.log('>>>>>>>>>>>>>>>> section: ', index);
+    // console.log('>>>>>>>>>>>>>>>> section title: ', section.title);
+
+    // if (index === 7) {
+    //   const test = retrieveManifestoSubSections(section.content);
+    //   return null;
+    // }
+
+    if (section.content[0].content !== undefined) {
+      return {
+        positions: section.position,
+        title: section.title,
+        subSections: retrieveManifestoSubSections(section.content),
+        topics: null
+      }
     }
-
     return {
       positions: section.position,
       title: section.title,
-      subSections: retrieveManifestoSubSections(section.content),
+      subSections: null,
       topics: retrieveManifestoTopics(section.content)
     }
   })
 
-const retrieveManifestoSubSections = (rawSubSections: any): SubSection[] | null => {
-  if (rawSubSections[0].content !== undefined) {
-    return rawSubSections.map((subSection: any, index: number) => {
-      console.log(">>>>>>>>>>>>> subsection: ", index);
+const retrieveManifestoSubSections = (rawSubSections: any): SubSection[] => {
+  // console.log("<<<<<>>>>><<<<>>>> ", rawSubSections);
 
-      return {
-        position: subSection.position,
-        title: subSection.title,
-        topics: retrieveManifestoTopics(subSection.content)
-      }
-    })
-  }
-  return null;
+  return rawSubSections.map((subSection: any, index: number) => {
+    return {
+      topics: retrieveManifestoTopics(subSection.content),
+      position: subSection.position,
+      title: subSection.title
+    }
+  })
 }
 
-const retrieveManifestoTopics = (rawTopics: any): Topic[] | null =>
+const retrieveManifestoTopics = (rawTopics: any): Topic[] =>
   rawTopics.map((topic: any, index: number) => {
-    console.log('>>>>>>>>>>>>>>>>> topic: ', index);
+    // console.log('>>>>>>>>>>>>>>>>> topic: ', index);
     if (index === 7) {
-      console.log("<<<<<<<< topic: ", topic);
+      // console.log("<<<<<<<< topic: ", topic);
     }
     return {
       html: topic.html,

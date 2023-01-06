@@ -8,46 +8,49 @@ interface ManifestoSiderProps {
   title: string
 }
 
-const { SubMenu } = Menu;
 const { Sider } = Layout;
+const { SubMenu } = Menu;
 
 const ManifestoSider = ({ sections, title }: ManifestoSiderProps) => {
-  const [selectedSection, setSelectedSection] = useState(sections[0]);
+  const [selectedSection, setSelectedSection] = useState<Section | null>(null);
 
   const onClickSection = (event: React.MouseEvent) => {
-    const key = event.key.substring(event.key.length - 1);
-    setSelectedSection(sections[key]);
-  }
+    const keyPath: string[] = event.keyPath;
+    const sectionKey: number | null = keyPath[keyPath.length - 1].substring(8) as unknown as number;
+    const subSectionKey: number = keyPath[0] as unknown as number - 1;
 
-  const renderSectionTitles = () =>
-    sections.map(section => {
-      return (
-        <Menu.Item key={section.position} onClick={onClickSection}>
-          {section.title}
-        </Menu.Item>
-      )
-    })
+    console.log(keyPath);
+    console.log(sectionKey);
+    console.log(subSectionKey);
+
+    if (subSectionKey == null) {
+      setSelectedSection(sections[sectionKey]);
+    } else {
+      setSelectedSection(sections[sectionKey].subSections[subSectionKey]!);
+    }
+  }
 
   const renderSectionItems = () =>
     sections.map(section => {
       if (section.subSections) {
-        <SubMenu
-          key={section.position}
-          title={section.title}
-          className={`section-mobile-${section.position}`}
-        >
-          {renderSubSectionItems(section.subSections)}
-        </SubMenu>
-      } else {
-        return renderMenuItem(section.position, section.title ?? "FAILED");
+        return renderSubMenuItem(section);
       }
+      return renderMenuItem(section.position, section.title ?? "FAILED");
     })
 
   const renderMenuItem = (position: number, title: string) =>
-    <Menu.Item key={position} className={`section-${position}`}>
-      {/* should render the manifesto section body */}
+    <Menu.Item key={position} className={`section-${position}`} onClick={onClickSection}>
       {title}
     </Menu.Item>
+
+  const renderSubMenuItem = (section: Section) =>
+    <SubMenu
+      key={section.position}
+      title={section.title}
+      className={`section-mobile-${section.position}`}
+    >
+      {renderSubSectionItems(section.subSections)}
+    </SubMenu>
 
   const renderSubSectionItems = (subSections: SubSection[]) =>
     subSections.map(subSection =>
@@ -63,13 +66,13 @@ const ManifestoSider = ({ sections, title }: ManifestoSiderProps) => {
             style={{ height: '100%', borderRight: 0 }}
           >
             {/* <SubMenu
-        key="mobile-menu"
-        title="Capítulos"
-        className="section-mobile__chapter"
-      >
-      {renderSectionItems()}
-    </SubMenu> */}
-            {renderSectionTitles()}
+              key="mobile-menu"
+              title="Capítulos"
+              className="section-mobile__chapter"
+            >
+              {renderSectionItems()}
+            </SubMenu> */}
+            {renderSectionItems()}
           </Menu >
         </Fragment>
       </Sider>
