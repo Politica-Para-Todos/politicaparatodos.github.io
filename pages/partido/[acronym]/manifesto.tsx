@@ -24,7 +24,7 @@ const getOpenKey = (sections: Section[], section_id: string) => {
 
   sections.forEach(section => {
 
-    if (section.subSections !== undefined && section.subSections.length > 0) {
+    if (section.subSections !== null) {
 
       section.subSections.forEach(subsection => {
 
@@ -38,10 +38,7 @@ const getOpenKey = (sections: Section[], section_id: string) => {
 };
 
 const PartyManifesto: NextPage<PartyManifestoProps> = ({ party }) => {
-  const [manifesto, setManifesto] = useState({
-    currentSection: party.manifesto?.sections[0],
-    visible: true
-  });
+  const [currentSection, setCurrentSection] = useState(party.manifesto?.sections[0]);
 
   if (!party.manifesto) {
     return null;
@@ -62,7 +59,13 @@ const PartyManifesto: NextPage<PartyManifestoProps> = ({ party }) => {
       <LayoutHeader />
       <Layout.Content>
         <PartyHeader party={party} subtitle={`${party.acronym} - Programa`} />
-        <Layout>
+        {sections.length && (
+          <ManifestoSider
+            sections={sections}
+            title={title}
+          />
+        )}
+        {/* <Layout>
           <Sider width={400} className="party-manifesto-sider">
             {sections.length && (
               <ManifestoSider
@@ -73,11 +76,9 @@ const PartyManifesto: NextPage<PartyManifestoProps> = ({ party }) => {
             )}
           </Sider>
           <Layout.Content>
-            {sections && (
-              <ManifestoSection title={title} section={manifesto.currentSection!} />
-            )}
+            <ManifestoSection title={title} section={manifesto.selectedSection} />
           </Layout.Content>
-        </Layout>
+        </Layout> */}
       </Layout.Content>
       <LayoutFooter />
     </Layout>

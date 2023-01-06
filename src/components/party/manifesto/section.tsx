@@ -1,12 +1,11 @@
 import { Popover } from "antd";
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import ReactHtmlParser from "react-html-parser";
-import twitter_icon from "../../../../public/twitter_icon.svg";
 import { Section, Topic } from "../../../dtos/manifesto-dto";
 
 interface ManifestoSectionProps {
   title: string,
-  section: Section
+  section: Section | null
 }
 
 // const onClickTwitterShare = (e) => {
@@ -42,29 +41,32 @@ const ManifestoSection = ({ title, section }: ManifestoSectionProps) => {
     return null;
   }
 
-  const renderSectionTitle = (section: Section) => !section ? null : <h2>{section.title}</h2>
   const sectionContentRef = () => React.createRef();
 
   return (
     <section className="party-manifesto-body">
       <h1 className="party-manifesto-body__title">{title}</h1>
-      {renderSectionTitle(section)}
-      <div
-        ref={sectionContentRef}
-        className="party-manifesto-body__content">
-        {renderSectionContent(section)}
-      </div>
-      <Popover
-        ref={sectionContentRef}
-        className="party-manifesto__share-popover">
-        {/* <div
-          className="party-manifesto__share-popover-inner"
-          onClick={(e) => onClickTwitterShare(e)}
-        >
-          <img src={twitter_icon} />
-        </div> */}
-      </Popover>
-    </section>
+      {section !== null && (
+        <div>
+          <h2>{section.title}</h2>
+          < div
+            ref={sectionContentRef}
+            className="party-manifesto-body__content">
+            {renderSectionContent(section)}
+          </div>
+          <Popover
+            ref={sectionContentRef}
+            className="party-manifesto__share-popover">
+            {/* <div
+               className="party-manifesto__share-popover-inner"
+               onClick={(e) => onClickTwitterShare(e)}
+             >
+               <img src={twitter_icon} />
+             </div> */}
+          </Popover>
+        </div>
+      )}
+    </section >
   );
 };
 

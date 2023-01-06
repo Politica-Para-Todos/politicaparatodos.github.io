@@ -1,18 +1,32 @@
-import React, { Fragment } from "react";
-import { Menu } from "antd";
-import Media from "react-media";
+import React, { Fragment, useState } from "react";
+import { Layout, Menu } from "antd";
 import { Section, SubSection } from "../../../dtos/manifesto-dto";
-import Link from "next/link";
+import ManifestoSection from "./section";
+import Sider from "antd/lib/layout/Sider";
 
 interface ManifestoSiderProps {
   sections: Section[],
-  selectedKey: any,
-  openKey: any
+  title: string
 }
 
 const { SubMenu } = Menu;
 
-const ManifestoSider = ({ sections, selectedKey, openKey }: ManifestoSiderProps) => {
+const ManifestoSider = ({ sections, title }: ManifestoSiderProps) => {
+  const [selectedSection, setSelectedSection] = useState(sections[0]);
+
+  const onClickSection = (event: React.MouseEvent) => {
+    const key = event.key.substring(event.key.length - 1);
+    setSelectedSection(sections[key]);
+  }
+
+  const renderSectionTitles = () =>
+    sections.map(section => {
+      return (
+        <Menu.Item key={section.position} onClick={onClickSection}>
+          {section.title}
+        </Menu.Item>
+      )
+    })
 
   const renderSectionItems = () =>
     sections.map(section => {
@@ -41,35 +55,28 @@ const ManifestoSider = ({ sections, selectedKey, openKey }: ManifestoSiderProps)
     )
 
   return (
-    <Fragment>
-      <Media query="(max-width: 768px)" render={() => (
-        <Menu
-          mode="inline"
-          defaultSelectedKeys={selectedKey}
-          defaultOpenKeys={openKey}
-          style={{ height: '100%', borderRight: 0 }}
-        >
-          <SubMenu
-            key="mobile-menu"
-            title="Capítulos"
-            className="section-mobile__chapter"
+    <Layout>
+      <Sider width={400} className="party-manifesto-sider">
+        <Fragment>
+          <Menu
+            mode="inline"
+            style={{ height: '100%', borderRight: 0 }}
           >
-            {renderSectionItems()}
-          </SubMenu>
-        </Menu>
-      )} />
-      <Media query="(min-width: 769px)" render={() => (
-        <Menu
-          mode="inline"
-          // TODO: selectedKeys
-          defaultSelectedKeys={["1"]}
-          defaultOpenKeys={["1"]}
-          style={{ height: '100%', borderRight: 0 }}
-        >
-          {renderSectionItems()}
-        </Menu>
-      )} />
-    </Fragment>
+            {/* <SubMenu
+        key="mobile-menu"
+        title="Capítulos"
+        className="section-mobile__chapter"
+      >
+      {renderSectionItems()}
+    </SubMenu> */}
+            {renderSectionTitles()}
+          </Menu >
+        </Fragment>
+      </Sider>
+      <Layout.Content>
+        <ManifestoSection title={title} section={selectedSection} />
+      </Layout.Content>
+    </Layout>
   );
 }
 
