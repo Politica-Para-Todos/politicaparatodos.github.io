@@ -6,12 +6,8 @@ import PartyHeader from "../../../src/components/party/header";
 import { Section } from "../../../src/dtos/manifesto-dto";
 import { Party } from "../../../src/dtos/party-dto";
 import { retrieveParty, retrievePartyAcronyms } from "../../../src/retriever/api";
-import ManifestoSection from "../../../src/components/party/manifesto/section";
 import LayoutFooter from "../../../src/components/layout-footer";
 import ManifestoSider from "../../../src/components/party/manifesto/sider";
-import { useState } from "react";
-
-const { Sider } = Layout;
 
 interface PartyManifestoProps {
   party: Party
@@ -63,20 +59,6 @@ const PartyManifesto: NextPage<PartyManifestoProps> = ({ party }) => {
             title={title}
           />
         )}
-        {/* <Layout>
-          <Sider width={400} className="party-manifesto-sider">
-            {sections.length && (
-              <ManifestoSider
-                sections={sections}
-                selectedKey={getSelectedKey("1")}
-                openKey={getOpenKey(sections, "1")}
-              />
-            )}
-          </Sider>
-          <Layout.Content>
-            <ManifestoSection title={title} section={manifesto.selectedSection} />
-          </Layout.Content>
-        </Layout> */}
       </Layout.Content>
       <LayoutFooter />
     </Layout>
