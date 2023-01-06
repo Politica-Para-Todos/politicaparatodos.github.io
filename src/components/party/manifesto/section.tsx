@@ -28,14 +28,12 @@ const ManifestoSection = ({ title, section }: ManifestoSectionProps) => {
       section.subSections.forEach(subSection => {
         if (subSection.topics) {
           const result = subSection.topics.map(topic => renderSectionItem(topic));
-          console.log(result);
           return result;
         }
       });
     }
     else if (section.topics) {
       const result = section.topics.map(topic => renderSectionItem(topic));
-      console.log(result);
       return result;
     }
     return null;
