@@ -38,8 +38,6 @@ const getOpenKey = (sections: Section[], section_id: string) => {
 };
 
 const PartyManifesto: NextPage<PartyManifestoProps> = ({ party }) => {
-  const [currentSection, setCurrentSection] = useState(party.manifesto?.sections[0]);
-
   if (!party.manifesto) {
     return null;
   }

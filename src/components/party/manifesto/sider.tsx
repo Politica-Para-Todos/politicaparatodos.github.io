@@ -2,7 +2,6 @@ import React, { Fragment, useState } from "react";
 import { Layout, Menu } from "antd";
 import { Section, SubSection } from "../../../dtos/manifesto-dto";
 import ManifestoSection from "./section";
-import Sider from "antd/lib/layout/Sider";
 
 interface ManifestoSiderProps {
   sections: Section[],
@@ -10,6 +9,7 @@ interface ManifestoSiderProps {
 }
 
 const { SubMenu } = Menu;
+const { Sider } = Layout;
 
 const ManifestoSider = ({ sections, title }: ManifestoSiderProps) => {
   const [selectedSection, setSelectedSection] = useState(sections[0]);
@@ -76,7 +76,7 @@ const ManifestoSider = ({ sections, title }: ManifestoSiderProps) => {
       <Layout.Content>
         <ManifestoSection title={title} section={selectedSection} />
       </Layout.Content>
-    </Layout>
+    </Layout >
   );
 }
 
