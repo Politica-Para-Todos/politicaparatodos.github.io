@@ -16,21 +16,15 @@ const ManifestoSider = ({ sections, title }: ManifestoSiderProps) => {
 
   const onClickSection = (event: React.MouseEvent) => {
     const keyPath: string[] = event.keyPath;
-    console.log(event);
-    // const getSectionMenuKey = (position: number) =>
-    //   +keyPath[position].split('-')[1];
+    const getSectionMenuKey = (position: number) =>
+      +keyPath[position].split('-')[1];
 
     if (keyPath.length > 1) {
-      const sectionMenuKey: number = +keyPath[1].split('-')[1];
+      const sectionMenuKey: number = getSectionMenuKey(1);
       const subSectionMenuKey: number = +keyPath[0] - 1;
-
-      console.log(sectionMenuKey);
-      console.log(subSectionMenuKey);
-      console.log(sections[sectionMenuKey].subSections[subSectionMenuKey]);
-
       setSelectedSection(sections[sectionMenuKey].subSections[subSectionMenuKey]);
     } else {
-      const sectionMenuKey: number = +keyPath[0].split('-')[1];
+      const sectionMenuKey: number = getSectionMenuKey(0);
       setSelectedSection(sections[sectionMenuKey]);
     }
   }
@@ -70,13 +64,6 @@ const ManifestoSider = ({ sections, title }: ManifestoSiderProps) => {
             mode="inline"
             style={{ height: '100%', borderRight: 0 }}
           >
-            {/* <SubMenu
-              key="mobile-menu"
-              title="Capítulos"
-              className="section-mobile__chapter"
-            >
-              {renderSectionItems()}
-            </SubMenu> */}
             {renderSectionItems()}
           </Menu >
         </Fragment>
