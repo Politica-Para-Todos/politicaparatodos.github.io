@@ -1,5 +1,5 @@
 import { Candidate } from "./candidate-dto";
-import { Manifesto, ManifestoDeserialized } from "./manifesto-dto";
+import { Manifesto } from "./manifesto-dto";
 
 export interface Party {
   name: string;
