@@ -1,11 +1,11 @@
 import { Popover } from "antd";
 import React, { Fragment } from "react";
 import ReactHtmlParser from "react-html-parser";
-import { Section, Topic } from "../../../dtos/manifesto-dto";
+import { Section, SubSection, Topic } from "../../../dtos/manifesto-dto";
 
 interface ManifestoSectionProps {
   title: string,
-  section: Section | null
+  section: Section | SubSection | null
 }
 
 // const onClickTwitterShare = (e) => {
@@ -23,19 +23,21 @@ const ManifestoSection = ({ title, section }: ManifestoSectionProps) => {
       {ReactHtmlParser(topic.html)}
     </Fragment>
 
-  const renderSectionContent = (section: Section) => {
-    if (section.subSections) {
-      section.subSections.forEach(subSection => {
-        if (subSection.topics) {
-          const result = subSection.topics.map(topic => renderSectionItem(topic));
-          return result;
-        }
-      });
+  const renderSectionContent = (section: Section | SubSection) => {
+    console.log("SELECTED SECTION: ", section);
+    if (section) {
+      if (section.topics) {
+        return section.topics?.map(topic => renderSectionItem(topic));
+      }
+      if (section.subSections) {
+        section.subSections?.forEach(subSection =>
+          subSection.topics.map(topic => renderSectionItem(topic)));
+      }
     }
-    else if (section.topics) {
-      const result = section.topics.map(topic => renderSectionItem(topic));
-      return result;
-    }
+    // else if (section.topics) {
+    //   const result = section.topics.map(topic => renderSectionItem(topic));
+    //   return result;
+    // }
     return null;
   }
 

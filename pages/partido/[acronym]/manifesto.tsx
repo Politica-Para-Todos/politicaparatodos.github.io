@@ -13,25 +13,25 @@ interface PartyManifestoProps {
   party: Party
 }
 
-const getSelectedKey = (section_id: string) => section_id ? [section_id] : [];
+// const getSelectedKey = (section_id: string) => section_id ? [section_id] : [];
 
-const getOpenKey = (sections: Section[], section_id: string) => {
-  let openKey: any = [];
+// const getOpenKey = (sections: Section[], section_id: string) => {
+//   let openKey: any = [];
 
-  sections.forEach(section => {
+//   sections.forEach(section => {
 
-    if (section.subSections !== null) {
+//     if (section.subSections !== null) {
 
-      section.subSections.forEach(subsection => {
+//       section.subSections.forEach(subsection => {
 
-        if (subsection.position.toString() === section_id) {
-          openKey = [section.position.toString()];
-        }
-      });
-    }
-  });
-  return openKey ? openKey : [];
-};
+//         if (subsection.position.toString() === section_id) {
+//           openKey = [section.position.toString()];
+//         }
+//       });
+//     }
+//   });
+//   return openKey ? openKey : [];
+// };
 
 const PartyManifesto: NextPage<PartyManifestoProps> = ({ party }) => {
   if (!party.manifesto) {

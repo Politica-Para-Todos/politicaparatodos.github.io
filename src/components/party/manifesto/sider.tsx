@@ -12,21 +12,26 @@ const { Sider } = Layout;
 const { SubMenu } = Menu;
 
 const ManifestoSider = ({ sections, title }: ManifestoSiderProps) => {
-  const [selectedSection, setSelectedSection] = useState<Section | null>(null);
+  const [selectedSection, setSelectedSection] = useState<Section | SubSection | null>(null);
 
   const onClickSection = (event: React.MouseEvent) => {
     const keyPath: string[] = event.keyPath;
-    const sectionKey: number | null = keyPath[keyPath.length - 1].substring(8) as unknown as number;
-    const subSectionKey: number = keyPath[0] as unknown as number - 1;
+    console.log(event);
+    // const getSectionMenuKey = (position: number) =>
+    //   +keyPath[position].split('-')[1];
 
-    console.log(keyPath);
-    console.log(sectionKey);
-    console.log(subSectionKey);
+    if (keyPath.length > 1) {
+      const sectionMenuKey: number = +keyPath[1].split('-')[1];
+      const subSectionMenuKey: number = +keyPath[0] - 1;
 
-    if (subSectionKey == null) {
-      setSelectedSection(sections[sectionKey]);
+      console.log(sectionMenuKey);
+      console.log(subSectionMenuKey);
+      console.log(sections[sectionMenuKey].subSections[subSectionMenuKey]);
+
+      setSelectedSection(sections[sectionMenuKey].subSections[subSectionMenuKey]);
     } else {
-      setSelectedSection(sections[sectionKey].subSections[subSectionKey]!);
+      const sectionMenuKey: number = +keyPath[0].split('-')[1];
+      setSelectedSection(sections[sectionMenuKey]);
     }
   }
 
