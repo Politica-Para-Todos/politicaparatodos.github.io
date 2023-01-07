@@ -15,47 +15,41 @@ interface PartyHomeProps {
   party: Party;
 }
 
-const PartyHome = (props: PartyHomeProps) => {
-  const { party } = props;
-
-  console.log("PARTY MANIFESTO: ", party.manifesto);
-  return (
-    <Layout>
-      {party.name && (
-        <MetaTags
-          pageTitle={`Política Para Todos - Conhece o programa e os candidatos do ${party.acronym}`}
-          pageDescription={`Nesta página encontrarás o programa e os candidatos, por círculo eleitoral, do ${party.name}`}
-          socialTitle={`Política Para Todos - Conhece o programa e os candidatos do ${party.acronym}`}
-          socialDescription={`Nesta página encontrarás o programa e os candidatos, por círculo eleitoral, do ${party.name}`}
-          socialImage={`/party-logos/${party.logo}`}
-        />
-      )}
-      <LayoutHeader />
-      <Layout.Content className="party-section">
-        <PartyHeader party={party} subtitle="" />
-        <PartyIntro spokesperson={null} title="Descrição do Partido">
-          <Paragraph>{party.description}</Paragraph>
-          {party.descriptionSource
-            .split("\n")
-            .map((desc: string, index: number) => (
-              <Paragraph key={index}>
-                Fonte:{" "}
-                <a href={desc} target="_blank" rel="noopener noreferrer">
-                  Wikipedia
-                </a>
-              </Paragraph>
-            ))}
-        </PartyIntro>
-        <PartyCandidatesList
-          candidates={party.candidates}
-          circles={electoralCircleDropdown()}
-          acronym={party.acronym}
-        />
-      </Layout.Content>
-      <LayoutFooter />
-    </Layout>
-  );
-};
+const PartyHome = ({ party }: PartyHomeProps) =>
+  <Layout>
+    {party.name && (
+      <MetaTags
+        pageTitle={`Política Para Todos - Conhece o programa e os candidatos do ${party.acronym}`}
+        pageDescription={`Nesta página encontrarás o programa e os candidatos, por círculo eleitoral, do ${party.name}`}
+        socialTitle={`Política Para Todos - Conhece o programa e os candidatos do ${party.acronym}`}
+        socialDescription={`Nesta página encontrarás o programa e os candidatos, por círculo eleitoral, do ${party.name}`}
+        socialImage={`/party-logos/${party.logo}`}
+      />
+    )}
+    <LayoutHeader />
+    <Layout.Content className="party-section">
+      <PartyHeader party={party} subtitle="" />
+      <PartyIntro spokesperson={null} title="Descrição do Partido">
+        <Paragraph>{party.description}</Paragraph>
+        {party.descriptionSource
+          .split("\n")
+          .map((desc: string, index: number) => (
+            <Paragraph key={index}>
+              Fonte:{" "}
+              <a href={desc} target="_blank" rel="noopener noreferrer">
+                Wikipedia
+              </a>
+            </Paragraph>
+          ))}
+      </PartyIntro>
+      <PartyCandidatesList
+        candidates={party.candidates}
+        circles={electoralCircleDropdown()}
+        acronym={party.acronym}
+      />
+    </Layout.Content>
+    <LayoutFooter />
+  </Layout>
 
 export const getStaticPaths = async () => {
   const params: object[] = retrievePartyAcronyms().map((acro: string) => {
