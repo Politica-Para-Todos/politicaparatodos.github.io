@@ -34,10 +34,6 @@ const ManifestoSection = ({ title, section }: ManifestoSectionProps) => {
           subSection.topics.map(topic => renderSectionItem(topic)));
       }
     }
-    // else if (section.topics) {
-    //   const result = section.topics.map(topic => renderSectionItem(topic));
-    //   return result;
-    // }
     return null;
   }
 
