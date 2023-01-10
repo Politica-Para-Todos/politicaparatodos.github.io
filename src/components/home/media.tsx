@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col, Button } from "antd";
-import VideoMask from "../../../public/video_mask.jpg";
 import ReactPlayer from "react-player/youtube";
 import {
   YOUTUBE_VIDEO_EP1,
@@ -39,7 +38,16 @@ const videos: Video[] = [
 
 const HomeMedia = () => {
   const [currentEpisode, setCurrentEpisode] = useState(0);
+  const [isPlayerHidden, setIsPlayerHidden] = useState(true);
   const { url, caption } = videos[currentEpisode];
+
+  useEffect(() => {
+    setIsPlayerHidden(false)
+  }, []);
+
+  if (isPlayerHidden) {
+    return null;
+  }
 
   return (
     <section className="home-videos">
@@ -51,9 +59,8 @@ const HomeMedia = () => {
           <ReactPlayer
             className="home-videos-react-player"
             url={url}
-            light={VideoMask.src}
-            controls={true}
-            pip={true}
+            controls
+            pip
           />
         </Col>
         <Col span={24} md={16}>
