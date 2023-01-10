@@ -12,9 +12,12 @@ const { Sider } = Layout;
 const { SubMenu } = Menu;
 
 const ManifestoSider = ({ sections, title }: ManifestoSiderProps) => {
-  const [selectedSection, setSelectedSection] = useState<Section | SubSection | null>(null);
+  const [selectedSection, setSelectedSection] = useState<{ section: Section | null, subSectionPosition: number | null }>({
+    section: null,
+    subSectionPosition: null
+  });
 
-  const onClickSection = (event: React.MouseEvent) => {
+  const onClickSection = (event: any) => {
     const keyPath: string[] = event.keyPath;
     const getSectionMenuKey = (position: number) =>
       +keyPath[position].split('-')[1];
@@ -22,10 +25,16 @@ const ManifestoSider = ({ sections, title }: ManifestoSiderProps) => {
     if (keyPath.length > 1) {
       const sectionMenuKey: number = getSectionMenuKey(1);
       const subSectionMenuKey: number = +keyPath[0] - 1;
-      setSelectedSection(sections[sectionMenuKey].subSections[subSectionMenuKey]);
+      setSelectedSection({
+        section: sections[sectionMenuKey],
+        subSectionPosition: subSectionMenuKey
+      });
     } else {
       const sectionMenuKey: number = getSectionMenuKey(0);
-      setSelectedSection(sections[sectionMenuKey]);
+      setSelectedSection({
+        section: sections[sectionMenuKey],
+        subSectionPosition: null
+      });
     }
   }
 
@@ -48,7 +57,7 @@ const ManifestoSider = ({ sections, title }: ManifestoSiderProps) => {
       title={section.title}
       className={`section-mobile-${section.position}`}
     >
-      {renderSubSectionItems(section.subSections)}
+      {renderSubSectionItems(section.subSections!)}
     </SubMenu>
 
   const renderSubSectionItems = (subSections: SubSection[]) =>
@@ -69,7 +78,7 @@ const ManifestoSider = ({ sections, title }: ManifestoSiderProps) => {
         </Fragment>
       </Sider>
       <Layout.Content>
-        <ManifestoSection title={title} section={selectedSection} />
+        <ManifestoSection title={title} section={selectedSection.section} subSectionPosition={selectedSection.subSectionPosition} />
       </Layout.Content>
     </Layout >
   );

@@ -9,7 +9,7 @@ interface HomePartiesProps {
   parties: HomeParty[];
 }
 
-const HomeParties = ({ parties }: HomePartiesProp) => {
+const HomeParties = ({ parties }: HomePartiesProps) => {
   let sortedParties: HomeParty[];
 
   const [state, setState] = useState({

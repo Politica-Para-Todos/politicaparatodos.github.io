@@ -1,11 +1,12 @@
 import { Popover } from "antd";
 import React, { Fragment } from "react";
 import ReactHtmlParser from "react-html-parser";
-import { Section, SubSection, Topic } from "../../../dtos/manifesto-dto";
+import { Section, Topic } from "../../../dtos/manifesto-dto";
 
 interface ManifestoSectionProps {
   title: string,
-  section: Section | SubSection | null
+  section: Section | null,
+  subSectionPosition: number | null
 }
 
 // const onClickTwitterShare = (e) => {
@@ -16,22 +17,23 @@ interface ManifestoSectionProps {
 // e.stopPropagation();
 // }
 
-const ManifestoSection = ({ title, section }: ManifestoSectionProps) => {
+const ManifestoSection = ({ title, section, subSectionPosition }: ManifestoSectionProps) => {
+
+  const isSubSection = () => section?.subSections ?? false;
+  const renderedTitle = () => isSubSection() ? section?.subSections![subSectionPosition!].title : section?.title;
 
   const renderSectionItem = (topic: Topic) =>
     <Fragment key={topic.position}>
       {ReactHtmlParser(topic.html)}
     </Fragment>
 
-  const renderSectionContent = (section: Section | SubSection) => {
-    console.log("SELECTED SECTION: ", section);
+  const renderSectionContent = (section: Section | null, subSectionPosition: number | null) => {
+    if (isSubSection()) {
+      return section?.subSections![subSectionPosition!].topics.map(topic => renderSectionItem(topic));
+    }
     if (section) {
       if (section.topics) {
         return section.topics?.map(topic => renderSectionItem(topic));
-      }
-      if (section.subSections) {
-        section.subSections?.forEach(subSection =>
-          subSection.topics.map(topic => renderSectionItem(topic)));
       }
     }
     return null;
@@ -44,11 +46,11 @@ const ManifestoSection = ({ title, section }: ManifestoSectionProps) => {
       <h1 className="party-manifesto-body__title">{title}</h1>
       {section !== null && (
         <div>
-          <h2>{section.title}</h2>
+          <h2>{renderedTitle()}</h2>
           < div
             ref={sectionContentRef}
             className="party-manifesto-body__content">
-            {renderSectionContent(section)}
+            {renderSectionContent(section, subSectionPosition)}
           </div>
           <Popover
             ref={sectionContentRef}
