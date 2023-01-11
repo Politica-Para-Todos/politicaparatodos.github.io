@@ -4,7 +4,6 @@ import { Layout } from "antd";
 import SocialSharing from "../social-sharing";
 import { socialMediaOptions } from "../../utils/online-platform";
 import { FooterLogo } from "../logos";
-import Image from "next/image";
 
 const { Footer } = Layout;
 
