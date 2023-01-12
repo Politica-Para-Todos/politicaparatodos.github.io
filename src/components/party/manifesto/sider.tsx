@@ -1,87 +1,87 @@
-import React, { Fragment } from "react";
-import { Link } from "react-router-dom";
-import { Menu } from "antd";
-import Media from "react-media";
-import { SubSection } from "../../../dtos/manifesto-dto";
+import React, { Fragment, useState } from "react";
+import { Layout, Menu } from "antd";
+import { Section, SubSection } from "../../../dtos/manifesto-dto";
+import ManifestoSection from "./section";
 
+interface ManifestoSiderProps {
+  sections: Section[],
+  title: string
+}
+
+const { Sider } = Layout;
 const { SubMenu } = Menu;
 
-const renderMenuItem = (id: string, title: string, party_acronym: string) => (
-  <Menu.Item key={id} className={`section-${id}`}>
-    <Link to={`/party/${party_acronym}/manifesto/${id}`}>{title}</Link>
-  </Menu.Item>
-);
+const ManifestoSider = ({ sections, title }: ManifestoSiderProps) => {
+  const [selectedSection, setSelectedSection] = useState<{ section: Section | null, subSectionPosition: number | null }>({
+    section: null,
+    subSectionPosition: null
+  });
 
-// const renderMenuSubitems = (subsections: SubSection[], party_acronym: string) => {
-//   if (!subsections) {
-//     return null;
-//   }
+  const onClickSection = (event: any) => {
+    const keyPath: string[] = event.keyPath;
+    const getSectionMenuKey = (position: number) =>
+      +keyPath[position].split('-')[1];
 
-//   return subsections.map(({ id, title }) => {
-//     return renderMenuItem(id, title, party_acronym);
-//   });
-// }
+    if (keyPath.length > 1) {
+      const sectionMenuKey: number = getSectionMenuKey(1);
+      const subSectionMenuKey: number = +keyPath[0] - 1;
+      setSelectedSection({
+        section: sections[sectionMenuKey],
+        subSectionPosition: subSectionMenuKey
+      });
+    } else {
+      const sectionMenuKey: number = getSectionMenuKey(0);
+      setSelectedSection({
+        section: sections[sectionMenuKey],
+        subSectionPosition: null
+      });
+    }
+  }
 
-// const renderMenuItems = (props: any) => {
-//   const { sections, party_acronym } = props;
+  const renderSectionItems = () =>
+    sections.map(section => {
+      if (section.subSections) {
+        return renderSubMenuItem(section);
+      }
+      return renderMenuItem(section.position, section.title ?? "FAILED");
+    })
 
-//   if (!sections) {
-//     return null;
-//   }
+  const renderMenuItem = (position: number, title: string) =>
+    <Menu.Item key={position} className={`section-${position}`} onClick={onClickSection}>
+      {title}
+    </Menu.Item>
 
-//   return sections.map(section => {
-//     if (Array.isArray(section.subsections) && section.subsections.length > 0) {
-//       return (
-//         <SubMenu
-//           key={section.id}
-//           title={section.title}
-//           className={`section-mobile-${section.id}`}
-//         >
-//           {renderMenuSubitems(section.subsections, party_acronym)}
-//         </SubMenu>
-//       )
-//     } else {
-//       return renderMenuItem(section.id, section.title, party_acronym);
-//     }
-//   })
-// }
+  const renderSubMenuItem = (section: Section) =>
+    <SubMenu
+      key={section.position}
+      title={section.title}
+      className={`section-mobile-${section.position}`}
+    >
+      {renderSubSectionItems(section.subSections!)}
+    </SubMenu>
 
-const ManifestoSider = (props: any) => {
-  //   const { section_id, selectedKey, openKey } = this.props;
-
-  const { selectedKey, openKey } = props;
+  const renderSubSectionItems = (subSections: SubSection[]) =>
+    subSections.map(subSection =>
+      renderMenuItem(subSection.position, subSection.title)
+    )
 
   return (
-    <div>Hello World !</div>
-    // <Fragment>
-    //   <Media query="(max-width: 768px)" render={() => (
-    //     <Menu
-    //       mode="inline"
-    //       defaultSelectedKeys={selectedKey}
-    //       defaultOpenKeys={openKey}
-    //       style={{ height: '100%', borderRight: 0 }}
-    //     >
-    //       <SubMenu
-    //         key="mobile-menu"
-    //         title="Capítulos"
-    //         className="section-mobile__chapter"
-    //       >
-    //         {renderMenuItems(props)}
-    //       </SubMenu>
-    //     </Menu>
-    //   )} />
-    //   <Media query="(min-width: 769px)" render={() => (
-    //     <Menu
-    //       mode="inline"
-    //       defaultSelectedKeys={selectedKey}
-    //       defaultOpenKeys={openKey}
-    //       style={{ height: '100%', borderRight: 0 }}
-    //     >
-    //       {renderMenuItems(props)}
-    //     </Menu>
-    //   )} />
-    // </Fragment>
+    <Layout>
+      <Sider width={400} className="party-manifesto-sider">
+        <Fragment>
+          <Menu
+            mode="inline"
+            style={{ height: '100%', borderRight: 0 }}
+          >
+            {renderSectionItems()}
+          </Menu >
+        </Fragment>
+      </Sider>
+      <Layout.Content>
+        <ManifestoSection title={title} section={selectedSection.section} subSectionPosition={selectedSection.subSectionPosition} />
+      </Layout.Content>
+    </Layout >
   );
-};
+}
 
 export default ManifestoSider;

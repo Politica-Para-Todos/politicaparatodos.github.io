@@ -1,14 +1,14 @@
 import { Divider, Layout } from "antd";
 import { NextPage } from "next";
-import Image from "next/image";
 import AboutUsFooter from "../src/components/about-us/footer";
 import AboutUsJoinUs from "../src/components/about-us/join-us";
 import AboutUsMotivation from "../src/components/about-us/motivation";
 import AboutUsContributors from "../src/components/about-us/contributors";
 import LayoutHeader from "../src/components/layout-header";
 import MetaTags from "../src/components/meta-tags";
+import { AboutUsHeaderImage } from "../src/components/logos";
 
-const AboutUs: NextPage = () => (
+const AboutUs: NextPage = () =>
   <Layout>
     <MetaTags
       pageTitle="Quem somos"
@@ -19,14 +19,7 @@ const AboutUs: NextPage = () => (
     />
     <LayoutHeader />
     <Layout.Content className="about-us-section">
-      <Image
-        src="rows-people.svg"
-        className="about-us__header-img"
-        layout="responsive"
-        width={1440}
-        height={351}
-        alt="people"
-      />
+      <AboutUsHeaderImage />
       <AboutUsContributors />
       <Divider />
       <AboutUsMotivation />
@@ -34,6 +27,5 @@ const AboutUs: NextPage = () => (
     </Layout.Content>
     <AboutUsFooter />
   </Layout>
-);
 
 export default AboutUs;

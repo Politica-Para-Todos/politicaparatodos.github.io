@@ -1,11 +1,8 @@
 import React, { Fragment } from "react";
 import { Row, Col, Divider, Avatar, Button } from "antd";
 import SocialSharing from "../social-sharing";
-import {
-  OnlinePlatform,
-  OnlinePlatformType,
-  Party,
-} from "../../dtos/party-dto";
+import { OnlinePlatform, OnlinePlatformType, Party } from "../../dtos/party-dto";
+import Link from "next/link";
 
 interface PartyHeaderProps {
   party: Party;
@@ -34,17 +31,18 @@ const PartyHeader = ({ party, subtitle }: PartyHeaderProps) => {
       <Row typeof="flex" justify="center">
         <Col>
           <Avatar size={200} src={`/party-logos/${party.logo}`} icon="user" />
-          {hasManifesto && (
-            <div className="party-header__program-cta">
+          <div className="party-header__program-cta">
+            {hasManifesto && (
               <Button
                 className="button--grey party-header__program-button"
-                href={`/partido/${party.acronym.toLowerCase()}/manifesto`}
-                rel="noopener"
+                key={party.name}
               >
-                {`Ver Programa ${party.acronym}`}
+                <Link href={`/partido/${party.acronym.toLowerCase()}/manifesto`} rel="noopener">
+                  {`Ver Programa ${party.acronym}`}
+                </Link>
               </Button>
-            </div>
-          )}
+            )}
+          </div>
           {!hasManifesto && (
             <div className="party-header__program-cta">
               <p>

@@ -3,6 +3,7 @@ import footer_logo from "../../public/vertical_logo.jpg";
 import header_logo from "../../public/horizontal_logo.svg";
 import voting_image from '../../public/voting.svg'
 import infographic_image from "../../public/infographic.svg";
+import rows_people_image from "../../public/rows-people.svg";
 
 export const HeaderLogo = () =>
   <Image
@@ -36,4 +37,14 @@ export const InfographicImage = () =>
     width={440}
     height={186}
     alt="infographic"
+  />
+
+export const AboutUsHeaderImage = () =>
+  <Image
+    src={`/${rows_people_image.src}`}
+    className="about-us__header-img"
+    layout="responsive"
+    width={1440}
+    height={351}
+    alt="people"
   />

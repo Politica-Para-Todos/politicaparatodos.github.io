@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col, Button } from "antd";
-import YouTubePlayer from "react-player/youtube";
-// import YouTubePlayer from "react-player/lib/players/YouTube";
-import VideoMask from "../../../public/video_mask.jpg";
 import ReactPlayer from "react-player/youtube";
-import { YOUTUBE_VIDEO_EP1, YOUTUBE_VIDEO_EP2, YOUTUBE_VIDEO_EP3, YOUTUBE_VIDEO_EP4 } from "../../utils/constants";
+import {
+  YOUTUBE_VIDEO_EP1,
+  YOUTUBE_VIDEO_EP2,
+  YOUTUBE_VIDEO_EP3,
+  YOUTUBE_VIDEO_EP4,
+} from "../../utils/constants";
 
 interface Video {
   url: string;
@@ -34,45 +36,18 @@ const videos: Video[] = [
   },
 ];
 
-const renderEpisodeButtons = (currentEpisode: number, setState: any) => {
-  return videos.map((video: Video, index: number) => {
-    let classNames = "home-videos__episode-button";
-
-    if (currentEpisode === index) {
-      classNames += " button--grey";
-    } else {
-      classNames += " button--white";
-    }
-    return (
-      <Button
-        key={`episode-${index}`}
-        className={classNames}
-        onClick={() => setState({ currentEpisode: index })}
-      >
-        Ep. {index + 1}
-      </Button>
-    );
-  });
-};
-
 const HomeMedia = () => {
-  const [media, setMedia] = useState({
-    currentEpisode: 0,
-    hasMounted: false,
-  });
+  const [currentEpisode, setCurrentEpisode] = useState(0);
+  const [isPlayerHidden, setIsPlayerHidden] = useState(true);
+  const { url, caption } = videos[currentEpisode];
 
   useEffect(() => {
-    setMedia((prevMedia) => ({
-      ...prevMedia,
-      hasMounted: true,
-    }));
+    setIsPlayerHidden(false)
   }, []);
 
-  if (!media.hasMounted) {
+  if (isPlayerHidden) {
     return null;
   }
-
-  const { url, caption } = videos[media.currentEpisode];
 
   return (
     <section className="home-videos">
@@ -80,23 +55,38 @@ const HomeMedia = () => {
         <Col span={24} className="home-videos-title">
           <h2>Como funcionam as Eleições Legislativas</h2>
         </Col>
-        <Col span={24} lg={18}>
-          <div className="home-videos-player-wrapper">
-            <ReactPlayer
-              className="home-videos-react-player"
-              url={`https://www.youtube.com/embed/up0Gfd5c0cM?autoplay=0&mute=0&controls=1&origin=https%3A%2F%2Fwww.politicaparatodos.pt&playsinline=1&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1&widgetid=1`}
-              light={VideoMask.src}
-              width="100%"
-              height="100%"
-              controls={true}
-              pip={true}
-            />
-          </div>
+        <Col span={24} lg={18} className="home-videos__wrapper">
+          <ReactPlayer
+            className="home-videos-react-player"
+            url={url}
+            controls
+            pip
+          />
         </Col>
         <Col span={24} md={16}>
           <p>{caption}</p>
         </Col>
-        <Col>{renderEpisodeButtons(media.currentEpisode, setMedia)}</Col>
+        <Col>
+          {videos.map((_, index) => {
+            const buttonClassNames = ["home-videos__episode-button"];
+
+            if (currentEpisode === index) {
+              buttonClassNames.push("button--grey");
+            } else {
+              buttonClassNames.push("button--white");
+            }
+
+            return (
+              <Button
+                key={`episode-${index}`}
+                className={buttonClassNames.join(" ")}
+                onClick={() => setCurrentEpisode(index)}
+              >
+                Ep. {index + 1}
+              </Button>
+            );
+          })}
+        </Col>
       </Row>
     </section>
   );

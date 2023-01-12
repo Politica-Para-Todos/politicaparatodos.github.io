@@ -1,22 +1,22 @@
 export interface Manifesto {
-  title: string;
-  partyAcronym: string;
-  sections: Section[];
+  title: string,
+  sections: Section[]
 }
 
 export interface Section {
-  subSections: SubSection[];
-  position: number;
-  title: string;
+  position: number,
+  title: string
+  subSections: SubSection[] | null,
+  topics: Topic[] | null,
 }
 
 export interface SubSection {
-  topic: Topic[];
+  topics: Topic[];
   position: number;
   title: string;
 }
 
 export interface Topic {
-  content: string;
+  html: string;
   position: number;
 }

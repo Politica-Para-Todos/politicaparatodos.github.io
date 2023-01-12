@@ -24,8 +24,6 @@ const PartyCandidatesList = (props: PartyCandidatesListProps) => {
 
   const { circles, candidates, acronym } = props;
 
-  console.log(candidates);
-
   return (
     <section className="party-candidates">
       <Row>

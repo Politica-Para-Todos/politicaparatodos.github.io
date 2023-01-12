@@ -1,13 +1,14 @@
 import { Candidate } from "../dtos/candidate-dto";
 import { ElectoralCircle } from "../dtos/electoral-circle-dto";
+import { Manifesto, Section, SubSection, Topic } from "../dtos/manifesto-dto";
 import { OnlinePlatformType, Party } from "../dtos/party-dto";
 
 const buildParty = (
-  rawData: any,
+  parties: any,
   acronym: string,
   electoralCircles: string[]
 ): Party => {
-  const party = rawData.parties[acronym];
+  const party = parties[acronym];
 
   return {
     name: party.name,
@@ -37,9 +38,9 @@ const buildParty = (
         address: party.instagram,
       },
     ],
-    manifesto: retrievePartyManifest(rawData.manifestos, acronym),
+    manifesto: null,
     candidates: retrievePartyCandidates(
-      rawData.parties,
+      parties,
       acronym,
       electoralCircles
     ),
@@ -47,17 +48,17 @@ const buildParty = (
 };
 
 const retrieveParties = (
-  rawData: any,
+  parties: any,
   acronyms: string[],
   electoralCircles: string[]
 ) => {
-  let parties = [];
+  let resultParties = [];
   const size = acronyms.length;
 
   for (let i = 0; i < size; i++) {
-    parties.push(buildParty(rawData, acronyms[i], electoralCircles));
+    resultParties.push(buildParty(parties, acronyms[i], electoralCircles));
   }
-  return parties;
+  return resultParties;
 };
 
 const retrievePartyCandidates = (
@@ -114,19 +115,70 @@ const retrievePartyCandidates = (
   return candidatesList;
 };
 
-export const retrievePartyManifest = (rawManifests: any, acronym: string) => {
-  if (rawManifests[acronym] === undefined) {
+export const retrievePartyManifesto = (manifestos: any, acronym: string): Manifesto | null => {
+  const partyManifesto = manifestos[acronym];
+
+  if (partyManifesto === undefined) {
     return null;
   }
 
-  const rawPartyManifest = rawManifests[acronym];
-
-  return {
-    partyAcronym: acronym,
-    title: rawPartyManifest.title,
-    sections: rawPartyManifest.sections,
-  };
+  const result = {
+    title: partyManifesto.title,
+    sections: retrieveManifestoSections(partyManifesto.sections)
+  }
+  return result;
 };
+
+const retrieveManifestoSections = (rawSections: any): Section[] =>
+  rawSections.map((section: any, index: number) => {
+
+    // console.log('>>>>>>>>>>>>>>>> section: ', index);
+    // console.log('>>>>>>>>>>>>>>>> section title: ', section.title);
+
+    // if (index === 7) {
+    //   const test = retrieveManifestoSubSections(section.content);
+    //   return null;
+    // }
+
+    if (section.content[0].content !== undefined) {
+      return {
+        positions: section.position,
+        title: section.title,
+        subSections: retrieveManifestoSubSections(section.content),
+        topics: null
+      }
+    }
+    return {
+      positions: section.position,
+      title: section.title,
+      subSections: null,
+      topics: retrieveManifestoTopics(section.content)
+    }
+  })
+
+const retrieveManifestoSubSections = (rawSubSections: any): SubSection[] => {
+  // console.log("<<<<<>>>>><<<<>>>> ", rawSubSections);
+
+  return rawSubSections.map((subSection: any, index: number) => {
+    return {
+      topics: retrieveManifestoTopics(subSection.content),
+      position: subSection.position,
+      title: subSection.title
+    }
+  })
+}
+
+const retrieveManifestoTopics = (rawTopics: any): Topic[] =>
+  rawTopics.map((topic: any, index: number) => {
+    // console.log('>>>>>>>>>>>>>>>>> topic: ', index);
+    if (index === 7) {
+      // console.log("<<<<<<<< topic: ", topic);
+    }
+    return {
+      html: topic.html,
+      position: topic.position
+    }
+  })
 
 export const convertToElectoralCircle = (region: string): ElectoralCircle => {
   switch (region) {
@@ -180,9 +232,9 @@ export const convertToElectoralCircle = (region: string): ElectoralCircle => {
 };
 
 export const retrieveData = (
-  rawData: any,
+  parties: any,
   partyAcronyms: string[],
   electoralCircles: string[]
-) => retrieveParties(rawData, partyAcronyms, electoralCircles);
+) => retrieveParties(parties, partyAcronyms, electoralCircles);
 
-const validateField = (value: string | undefined) => (value ? value : null);
+const validateField = (value: string | undefined) => (value ?? null); 

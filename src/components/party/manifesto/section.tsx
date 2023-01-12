@@ -1,6 +1,13 @@
 import { Popover } from "antd";
 import React, { Fragment } from "react";
 import ReactHtmlParser from "react-html-parser";
+import { Section, Topic } from "../../../dtos/manifesto-dto";
+
+interface ManifestoSectionProps {
+  title: string,
+  section: Section | null,
+  subSectionPosition: number | null
+}
 
 // const onClickTwitterShare = (e) => {
 //   const hashtags = '\n\n #politicaparatodos www.politicaparatodos.pt';
@@ -10,47 +17,54 @@ import ReactHtmlParser from "react-html-parser";
 // e.stopPropagation();
 // }
 
-const renderSectionItem = (item: any) => (
-  <Fragment key={item.id}>{ReactHtmlParser(item.content)}</Fragment>
-);
+const ManifestoSection = ({ title, section, subSectionPosition }: ManifestoSectionProps) => {
 
-const renderSectionContent = (section: any) => {
-  if (!section.id || !section) {
+  const isSubSection = () => section?.subSections ?? false;
+  const renderedTitle = () => isSubSection() ? section?.subSections![subSectionPosition!].title : section?.title;
+
+  const renderSectionItem = (topic: Topic) =>
+    <Fragment key={topic.position}>
+      {ReactHtmlParser(topic.html)}
+    </Fragment>
+
+  const renderSectionContent = (section: Section | null, subSectionPosition: number | null) => {
+    if (isSubSection()) {
+      return section?.subSections![subSectionPosition!].topics.map(topic => renderSectionItem(topic));
+    }
+    if (section) {
+      if (section.topics) {
+        return section.topics?.map(topic => renderSectionItem(topic));
+      }
+    }
     return null;
   }
-  return section.items.map((item: any) => renderSectionItem(item));
-};
 
-const renderSectionTitle = (section: any) => {
-  if (!section) {
-    return null;
-  }
-  return <h2>{section.title}</h2>;
-};
-
-const ManifestoSection = (props: any) => {
-  const sectionContentRef = React.createRef();
-  const { title } = props;
+  const sectionContentRef = () => React.createRef();
 
   return (
-    <div>Hello world</div>
-    // <section className="party-manifesto-body">
-    //   <h1 className="party-manifesto-body__title">{title}</h1>
-    //   {renderSectionTitle(null)}
-    //   <div
-    //     ref={sectionContentRef}
-    //     className="party-manifesto-body__content">
-    //     {renderSectionContent(null)}
-    //   </div>
-    //   <Popover
-    //     selectionRef={sectionContentRef}
-    //     className="party-manifesto__share-popover">
-    //     <div className="party-manifesto__share-popover-inner"
-    //       onClick={(e) => onClickTwitterShare(e)}>
-    //       <img src={'/twitter_icon.svg'} />
-    //     </div>
-    //   </Popover>
-    // </section>
+    <section className="party-manifesto-body">
+      <h1 className="party-manifesto-body__title">{title}</h1>
+      {section !== null && (
+        <div>
+          <h2>{renderedTitle()}</h2>
+          < div
+            ref={sectionContentRef}
+            className="party-manifesto-body__content">
+            {renderSectionContent(section, subSectionPosition)}
+          </div>
+          <Popover
+            ref={sectionContentRef}
+            className="party-manifesto__share-popover">
+            {/* <div
+               className="party-manifesto__share-popover-inner"
+               onClick={(e) => onClickTwitterShare(e)}
+             >
+               <img src={twitter_icon} />
+             </div> */}
+          </Popover>
+        </div>
+      )}
+    </section >
   );
 };
 
