@@ -1,10 +1,9 @@
-import Image from "next/image";
+import { Button, Col, Row } from "antd";
 import Link from "next/link";
-import { Col, Row, Button } from "antd";
 import Countdown from "react-countdown-now";
-import CountdownRenderer from "../countdown-renderer";
-import { PORTAL_ELEITOR_URL } from "../../utils/constants";
-import { VotingImage } from "../logos";
+import { PORTAL_ELEITOR_URL } from "../../src/utils/constants";
+import { VotingImage } from "../global/logos";
+import CountdownRenderer from "./countdown-renderer";
 
 const HomeCountdown = () =>
   <section className="home-voting-countdown section--grey">

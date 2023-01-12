@@ -1,6 +1,6 @@
-import React, { Fragment, useState } from "react";
 import { Layout, Menu } from "antd";
-import { Section, SubSection } from "../../../dtos/manifesto-dto";
+import { Fragment, useState } from "react";
+import { Section, SubSection } from "../../../src/dtos/manifesto-dto";
 import ManifestoSection from "./section";
 
 interface ManifestoSiderProps {

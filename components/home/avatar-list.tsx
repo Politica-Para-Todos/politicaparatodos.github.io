@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { HomeParty } from "../../dtos/party-dto";
+import { useEffect, useState } from "react";
+import { HomeParty } from "../../src/dtos/party-dto";
 import RoundAvatar from "./round-avatar";
 
 interface AvatarListProp {

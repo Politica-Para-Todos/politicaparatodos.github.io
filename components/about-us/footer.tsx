@@ -1,9 +1,8 @@
-import React from "react";
-import Link from "next/link";
 import { Layout } from "antd";
-import SocialSharing from "../social-sharing";
-import { socialMediaOptions } from "../../utils/online-platform";
-import { FooterLogo } from "../logos";
+import Link from "next/link";
+import { socialMediaOptions } from "../../src/utils/online-platform";
+import { FooterLogo } from "../global/logos";
+import SocialSharing from "../global/social-sharing";
 
 const { Footer } = Layout;
 

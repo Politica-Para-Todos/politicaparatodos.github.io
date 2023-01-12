@@ -1,6 +1,6 @@
+import { Avatar, Col, Row, Typography } from "antd";
 import React from "react";
-import { Row, Col, Typography, Avatar } from "antd";
-import { Candidate } from "../../dtos/candidate-dto";
+import { Candidate } from "../../src/dtos/candidate-dto";
 
 const { Title, Paragraph } = Typography;
 

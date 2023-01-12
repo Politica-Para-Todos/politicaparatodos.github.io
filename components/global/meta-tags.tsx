@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { PPT_WEBSITE } from "../utils/constants";
+import { PPT_WEBSITE } from "../../src/utils/constants";
 
 interface MetaTagProps {
   pageTitle: string;

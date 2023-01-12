@@ -4,4 +4,8 @@
   "editor.detectIndentation": false,
   "files.insertFinalNewline": true,
   "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+    "source.organizeImports": true
+  }
 }

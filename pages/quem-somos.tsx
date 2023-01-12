@@ -1,12 +1,12 @@
 import { Divider, Layout } from "antd";
 import { NextPage } from "next";
-import AboutUsFooter from "../src/components/about-us/footer";
-import AboutUsJoinUs from "../src/components/about-us/join-us";
-import AboutUsMotivation from "../src/components/about-us/motivation";
-import AboutUsContributors from "../src/components/about-us/contributors";
-import LayoutHeader from "../src/components/layout-header";
-import MetaTags from "../src/components/meta-tags";
-import { AboutUsHeaderImage } from "../src/components/logos";
+import AboutUsContributors from "../components/about-us/contributors";
+import AboutUsFooter from "../components/about-us/footer";
+import AboutUsJoinUs from "../components/about-us/join-us";
+import AboutUsMotivation from "../components/about-us/motivation";
+import LayoutHeader from "../components/global/layout-header";
+import { AboutUsHeaderImage } from "../components/global/logos";
+import MetaTags from "../components/global/meta-tags";
 
 const AboutUs: NextPage = () =>
   <Layout>

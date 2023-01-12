@@ -1,4 +1,4 @@
-import { OnlinePlatform, OnlinePlatformType } from "../dtos/party-dto";
+import { OnlinePlatform, OnlinePlatformType } from "../../src/dtos/party-dto";
 import SocialIcon from "./social-icon";
 
 interface SocialSharingProps {

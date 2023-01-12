@@ -1,7 +1,6 @@
-import React from "react";
-import { Row, Col } from "antd";
-import ContributorsList from "../contributors-list";
-import { LOOMIO_PPT_URL } from "../../utils/constants";
+import { Col, Row } from "antd";
+import { LOOMIO_PPT_URL } from "../../src/utils/constants";
+import ContributorsList from "../global/contributors-list";
 
 const AboutUsContributors = () =>
   <section className="about-us-contributors">

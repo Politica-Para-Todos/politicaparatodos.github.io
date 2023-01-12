@@ -1,8 +1,8 @@
 import { Col, Row, Select, Switch } from "antd";
 import { useState } from "react";
-import { electoralCircleDropdown } from "../../dtos/electoral-circle-dto";
-import { HomeParty } from "../../dtos/party-dto";
-import { shuffleParties } from "../../utils/manipuation";
+import { electoralCircleDropdown } from "../../src/dtos/electoral-circle-dto";
+import { HomeParty } from "../../src/dtos/party-dto";
+import { shuffleParties } from "../../src/utils/manipuation";
 import AvatarList from "./avatar-list";
 
 interface HomePartiesProps {

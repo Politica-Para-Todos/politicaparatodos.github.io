@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { shuffleList, contributors } from "../utils/contributors";
+import { contributors, shuffleList } from "../../src/utils/contributors";
 
 const ContributorsList = () => {
   const [hasMounted, setHasMounted] = useState(false);

@@ -1,6 +1,5 @@
-import React from "react";
-import { Row, Col } from "antd";
-import { LOOMIO_PPT_URL } from "../../utils/constants";
+import { Col, Row } from "antd";
+import { LOOMIO_PPT_URL } from "../../src/utils/constants";
 
 const AboutUsJoinUs = () =>
   <section className="about-us-join-us section--grey">

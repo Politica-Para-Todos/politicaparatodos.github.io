@@ -1,14 +1,15 @@
 import type { NextPage } from "next";
-import LayoutHeader from "../src/components/layout-header";
-import AboutUsFooter from "../src/components/layout-footer";
-import HomeCountdown from "../src/components/home/countdown";
+
 import { Layout } from "antd";
-import { HomeMission, HomeMissionInfographic } from "../src/components/home/mission";
-import HomeMedia from "../src/components/home/media";
-import MetaTags from "../src/components/meta-tags";
-import HomeParties from "../src/components/home/parties";
-import { retrieveHomepageParties } from "../src/retriever/api";
+import AboutUsFooter from "../components/about-us/footer";
+import LayoutHeader from "../components/global/layout-header";
+import MetaTags from "../components/global/meta-tags";
+import HomeCountdown from "../components/home/countdown";
+import HomeMedia from "../components/home/media";
+import { HomeMission, HomeMissionInfographic } from "../components/home/mission";
+import HomeParties from "../components/home/parties";
 import { Party } from "../src/dtos/party-dto";
+import { retrieveHomepageParties } from "../src/retriever/api";
 
 interface HomePageParty {
   homepageParties: Party[];

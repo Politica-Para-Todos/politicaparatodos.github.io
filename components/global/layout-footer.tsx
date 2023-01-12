@@ -1,10 +1,10 @@
 import { Col, Layout, Row } from "antd";
-import ContributorsList from "./contributors-list";
-import { memo } from "react";
 import Link from "next/link";
-import SocialSharing from "./social-sharing";
-import { socialMediaOptions } from "../utils/online-platform";
+import { memo } from "react";
+import { socialMediaOptions } from "../../src/utils/online-platform";
+import ContributorsList from "./contributors-list";
 import { FooterLogo } from "./logos";
+import SocialSharing from "./social-sharing";
 
 const HomeFooter = () => {
   const { Footer } = Layout;

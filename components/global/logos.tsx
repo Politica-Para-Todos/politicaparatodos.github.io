@@ -1,9 +1,9 @@
 import Image from "next/image";
-import footer_logo from "../../public/vertical_logo.jpg";
 import header_logo from "../../public/horizontal_logo.svg";
-import voting_image from '../../public/voting.svg'
 import infographic_image from "../../public/infographic.svg";
 import rows_people_image from "../../public/rows-people.svg";
+import footer_logo from "../../public/vertical_logo.jpg";
+import voting_image from '../../public/voting.svg';
 
 export const HeaderLogo = () =>
   <Image

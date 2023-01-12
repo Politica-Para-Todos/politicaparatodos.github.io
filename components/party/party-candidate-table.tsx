@@ -1,7 +1,6 @@
-import React from "react";
-import { Row, Col, Typography, List } from "antd";
-import { Candidate } from "../../dtos/candidate-dto";
-import { sortArrayByKey } from "../../utils/manipuation";
+import { Col, List, Row, Typography } from "antd";
+import { Candidate } from "../../src/dtos/candidate-dto";
+import { sortArrayByKey } from "../../src/utils/manipuation";
 
 interface PartyCandidatesTableProps {
   candidates: Candidate[];

@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { Row, Col, Typography, Select, Avatar } from "antd";
-import { Candidate } from "../../dtos/candidate-dto";
-import { convertToLabel } from "../../dtos/electoral-circle-dto";
+import { Avatar, Col, Row, Select, Typography } from "antd";
+import { useState } from "react";
+import { Candidate } from "../../src/dtos/candidate-dto";
+import { convertToLabel } from "../../src/dtos/electoral-circle-dto";
 
 const { Title, Paragraph } = Typography;
 const { Option } = Select;

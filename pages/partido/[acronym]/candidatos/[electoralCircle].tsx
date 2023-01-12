@@ -1,16 +1,15 @@
 import { Layout, Typography } from "antd";
-import LayoutFooter from "../../../../src/components/layout-footer";
-import LayoutHeader from "../../../../src/components/layout-header";
-import MetaTags from "../../../../src/components/meta-tags";
-import PartyHeader from "../../../../src/components/party/header";
-import PartyIntro from "../../../../src/components/party/intro";
-import PartyCandidatesTable from "../../../../src/components/party/party-candidate-table";
+import LayoutFooter from "../../../../components/global/layout-footer";
+import LayoutHeader from "../../../../components/global/layout-header";
+import MetaTags from "../../../../components/global/meta-tags";
+import PartyHeader from "../../../../components/party/header";
+import PartyIntro from "../../../../components/party/intro";
+import PartyCandidatesTable from "../../../../components/party/party-candidate-table";
 import { Candidate } from "../../../../src/dtos/candidate-dto";
 import { convertToLabel } from "../../../../src/dtos/electoral-circle-dto";
 import { Party } from "../../../../src/dtos/party-dto";
 import {
-  retrieveParty,
-  getPartyCandidates,
+  getPartyCandidates, retrieveParty
 } from "../../../../src/retriever/api";
 
 const { Paragraph } = Typography;

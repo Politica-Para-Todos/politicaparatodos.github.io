@@ -1,12 +1,13 @@
 import { Layout } from "antd";
 import { NextPage } from "next";
-import LayoutHeader from "../../../src/components/layout-header";
-import MetaTags from "../../../src/components/meta-tags";
-import PartyHeader from "../../../src/components/party/header";
+import LayoutFooter from "../../../components/global/layout-footer";
+import LayoutHeader from "../../../components/global/layout-header";
+import MetaTags from "../../../components/global/meta-tags";
+import PartyHeader from "../../../components/party/header";
+import ManifestoSider from "../../../components/party/manifesto/sider";
 import { Party } from "../../../src/dtos/party-dto";
 import { retrieveParty, retrievePartyAcronyms } from "../../../src/retriever/api";
-import LayoutFooter from "../../../src/components/layout-footer";
-import ManifestoSider from "../../../src/components/party/manifesto/sider";
+
 
 interface PartyManifestoProps {
   party: Party

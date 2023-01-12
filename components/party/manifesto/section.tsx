@@ -1,7 +1,7 @@
 import { Popover } from "antd";
 import React, { Fragment } from "react";
 import ReactHtmlParser from "react-html-parser";
-import { Section, Topic } from "../../../dtos/manifesto-dto";
+import { Section, Topic } from "../../../src/dtos/manifesto-dto";
 
 interface ManifestoSectionProps {
   title: string,

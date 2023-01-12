@@ -1,12 +1,12 @@
+import { Button, Col, Drawer, Layout, Menu, Row } from "antd";
+import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 import Image from "next/image";
 import Link from "next/link";
-import { Button, Col, Drawer, Layout, Menu, Row } from "antd";
-import React, { Fragment, memo, useState } from "react";
-import SocialSharing from "./social-sharing";
-import { socialMediaOptions } from "../utils/online-platform";
-import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
+import { Fragment, memo, useState } from "react";
+import { LOOMIO_PPT_URL } from "../../src/utils/constants";
+import { socialMediaOptions } from "../../src/utils/online-platform";
 import { HeaderLogo } from "./logos";
-import { LOOMIO_PPT_URL } from "../utils/constants";
+import SocialSharing from "./social-sharing";
 
 const LayoutHeader = () => {
   const [headerState, setState] = useState({

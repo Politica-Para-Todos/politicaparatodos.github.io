@@ -1,12 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { Row, Col, Button } from "antd";
+import { Button, Col, Row } from "antd";
+import { useEffect, useState } from "react";
 import ReactPlayer from "react-player/youtube";
-import {
-  YOUTUBE_VIDEO_EP1,
-  YOUTUBE_VIDEO_EP2,
-  YOUTUBE_VIDEO_EP3,
-  YOUTUBE_VIDEO_EP4,
-} from "../../utils/constants";
+import { YOUTUBE_VIDEO_EP1, YOUTUBE_VIDEO_EP2, YOUTUBE_VIDEO_EP3, YOUTUBE_VIDEO_EP4 } from "../../src/utils/constants";
 
 interface Video {
   url: string;
