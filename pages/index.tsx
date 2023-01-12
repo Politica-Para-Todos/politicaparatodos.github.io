@@ -1,7 +1,6 @@
-import type { NextPage } from "next";
-
 import { Layout } from "antd";
-import AboutUsFooter from "../components/about-us/footer";
+import type { NextPage } from "next";
+import LayoutFooter from "../components/global/layout-footer";
 import LayoutHeader from "../components/global/layout-header";
 import MetaTags from "../components/global/meta-tags";
 import HomeCountdown from "../components/home/countdown";
@@ -34,7 +33,7 @@ const Home: NextPage<HomePageParty> = ({ homepageParties }) => {
         <HomeParties parties={homepageParties} />
         <div className="getsocial gs-inline-group"></div>
       </Layout.Content>
-      <AboutUsFooter />
+      <LayoutFooter />
     </Layout>
   );
 };
