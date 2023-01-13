@@ -8,7 +8,7 @@ import HomeMedia from "../components/home/media";
 import { HomeMission, HomeMissionInfographic } from "../components/home/mission";
 import HomeParties from "../components/home/parties";
 import { Party } from "../src/dtos/party-dto";
-import { retrieveHomepageParties } from "../src/retriever/api";
+import { homePageData } from "../src/retriever/api";
 
 interface HomePageParty {
   homepageParties: Party[];
@@ -41,7 +41,7 @@ const Home: NextPage<HomePageParty> = ({ homepageParties }) => {
 export const getStaticProps = async () => {
   return {
     props: {
-      homepageParties: retrieveHomepageParties(),
+      homepageParties: homePageData(),
     },
   };
 };

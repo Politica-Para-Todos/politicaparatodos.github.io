@@ -32,3 +32,9 @@ export interface HomeParty {
   acronym: string;
   logo: string;
 }
+
+export type HomePageParty = {
+  name: string,
+  acronym: string,
+  logoFileName: string
+}

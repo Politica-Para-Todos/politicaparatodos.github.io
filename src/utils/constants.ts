@@ -1,4 +1,4 @@
-// URL
+// urls
 export const PORTAL_ELEITOR_URL = "https://www.portaldoeleitor.pt/Default.aspx";
 export const LOOMIO_PPT_URL = "https://www.loomio.org/g/ZqT2uPv6/politica-para-todos"
 export const PPT_WEBSITE = "https://politicaparatodos.pt/"
@@ -12,5 +12,67 @@ export const YOUTUBE_VIDEO_EP2 = "https://www.youtube.com/watch?v=2nBGppKe1z4"
 export const YOUTUBE_VIDEO_EP3 = "https://www.youtube.com/watch?v=OERxKenLIo8"
 export const YOUTUBE_VIDEO_EP4 = "https://www.youtube.com/watch?v=v-Uj7kwfG5o"
 
-// Email
+// email
 export const EMAIL_PPT = "contacto@politicaparatodos.pt"
+
+// contributors
+export const CONTRIBUTORS: string[] = [
+  "Nuno Carneiro",
+  "Rui Gonçalves",
+  "Hugo Barroca",
+  "Inês Rosete",
+  "Ana Neves",
+  "Tiago Sousa",
+  "Vasco Patarata",
+  "Renato Almeida",
+  "Miguel Spranger",
+  "Paulo Fonseca",
+  "Luís Silva",
+  "Nuno Cruz",
+  "João Gonçalves",
+  "Leonid Kholkine",
+  "João Moleiro",
+  "Francisco Marques",
+  "Luís Neves",
+  "Pedro Coelho",
+  "João Romão",
+  "Jorge Saco",
+  "Joana Flores",
+  "Francisco Frutuoso",
+  "Fábio Cláudio",
+  "Luis Cunha",
+  "Marta Costa",
+  "Vanessa Vilela",
+  "Renata Henriques",
+  "Domingos Ferreira",
+  "Fábio Cláudio",
+  "Diogo Correia",
+  "Tiago Paim",
+  "Catarina Tomé",
+];
+
+// electoral circles
+const ELECTORAL_CIRCLES = [
+  "Açores",
+  "Aveiro",
+  "Beja",
+  "Braga",
+  "Bragança",
+  "Castelo Branco",
+  "Coimbra",
+  "Évora",
+  "Europa",
+  "Faro",
+  "Fora da Europa",
+  "Guarda",
+  "Leiria",
+  "Lisboa",
+  "Madeira",
+  "Portalegre",
+  "Porto",
+  "Santarém",
+  "Setúbal",
+  "Viana do Castelo",
+  "Vila Real",
+  "Viseu"
+]

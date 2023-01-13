@@ -1,18 +1,22 @@
 import { Party } from "../dtos/party-dto";
 import {
   electoralCirclePage,
-  getAllData,
-  getHomepageParties,
-  getPartyAcronyms,
-  homePageParties,
-  partyHomePage,
+  getAllData, getPartyAcronyms, partyHomePage, retrieveHomePageParties
 } from "./service";
 
-export const getHomeParties = () => homePageParties();
+export const homePageData = () => retrieveHomePageParties();
+
 export const getPartyCandidates = (acronym: string, electoralCircle: string) =>
   electoralCirclePage(acronym, electoralCircle);
 export const retrieveJsonData = (): Party[] => getAllData();
 
-export const retrieveHomepageParties = () => getHomepageParties();
 export const retrieveParty = (acronym: string) => partyHomePage(acronym);
 export const retrievePartyAcronyms = () => getPartyAcronyms();
+
+
+interface JsonRetriever {
+  homePageData(): void;
+  partyPageData(partyAcronym: string): void;
+  manifestoPageData(partyAcronym: string): void;
+  partyElectoralCirclePageData(partyAcronym: string, electoralCircle: string): void;
+}
