@@ -1,10 +1,11 @@
 import { Party } from "../dtos/party-dto";
 import {
   electoralCirclePage,
-  getAllData, getPartyAcronyms, partyHomePage, retrieveHomePageParties
+  getAllData, getPartyAcronyms, partyHomePage, retrieveHomePageParties, retrievePartyHomePage
 } from "./service";
 
 export const homePageData = () => retrieveHomePageParties();
+export const partyPageData = (acronym: string) => retrievePartyHomePage(acronym);
 
 export const getPartyCandidates = (acronym: string, electoralCircle: string) =>
   electoralCirclePage(acronym, electoralCircle);
