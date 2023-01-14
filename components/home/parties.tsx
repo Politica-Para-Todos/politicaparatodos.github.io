@@ -87,9 +87,9 @@ const HomeParties = ({ parties }: HomePartiesProps) => {
                 placeholder="Escolha o Círculo Eleitoral"
                 onChange={filterDisctrict}
               >
-                {electoralCircleDropdown().map((circle) => (
-                  <Select.Option key={circle.value} value={circle.label}>
-                    {circle.label}
+                {electoralCircleDropdown.map(element => (
+                  <Select.Option key={element.value} value={element.label}>
+                    {element.label}
                   </Select.Option>
                 ))}
               </Select>

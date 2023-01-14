@@ -5,14 +5,13 @@ import MetaTags from "../../components/global/meta-tags";
 import PartyCandidatesList from "../../components/party/candidate-list";
 import PartyHeader from "../../components/party/header";
 import PartyIntro from "../../components/party/intro";
-import { electoralCircleDropdown } from "../../src/dtos/electoral-circle-dto";
-import { Party } from "../../src/dtos/party-dto";
-import { retrieveParty, retrievePartyAcronyms } from "../../src/retriever/api";
+import { PartyPage } from "../../src/dtos/party-dto";
+import { partyPageData, retrievePartyAcronyms } from "../../src/retriever/api";
 
 const { Paragraph } = Typography;
 
 interface PartyHomeProps {
-  party: Party;
+  party: PartyPage;
 }
 
 const PartyHome = ({ party }: PartyHomeProps) =>
@@ -23,7 +22,7 @@ const PartyHome = ({ party }: PartyHomeProps) =>
         pageDescription={`Nesta página encontrarás o programa e os candidatos, por círculo eleitoral, do ${party.name}`}
         socialTitle={`Política Para Todos - Conhece o programa e os candidatos do ${party.acronym}`}
         socialDescription={`Nesta página encontrarás o programa e os candidatos, por círculo eleitoral, do ${party.name}`}
-        socialImage={`/party-logos/${party.logo}`}
+        socialImage={`/party-logos/${party.logoFileName}`}
       />
     )}
     <LayoutHeader />
@@ -43,9 +42,8 @@ const PartyHome = ({ party }: PartyHomeProps) =>
           ))}
       </PartyIntro>
       <PartyCandidatesList
-        candidates={party.candidates}
-        circles={electoralCircleDropdown()}
-        acronym={party.acronym}
+        candidates={party.leadCandidates}
+        partyAcronym={party.acronym}
       />
     </Layout.Content>
     <LayoutFooter />
@@ -67,10 +65,8 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async (context: any) => {
-  const party = retrieveParty(context.params.acronym);
-
   return {
-    props: { party },
+    props: { party: partyPageData(context.params.acronym) }
   };
 };
 

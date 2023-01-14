@@ -1,28 +1,24 @@
 import { Avatar, Col, Row, Select, Typography } from "antd";
 import { useState } from "react";
-import { Candidate } from "../../src/dtos/candidate-dto";
-import { convertToLabel } from "../../src/dtos/electoral-circle-dto";
+import { convertToLabel, electoralCircleDropdown, ElectoralCircleDropdownValue } from "../../src/dtos/electoral-circle-dto";
+import { PartyPageLeadCandidate } from "../../src/dtos/party-dto";
 
 const { Title, Paragraph } = Typography;
 const { Option } = Select;
 
 interface PartyCandidatesListProps {
-  circles: any[];
-  candidates: any[];
-  acronym: string;
+  candidates: PartyPageLeadCandidate[];
+  partyAcronym: string;
 }
 
-const PartyCandidatesList = (props: PartyCandidatesListProps) => {
-  const [state, setState] = useState({
-    selectedCircle: "all",
-  });
+const PartyCandidatesList = ({ candidates, partyAcronym }: PartyCandidatesListProps) => {
+  const [
+    electoralCircleFilter,
+    setElectoralCircleFilter
+  ] = useState(ElectoralCircleDropdownValue.ALL);
 
-  const updateCircle = (value: string) => {
-    const selectedCircle = value || "all";
-    setState({ selectedCircle });
-  };
-
-  const { circles, candidates, acronym } = props;
+  const filterCircle = (value: ElectoralCircleDropdownValue) =>
+    setElectoralCircleFilter(value ?? ElectoralCircleDropdownValue.ALL);
 
   return (
     <section className="party-candidates">
@@ -34,13 +30,13 @@ const PartyCandidatesList = (props: PartyCandidatesListProps) => {
           <Select
             style={{ width: "100%" }}
             placeholder="Escolha o Círculo Eleitoral"
-            onChange={updateCircle}
+            onChange={filterCircle}
           >
-            {circles.map((circle: any) => (
-              <Option key={circle.value} value={circle.value}>
-                {circle.label}
+            {electoralCircleDropdown.map((option, index) =>
+              <Option key={index} value={option.value}>
+                {option.label}
               </Option>
-            ))}
+            )}
           </Select>
         </Col>
         <Col lg={24} span={24}>
@@ -51,13 +47,13 @@ const PartyCandidatesList = (props: PartyCandidatesListProps) => {
         </Col>
       </Row>
       <Row typeof="flex" className="party-candidates__list">
+
         {candidates
-          .filter(
-            (candidate: Candidate) =>
-              candidate.electoralCircle === state.selectedCircle ||
-              state.selectedCircle === "all"
+          .filter(candidate =>
+            convertToLabel(electoralCircleFilter) === candidate.electoralCircle ||
+            electoralCircleFilter === ElectoralCircleDropdownValue.ALL
           )
-          .map((candidate: Candidate, index: number) => {
+          .map((candidate: PartyPageLeadCandidate, index: number) => {
             return (
               <Col
                 key={index}
@@ -69,19 +65,19 @@ const PartyCandidatesList = (props: PartyCandidatesListProps) => {
               >
                 <a
                   className="avatar-list-item"
-                  href={`/partido/${acronym.toLowerCase()}/candidatos/${encodeURIComponent(
+                  href={`/partido/${partyAcronym.toLowerCase()}/candidatos/${encodeURIComponent(
                     candidate.electoralCircle
                   )}`}
                 >
                   <div className="party-candidate__content">
                     <Avatar
                       size={120}
-                      src={`/party-candidates/${candidate.photo}`}
+                      src={`/party-candidates/${candidate.profileFileName}`}
                       icon="user"
                     />
                     {candidate.electoralCircle && (
                       <Paragraph className="party-candidate__content-circle">
-                        {convertToLabel(candidate.electoralCircle)}
+                        {candidate.electoralCircle}
                       </Paragraph>
                     )}
                     {candidate.name && (
