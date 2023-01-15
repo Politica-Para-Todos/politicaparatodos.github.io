@@ -6,7 +6,7 @@ import PartyCandidatesList from "../../components/party/candidate-list";
 import PartyHeader from "../../components/party/header";
 import PartyIntro from "../../components/party/intro";
 import { PartyPage } from "../../src/dtos/party-dto";
-import { partyPageData, retrievePartyAcronyms } from "../../src/retriever/api";
+import { partyAcronymsData, partyPageData } from "../../src/retriever/api";
 
 const { Paragraph } = Typography;
 
@@ -50,10 +50,10 @@ const PartyHome = ({ party }: PartyHomeProps) =>
   </Layout>
 
 export const getStaticPaths = async () => {
-  const params: object[] = retrievePartyAcronyms().map((acro: string) => {
+  const params: object[] = partyAcronymsData().map((acronym: string) => {
     return {
       params: {
-        acronym: acro.toLowerCase(),
+        acronym: acronym.toLowerCase(),
       },
     };
   });

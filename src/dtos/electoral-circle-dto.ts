@@ -26,12 +26,12 @@ export enum ElectoralCircleDropdownValue {
   VISEU = "viseu",
 }
 
-interface DropDownValueLabel {
+export interface DropdownOption {
   value: ElectoralCircleDropdownValue,
   label: string
 }
 
-export const electoralCircleDropdown: DropDownValueLabel[] = [
+export const electoralCircleDropdown: DropdownOption[] = [
   {
     value: ElectoralCircleDropdownValue.ALL,
     label: "Todos",
@@ -128,3 +128,6 @@ export const electoralCircleDropdown: DropDownValueLabel[] = [
 
 export const convertToLabel = (electoralCircle: ElectoralCircleDropdownValue) =>
   electoralCircleDropdown.filter(element => element.value == electoralCircle)[0].label;
+
+export const convertToValue = (label: string) =>
+  electoralCircleDropdown.filter(option => option.label == label)[0].value;

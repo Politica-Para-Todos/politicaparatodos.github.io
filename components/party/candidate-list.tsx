@@ -1,6 +1,7 @@
 import { Avatar, Col, Row, Select, Typography } from "antd";
+import Link from "next/link";
 import { useState } from "react";
-import { convertToLabel, electoralCircleDropdown, ElectoralCircleDropdownValue } from "../../src/dtos/electoral-circle-dto";
+import { convertToLabel, convertToValue, DropdownOption, electoralCircleDropdown, ElectoralCircleDropdownValue } from "../../src/dtos/electoral-circle-dto";
 import { PartyPageLeadCandidate } from "../../src/dtos/party-dto";
 
 const { Title, Paragraph } = Typography;
@@ -32,7 +33,7 @@ const PartyCandidatesList = ({ candidates, partyAcronym }: PartyCandidatesListPr
             placeholder="Escolha o Círculo Eleitoral"
             onChange={filterCircle}
           >
-            {electoralCircleDropdown.map((option, index) =>
+            {electoralCircleDropdown.map((option: DropdownOption, index: number) =>
               <Option key={index} value={option.value}>
                 {option.label}
               </Option>
@@ -53,46 +54,45 @@ const PartyCandidatesList = ({ candidates, partyAcronym }: PartyCandidatesListPr
             convertToLabel(electoralCircleFilter) === candidate.electoralCircle ||
             electoralCircleFilter === ElectoralCircleDropdownValue.ALL
           )
-          .map((candidate: PartyPageLeadCandidate, index: number) => {
-            return (
-              <Col
-                key={index}
-                span={12}
-                sm={8}
-                lg={6}
-                xl={4}
-                className="party-candidate"
+          .map((candidate: PartyPageLeadCandidate, index: number) =>
+            <Col
+              key={index}
+              span={12}
+              sm={8}
+              lg={6}
+              xl={4}
+              className="party-candidate"
+            >
+              <Link
+                className="avatar-list-item"
+                href={`/partido/${partyAcronym.toLowerCase()}/candidatos/${encodeURI(
+                  convertToValue(candidate.electoralCircle)
+                )}`}
+                legacyBehavior={false}
               >
-                <a
-                  className="avatar-list-item"
-                  href={`/partido/${partyAcronym.toLowerCase()}/candidatos/${encodeURIComponent(
-                    candidate.electoralCircle
-                  )}`}
-                >
-                  <div className="party-candidate__content">
-                    <Avatar
-                      size={120}
-                      src={`/party-candidates/${candidate.profileFileName}`}
-                      icon="user"
-                    />
-                    {candidate.electoralCircle && (
-                      <Paragraph className="party-candidate__content-circle">
-                        {candidate.electoralCircle}
-                      </Paragraph>
-                    )}
-                    {candidate.name && (
-                      <Title
-                        className="party-candidate__content-title"
-                        level={3}
-                      >
-                        {candidate.name}
-                      </Title>
-                    )}
-                  </div>
-                </a>
-              </Col>
-            );
-          })}
+                <div className="party-candidate__content">
+                  <Avatar
+                    size={120}
+                    src={`/party-candidates/${candidate.profileFileName}`}
+                    icon="user"
+                  />
+                  {candidate.electoralCircle && (
+                    <Paragraph className="party-candidate__content-circle">
+                      {candidate.electoralCircle}
+                    </Paragraph>
+                  )}
+                  {candidate.name && (
+                    <Title
+                      className="party-candidate__content-title"
+                      level={3}
+                    >
+                      {candidate.name}
+                    </Title>
+                  )}
+                </div>
+              </Link>
+            </Col>
+          )}
       </Row>
     </section>
   );
