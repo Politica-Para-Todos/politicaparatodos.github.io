@@ -1,11 +1,10 @@
 import { Avatar, Col, Row, Typography } from "antd";
 import React from "react";
-import { Candidate } from "../../src/dtos/candidate-dto";
 
 const { Title, Paragraph } = Typography;
 
 interface PartyIntroProps extends React.HTMLProps<HTMLDivElement> {
-  spokesperson: Candidate | null;
+  spokesperson: any | null;
   title: string;
   children: any;
 }
@@ -21,7 +20,7 @@ const PartyIntro = ({ spokesperson, title, children }: PartyIntroProps) =>
         <Col span={24} lg={8} className="party-intro__spokesperson">
           <Avatar
             size={160}
-            src={`/party-candidates/${spokesperson.photo}`}
+            src={`/party-candidates/${spokesperson.profilePhotoFileName}`}
             icon="user"
           />
           <Title className="party-intro__spokesperson-name" level={3}>

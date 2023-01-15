@@ -1,5 +1,4 @@
 import { Candidate } from "../dtos/candidate-dto";
-import { ElectoralCircle } from "../dtos/electoral-circle-dto";
 import { Manifesto, Section, SubSection, Topic } from "../dtos/manifesto-dto";
 import { OnlinePlatformType, Party } from "../dtos/party-dto";
 
@@ -80,7 +79,7 @@ const retrievePartyCandidates = (
         const candidate = main[k];
         candidatesList.push({
           name: candidate.name,
-          electoralCircle: convertToElectoralCircle(electoralCircles[j]),
+          electoralCircle: null,
           photo: validateField(candidate.photo),
           isLeadCandidate: candidate.is_lead_candidate,
           type: candidate.type,
@@ -99,7 +98,7 @@ const retrievePartyCandidates = (
 
         candidatesList.push({
           name: candidate.name,
-          electoralCircle: convertToElectoralCircle(electoralCircles[j]),
+          electoralCircle: null,
           photo: null,
           isLeadCandidate: candidate.is_lead_candidate,
           type: candidate.type,
@@ -180,56 +179,54 @@ const retrieveManifestoTopics = (rawTopics: any): Topic[] =>
     }
   })
 
-export const convertToElectoralCircle = (region: string): ElectoralCircle => {
-  switch (region) {
-    case "Açores":
-      return ElectoralCircle.ACORES;
-    case "Aveiro":
-      return ElectoralCircle.AVEIRO;
-    case "Beja":
-      return ElectoralCircle.BEJA;
-    case "Braga":
-      return ElectoralCircle.BRAGA;
-    case "Bragança":
-      return ElectoralCircle.BRAGANCA;
-    case "Castelo Branco":
-      return ElectoralCircle.CASTELO_BRANCO;
-    case "Coimbra":
-      return ElectoralCircle.COIMBRA;
-    case "Europa":
-      return ElectoralCircle.EUROPA;
-    case "Évora":
-      return ElectoralCircle.EVORA;
-    case "Faro":
-      return ElectoralCircle.FARO;
-    case "Fora da Europa":
-      return ElectoralCircle.FORA_EUROPA;
-    case "Guarda":
-      return ElectoralCircle.GUARDA;
-    case "Leiria":
-      return ElectoralCircle.LEIRIA;
-    case "Lisboa":
-      return ElectoralCircle.LISBOA;
-    case "Madeira":
-      return ElectoralCircle.MADEIRA;
-    case "Portalegre":
-      return ElectoralCircle.PORTALEGRE;
-    case "Porto":
-      return ElectoralCircle.PORTO;
-    case "Santarém":
-      return ElectoralCircle.SANTAREM;
-    case "Setúbal":
-      return ElectoralCircle.SETUBAL;
-    case "Viana do Castelo":
-      return ElectoralCircle.VIANA_DO_CASTELO;
-    case "Vila Real":
-      return ElectoralCircle.VILA_REAL;
-    case "Viseu":
-      return ElectoralCircle.VISEU;
-    default:
-      return ElectoralCircle.ALL;
-  }
-};
+// // export const convertToElectoralCircle = (region: string): ElectoralCircle => {
+// //   switch (region) {
+// //     case "Açores":
+// //       return ElectoralCircle.ACORES;
+// //     case "Aveiro":
+// //       return ElectoralCircle.AVEIRO;
+// //     case "Beja":
+// //       return ElectoralCircle.BEJA;
+// //     case "Braga":
+// //       return ElectoralCircle.BRAGA;
+// //     case "Bragança":
+// //       return ElectoralCircle.BRAGANCA;
+// //     case "Castelo Branco":
+// //       return ElectoralCircle.CASTELO_BRANCO;
+// //     case "Coimbra":
+// //       return ElectoralCircle.COIMBRA;
+// //     case "Europa":
+// //       return ElectoralCircle.EUROPA;
+// //     case "Évora":
+// //       return ElectoralCircle.EVORA;
+// //     case "Faro":
+// //       return ElectoralCircle.FARO;
+// //     case "Fora da Europa":
+// //       return ElectoralCircle.FORA_DA_EUROPA;
+// //     case "Guarda":
+// //       return ElectoralCircle.GUARDA;
+// //     case "Leiria":
+// //       return ElectoralCircle.LEIRIA;
+// //     case "Lisboa":
+// //       return ElectoralCircle.LISBOA;
+// //     case "Madeira":
+// //       return ElectoralCircle.MADEIRA;
+// //     case "Portalegre":
+// //       return ElectoralCircle.PORTALEGRE;
+// //     case "Porto":
+// //       return ElectoralCircle.PORTO;
+// //     case "Santarém":
+// //       return ElectoralCircle.SANTAREM;
+// //     case "Setúbal":
+// //       return ElectoralCircle.SETUBAL;
+// //     case "Viana do Castelo":
+// //       return ElectoralCircle.VIANA_DO_CASTELO;
+// //     case "Vila Real":
+// //       return ElectoralCircle.VILA_REAL;
+// //     case "Viseu":
+// //       return ElectoralCircle.VISEU;
+// //   }
+// };
 
 export const retrieveData = (
   parties: any,

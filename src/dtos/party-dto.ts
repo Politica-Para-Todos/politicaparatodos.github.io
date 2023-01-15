@@ -38,3 +38,20 @@ export type HomePageParty = {
   acronym: string,
   logoFileName: string
 }
+
+export type PartyPage = {
+  name: string,
+  acronym: string,
+  logoFileName: string,
+  description: string,
+  descriptionSource: string,
+  hasManifesto: boolean,
+  onlinePlatforms: OnlinePlatform[],
+  leadCandidates: PartyPageLeadCandidate[]
+}
+
+export type PartyPageLeadCandidate = {
+  name: string,
+  profileFileName: string,
+  electoralCircle: string
+}

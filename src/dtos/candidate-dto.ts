@@ -1,8 +1,6 @@
-import { ElectoralCircle } from "./electoral-circle-dto";
-
 export interface Candidate {
   name: string;
-  electoralCircle: ElectoralCircle;
+  electoralCircle: null;
   photo: string | null;
   isLeadCandidate: boolean;
   type: string;

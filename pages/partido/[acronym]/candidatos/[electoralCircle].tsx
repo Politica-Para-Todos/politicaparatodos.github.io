@@ -5,55 +5,49 @@ import MetaTags from "../../../../components/global/meta-tags";
 import PartyHeader from "../../../../components/party/header";
 import PartyIntro from "../../../../components/party/intro";
 import PartyCandidatesTable from "../../../../components/party/party-candidate-table";
-import { Candidate } from "../../../../src/dtos/candidate-dto";
-import { convertToLabel } from "../../../../src/dtos/electoral-circle-dto";
-import { Party } from "../../../../src/dtos/party-dto";
-import {
-  getPartyCandidates, retrieveParty
-} from "../../../../src/retriever/api";
+import { convertToLabel, DropdownOption, electoralCircleDropdown } from "../../../../src/dtos/electoral-circle-dto";
+import { partyAcronymsData, partyCandidatesData, partyHeaderData } from "../../../../src/retriever/api";
 
 const { Paragraph } = Typography;
 
 interface PartyCandidateProps {
-  acronym: string;
+  partyAcronym: string;
   electoralCircle: string;
+
+  party: any,
+  candidates: any
 }
 
-const PartyCandidate = ({ acronym, electoralCircle }: PartyCandidateProps) => {
-  const party = retrieveParty(acronym) as Party;
-  const candidates = getPartyCandidates(acronym, electoralCircle);
-
-  const circleAsLabel = convertToLabel(electoralCircle!.toString());
-  const leadCandidate = candidates.filter(
-    (candidate: Candidate) => candidate.isLeadCandidate
-  )[0];
+const PartyCandidate = ({ party, candidates }: PartyCandidateProps) => {
+  const circleAsLabel2 = convertToLabel(candidates.electoralCircle);
+  const { lead } = candidates;
 
   return (
     <Layout>
       {party.name && (
         <MetaTags
-          pageTitle={`${party.name} - Círculo eleitoral de ${leadCandidate.electoralCircle}`}
-          pageDescription={`Informações sobre o ${party.name} no círculo eleitoral de ${leadCandidate.electoralCircle}`}
-          socialTitle={`${party.name} - Círculo eleitoral de ${leadCandidate.electoralCircle}`}
-          socialDescription={`Informações sobre o ${party.name} no círculo eleitoral de ${leadCandidate.electoralCircle}`}
-          socialImage={`/party-logos/${party.logo}`}
+          pageTitle={`${party.name} - Círculo eleitoral de ${circleAsLabel2}`}
+          pageDescription={`Informações sobre o ${party.name} no círculo eleitoral de ${circleAsLabel2}`}
+          socialTitle={`${party.name} - Círculo eleitoral de ${circleAsLabel2}`}
+          socialDescription={`Informações sobre o ${party.name} no círculo eleitoral de ${circleAsLabel2}`}
+          socialImage={`/party-logos/${party.photo}`}
         />
       )}
       <LayoutHeader />
       <Layout.Content>
         <PartyHeader
           party={party}
-          subtitle={`${party.acronym} - Círculo eleitoral de ${circleAsLabel}`}
+          subtitle={`${party.acronym} - Círculo eleitoral de ${circleAsLabel2}`}
         />
-        <PartyIntro spokesperson={leadCandidate} title={leadCandidate.name}>
+        <PartyIntro spokesperson={lead} title={lead.name}>
           <Paragraph className="party-desc">
-            {leadCandidate.biography}
+            {lead.biography}
           </Paragraph>
-          {leadCandidate.biographySource ? (
+          {lead.biographySource ? (
             <Paragraph>
               Biografia:{" "}
               <a
-                href={leadCandidate.biographySource}
+                href={lead.biographySource}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -61,11 +55,11 @@ const PartyCandidate = ({ acronym, electoralCircle }: PartyCandidateProps) => {
               </a>
             </Paragraph>
           ) : null}
-          {leadCandidate.parliamentLink ? (
+          {lead.parliamentLink ? (
             <Paragraph>
               Página do Parlamento:{" "}
               <a
-                href={leadCandidate.parliamentLink}
+                href={lead.parliamentLink}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -81,11 +75,39 @@ const PartyCandidate = ({ acronym, electoralCircle }: PartyCandidateProps) => {
   );
 };
 
-PartyCandidate.getInitialProps = (appContext: any) => {
+export const getStaticPaths = async () => {
+  const paths: object[] = [];
+
+  partyAcronymsData().forEach((acronym: string) => {
+    electoralCircleDropdown.forEach((electoral: DropdownOption, index: number) => {
+
+      if (electoral.value != "all") {
+        paths.push({
+          params: {
+            acronym: acronym.toLowerCase(),
+            electoralCircle: electoral.value
+          }
+        })
+      }
+    })
+  });
+
   return {
-    acronym: appContext.query.acronym,
-    electoralCircle: appContext.query.electoralCircle,
-  };
+    paths,
+    fallback: false
+  }
 };
+
+export const getStaticProps = async (context: any) => {
+  return {
+    props: {
+      party: partyHeaderData(context.params.acronym),
+      candidates: partyCandidatesData(
+        context.params.acronym,
+        context.params.electoralCircle
+      )
+    }
+  }
+}
 
 export default PartyCandidate;
