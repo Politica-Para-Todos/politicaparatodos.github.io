@@ -7,7 +7,6 @@ import PartyHeader from "../../../components/party/header";
 import ManifestoSider from "../../../components/party/manifesto/sider";
 import { partyAcronymsData, partyHeaderData, partyManifestoData } from "../../../src/retriever/api";
 
-
 interface PartyManifestoProps {
   party: any,
   manifesto: any
@@ -62,11 +61,6 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async (context: any) => {
-  // return {
-  //   props: {
-  //     party: retrieveParty(context.params.acronym)
-  //   },
-  // };
   return {
     props: {
       party: partyHeaderData(context.params.acronym),
