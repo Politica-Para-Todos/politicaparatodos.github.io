@@ -4,6 +4,7 @@ import LayoutFooter from "../../../components/global/layout-footer";
 import LayoutHeader from "../../../components/global/layout-header";
 import MetaTags from "../../../components/global/meta-tags";
 import PartyHeader from "../../../components/party/header";
+import ManifestoSider from "../../../components/party/manifesto/sider";
 import { partyAcronymsData, partyHeaderData, partyManifestoData } from "../../../src/retriever/api";
 
 
@@ -13,9 +14,10 @@ interface PartyManifestoProps {
 }
 
 const PartyManifesto: NextPage<PartyManifestoProps> = ({ party, manifesto }) => {
-  // if (!party.manifesto) {
-  //   return null;
-  // }
+  if (!manifesto) {
+    return null;
+  }
+
   const { title, sections } = manifesto;
 
   return (

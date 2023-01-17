@@ -127,15 +127,11 @@ export const retrievePartyHeader = (acronym: string) => {
 }
 
 export const retrievePartyHomePage = (acronym: string): PartyPage => {
-
-  if (!validatePartyAcronym(acronym)) {
-    throw Error("Party acronym does not exist");
-  }
   const partyAcronym = acronym.toUpperCase();
   const party = parties[partyAcronym];
   const { candidates } = party;
 
-  const result = {
+  return {
     name: party.name,
     acronym: partyAcronym,
     logoFileName: party.logo,
@@ -145,8 +141,6 @@ export const retrievePartyHomePage = (acronym: string): PartyPage => {
     onlinePlatforms: getOnlinePlatforms(party),
     leadCandidates: getLeadCandidates(candidates)
   }
-  console.log(result);
-  return result;
 }
 
 const validatePartyAcronym = (acronym: string): boolean =>
@@ -248,9 +242,6 @@ const convertElectoralCircle = (electoralCircle: string) =>
 
 export const retrievePartyManifestoPage = (acronym: string) => {
   const partyAcronym = acronym.toUpperCase();
-  const partyManifesto = manifestos[partyAcronym];
 
-  return {
-    manifesto: partyManifesto
-  }
+  return manifestos[partyAcronym]
 }
