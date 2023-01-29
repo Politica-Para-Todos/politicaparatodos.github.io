@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { convertToLabel, convertToValue, DropdownOption, electoralCircleDropdown, ElectoralCircleDropdownValue } from "../../src/retriever/dtos/electoral-circle-dto";
 import { PartyPageLeadCandidate } from "../../src/retriever/dtos/party-dto";
+import { acronymConversion, Conversion } from "../../src/utils/manipuation";
 
 const { Title, Paragraph } = Typography;
 const { Option } = Select;
@@ -65,7 +66,7 @@ const PartyCandidatesList = ({ candidates, partyAcronym }: PartyCandidatesListPr
             >
               <Link
                 className="avatar-list-item"
-                href={`/partido/${partyAcronym.toLowerCase()}/candidatos/${encodeURI(
+                href={`/partido/${acronymConversion(partyAcronym, Conversion.TO_URL)}/candidatos/${encodeURI(
                   convertToValue(candidate.electoralCircle)
                 )}`}
                 legacyBehavior={false}

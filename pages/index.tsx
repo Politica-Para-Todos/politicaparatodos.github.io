@@ -40,8 +40,7 @@ export const getStaticProps = async () => {
 
   return {
     props: {
-      // homepageParties: homePageData()
-      homePageParties: retriever.retrieveHomePageParties()
+      homePageParties: retriever.homePageParties()
     },
   };
 };

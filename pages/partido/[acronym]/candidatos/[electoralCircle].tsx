@@ -5,8 +5,10 @@ import MetaTags from "../../../../components/global/meta-tags";
 import PartyHeader from "../../../../components/party/header";
 import PartyIntro from "../../../../components/party/intro";
 import PartyCandidatesTable from "../../../../components/party/party-candidate-table";
-import { partyAcronymsData, partyCandidatesData, partyHeaderData } from "../../../../src/retriever/api";
+import { partyAcronymsData } from "../../../../src/retriever/api";
 import { convertToLabel, DropdownOption, electoralCircleDropdown } from "../../../../src/retriever/dtos/electoral-circle-dto";
+import { Retriever, SeedsJsonRetriever } from "../../../../src/retriever/service";
+import { acronymConversion, Conversion } from "../../../../src/utils/manipuation";
 
 const { Paragraph } = Typography;
 
@@ -79,12 +81,12 @@ export const getStaticPaths = async () => {
   const paths: object[] = [];
 
   partyAcronymsData().forEach((acronym: string) => {
-    electoralCircleDropdown.forEach((electoral: DropdownOption, index: number) => {
+    electoralCircleDropdown.forEach((electoral: DropdownOption) => {
 
       if (electoral.value != "all") {
         paths.push({
           params: {
-            acronym: acronym.toLowerCase(),
+            acronym: acronymConversion(acronym, Conversion.TO_URL),
             electoralCircle: electoral.value
           }
         })
@@ -99,10 +101,12 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async (context: any) => {
+  const retriever: SeedsJsonRetriever = new Retriever();
+
   return {
     props: {
-      party: partyHeaderData(context.params.acronym),
-      candidates: partyCandidatesData(
+      party: retriever.partyHeader(context.params.acronym),
+      candidates: retriever.candidates(
         context.params.acronym,
         context.params.electoralCircle
       )

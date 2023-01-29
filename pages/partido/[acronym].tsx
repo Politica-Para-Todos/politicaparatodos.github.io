@@ -70,7 +70,7 @@ export const getStaticProps = async (context: any) => {
   const retriever: SeedsJsonRetriever = new Retriever();
   return {
     props: {
-      party: retriever.retrievePartyHomePage(context.params.acronym)
+      party: retriever.partyHomePage(context.params.acronym)
     }
   };
 }
