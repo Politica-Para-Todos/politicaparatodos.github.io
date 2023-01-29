@@ -5,7 +5,6 @@ import MetaTags from "../../../../components/global/meta-tags";
 import PartyHeader from "../../../../components/party/header";
 import PartyIntro from "../../../../components/party/intro";
 import PartyCandidatesTable from "../../../../components/party/party-candidate-table";
-import { partyAcronymsData } from "../../../../src/retriever/api";
 import { convertToLabel, DropdownOption, electoralCircleDropdown } from "../../../../src/retriever/dtos/electoral-circle-dto";
 import { Retriever, SeedsJsonRetriever } from "../../../../src/retriever/service";
 import { acronymConversion, Conversion } from "../../../../src/utils/manipuation";
@@ -78,9 +77,10 @@ const PartyCandidate = ({ party, candidates }: PartyCandidateProps) => {
 };
 
 export const getStaticPaths = async () => {
+  const retriever: SeedsJsonRetriever = new Retriever();
   const paths: object[] = [];
 
-  partyAcronymsData().forEach((acronym: string) => {
+  retriever.partyAcronyms().forEach((acronym: string) => {
     electoralCircleDropdown.forEach((electoral: DropdownOption) => {
 
       if (electoral.value != "all") {

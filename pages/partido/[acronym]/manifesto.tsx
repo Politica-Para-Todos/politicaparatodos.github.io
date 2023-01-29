@@ -5,7 +5,6 @@ import LayoutHeader from "../../../components/global/layout-header";
 import MetaTags from "../../../components/global/meta-tags";
 import PartyHeader from "../../../components/party/header";
 import ManifestoSider from "../../../components/party/manifesto/sider";
-import { partyAcronymsData } from "../../../src/retriever/api";
 import { Retriever, SeedsJsonRetriever } from "../../../src/retriever/service";
 import { acronymConversion, Conversion } from "../../../src/utils/manipuation";
 
@@ -48,7 +47,8 @@ const PartyManifesto: NextPage<PartyManifestoProps> = ({ party, manifesto }) => 
 };
 
 export const getStaticPaths = async () => {
-  const paths: object[] = partyAcronymsData().map((acronym: string) => {
+  const retriever: SeedsJsonRetriever = new Retriever();
+  const paths: object[] = retriever.partyAcronyms().map((acronym: string) => {
     return {
       params: {
         acronym: acronymConversion(acronym, Conversion.TO_URL),

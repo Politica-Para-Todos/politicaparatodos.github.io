@@ -5,7 +5,6 @@ import MetaTags from "../../components/global/meta-tags";
 import PartyCandidatesList from "../../components/party/candidate-list";
 import PartyHeader from "../../components/party/header";
 import PartyIntro from "../../components/party/intro";
-import { partyAcronymsData } from "../../src/retriever/api";
 import { PartyPage } from "../../src/retriever/dtos/party-dto";
 import { Retriever, SeedsJsonRetriever } from "../../src/retriever/service";
 import { acronymConversion, Conversion } from "../../src/utils/manipuation";
@@ -52,7 +51,8 @@ const PartyHome = ({ party }: PartyHomeProps) =>
   </Layout>
 
 export const getStaticPaths = async () => {
-  const params: object[] = partyAcronymsData().map((acronym: string) => {
+  const retriever: SeedsJsonRetriever = new Retriever();
+  const params: object[] = retriever.partyAcronyms().map((acronym: string) => {
     return {
       params: {
         acronym: acronymConversion(acronym, Conversion.TO_URL)

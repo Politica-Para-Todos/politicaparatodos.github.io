@@ -2,6 +2,7 @@ import { Avatar, Button, Col, Divider, Row } from "antd";
 import Link from "next/link";
 import { Fragment } from "react";
 import { OnlinePlatform, OnlinePlatformType, PartyPage } from "../../src/retriever/dtos/party-dto";
+import { acronymConversion, Conversion } from "../../src/utils/manipuation";
 import SocialSharing from "../global/social-sharing";
 
 interface PartyHeaderProps {
@@ -36,7 +37,7 @@ const PartyHeader = ({ party, subtitle }: PartyHeaderProps) => {
                 className="button--grey party-header__program-button"
                 key={party.name}
               >
-                <Link href={`/partido/${party.acronym.toLowerCase()}/manifesto`} rel="noopener">
+                <Link href={`/partido/${acronymConversion(party.acronym, Conversion.TO_URL)}/manifesto`} rel="noopener">
                   {`Ver Programa ${party.acronym}`}
                 </Link>
               </Button>
