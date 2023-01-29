@@ -51,3 +51,20 @@ export function sortArrayByKey(array: any[], key: string): any[] {
     return x < y ? -1 : x > y ? 1 : 0;
   });
 }
+
+// Convert party acronyms into url valid names and vice-versa
+export enum Conversion {
+  TO_URL = "URL",
+  TO_OFFICIAL_ACRONYM = "OFICIAL"
+}
+
+export function acronymConversion(partyAcronym: string, conversionType: Conversion): string {
+  switch (conversionType) {
+    case Conversion.TO_URL:
+      return partyAcronym.replace('/', '-').toLowerCase();
+    case Conversion.TO_OFFICIAL_ACRONYM:
+      return partyAcronym.replace('-', '/').toUpperCase();
+    default:
+      throw Error("Something went wrong.");
+  }
+}

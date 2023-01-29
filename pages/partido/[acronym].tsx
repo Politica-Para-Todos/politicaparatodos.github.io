@@ -5,8 +5,10 @@ import MetaTags from "../../components/global/meta-tags";
 import PartyCandidatesList from "../../components/party/candidate-list";
 import PartyHeader from "../../components/party/header";
 import PartyIntro from "../../components/party/intro";
-import { partyAcronymsData, partyPageData } from "../../src/retriever/api";
+import { partyAcronymsData } from "../../src/retriever/api";
 import { PartyPage } from "../../src/retriever/dtos/party-dto";
+import { Retriever, SeedsJsonRetriever } from "../../src/retriever/service";
+import { acronymConversion, Conversion } from "../../src/utils/manipuation";
 
 const { Paragraph } = Typography;
 
@@ -53,7 +55,7 @@ export const getStaticPaths = async () => {
   const params: object[] = partyAcronymsData().map((acronym: string) => {
     return {
       params: {
-        acronym: acronym.toLowerCase(),
+        acronym: acronymConversion(acronym, Conversion.TO_URL)
       },
     };
   });
@@ -65,45 +67,12 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async (context: any) => {
+  const retriever: SeedsJsonRetriever = new Retriever();
   return {
-    props: { party: partyPageData(context.params.acronym) }
+    props: {
+      party: retriever.retrievePartyHomePage(context.params.acronym)
+    }
   };
-};
-
-// Don't know where this was used..
-const thematics = [
-  {
-    value: 10,
-    icon: "build",
-    color: "green",
-  },
-  {
-    value: 30,
-    icon: "build",
-    color: "yellow",
-  },
-  {
-    value: 20,
-    icon: "build",
-    color: "red",
-  },
-  {
-    value: 25,
-    icon: "build",
-    color: "blue",
-  },
-  {
-    value: 15,
-    icon: "build",
-    color: "gray",
-  },
-];
-
-const analytics = {
-  words: "310K",
-  views: "310K",
-  reading: "302 min",
-  comments: "3.5K",
-};
+}
 
 export default PartyHome;
