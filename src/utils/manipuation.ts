@@ -1,4 +1,4 @@
-import { HomeParty } from "../dtos/party-dto";
+import { HomePageParty } from "../retriever/dtos/party-dto";
 
 export const slugify = (expression: string) => {
   expression = expression.replace(/^\s+|\s+$/g, "");
@@ -30,10 +30,10 @@ export const slugify = (expression: string) => {
 };
 
 // Shuffle array
-export function shuffleParties(parties: HomeParty[]): HomeParty[] {
-  const shuffledParties: HomeParty[] = [...parties];
+export function shuffleParties(parties: HomePageParty[]): HomePageParty[] {
+  const shuffledParties: HomePageParty[] = [...parties];
 
-  shuffledParties.forEach((party: HomeParty, index: number) => {
+  shuffledParties.forEach((party: HomePageParty, index: number) => {
     const random = Math.floor(Math.random() * (index + 1));
     [shuffledParties[index], shuffledParties[random]] = [
       shuffledParties[random],

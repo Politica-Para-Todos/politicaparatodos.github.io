@@ -5,8 +5,8 @@ import MetaTags from "../../../../components/global/meta-tags";
 import PartyHeader from "../../../../components/party/header";
 import PartyIntro from "../../../../components/party/intro";
 import PartyCandidatesTable from "../../../../components/party/party-candidate-table";
-import { convertToLabel, DropdownOption, electoralCircleDropdown } from "../../../../src/dtos/electoral-circle-dto";
 import { partyAcronymsData, partyCandidatesData, partyHeaderData } from "../../../../src/retriever/api";
+import { convertToLabel, DropdownOption, electoralCircleDropdown } from "../../../../src/retriever/dtos/electoral-circle-dto";
 
 const { Paragraph } = Typography;
 

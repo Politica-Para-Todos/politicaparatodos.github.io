@@ -1,16 +1,16 @@
 import { Col, Row, Select, Switch } from "antd";
 import { useState } from "react";
-import { electoralCircleDropdown } from "../../src/dtos/electoral-circle-dto";
-import { HomeParty } from "../../src/dtos/party-dto";
+import { electoralCircleDropdown } from "../../src/retriever/dtos/electoral-circle-dto";
+import { HomePageParty } from "../../src/retriever/dtos/party-dto";
 import { shuffleParties } from "../../src/utils/manipuation";
 import AvatarList from "./avatar-list";
 
 interface HomePartiesProps {
-  parties: HomeParty[];
+  parties: HomePageParty[];
 }
 
 const HomeParties = ({ parties }: HomePartiesProps) => {
-  let sortedParties: HomeParty[];
+  let sortedParties: HomePageParty[];
 
   const [state, setState] = useState({
     alphabeticalOrder: false,

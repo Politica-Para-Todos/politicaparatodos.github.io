@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { HomeParty } from "../../src/dtos/party-dto";
+import { HomePageParty } from "../../src/retriever/dtos/party-dto";
 import RoundAvatar from "./round-avatar";
 
 interface AvatarListProp {
   theme: string;
-  parties: HomeParty[];
+  parties: HomePageParty[];
 }
 
 const AvatarList = ({ theme, parties }: AvatarListProp) => {

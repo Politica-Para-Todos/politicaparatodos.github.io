@@ -1,7 +1,7 @@
 import { Avatar, Button, Col, Divider, Row } from "antd";
 import Link from "next/link";
 import { Fragment } from "react";
-import { OnlinePlatform, OnlinePlatformType, PartyPage } from "../../src/dtos/party-dto";
+import { OnlinePlatform, OnlinePlatformType, PartyPage } from "../../src/retriever/dtos/party-dto";
 import SocialSharing from "../global/social-sharing";
 
 interface PartyHeaderProps {

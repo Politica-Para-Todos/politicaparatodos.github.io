@@ -5,8 +5,8 @@ import MetaTags from "../../components/global/meta-tags";
 import PartyCandidatesList from "../../components/party/candidate-list";
 import PartyHeader from "../../components/party/header";
 import PartyIntro from "../../components/party/intro";
-import { PartyPage } from "../../src/dtos/party-dto";
 import { partyAcronymsData, partyPageData } from "../../src/retriever/api";
+import { PartyPage } from "../../src/retriever/dtos/party-dto";
 
 const { Paragraph } = Typography;
 

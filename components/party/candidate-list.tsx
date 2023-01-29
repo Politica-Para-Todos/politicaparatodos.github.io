@@ -1,8 +1,8 @@
 import { Avatar, Col, Row, Select, Typography } from "antd";
 import Link from "next/link";
 import { useState } from "react";
-import { convertToLabel, convertToValue, DropdownOption, electoralCircleDropdown, ElectoralCircleDropdownValue } from "../../src/dtos/electoral-circle-dto";
-import { PartyPageLeadCandidate } from "../../src/dtos/party-dto";
+import { convertToLabel, convertToValue, DropdownOption, electoralCircleDropdown, ElectoralCircleDropdownValue } from "../../src/retriever/dtos/electoral-circle-dto";
+import { PartyPageLeadCandidate } from "../../src/retriever/dtos/party-dto";
 
 const { Title, Paragraph } = Typography;
 const { Option } = Select;

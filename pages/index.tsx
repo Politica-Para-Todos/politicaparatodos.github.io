@@ -7,14 +7,14 @@ import HomeCountdown from "../components/home/countdown";
 import HomeMedia from "../components/home/media";
 import { HomeMission, HomeMissionInfographic } from "../components/home/mission";
 import HomeParties from "../components/home/parties";
-import { Party } from "../src/dtos/party-dto";
-import { homePageData } from "../src/retriever/api";
+import { HomePageParty } from "../src/retriever/dtos/party-dto";
+import { Retriever, SeedsJsonRetriever } from "../src/retriever/service";
 
-interface HomePageParty {
-  homepageParties: Party[];
+interface HomePageProps {
+  homePageParties: HomePageParty[];
 }
 
-const Home: NextPage<HomePageParty> = ({ homepageParties }) =>
+const Home: NextPage<HomePageProps> = ({ homePageParties }) =>
   <Layout>
     <MetaTags
       pageTitle="Política Para Todos"
@@ -29,16 +29,19 @@ const Home: NextPage<HomePageParty> = ({ homepageParties }) =>
       <HomeCountdown />
       <HomeMission />
       <HomeMedia />
-      <HomeParties parties={homepageParties} />
+      <HomeParties parties={homePageParties} />
       <div className="getsocial gs-inline-group"></div>
     </Layout.Content>
     <LayoutFooter />
   </Layout>
 
 export const getStaticProps = async () => {
+  const retriever: SeedsJsonRetriever = new Retriever();
+
   return {
     props: {
-      homepageParties: homePageData(),
+      // homepageParties: homePageData()
+      homePageParties: retriever.retrieveHomePageParties()
     },
   };
 };
