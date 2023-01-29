@@ -1,17 +1,3 @@
-import { Candidate } from "./candidate-dto";
-import { Manifesto } from "./manifesto-dto";
-
-export interface Party {
-  name: string;
-  acronym: string;
-  description: string;
-  descriptionSource: string;
-  logo: string;
-  platforms: OnlinePlatform[];
-  manifesto: Manifesto | null;
-  candidates: Candidate[];
-}
-
 export interface OnlinePlatform {
   type: OnlinePlatformType;
   address: string;
@@ -27,16 +13,20 @@ export enum OnlinePlatformType {
   GITHUB = "Github",
 }
 
-export interface HomeParty {
-  name: string;
-  acronym: string;
-  logo: string;
-}
-
 export type HomePageParty = {
   name: string,
   acronym: string,
   logoFileName: string
+}
+
+export interface PartyHeader {
+  name: string,
+  acronym: string,
+  logoFileName: string,
+  description: string,
+  descriptionSource: string,
+  hasManifesto: boolean,
+  onlinePlatforms: OnlinePlatform[]
 }
 
 export type PartyPage = {
