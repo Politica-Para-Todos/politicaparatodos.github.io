@@ -12,9 +12,6 @@ import { acronymConversion, Conversion } from "../../../../src/utils/manipuation
 const { Paragraph } = Typography;
 
 interface PartyCandidateProps {
-  partyAcronym: string;
-  electoralCircle: string;
-
   party: any,
   candidates: any
 }
