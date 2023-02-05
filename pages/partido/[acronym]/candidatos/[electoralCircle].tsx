@@ -17,17 +17,22 @@ interface PartyCandidateProps {
 }
 
 const PartyCandidate = ({ party, candidates }: PartyCandidateProps) => {
-  const circleAsLabel2 = convertToLabel(candidates.electoralCircle);
+
+  if (!candidates) {
+    return null;
+  }
+
+  const circleAsLabel = convertToLabel(candidates.electoralCircle);
   const { lead } = candidates;
 
   return (
     <Layout>
       {party.name && (
         <MetaTags
-          pageTitle={`${party.name} - Círculo eleitoral de ${circleAsLabel2}`}
-          pageDescription={`Informações sobre o ${party.name} no círculo eleitoral de ${circleAsLabel2}`}
-          socialTitle={`${party.name} - Círculo eleitoral de ${circleAsLabel2}`}
-          socialDescription={`Informações sobre o ${party.name} no círculo eleitoral de ${circleAsLabel2}`}
+          pageTitle={`${party.name} - Círculo eleitoral de ${circleAsLabel}`}
+          pageDescription={`Informações sobre o ${party.name} no círculo eleitoral de ${circleAsLabel}`}
+          socialTitle={`${party.name} - Círculo eleitoral de ${circleAsLabel}`}
+          socialDescription={`Informações sobre o ${party.name} no círculo eleitoral de ${circleAsLabel}`}
           socialImage={`/party-logos/${party.photo}`}
         />
       )}
@@ -35,7 +40,7 @@ const PartyCandidate = ({ party, candidates }: PartyCandidateProps) => {
       <Layout.Content>
         <PartyHeader
           party={party}
-          subtitle={`${party.acronym} - Círculo eleitoral de ${circleAsLabel2}`}
+          subtitle={`${party.acronym} - Círculo eleitoral de ${circleAsLabel}`}
         />
         <PartyIntro spokesperson={lead} title={lead.name}>
           <Paragraph className="party-desc">
