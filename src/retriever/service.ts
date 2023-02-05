@@ -10,8 +10,8 @@ export interface SeedsJsonRetriever {
   homePageParties(): HomePageParty[];
   partyHeader(acronym: string): PartyHeader;
   partyHomePage(urlAcronym: string): PartyPage;
-  candidates(urlAcronym: string, electoralCircle: string): CandidatePage;
-  partyManifestoPage(urlAcronym: string): any;
+  candidates(urlAcronym: string, electoralCircle: string): CandidatePage | null;
+  partyManifestoPage(urlAcronym: string): any | null;
 }
 
 export class Retriever implements SeedsJsonRetriever {
@@ -74,12 +74,17 @@ export class Retriever implements SeedsJsonRetriever {
     }
   }
 
-  candidates(urlAcronym: string, electoralCircle: string): CandidatePage {
-    const { parties } = this.JSON_FILE;
+  candidates(urlAcronym: string, electoralCircle: string): CandidatePage | null {
     const partyAcronym = this.convertToPartyAcronym(urlAcronym);
     const partyElectoralCircle = this.convertElectoralCircle(electoralCircle);
+    const { parties } = this.JSON_FILE;
     const party = parties[partyAcronym];
     const { candidates } = party;
+
+    if (candidates[partyElectoralCircle].main.length === 0) {
+      return null;
+    }
+
     const partyCandidates = candidates[partyElectoralCircle];
     const leadCandidate = partyCandidates.main[0];
 
@@ -97,10 +102,10 @@ export class Retriever implements SeedsJsonRetriever {
     }
   }
 
-  partyManifestoPage(urlAcronym: string): any {
+  partyManifestoPage(urlAcronym: string): any | null {
     const { manifestos } = this.JSON_FILE;
     const partyAcronym = this.convertToPartyAcronym(urlAcronym);
-    return manifestos[partyAcronym]
+    return manifestos[partyAcronym] != undefined ? manifestos[partyAcronym] : null
   }
 
   private convertToPartyAcronym(acronym: string) {
