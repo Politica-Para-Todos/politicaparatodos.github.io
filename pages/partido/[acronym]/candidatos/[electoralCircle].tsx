@@ -5,38 +5,35 @@ import MetaTags from "../../../../components/global/meta-tags";
 import PartyHeader from "../../../../components/party/header";
 import PartyIntro from "../../../../components/party/intro";
 import PartyCandidatesTable from "../../../../components/party/party-candidate-table";
-import { Candidate } from "../../../../src/dtos/candidate-dto";
-import { convertToLabel } from "../../../../src/dtos/electoral-circle-dto";
-import { Party } from "../../../../src/dtos/party-dto";
-import {
-  getPartyCandidates, retrieveParty
-} from "../../../../src/retriever/api";
+import { convertToLabel, DropdownOption, electoralCircleDropdown } from "../../../../src/retriever/dtos/electoral-circle-dto";
+import { Retriever, SeedsJsonRetriever } from "../../../../src/retriever/service";
+import { acronymConversion, Conversion } from "../../../../src/utils/manipuation";
 
 const { Paragraph } = Typography;
 
 interface PartyCandidateProps {
-  acronym: string;
-  electoralCircle: string;
+  party: any,
+  candidates: any
 }
 
-const PartyCandidate = ({ acronym, electoralCircle }: PartyCandidateProps) => {
-  const party = retrieveParty(acronym) as Party;
-  const candidates = getPartyCandidates(acronym, electoralCircle);
+const PartyCandidate = ({ party, candidates }: PartyCandidateProps) => {
 
-  const circleAsLabel = convertToLabel(electoralCircle!.toString());
-  const leadCandidate = candidates.filter(
-    (candidate: Candidate) => candidate.isLeadCandidate
-  )[0];
+  if (!candidates) {
+    return null;
+  }
+
+  const circleAsLabel = convertToLabel(candidates.electoralCircle);
+  const { lead } = candidates;
 
   return (
     <Layout>
       {party.name && (
         <MetaTags
-          pageTitle={`${party.name} - Círculo eleitoral de ${leadCandidate.electoralCircle}`}
-          pageDescription={`Informações sobre o ${party.name} no círculo eleitoral de ${leadCandidate.electoralCircle}`}
-          socialTitle={`${party.name} - Círculo eleitoral de ${leadCandidate.electoralCircle}`}
-          socialDescription={`Informações sobre o ${party.name} no círculo eleitoral de ${leadCandidate.electoralCircle}`}
-          socialImage={`/party-logos/${party.logo}`}
+          pageTitle={`${party.name} - Círculo eleitoral de ${circleAsLabel}`}
+          pageDescription={`Informações sobre o ${party.name} no círculo eleitoral de ${circleAsLabel}`}
+          socialTitle={`${party.name} - Círculo eleitoral de ${circleAsLabel}`}
+          socialDescription={`Informações sobre o ${party.name} no círculo eleitoral de ${circleAsLabel}`}
+          socialImage={`/party-logos/${party.photo}`}
         />
       )}
       <LayoutHeader />
@@ -45,15 +42,15 @@ const PartyCandidate = ({ acronym, electoralCircle }: PartyCandidateProps) => {
           party={party}
           subtitle={`${party.acronym} - Círculo eleitoral de ${circleAsLabel}`}
         />
-        <PartyIntro spokesperson={leadCandidate} title={leadCandidate.name}>
+        <PartyIntro spokesperson={lead} title={lead.name}>
           <Paragraph className="party-desc">
-            {leadCandidate.biography}
+            {lead.biography}
           </Paragraph>
-          {leadCandidate.biographySource ? (
+          {lead.biographySource ? (
             <Paragraph>
               Biografia:{" "}
               <a
-                href={leadCandidate.biographySource}
+                href={lead.biographySource}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -61,11 +58,11 @@ const PartyCandidate = ({ acronym, electoralCircle }: PartyCandidateProps) => {
               </a>
             </Paragraph>
           ) : null}
-          {leadCandidate.parliamentLink ? (
+          {lead.parliamentLink ? (
             <Paragraph>
               Página do Parlamento:{" "}
               <a
-                href={leadCandidate.parliamentLink}
+                href={lead.parliamentLink}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -81,11 +78,42 @@ const PartyCandidate = ({ acronym, electoralCircle }: PartyCandidateProps) => {
   );
 };
 
-PartyCandidate.getInitialProps = (appContext: any) => {
+export const getStaticPaths = async () => {
+  const retriever: SeedsJsonRetriever = new Retriever();
+  const paths: object[] = [];
+
+  retriever.partyAcronyms().forEach((acronym: string) => {
+    electoralCircleDropdown.forEach((electoral: DropdownOption) => {
+
+      if (electoral.value != "all") {
+        paths.push({
+          params: {
+            acronym: acronymConversion(acronym, Conversion.TO_URL),
+            electoralCircle: electoral.value
+          }
+        })
+      }
+    })
+  });
+
   return {
-    acronym: appContext.query.acronym,
-    electoralCircle: appContext.query.electoralCircle,
-  };
+    paths,
+    fallback: false
+  }
 };
+
+export const getStaticProps = async (context: any) => {
+  const retriever: SeedsJsonRetriever = new Retriever();
+
+  return {
+    props: {
+      party: retriever.partyHeader(context.params.acronym),
+      candidates: retriever.candidates(
+        context.params.acronym,
+        context.params.electoralCircle
+      )
+    }
+  }
+}
 
 export default PartyCandidate;

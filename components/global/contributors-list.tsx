@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { contributors, shuffleList } from "../../src/utils/contributors";
+import { shuffleList } from "../../src/utils/contributors";
 
 const ContributorsList = () => {
   const [hasMounted, setHasMounted] = useState(false);
@@ -12,7 +12,7 @@ const ContributorsList = () => {
     return null;
   }
 
-  return <>{shuffleList(contributors).join(", ")}.</>;
+  return <>{shuffleList().join(", ")}.</>;
 };
 
 export default ContributorsList;

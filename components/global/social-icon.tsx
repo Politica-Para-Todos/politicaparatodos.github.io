@@ -1,4 +1,4 @@
-import { OnlinePlatformType } from "../../src/dtos/party-dto";
+import { OnlinePlatformType } from "../../src/retriever/dtos/party-dto";
 import { EmailSvgIcon, FacebookSvgIcon, GithubSvgIcon, InstagramSvgIcon, MediumSvgIcon, TwitterSvgIcon } from "./icons";
 
 interface SocialIconProps {

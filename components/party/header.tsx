@@ -1,17 +1,17 @@
 import { Avatar, Button, Col, Divider, Row } from "antd";
 import Link from "next/link";
 import { Fragment } from "react";
-import { OnlinePlatform, OnlinePlatformType, Party } from "../../src/dtos/party-dto";
+import { OnlinePlatform, OnlinePlatformType, PartyPage } from "../../src/retriever/dtos/party-dto";
+import { acronymConversion, Conversion } from "../../src/utils/manipuation";
 import SocialSharing from "../global/social-sharing";
 
 interface PartyHeaderProps {
-  party: Party;
+  party: PartyPage;
   subtitle: string;
 }
 
 const PartyHeader = ({ party, subtitle }: PartyHeaderProps) => {
-  const hasManifesto = party.manifesto ?? false;
-  const website = party.platforms.filter(
+  const website = party.onlinePlatforms.filter(
     (op: OnlinePlatform) => op.type == OnlinePlatformType.WEBSITE
   )[0];
 
@@ -30,20 +30,20 @@ const PartyHeader = ({ party, subtitle }: PartyHeaderProps) => {
       </Row>
       <Row typeof="flex" justify="center">
         <Col>
-          <Avatar size={200} src={`/party-logos/${party.logo}`} icon="user" />
+          <Avatar size={200} src={`/party-logos/${party.logoFileName}`} icon="user" />
           <div className="party-header__program-cta">
-            {hasManifesto && (
+            {party.hasManifesto && (
               <Button
                 className="button--grey party-header__program-button"
                 key={party.name}
               >
-                <Link href={`/partido/${party.acronym.toLowerCase()}/manifesto`} rel="noopener">
+                <Link href={`/partido/${acronymConversion(party.acronym, Conversion.TO_URL)}/manifesto`} rel="noopener">
                   {`Ver Programa ${party.acronym}`}
                 </Link>
               </Button>
             )}
           </div>
-          {!hasManifesto && (
+          {!party.hasManifesto && (
             <div className="party-header__program-cta">
               <p>
                 Este partido ainda não apresentou programa eleitoral. <br />
@@ -63,7 +63,7 @@ const PartyHeader = ({ party, subtitle }: PartyHeaderProps) => {
         <a href={website.address} rel="noopener noreferrer" target="_blank">
           {website.address}
         </a>
-        <SocialSharing onlinePlatforms={party.platforms} theme={"#c4c4c4"} />
+        <SocialSharing onlinePlatforms={party.onlinePlatforms} theme={"#c4c4c4"} />
       </Row>
     </section>
   );

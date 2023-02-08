@@ -5,14 +5,14 @@ import MetaTags from "../../components/global/meta-tags";
 import PartyCandidatesList from "../../components/party/candidate-list";
 import PartyHeader from "../../components/party/header";
 import PartyIntro from "../../components/party/intro";
-import { electoralCircleDropdown } from "../../src/dtos/electoral-circle-dto";
-import { Party } from "../../src/dtos/party-dto";
-import { retrieveParty, retrievePartyAcronyms } from "../../src/retriever/api";
+import { PartyPage } from "../../src/retriever/dtos/party-dto";
+import { Retriever, SeedsJsonRetriever } from "../../src/retriever/service";
+import { acronymConversion, Conversion } from "../../src/utils/manipuation";
 
 const { Paragraph } = Typography;
 
 interface PartyHomeProps {
-  party: Party;
+  party: PartyPage;
 }
 
 const PartyHome = ({ party }: PartyHomeProps) =>
@@ -23,7 +23,7 @@ const PartyHome = ({ party }: PartyHomeProps) =>
         pageDescription={`Nesta página encontrarás o programa e os candidatos, por círculo eleitoral, do ${party.name}`}
         socialTitle={`Política Para Todos - Conhece o programa e os candidatos do ${party.acronym}`}
         socialDescription={`Nesta página encontrarás o programa e os candidatos, por círculo eleitoral, do ${party.name}`}
-        socialImage={`/party-logos/${party.logo}`}
+        socialImage={`/party-logos/${party.logoFileName}`}
       />
     )}
     <LayoutHeader />
@@ -43,19 +43,19 @@ const PartyHome = ({ party }: PartyHomeProps) =>
           ))}
       </PartyIntro>
       <PartyCandidatesList
-        candidates={party.candidates}
-        circles={electoralCircleDropdown()}
-        acronym={party.acronym}
+        candidates={party.leadCandidates}
+        partyAcronym={party.acronym}
       />
     </Layout.Content>
     <LayoutFooter />
   </Layout>
 
 export const getStaticPaths = async () => {
-  const params: object[] = retrievePartyAcronyms().map((acro: string) => {
+  const retriever: SeedsJsonRetriever = new Retriever();
+  const params: object[] = retriever.partyAcronyms().map((acronym: string) => {
     return {
       params: {
-        acronym: acro.toLowerCase(),
+        acronym: acronymConversion(acronym, Conversion.TO_URL)
       },
     };
   });
@@ -67,47 +67,12 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async (context: any) => {
-  const party = retrieveParty(context.params.acronym);
-
+  const retriever: SeedsJsonRetriever = new Retriever();
   return {
-    props: { party },
+    props: {
+      party: retriever.partyHomePage(context.params.acronym)
+    }
   };
-};
-
-// Don't know where this was used..
-const thematics = [
-  {
-    value: 10,
-    icon: "build",
-    color: "green",
-  },
-  {
-    value: 30,
-    icon: "build",
-    color: "yellow",
-  },
-  {
-    value: 20,
-    icon: "build",
-    color: "red",
-  },
-  {
-    value: 25,
-    icon: "build",
-    color: "blue",
-  },
-  {
-    value: 15,
-    icon: "build",
-    color: "gray",
-  },
-];
-
-const analytics = {
-  words: "310K",
-  views: "310K",
-  reading: "302 min",
-  comments: "3.5K",
-};
+}
 
 export default PartyHome;

@@ -1,94 +1,183 @@
 import seeds from "../../resources/seeds.json";
-import { Manifesto } from "../dtos/manifesto-dto";
-import { OnlinePlatformType, Party } from "../dtos/party-dto";
-import { retrieveData, retrievePartyManifesto } from "./utils";
+import { ELECTORAL_CIRCLES } from "../utils/constants";
+import { acronymConversion, Conversion } from "../utils/manipuation";
+import { CandidatePage } from "./dtos/candidate-dto";
+import { electoralCircleDropdown } from "./dtos/electoral-circle-dto";
+import { HomePageParty, OnlinePlatform, OnlinePlatformType, PartyHeader, PartyPage, PartyPageLeadCandidate } from "./dtos/party-dto";
 
-const file = seeds as any;
-const { parties, manifestos } = file;
-
-const partyAcronyms = Object.keys(parties).sort();
-
-const electoralCircles = () => {
-  const randomParty = partyAcronyms[1] // randomize a party with guarantees of having candidates in all electoral circles 
-  return Object.keys(parties[randomParty].candidates);
-};
-
-const convertedParties: Party[] = retrieveData(parties, partyAcronyms, electoralCircles());
-
-export const homePageParties = () =>
-  convertedParties.map(party => {
-    return {
-      name: party.name,
-      acronym: party.acronym,
-      logo: party.logo,
-      website: websiteAddress(party),
-    };
-  });
-
-export const partyHomePage = (acronym: string) => {
-  const party = getParty(acronym);
-
-  return {
-    name: party.name,
-    acronym: party.acronym,
-    logo: party.logo,
-    description: party.description,
-    descriptionSource: party.descriptionSource,
-    platforms: party.platforms,
-    candidates: leadCandidates(party),
-    manifesto: getManifesto(acronym)
-  };
-};
-
-export const electoralCirclePage = (
-  acronym: string,
-  electoralCircle: string
-) => {
-  const party = getParty(acronym);
-
-  return party.candidates.filter(candidate =>
-    candidate.electoralCircle.toString().toLowerCase() == electoralCircle
-  );
-};
-
-export const getAllData = () =>
-  retrieveData(seeds, partyAcronyms, electoralCircles());
-
-export const getHomepageParties = () =>
-  convertedParties.map(party => {
-    return {
-      name: party.name,
-      acronym: party.acronym,
-      logo: party.logo,
-    };
-  });
-
-export const getPartyAcronyms = () => partyAcronyms;
-
-export const getManifesto = (acronym: string): Manifesto | null => retrievePartyManifesto(manifestos, acronym.toUpperCase())
-
-// Aux functions
-const getParty = (acronym: string) => {
-  const party = convertedParties.find(party => party.acronym.toLowerCase() === acronym)
-
-  if (party === undefined) {
-    throw Error("Something's wrong.");
-  }
-  return party;
+export interface SeedsJsonRetriever {
+  partyAcronyms(): string[];
+  homePageParties(): HomePageParty[];
+  partyHeader(acronym: string): PartyHeader;
+  partyHomePage(urlAcronym: string): PartyPage;
+  candidates(urlAcronym: string, electoralCircle: string): CandidatePage | null;
+  partyManifestoPage(urlAcronym: string): any | null;
 }
 
-const websiteAddress = (party: Party): string =>
-  party.platforms.find(platform =>
-    platform.type === OnlinePlatformType.WEBSITE
-  )?.address ?? ""
+export class Retriever implements SeedsJsonRetriever {
+  private readonly JSON_FILE = seeds as any;
 
-const leadCandidates = (party: Party) =>
-  party.candidates.filter(candidate => candidate.isLeadCandidate)
-    .map(leadCandidate => {
-      return {
+  partyAcronyms() {
+    const { parties } = this.JSON_FILE;
+    return Object.keys(parties).sort();
+  }
+
+  homePageParties(): HomePageParty[] {
+    const { parties } = this.JSON_FILE;
+    const homePageParties: HomePageParty[] = [];
+    const totalParties = this.partyAcronyms().length;
+
+    for (let index = 0; index < totalParties; index++) {
+      const currentPartyAcronym = this.partyAcronyms()[index];
+      const currentParty = parties[currentPartyAcronym];
+
+      homePageParties.push({
+        name: currentParty.name,
+        acronym: currentPartyAcronym,
+        logoFileName: currentParty.logo
+      })
+    }
+    return homePageParties;
+  }
+
+  partyHeader(urlAcronym: string): PartyHeader {
+    const { parties, manifestos } = this.JSON_FILE;
+    const partyAcronym = this.convertToPartyAcronym(urlAcronym);
+    const party = parties[partyAcronym];
+
+    return {
+      name: party.name,
+      acronym: partyAcronym,
+      logoFileName: party.logo,
+      description: party.description,
+      descriptionSource: party.description_source,
+      hasManifesto: manifestos[partyAcronym] === undefined ? false : true,
+      onlinePlatforms: this.getOnlinePlatforms(party)
+    }
+  }
+
+  partyHomePage(urlAcronym: string): PartyPage {
+    const { parties, manifestos } = this.JSON_FILE;
+    const partyAcronym = this.convertToPartyAcronym(urlAcronym);
+    const party = parties[partyAcronym];
+    const { candidates } = party;
+
+    return {
+      name: party.name,
+      acronym: partyAcronym,
+      logoFileName: party.logo,
+      description: party.description,
+      descriptionSource: party.description_source,
+      hasManifesto: manifestos[partyAcronym] !== undefined ? true : false,
+      onlinePlatforms: this.getOnlinePlatforms(party),
+      leadCandidates: this.getLeadCandidates(candidates)
+    }
+  }
+
+  candidates(urlAcronym: string, electoralCircle: string): CandidatePage | null {
+    const partyAcronym = this.convertToPartyAcronym(urlAcronym);
+    const partyElectoralCircle = this.convertElectoralCircle(electoralCircle);
+    const { parties } = this.JSON_FILE;
+    const party = parties[partyAcronym];
+    const { candidates } = party;
+
+    if (candidates[partyElectoralCircle].main.length === 0) {
+      return null;
+    }
+
+    const partyCandidates = candidates[partyElectoralCircle];
+    const leadCandidate = partyCandidates.main[0];
+
+    return {
+      electoralCircle: electoralCircle,
+      lead: {
         name: leadCandidate.name,
-        photo: leadCandidate.photo,
-        electoralCircle: leadCandidate.electoralCircle,
+        profilePhotoFileName: leadCandidate.photo,
         biography: leadCandidate.biography,
-      };
+        biographySource: leadCandidate.biography_source,
+        parliamentLink: leadCandidate.link_parlamento
+      },
+      main: partyCandidates.main.length > 0 ? this.getMainCandidates(partyCandidates) : null,
+      secondary: partyCandidates.secundary.length > 0 ? this.getSecundaryCandidates(partyCandidates) : null
+    }
+  }
+
+  partyManifestoPage(urlAcronym: string): any | null {
+    const { manifestos } = this.JSON_FILE;
+    const partyAcronym = this.convertToPartyAcronym(urlAcronym);
+    return manifestos[partyAcronym] != undefined ? manifestos[partyAcronym] : null
+  }
+
+  private convertToPartyAcronym(acronym: string) {
+    if (acronym === 'ppd-psd' || acronym === 'ppd-psd.cds-pp' || acronym === 'pctp-mrpp' || acronym === 'ppd-psd.cds-pp.ppm') {
+      return acronymConversion(acronym, Conversion.TO_OFFICIAL_ACRONYM);
+    }
+    return acronym.toUpperCase();
+  }
+
+  private getMainCandidates(candidates: any) {
+    return candidates.main.map((candidate: any) => {
+      return {
+        name: candidate.name,
+        position: candidate.position
+      }
     });
+  }
+
+  private getSecundaryCandidates(candidates: any) {
+    return candidates.secundary.map((candidate: any) => {
+      return {
+        name: candidate.name,
+        position: candidate.position
+      }
+    });
+  }
+
+  private getLeadCandidates(candidates: any): PartyPageLeadCandidate[] {
+    const leadCandidates: PartyPageLeadCandidate[] = [];
+    const totalElectoralCircles = ELECTORAL_CIRCLES.length;
+
+    for (let i = 0; i < totalElectoralCircles; i++) {
+      const electoralCircle = ELECTORAL_CIRCLES[i];
+      const leadCandidate = candidates[electoralCircle].main[0];
+
+      if (leadCandidate) {
+        leadCandidates.push({
+          name: leadCandidate.name,
+          profileFileName: leadCandidate.photo,
+          electoralCircle: ELECTORAL_CIRCLES[i]
+        });
+      }
+    }
+    return leadCandidates;
+  }
+
+  private getOnlinePlatforms(party: any): OnlinePlatform[] {
+    return [
+      {
+        type: OnlinePlatformType.EMAIL,
+        address: party.email
+      },
+      {
+        type: OnlinePlatformType.WEBSITE,
+        address: party.website
+      },
+      {
+        type: OnlinePlatformType.FACEBOOK,
+        address: party.facebook
+      },
+      {
+        type: OnlinePlatformType.INSTAGRAM,
+        address: party.instagram
+      },
+      {
+        type: OnlinePlatformType.TWITTER,
+        address: party.twitter
+      }
+    ]
+  }
+
+  private convertElectoralCircle(electoralCircle: string) {
+    return electoralCircleDropdown.filter(option => electoralCircle == option.value)[0].label;
+  }
+}

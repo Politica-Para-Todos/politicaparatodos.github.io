@@ -1,5 +1,5 @@
+import { OnlinePlatform, OnlinePlatformType } from "../retriever/dtos/party-dto";
 import { EMAIL_PPT, FACEBOOK_PPT, GITHUB_PPT, INSTAGRAM_PPT, MEDIUM_PPT, TWITTER_PPT } from "./constants";
-import { OnlinePlatform, OnlinePlatformType } from "../dtos/party-dto";
 
 export const socialMediaOptions: OnlinePlatform[] = [
   {

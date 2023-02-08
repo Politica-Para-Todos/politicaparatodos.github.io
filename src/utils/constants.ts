@@ -1,4 +1,4 @@
-// URL
+// urls
 export const PORTAL_ELEITOR_URL = "https://www.portaldoeleitor.pt/Default.aspx";
 export const LOOMIO_PPT_URL = "https://www.loomio.org/g/ZqT2uPv6/politica-para-todos"
 export const PPT_WEBSITE = "https://politicaparatodos.pt/"
@@ -12,5 +12,92 @@ export const YOUTUBE_VIDEO_EP2 = "https://www.youtube.com/watch?v=2nBGppKe1z4"
 export const YOUTUBE_VIDEO_EP3 = "https://www.youtube.com/watch?v=OERxKenLIo8"
 export const YOUTUBE_VIDEO_EP4 = "https://www.youtube.com/watch?v=v-Uj7kwfG5o"
 
-// Email
+// email
 export const EMAIL_PPT = "contacto@politicaparatodos.pt"
+
+// contributors
+export const CONTRIBUTORS: string[] = [
+  "Nuno Carneiro",
+  "Rui Gonçalves",
+  "Hugo Barroca",
+  "Inês Rosete",
+  "Ana Neves",
+  "Tiago Sousa",
+  "Vasco Patarata",
+  "Renato Almeida",
+  "Miguel Spranger",
+  "Paulo Fonseca",
+  "Luís Silva",
+  "Nuno Cruz",
+  "João Gonçalves",
+  "Leonid Kholkine",
+  "João Moleiro",
+  "Francisco Marques",
+  "Luís Neves",
+  "Pedro Coelho",
+  "João Romão",
+  "Jorge Saco",
+  "Joana Flores",
+  "Francisco Frutuoso",
+  "Fábio Cláudio",
+  "Luis Cunha",
+  "Marta Costa",
+  "Vanessa Vilela",
+  "Renata Henriques",
+  "Domingos Ferreira",
+  "Fábio Cláudio",
+  "Diogo Correia",
+  "Tiago Paim",
+  "Catarina Tomé",
+];
+
+// electoral circles
+export enum ElectoralCircle {
+  ACORES = "Açores",
+  AVEIRO = "Aveiro",
+  BEJA = "Beja",
+  BRAGA = "Braga",
+  BRAGANCA = "Bragança",
+  CASTELO_BRANCO = "Castelo Branco",
+  COIMBRA = "Coimbra",
+  EVORA = "Évora",
+  EUROPA = "Europa",
+  FARO = "Faro",
+  FORA_DA_EUROPA = "Fora da Europa",
+  GUARDA = "Guarda",
+  LEIRIA = "Leiria",
+  LISBOA = "Lisboa",
+  MADEIRA = "Madeira",
+  PORTALEGRE = "Portalegre",
+  PORTO = "Porto",
+  SANATREM = "Santarém",
+  SETUBAL = "Setúbal",
+  VIANA_DO_CASTELO = "Viana do Castelo",
+  VILA_REAL = "Vila Real",
+  VISEU = "Viseu"
+}
+
+export const ELECTORAL_CIRCLES: ElectoralCircle[] = [
+  ElectoralCircle.ACORES,
+  ElectoralCircle.AVEIRO,
+  ElectoralCircle.BEJA,
+  ElectoralCircle.BRAGA,
+  ElectoralCircle.BRAGANCA,
+  ElectoralCircle.CASTELO_BRANCO,
+  ElectoralCircle.COIMBRA,
+  ElectoralCircle.EVORA,
+  ElectoralCircle.EUROPA,
+  ElectoralCircle.FARO,
+  ElectoralCircle.FORA_DA_EUROPA,
+  ElectoralCircle.GUARDA,
+  ElectoralCircle.LEIRIA,
+  ElectoralCircle.LISBOA,
+  ElectoralCircle.MADEIRA,
+  ElectoralCircle.PORTALEGRE,
+  ElectoralCircle.PORTO,
+  ElectoralCircle.SANATREM,
+  ElectoralCircle.SETUBAL,
+  ElectoralCircle.VIANA_DO_CASTELO,
+  ElectoralCircle.VILA_REAL,
+  ElectoralCircle.VISEU
+]

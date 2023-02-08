@@ -5,19 +5,20 @@ import LayoutHeader from "../../../components/global/layout-header";
 import MetaTags from "../../../components/global/meta-tags";
 import PartyHeader from "../../../components/party/header";
 import ManifestoSider from "../../../components/party/manifesto/sider";
-import { Party } from "../../../src/dtos/party-dto";
-import { retrieveParty, retrievePartyAcronyms } from "../../../src/retriever/api";
-
+import { Retriever, SeedsJsonRetriever } from "../../../src/retriever/service";
+import { acronymConversion, Conversion } from "../../../src/utils/manipuation";
 
 interface PartyManifestoProps {
-  party: Party
+  party: any,
+  manifesto: any
 }
 
-const PartyManifesto: NextPage<PartyManifestoProps> = ({ party }) => {
-  if (!party.manifesto) {
+const PartyManifesto: NextPage<PartyManifestoProps> = ({ party, manifesto }) => {
+  if (!manifesto) {
     return null;
   }
-  const { title, sections } = party.manifesto;
+
+  const { title, sections } = manifesto;
 
   return (
     <Layout className="party-manifesto">
@@ -46,24 +47,28 @@ const PartyManifesto: NextPage<PartyManifestoProps> = ({ party }) => {
 };
 
 export const getStaticPaths = async () => {
-  const params: object[] = retrievePartyAcronyms().map((acro: string) => {
+  const retriever: SeedsJsonRetriever = new Retriever();
+  const paths: object[] = retriever.partyAcronyms().map((acronym: string) => {
     return {
       params: {
-        acronym: acro.toLowerCase(),
+        acronym: acronymConversion(acronym, Conversion.TO_URL),
       },
     };
   });
 
   return {
-    paths: params,
+    paths,
     fallback: false,
   };
 };
 
 export const getStaticProps = async (context: any) => {
+  const retriever: SeedsJsonRetriever = new Retriever();
+
   return {
     props: {
-      party: retrieveParty(context.params.acronym)
+      party: retriever.partyHeader(context.params.acronym),
+      manifesto: retriever.partyManifestoPage(context.params.acronym)
     },
   };
 };

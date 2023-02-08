@@ -1,4 +1,4 @@
-import { HomeParty } from "../dtos/party-dto";
+import { HomePageParty } from "../retriever/dtos/party-dto";
 
 export const slugify = (expression: string) => {
   expression = expression.replace(/^\s+|\s+$/g, "");
@@ -30,10 +30,10 @@ export const slugify = (expression: string) => {
 };
 
 // Shuffle array
-export function shuffleParties(parties: HomeParty[]): HomeParty[] {
-  const shuffledParties: HomeParty[] = [...parties];
+export function shuffleParties(parties: HomePageParty[]): HomePageParty[] {
+  const shuffledParties: HomePageParty[] = [...parties];
 
-  shuffledParties.forEach((party: HomeParty, index: number) => {
+  shuffledParties.forEach((party: HomePageParty, index: number) => {
     const random = Math.floor(Math.random() * (index + 1));
     [shuffledParties[index], shuffledParties[random]] = [
       shuffledParties[random],
@@ -50,4 +50,21 @@ export function sortArrayByKey(array: any[], key: string): any[] {
     var y = b[key];
     return x < y ? -1 : x > y ? 1 : 0;
   });
+}
+
+// Convert party acronyms into url valid names and vice-versa
+export enum Conversion {
+  TO_URL = "URL",
+  TO_OFFICIAL_ACRONYM = "OFICIAL"
+}
+
+export function acronymConversion(partyAcronym: string, conversionType: Conversion): string {
+  switch (conversionType) {
+    case Conversion.TO_URL:
+      return partyAcronym.replace('/', '-').toLowerCase();
+    case Conversion.TO_OFFICIAL_ACRONYM:
+      return partyAcronym.replace('-', '/').toUpperCase();
+    default:
+      throw Error("Something went wrong.");
+  }
 }

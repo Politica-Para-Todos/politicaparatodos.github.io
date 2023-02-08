@@ -1,10 +1,9 @@
 import { Layout, Menu } from "antd";
 import { Fragment, useState } from "react";
-import { Section, SubSection } from "../../../src/dtos/manifesto-dto";
 import ManifestoSection from "./section";
 
 interface ManifestoSiderProps {
-  sections: Section[],
+  sections: any,
   title: string
 }
 
@@ -12,38 +11,28 @@ const { Sider } = Layout;
 const { SubMenu } = Menu;
 
 const ManifestoSider = ({ sections, title }: ManifestoSiderProps) => {
-  const [selectedSection, setSelectedSection] = useState<{ section: Section | null, subSectionPosition: number | null }>({
-    section: null,
-    subSectionPosition: null
-  });
+  const [selectedSection, setSelectedSection] = useState(null);
 
   const onClickSection = (event: any) => {
     const keyPath: string[] = event.keyPath;
-    const getSectionMenuKey = (position: number) =>
-      +keyPath[position].split('-')[1];
+    const getMenuKey = (position: number) => +keyPath[position] - 1;
 
     if (keyPath.length > 1) {
-      const sectionMenuKey: number = getSectionMenuKey(1);
-      const subSectionMenuKey: number = +keyPath[0] - 1;
-      setSelectedSection({
-        section: sections[sectionMenuKey],
-        subSectionPosition: subSectionMenuKey
-      });
+      const sectionMenuKey: number = getMenuKey(1);
+      const subSectionMenuKey: number = getMenuKey(0);
+      setSelectedSection(sections[sectionMenuKey].content[subSectionMenuKey]);
     } else {
-      const sectionMenuKey: number = getSectionMenuKey(0);
-      setSelectedSection({
-        section: sections[sectionMenuKey],
-        subSectionPosition: null
-      });
+      const sectionMenuKey: number = getMenuKey(0);
+      setSelectedSection(sections[sectionMenuKey]);
     }
   }
 
   const renderSectionItems = () =>
-    sections.map(section => {
-      if (section.subSections) {
+    sections.map((section: any) => {
+      if (section.content[0].content) {
         return renderSubMenuItem(section);
       }
-      return renderMenuItem(section.position, section.title ?? "FAILED");
+      return renderMenuItem(section.position, section.title);
     })
 
   const renderMenuItem = (position: number, title: string) =>
@@ -51,16 +40,16 @@ const ManifestoSider = ({ sections, title }: ManifestoSiderProps) => {
       {title}
     </Menu.Item>
 
-  const renderSubMenuItem = (section: Section) =>
+  const renderSubMenuItem = (section: any) =>
     <SubMenu
       key={section.position}
       title={section.title}
       className={`section-mobile-${section.position}`}
     >
-      {renderSubSectionItems(section.subSections!)}
+      {renderSubSectionItems(section.content!)}
     </SubMenu>
 
-  const renderSubSectionItems = (subSections: SubSection[]) =>
+  const renderSubSectionItems = (subSections: any[]) =>
     subSections.map(subSection =>
       renderMenuItem(subSection.position, subSection.title)
     )
@@ -78,7 +67,7 @@ const ManifestoSider = ({ sections, title }: ManifestoSiderProps) => {
         </Fragment>
       </Sider>
       <Layout.Content>
-        <ManifestoSection title={title} section={selectedSection.section} subSectionPosition={selectedSection.subSectionPosition} />
+        <ManifestoSection title={title} section={selectedSection} />
       </Layout.Content>
     </Layout >
   );
