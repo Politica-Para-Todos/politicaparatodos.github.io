@@ -11,8 +11,6 @@ interface RoundAvatarProps {
 const RoundAvatar = ({ party }: RoundAvatarProps) => {
   const { name, acronym, logoFileName } = party;
 
-  console.log("log", logoFileName);
-
   return (
     <a
       className="avatar-list-item"

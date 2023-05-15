@@ -59,7 +59,7 @@ export const getStaticProps = async () => {
       };
     })
     .catch((error) => {
-      console.log("ppt-ui error", error);
+      console.error("ppt-ui error", error);
 
       return {
         props: {
