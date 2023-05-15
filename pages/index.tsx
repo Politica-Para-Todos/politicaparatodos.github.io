@@ -46,7 +46,7 @@ export const getStaticProps = async () => {
     .then((data) => {
       let parties = data.map((p: any) => {
         return {
-          logoFileName: p.logo,
+          logoFileName: p.logo.replace("/images/party_logos/", ""),
           acronym: p.acronym,
           name: p.title,
         };
