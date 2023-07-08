@@ -141,16 +141,16 @@ section.party-manifesto-body {
     color: rgba($darkerGrey, 0.7);
   }
 
-  .ant-menu-sub.ant-menu-inline > .ant-menu-item,
-  .ant-menu-sub.ant-menu-inline > .ant-menu-submenu > .ant-menu-submenu-title,
-  .ant-menu-vertical > .ant-menu-item,
-  .ant-menu-vertical-left > .ant-menu-item,
-  .ant-menu-vertical-right > .ant-menu-item,
-  .ant-menu-inline > .ant-menu-item,
-  .ant-menu-vertical > .ant-menu-submenu > .ant-menu-submenu-title,
-  .ant-menu-vertical-left > .ant-menu-submenu > .ant-menu-submenu-title,
-  .ant-menu-vertical-right > .ant-menu-submenu > .ant-menu-submenu-title,
-  .ant-menu-inline > .ant-menu-submenu > .ant-menu-submenu-title {
+  .ant-menu-sub.ant-menu-inline>.ant-menu-item,
+  .ant-menu-sub.ant-menu-inline>.ant-menu-submenu>.ant-menu-submenu-title,
+  .ant-menu-vertical>.ant-menu-item,
+  .ant-menu-vertical-left>.ant-menu-item,
+  .ant-menu-vertical-right>.ant-menu-item,
+  .ant-menu-inline>.ant-menu-item,
+  .ant-menu-vertical>.ant-menu-submenu>.ant-menu-submenu-title,
+  .ant-menu-vertical-left>.ant-menu-submenu>.ant-menu-submenu-title,
+  .ant-menu-vertical-right>.ant-menu-submenu>.ant-menu-submenu-title,
+  .ant-menu-inline>.ant-menu-submenu>.ant-menu-submenu-title {
     height: auto;
     padding: 5px 45px 5px 24px;
     margin: 0;

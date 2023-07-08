@@ -79,9 +79,6 @@ const LayoutHeader = () => {
                     Partidos
                   </Link>
                 </Menu.Item>
-                {/* <Menu.Item key={3}>
-                  <Link href='/' onClick={closeDrawer}>Parlamento</Link>
-                </Menu.Item> */}
                 <Menu.Item key={3}>
                   <Link href="/debates-2022" onClick={closeDrawer}>
                     Debates 2022

@@ -36,8 +36,8 @@
   background-color: $darkGrey;
   border: none;
 
-  .ant-menu-item {
-    border: none;
+  .ant-menu-item::after {
+    border: none !important;
 
     &:hover {
       border: none;
