@@ -5,7 +5,7 @@ import { acronymConversion, Conversion } from "../../src/utils/manipuation";
 const Avatar = dynamic(import("antd/es/avatar"), { ssr: false });
 
 interface RoundAvatarProps {
-  party: HomePageParty
+  party: HomePageParty;
 }
 
 const RoundAvatar = ({ party }: RoundAvatarProps) => {
@@ -22,7 +22,7 @@ const RoundAvatar = ({ party }: RoundAvatarProps) => {
         <h4 className="avatar-list-item__content-subtitle">{name}</h4>
       </div>
     </a>
-  )
-}
+  );
+};
 
 export default RoundAvatar;
