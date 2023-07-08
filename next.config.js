@@ -19,3 +19,9 @@ module.exports = {
     path: "",
   },
 };
+
+const nextConfig = {
+  basePath: 'ppt-ui'
+}
+
+module.exports = nextConfig;
