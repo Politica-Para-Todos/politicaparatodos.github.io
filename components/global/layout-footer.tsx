@@ -10,9 +10,7 @@ const HomeFooter = () => {
   const { Footer } = Layout;
 
   const TeamLink = () => (
-    <Link rel="noopener" href="/about-us">
-      <a>aqui</a>
-    </Link>
+    <Link rel="noopener" href="/about-us">aqui</Link>
   );
 
   return (

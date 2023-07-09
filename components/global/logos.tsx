@@ -7,7 +7,7 @@ import voting_image from '../../public/voting.svg';
 
 export const HeaderLogo = () =>
   <Image
-    src={`/${header_logo.src}`}
+    src={header_logo.src}
     width="200"
     height="41"
     alt="PPT Header Logo"
@@ -16,16 +16,16 @@ export const HeaderLogo = () =>
 
 export const FooterLogo = () =>
   <Image
-    src={`/${footer_logo.src}`}
-    width="240px"
-    height="100%"
+    src={footer_logo.src}
+    width={240}
+    height={100}
     alt="PPT Footer Logo"
     className="footer_logo"
   />
 
 export const VotingImage = () =>
   <Image
-    src={`/${voting_image.src}`}
+    src={voting_image.src}
     width={150}
     height={150}
     alt="voting"
@@ -33,7 +33,7 @@ export const VotingImage = () =>
 
 export const InfographicImage = () =>
   <Image
-    src={`/${infographic_image.src}`}
+    src={infographic_image.src}
     width={440}
     height={186}
     alt="infographic"
@@ -41,7 +41,7 @@ export const InfographicImage = () =>
 
 export const AboutUsHeaderImage = () =>
   <Image
-    src={`/${rows_people_image.src}`}
+    src={rows_people_image.src}
     className="about-us__header-img"
     layout="responsive"
     width={1440}
