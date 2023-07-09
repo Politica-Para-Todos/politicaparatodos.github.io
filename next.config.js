@@ -2,26 +2,17 @@
 
 const path = require("path");
 
-module.exports = {
+const nextConfig = {
+  basePath: '/ppt-ui',
   reactStrictMode: true,
   swcMinify: true,
-};
-
-module.exports = {
   sassOptions: {
-    includePaths: [path.join(__dirname, "styles")],
+    includePaths: [path.join(__dirname, "styles")]
   },
-};
-
-module.exports = {
   images: {
-    loader: "akamai",
-    path: "",
+    unoptimized: true
   },
-};
-
-const nextConfig = {
-  basePath: 'ppt-ui'
+  output: 'export'
 }
 
 module.exports = nextConfig;

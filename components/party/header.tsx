@@ -2,7 +2,8 @@ import { Avatar, Button, Col, Divider, Row } from "antd";
 import Link from "next/link";
 import { Fragment } from "react";
 import { OnlinePlatform, OnlinePlatformType, PartyPage } from "../../src/retriever/dtos/party-dto";
-import { acronymConversion, Conversion } from "../../src/utils/manipuation";
+import { Conversion, acronymConversion } from "../../src/utils/manipuation";
+import { renderPartyLogo } from "../global/logos";
 import SocialSharing from "../global/social-sharing";
 
 interface PartyHeaderProps {
@@ -30,7 +31,7 @@ const PartyHeader = ({ party, subtitle }: PartyHeaderProps) => {
       </Row>
       <Row typeof="flex" justify="center">
         <Col>
-          <Avatar size={200} src={`/party-logos/${party.logoFileName}`} icon="user" />
+          <Avatar size={200} src={renderPartyLogo(party.logoFileName)} icon="user" />
           <div className="party-header__program-cta">
             {party.hasManifesto && (
               <Button
