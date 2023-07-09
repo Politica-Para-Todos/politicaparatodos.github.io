@@ -1,0 +1,1 @@
+self.__SSG_MANIFEST=new Set(["\u002F","\u002Fpartido\u002F[acronym]","\u002Fpartido\u002F[acronym]\u002Fcandidatos\u002F[electoralCircle]","\u002Fpartido\u002F[acronym]\u002Fmanifesto"]);self.__SSG_MANIFEST_CB&&self.__SSG_MANIFEST_CB()
