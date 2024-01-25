@@ -3,7 +3,6 @@
 const path = require("path");
 
 const nextConfig = {
-  basePath: '/ppt-ui',
   reactStrictMode: true,
   swcMinify: true,
   sassOptions: {
