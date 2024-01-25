@@ -2,11 +2,14 @@
   "name": "ppt-ui",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "18.19.0",
+    "yarn": "1.22.21"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start -p $PORT",
-    "heroku-postbuild": "yarn start",
     "lint": "next lint",
     "export": "next export",
     "deploy": "next build && touch ./public/.nojekyll && git add out/ -f && git commit -m \"Deploy\" && git subtree push --prefix out origin gh-pages"
