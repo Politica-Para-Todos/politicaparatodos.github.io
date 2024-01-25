@@ -1,13 +1,13 @@
 import { Layout, Typography } from "antd";
+import { DropdownOption, convertToLabel, electoralCircleDropdown } from "../../../../../src/retriever/dtos/electoral-circle-dto";
+import { Retriever, SeedsJsonRetriever } from "../../../../../src/retriever/service";
+import { Conversion, acronymConversion } from "../../../../../src/utils/manipuation";
 import LayoutFooter from "../../../../components/global/layout-footer";
-import LayoutHeader from "../../../../components/global/layout-header";
 import MetaTags from "../../../../components/global/meta-tags";
+import LayoutHeader from "../../../../components/header/LayoutHeader";
 import PartyHeader from "../../../../components/party/header";
 import PartyIntro from "../../../../components/party/intro";
 import PartyCandidatesTable from "../../../../components/party/party-candidate-table";
-import { convertToLabel, DropdownOption, electoralCircleDropdown } from "../../../../src/retriever/dtos/electoral-circle-dto";
-import { Retriever, SeedsJsonRetriever } from "../../../../src/retriever/service";
-import { acronymConversion, Conversion } from "../../../../src/utils/manipuation";
 
 const { Paragraph } = Typography;
 

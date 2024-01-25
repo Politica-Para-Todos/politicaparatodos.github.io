@@ -1,9 +1,9 @@
 import { LinkOutlined } from "@ant-design/icons";
 import { Alert, Card, Col, Layout, Row, Table } from "antd";
 import { NextPage } from "next";
-import LayoutFooter from "../components/global/layout-footer";
-import LayoutHeader from "../components/global/layout-header";
-import MetaTags from "../components/global/meta-tags";
+import LayoutFooter from "../../components/global/layout-footer";
+import LayoutHeader from "../../components/global/layout-header";
+import MetaTags from "../../components/global/meta-tags";
 
 const PoliticalDebates: NextPage = () =>
   <Layout>
