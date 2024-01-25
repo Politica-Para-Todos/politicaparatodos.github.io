@@ -20,22 +20,30 @@ export const HomeMissionInfographic = () =>
     </Row>
   </section>
 
-export const HomeMission = () =>
-  <section className="home-our-mission home-our-mission-border">
-    <Row justify="space-between" align="middle">
-      <Col span={24} lg={24} className="home-our-mission-text">
-        <p>
-          Aproximam-se as{" "}
-          <b>Eleições Legislativas de 30 de janeiro de 2022</b> e o Política
-          Para Todos, enquanto grupo de cidadãos independentes, decidiu dar
-          continuidade ao trabalho iniciado nas Eleições Legislativas de 2019.
-        </p>
-        <br />
-        <p>
-          Esperamos que seja útil para promover decisões informadas e
-          conscientes. Estamos disponíveis através das nossas redes sociais ou
-          em contacto@politicaparatodos.pt.
-        </p>
-      </Col>
-    </Row>
-  </section>
+export const HomeMission = () => {
+  const legislativeElectionDate = new Date(2024, 2, 10);
+  const electionDay = legislativeElectionDate.getDate();
+  const electionMonthName = legislativeElectionDate.toLocaleString('pt-pt', { month: 'long' });
+  const electionYear = legislativeElectionDate.getFullYear();
+
+  return (
+    <section className="home-our-mission home-our-mission-border">
+      <Row justify="space-between" align="middle">
+        <Col span={24} lg={24} className="home-our-mission-text">
+          <p>
+            Aproximam-se as{" "}
+            <b>Eleições Legislativas de {electionDay} de {electionMonthName} de {electionYear}</b> e o Política
+            Para Todos, enquanto grupo de cidadãos independentes, decidiu dar
+            continuidade ao trabalho iniciado nas Eleições Legislativas de 2019.
+          </p>
+          <br />
+          <p>
+            Esperamos que seja útil para promover decisões informadas e
+            conscientes. Estamos disponíveis através das nossas redes sociais ou
+            em contacto@politicaparatodos.pt.
+          </p>
+        </Col>
+      </Row>
+    </section>
+  )
+};
