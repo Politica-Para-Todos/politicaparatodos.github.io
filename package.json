@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "yarn build && next start",
+    "start": "next start -p $PORT",
     "lint": "next lint",
     "export": "next export",
     "deploy": "next build && touch ./public/.nojekyll && git add out/ -f && git commit -m \"Deploy\" && git subtree push --prefix out origin gh-pages"
