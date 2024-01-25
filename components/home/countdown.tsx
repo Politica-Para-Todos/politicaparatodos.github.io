@@ -10,7 +10,7 @@ const HomeCountdown = () =>
     <Row>
       <Col span={24} lg={24}>
         <VotingImage />
-        <Countdown date="2022-01-30T09:00:00" renderer={CountdownRenderer} />
+        <Countdown date="2024-03-10T00:00:00" renderer={CountdownRenderer} />
         <Link
           href={PORTAL_ELEITOR_URL}
           target="_blank"
