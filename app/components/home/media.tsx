@@ -33,7 +33,7 @@ const videos: Video[] = [
   },
 ];
 
-const HomeMedia = () => {
+const VideoSection = () => {
   const [currentEpisode, setCurrentEpisode] = useState(0);
   const [isPlayerHidden, setIsPlayerHidden] = useState(true);
   const { url, caption } = videos[currentEpisode];
@@ -89,4 +89,4 @@ const HomeMedia = () => {
   );
 };
 
-export default HomeMedia;
+export default VideoSection;

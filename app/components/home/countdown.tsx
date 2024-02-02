@@ -6,7 +6,7 @@ import Countdown from "react-countdown-now";
 import { VotingImage } from "../global/logos";
 import CountdownRenderer from "./countdown-renderer";
 
-const HomeCountdown = () => {
+const LegislativeElectionCountdown = () => {
   const legislativeElectionDate = new Date(2024, 2, 10);
 
   return (
@@ -30,4 +30,4 @@ const HomeCountdown = () => {
   )
 }
 
-export default HomeCountdown;
+export default LegislativeElectionCountdown;

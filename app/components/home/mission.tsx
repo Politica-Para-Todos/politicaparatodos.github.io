@@ -1,7 +1,7 @@
 import { Col, Row } from "antd";
 import Infographic from "./infographic";
 
-export const HomeMissionInfographic = () =>
+export const LegislativeMission = () =>
   <section className="home-our-mission">
     <Row justify="space-between" align="middle">
       <Col
@@ -20,7 +20,7 @@ export const HomeMissionInfographic = () =>
     </Row>
   </section>
 
-export const HomeMission = () => {
+export const Mission = () => {
   const legislativeElectionDate = new Date(2024, 2, 10);
   const electionDay = legislativeElectionDate.getDate();
   const electionMonthName = legislativeElectionDate.toLocaleString('pt-pt', { month: 'long' });
