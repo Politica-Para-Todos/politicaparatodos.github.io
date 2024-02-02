@@ -7,8 +7,8 @@ import MenuItems from "./MenuItems";
 
 const LayoutHeader = () =>
   <>
-    <Header className="header">
-      <Row justify={'space-between'} align={'middle'} typeof="flex">
+    <Header className='header'>
+      <Row justify='space-between' align='middle' typeof='flex'>
         <Col span={24} lg={24}>
           <Link href={''}>
             <PPTLogo />

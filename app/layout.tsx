@@ -1,6 +1,8 @@
+import { AntdRegistry } from '@ant-design/nextjs-registry';
 import { Layout } from 'antd';
 import React from 'react';
 import LayoutHeader from './components/header/LayoutHeader';
+import './styles/index.scss';
 
 export const metadata = {
   title: 'PPT - Eleições',
@@ -10,12 +12,12 @@ export const metadata = {
 const RootLayout = ({ children }: React.PropsWithChildren) =>
   <html lang="en">
     <body>
-      <Layout>
-        <LayoutHeader />
-        {children}
-        {/* <AntdRegistry>
-        </AntdRegistry> */}
-      </Layout>
+      <AntdRegistry>
+        <Layout>
+          <LayoutHeader />
+          {children}
+        </Layout>
+      </AntdRegistry>
     </body >
   </html >
 
