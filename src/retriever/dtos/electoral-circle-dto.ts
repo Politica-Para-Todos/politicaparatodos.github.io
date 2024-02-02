@@ -1,4 +1,4 @@
-import { ElectoralCircle } from "../../utils/constants";
+import { ElectoralCircle } from "../../../app/utils/constants";
 
 export enum ElectoralCircleDropdownValue {
   ALL = "all",

@@ -1,6 +1,7 @@
 import { AntdRegistry } from '@ant-design/nextjs-registry';
 import { Layout } from 'antd';
 import React from 'react';
+import LayoutFooter from './components/footer/LayoutFooter';
 import LayoutHeader from './components/header/LayoutHeader';
 import './styles/index.scss';
 
@@ -16,6 +17,7 @@ const RootLayout = ({ children }: React.PropsWithChildren) =>
         <Layout>
           <LayoutHeader />
           {children}
+          <LayoutFooter />
         </Layout>
       </AntdRegistry>
     </body >

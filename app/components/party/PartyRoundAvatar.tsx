@@ -1,13 +1,19 @@
+import { Avatar } from "antd";
 import Link from "next/link";
 import { HomePageParty } from "../../src/retriever/dtos/party-dto";
-import { acronymConversion, Conversion } from "../../src/utils/manipuation";
+import { acronymConversion, Conversion } from "../../utils/manipuation";
 import { renderPartyLogo } from "../global/logos";
+import { Party } from "./PartiesGrid";
 
 interface RoundAvatarProps {
   party: HomePageParty
 }
 
-const RoundAvatar = ({ party }: RoundAvatarProps) => {
+interface PartyRoundAvatar {
+  party: Party
+}
+
+const PartyRoundAvatar = ({ party }: PartyRoundAvatar) => {
   const { name, acronym, logoFileName } = party;
 
   return (
@@ -21,4 +27,4 @@ const RoundAvatar = ({ party }: RoundAvatarProps) => {
   )
 }
 
-export default RoundAvatar;
+export default PartyRoundAvatar;
