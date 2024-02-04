@@ -1,5 +1,5 @@
 import { AntdRegistry } from '@ant-design/nextjs-registry';
-import { Layout } from 'antd';
+import { ConfigProvider, Layout } from 'antd';
 import React from 'react';
 import LayoutFooter from '../components/footer/LayoutFooter';
 import LayoutHeader from '../components/header/LayoutHeader';
@@ -14,11 +14,13 @@ const LegislativeLayout = ({ children }: React.PropsWithChildren) =>
   <html lang="en">
     <body>
       <AntdRegistry>
-        <Layout>
-          <LayoutHeader />
-          {children}
-          <LayoutFooter />
-        </Layout>
+        <ConfigProvider theme={{ hashed: false }}>
+          <Layout>
+            <LayoutHeader />
+            {children}
+            <LayoutFooter />
+          </Layout>
+        </ConfigProvider>
       </AntdRegistry>
     </body >
   </html >
