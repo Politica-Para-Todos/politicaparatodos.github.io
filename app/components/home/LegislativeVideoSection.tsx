@@ -33,7 +33,7 @@ const videos: Video[] = [
   },
 ];
 
-const VideoSection = () => {
+const LegislativeVideoSection = () => {
   const [currentEpisode, setCurrentEpisode] = useState(0);
   const [isPlayerHidden, setIsPlayerHidden] = useState(true);
   const { url, caption } = videos[currentEpisode];
@@ -89,4 +89,4 @@ const VideoSection = () => {
   );
 };
 
-export default VideoSection;
+export default LegislativeVideoSection;
