@@ -2,13 +2,24 @@ import { Menu } from 'antd';
 import Link from 'next/link';
 
 const MenuItems = () => {
+  const legislativesRoute = '/legislativas';
   return (
     <Menu
       mode='horizontal'
       items={[
         {
+          key: '0',
+          label: (<Link href={legislativesRoute}>Home</Link>)
+        },
+        {
           key: '1',
-          label: (<Link href={'/legislativas'}>Legislativas</Link>)
+          label: (<Link href={legislativesRoute}>Legislativas</Link>),
+          children: [
+            {
+              key: '1-1',
+              label: (<Link href={`${legislativesRoute}/debates`}>Debates</Link>)
+            }
+          ]
         },
         {
           key: '2',
