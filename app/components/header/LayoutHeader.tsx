@@ -3,6 +3,7 @@ import { Header } from "antd/es/layout/layout";
 import Row from "antd/es/row";
 import Link from "next/link";
 import { PPTLogo } from "../global/logos";
+import SocialSharing from "../social/SocialSharing";
 import MenuItems from "./MenuItems";
 
 const LayoutHeader = () =>
@@ -23,6 +24,7 @@ const LayoutHeader = () =>
             >Junta-te a nós !
             </a>
             <div className='header-social-media'>
+              <SocialSharing />
               {/* <SocialSharing /> */}
             </div>
           </nav>

@@ -4,7 +4,7 @@ import { Fragment } from "react";
 import { OnlinePlatform, OnlinePlatformType, PartyPage } from "../../src/retriever/dtos/party-dto";
 import { Conversion, acronymConversion } from "../../src/utils/manipuation";
 import { renderPartyLogo } from "../global/logos";
-import SocialSharing from "../global/social-sharing";
+import SocialSharing from "../social/SocialSharing";
 
 interface PartyHeaderProps {
   party: PartyPage;

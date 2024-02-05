@@ -1,7 +1,21 @@
-import { OnlinePlatform, OnlinePlatformType } from "../retriever/dtos/party-dto";
 import { EMAIL_PPT, FACEBOOK_PPT, GITHUB_PPT, INSTAGRAM_PPT, MEDIUM_PPT, TWITTER_PPT } from "./constants";
 
-export const socialMediaOptions: OnlinePlatform[] = [
+export interface OnlinePlatform {
+  type: OnlinePlatformType;
+  address: string;
+}
+
+export enum OnlinePlatformType {
+  WEBSITE = "Website",
+  TWITTER = "Twitter",
+  FACEBOOK = "Facebook",
+  EMAIL = "Email",
+  INSTAGRAM = "Instagram",
+  MEDIUM = "Medium",
+  GITHUB = "Github",
+}
+
+export const SOCIAL_MEDIA_OPTIONS: OnlinePlatform[] = [
   {
     type: OnlinePlatformType.TWITTER,
     address: TWITTER_PPT,

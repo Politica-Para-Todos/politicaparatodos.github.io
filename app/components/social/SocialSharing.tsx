@@ -1,14 +1,13 @@
-import { OnlinePlatform, OnlinePlatformType } from "../../src/retriever/dtos/party-dto";
-import SocialIcon from "./social-icon";
+import { OnlinePlatform, OnlinePlatformType, SOCIAL_MEDIA_OPTIONS } from "../../utils/online-platform";
+import SocialIcon from "./SocialIcon";
 
 interface SocialSharingProps {
-  onlinePlatforms: OnlinePlatform[];
   theme?: string;
 }
 
-const SocialSharing = ({ onlinePlatforms, theme }: SocialSharingProps) =>
+const SocialSharing = ({ theme }: SocialSharingProps) =>
   <ul className="social-media-list">
-    {onlinePlatforms.map((op: OnlinePlatform) => (
+    {SOCIAL_MEDIA_OPTIONS.map((op: OnlinePlatform) => (
       <li key={op.type}>
         <a
           href={

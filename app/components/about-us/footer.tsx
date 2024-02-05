@@ -2,7 +2,7 @@ import { Layout } from "antd";
 import Link from "next/link";
 import { socialMediaOptions } from "../../src/utils/online-platform";
 import { FooterLogo } from "../global/logos";
-import SocialSharing from "../global/social-sharing";
+import SocialSharing from "../social/SocialSharing";
 
 const { Footer } = Layout;
 

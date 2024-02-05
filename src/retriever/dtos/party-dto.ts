@@ -1,17 +1,4 @@
-export interface OnlinePlatform {
-  type: OnlinePlatformType;
-  address: string;
-}
-
-export enum OnlinePlatformType {
-  WEBSITE = "Website",
-  TWITTER = "Twitter",
-  FACEBOOK = "Facebook",
-  EMAIL = "Email",
-  INSTAGRAM = "Instagram",
-  MEDIUM = "Medium",
-  GITHUB = "Github",
-}
+import { OnlinePlatform } from "../../../app/utils/online-platform"
 
 export type HomePageParty = {
   name: string,

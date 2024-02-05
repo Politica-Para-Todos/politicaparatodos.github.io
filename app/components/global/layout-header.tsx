@@ -5,8 +5,8 @@ import Link from "next/link";
 import { Fragment, memo, useState } from "react";
 import { LOOMIO_PPT_URL } from "../../src/utils/constants";
 import { socialMediaOptions } from "../../src/utils/online-platform";
+import SocialSharing from "../social/SocialSharing";
 import { HeaderLogo } from "./logos";
-import SocialSharing from "./social-sharing";
 
 const LayoutHeader = () => {
   const [headerState, setState] = useState({

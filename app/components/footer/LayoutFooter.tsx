@@ -2,6 +2,7 @@ import { Col, Row } from "antd";
 import { Footer } from "antd/es/layout/layout";
 import Link from "next/link";
 import { FooterLogo } from "../global/logos";
+import SocialSharing from "../social/SocialSharing";
 import ContributorsList from "./ContributorsList";
 
 const LayoutFooter = () =>
@@ -13,9 +14,7 @@ const LayoutFooter = () =>
         lg={{ offset: 0, span: 6 }}
         className="footer-social"
       >
-        {/* <SocialSharing
-          onlinePlatforms={socialMediaOptions}
-        /> */}
+        <SocialSharing />
         <FooterLogo />
       </Col>
       <Col
