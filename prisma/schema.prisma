@@ -1,0 +1,96 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Election {
+  id                     String                   @id @default(uuid())
+  date                   DateTime                 @db.Date
+  type                   ElectionType
+  method                 ElectionMethod
+  PartyParticipation     PartyParticipation[]
+  CandidateParticipation CandidateParticipation[]
+}
+
+model PartyParticipation {
+  Election    Election   @relation(fields: [electionId], references: [id])
+  electionId  String
+  Parties     Party      @relation(fields: [partyId], references: [id])
+  partyId     String
+  Candidate   Candidate? @relation(fields: [candidateId], references: [id])
+  candidateId String?
+
+  @@id([electionId, partyId])
+}
+
+model CandidateParticipation {
+  Election    Election  @relation(fields: [electionId], references: [id])
+  electionId  String
+  Candidates  Candidate @relation(fields: [candidateId], references: [id])
+  candidateId String
+  Party       Party?    @relation(fields: [partyId], references: [id])
+  partyId     String?
+
+  @@id([electionId, candidateId])
+}
+
+model Coligation {
+  id            String  @id @default(uuid())
+  name          String
+  acronym       String
+  photoFileName String
+  Parties       Party[]
+}
+
+model Party {
+  id                 String                   @id @default(uuid())
+  name               String
+  acronym            String
+  photoFileName      String
+  Coligation         Coligation?              @relation(fields: [coligationId], references: [id])
+  coligationId       String?
+  Candidate          Candidate[]
+  Participation      CandidateParticipation[]
+  PartyParticipation PartyParticipation[]
+}
+
+model Candidate {
+  id                 String                   @id @default(uuid())
+  shortName          String
+  fullName           String
+  birthdate          DateTime                 @db.Date
+  photoFileName      String?
+  bio                String?
+  position           Int?
+  isSub              Boolean?
+  ElectoralCircle    ElectoralCircle          @relation(fields: [electoralCircleId], references: [id])
+  electoralCircleId  String
+  Party              Party                    @relation(fields: [partyId], references: [id])
+  partyId            String
+  Participation      CandidateParticipation[]
+  PartyParticipation PartyParticipation[]
+}
+
+model ElectoralCircle {
+  id              String      @id @default(uuid())
+  name            String
+  electedDeputies Int
+  Candidate       Candidate[]
+}
+
+enum ElectionType {
+  AUTARQUICA
+  LEGISLATIVA
+  PRESIDENCIAL
+}
+
+enum ElectionMethod {
+  D_HONDT
+}

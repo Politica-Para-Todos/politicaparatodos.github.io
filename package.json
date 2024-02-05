@@ -18,6 +18,7 @@
     "@ant-design/cssinjs": "^1.18.4",
     "@ant-design/icons": "^4.8.0",
     "@ant-design/nextjs-registry": "^1.0.0",
+    "@prisma/client": "5.9.1",
     "@types/body-scroll-lock": "^3.1.0",
     "@types/react-helmet": "^6.1.5",
     "@zeit/next-sass": "^1.0.1",
@@ -46,6 +47,7 @@
     "@types/react-router-hash-link": "^2.4.5",
     "eslint": "8.21.0",
     "eslint-config-next": "^14.1.0",
+    "prisma": "^5.9.1",
     "sass": "^1.54.3",
     "ts-jest": "^29.0.4",
     "typescript": "4.7.4"
