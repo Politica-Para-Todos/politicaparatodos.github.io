@@ -11,38 +11,38 @@ datasource db {
 }
 
 model Election {
-  id                     String                   @id @default(uuid())
-  date                   DateTime                 @db.Date
-  type                   ElectionType
-  method                 ElectionMethod
-  PartyParticipation     PartyParticipation[]
-  CandidateParticipation CandidateParticipation[]
+  id     Int            @id @db.Integer
+  date   DateTime       @db.Date
+  type   ElectionType
+  method ElectionMethod
+  // PartyParticipation     PartyParticipation[]
+  // CandidateParticipation CandidateParticipation[]
 }
 
-model PartyParticipation {
-  Election    Election   @relation(fields: [electionId], references: [id])
-  electionId  String
-  Parties     Party      @relation(fields: [partyId], references: [id])
-  partyId     String
-  Candidate   Candidate? @relation(fields: [candidateId], references: [id])
-  candidateId String?
+// model PartyParticipation {
+//   Election    Election   @relation(fields: [electionId], references: [id])
+//   electionId  String
+//   Parties     Party      @relation(fields: [partyId], references: [id])
+//   partyId     String
+//   Candidate   Candidate? @relation(fields: [candidateId], references: [id])
+//   candidateId String?
 
-  @@id([electionId, partyId])
-}
+//   @@id([electionId, partyId])
+// }
 
-model CandidateParticipation {
-  Election    Election  @relation(fields: [electionId], references: [id])
-  electionId  String
-  Candidates  Candidate @relation(fields: [candidateId], references: [id])
-  candidateId String
-  Party       Party?    @relation(fields: [partyId], references: [id])
-  partyId     String?
+// model CandidateParticipation {
+//   Election    Election  @relation(fields: [electionId], references: [id])
+//   electionId  String
+//   Candidates  Candidate @relation(fields: [candidateId], references: [id])
+//   candidateId String
+//   Party       Party?    @relation(fields: [partyId], references: [id])
+//   partyId     String?
 
-  @@id([electionId, candidateId])
-}
+//   @@id([electionId, candidateId])
+// }
 
 model Coligation {
-  id            String  @id @default(uuid())
+  id            Int     @id @db.Integer
   name          String
   acronym       String
   photoFileName String
@@ -50,36 +50,36 @@ model Coligation {
 }
 
 model Party {
-  id                 String                   @id @default(uuid())
-  name               String
-  acronym            String
-  photoFileName      String
-  Coligation         Coligation?              @relation(fields: [coligationId], references: [id])
-  coligationId       String?
-  Candidate          Candidate[]
-  Participation      CandidateParticipation[]
-  PartyParticipation PartyParticipation[]
+  id            Int         @id @db.Integer
+  name          String
+  acronym       String
+  photoFileName String
+  Coligation    Coligation? @relation(fields: [coligationId], references: [id])
+  coligationId  Int?
+  Candidates    Candidate[]
+  // Participation      CandidateParticipation[]
+  // PartyParticipation PartyParticipation[]
 }
 
 model Candidate {
-  id                 String                   @id @default(uuid())
-  shortName          String
-  fullName           String
-  birthdate          DateTime                 @db.Date
-  photoFileName      String?
-  bio                String?
-  position           Int?
-  isSub              Boolean?
-  ElectoralCircle    ElectoralCircle          @relation(fields: [electoralCircleId], references: [id])
-  electoralCircleId  String
-  Party              Party                    @relation(fields: [partyId], references: [id])
-  partyId            String
-  Participation      CandidateParticipation[]
-  PartyParticipation PartyParticipation[]
+  id                Int             @id @db.Integer
+  shortName         String
+  fullName          String
+  birthdate         DateTime        @db.Date
+  photoFileName     String?
+  bio               String?
+  position          Int?
+  isSub             Boolean?
+  ElectoralCircle   ElectoralCircle @relation(fields: [electoralCircleId], references: [id])
+  electoralCircleId Int
+  Party             Party           @relation(fields: [partyId], references: [id])
+  partyId           Int
+  // Participation      CandidateParticipation[]
+  // PartyParticipation PartyParticipation[]
 }
 
 model ElectoralCircle {
-  id              String      @id @default(uuid())
+  id              Int         @id @db.Integer
   name            String
   electedDeputies Int
   Candidate       Candidate[]

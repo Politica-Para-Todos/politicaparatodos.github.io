@@ -4,35 +4,24 @@ import { electoralCircleDropdown } from "@/retriever/dtos/electoral-circle-dto";
 import { Col, Row, Select, Switch } from "antd";
 import { useState } from "react";
 import { shuffleParties } from "../../utils/manipuation";
-import { Party } from "./PartiesSection";
+import { LegislativeHomeParty } from "./PartiesSection";
 import PartyRoundAvatar from "./PartyRoundAvatar";
 
-// interface AvatarListProp {
-//   theme: string;
-//   parties: HomePageParty[];
-// }
-
 interface PartiesGridProps {
-  parties: Party[],
+  parties: LegislativeHomeParty[],
   theme: string
 }
 
 enum ElectoralCircleFilter {
   TODOS = "Todos",
-  BRAGANCa = "Bragança"
+  BRAGANCa = "Bragança",
+  LISBOA = "Lisboa",
+  PORTO = 'Porto'
 }
 
 const PartiesGrid = ({ parties, theme }: PartiesGridProps) => {
-  // const [hasMounted, setHasMounted] = useState(false);
-
-  // useEffect(() => {
-  //   setHasMounted(true);
-  // }, []);
-
-  // if (!hasMounted) {
-  //   return null;
-  // }
-  let sortedParties: Party[];
+  let sortedParties: LegislativeHomeParty[];
+  console.log(parties);
 
   const [state, setState] = useState({
     isAlphabeticalOrder: false,
@@ -54,24 +43,24 @@ const PartiesGrid = ({ parties, theme }: PartiesGridProps) => {
   };
 
   if (state.districtFilter !== ElectoralCircleFilter.TODOS) {
-    sortedParties = parties.filter((party: Party) => party.includes(district));
+    sortedParties = parties.filter((party: LegislativeHomeParty) => [...party.electoralCircles].filter(district => district === state.districtFilter));
   }
 
   if (state.isAlphabeticalOrder) {
-    sortedParties = parties.sort((partyA, partyB) => partyA.acronym.toLowerCase().localeCompare(partyB.acronym.toLowerCase()));
-    // const partiesToSort = [...parties];
-    // sortedParties = partiesToSort.sort((party1, party2) => {
-    //   const partyName1 = party1.acronym.toLowerCase();
-    //   const partyName2 = party2.acronym.toLowerCase();
+    // sortedParties = parties.sort((partyA, partyB) => partyA.acronym.toLowerCase().localeCompare(partyB.acronym.toLowerCase()));
+    const partiesToSort = [...parties];
+    sortedParties = partiesToSort.sort((party1, party2) => {
+      const partyName1 = party1.acronym.toLowerCase();
+      const partyName2 = party2.acronym.toLowerCase();
 
-    //   if (partyName1 > partyName2) {
-    //     return 1;
-    //   }
-    //   if (partyName1 < partyName2) {
-    //     return -1;
-    //   }
-    //   return 0;
-    // });
+      if (partyName1 > partyName2) {
+        return 1;
+      }
+      if (partyName1 < partyName2) {
+        return -1;
+      }
+      return 0;
+    });
   } else {
     sortedParties = shuffleParties(parties);
   }
@@ -122,7 +111,6 @@ const PartiesGrid = ({ parties, theme }: PartiesGridProps) => {
               <PartyRoundAvatar key={party.acronym} party={party} />
             ))}
           </div>
-          {/* <AvatarList theme={"4x3"} parties={sortedParties} /> */}
         </Col>
       </Row>
     </>

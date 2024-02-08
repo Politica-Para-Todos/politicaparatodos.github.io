@@ -25,7 +25,6 @@ const LayoutHeader = () =>
             </a>
             <div className='header-social-media'>
               <SocialSharing />
-              {/* <SocialSharing /> */}
             </div>
           </nav>
         </Col>
