@@ -7,7 +7,7 @@
     "yarn": "1.22.21"
   },
   "scripts": {
-    "dev": "next dev",
+    "dev": "docker compose up -d && next dev",
     "build": "next build",
     "start": "next start -p $PORT",
     "lint": "next lint",
@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.8.0",
+    "@prisma/client": "5.9.1",
     "@types/body-scroll-lock": "^3.1.0",
     "@types/react-helmet": "^6.1.5",
     "@zeit/next-sass": "^1.0.1",
@@ -23,6 +24,7 @@
     "body-scroll-lock": "^4.0.0-beta.0",
     "micro": "^9.4.1",
     "next": "^13.4.9",
+    "prisma": "^5.9.1",
     "prop-types": "^15.8.1",
     "react": "18.2.0",
     "react-countdown-now": "^2.1.2",
