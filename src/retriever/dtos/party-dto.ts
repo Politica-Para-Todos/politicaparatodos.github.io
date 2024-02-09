@@ -14,9 +14,11 @@ export enum OnlinePlatformType {
 }
 
 export type HomePageParty = {
+  id: number,
   name: string,
   acronym: string,
-  logoFileName: string
+  logoFileName: string,
+  electoralDistrict: Set<string>
 }
 
 export interface PartyHeader {

@@ -1,3 +1,4 @@
+import { PrismaClient } from "@prisma/client";
 import { Layout } from "antd";
 import type { NextPage } from "next";
 import LayoutFooter from "../components/global/layout-footer";
@@ -8,7 +9,6 @@ import HomeMedia from "../components/home/media";
 import { HomeMission, HomeMissionInfographic } from "../components/home/mission";
 import HomeParties from "../components/home/parties";
 import { HomePageParty } from "../src/retriever/dtos/party-dto";
-import { Retriever, SeedsJsonRetriever } from "../src/retriever/service";
 
 interface HomePageProps {
   homePageParties: HomePageParty[];
@@ -35,12 +35,45 @@ const Home: NextPage<HomePageProps> = ({ homePageParties }) =>
     <LayoutFooter />
   </Layout>
 
+// export const getStaticProps = async () => {
+//   const retriever: SeedsJsonRetriever = new Retriever();
+
+//   return {
+//     props: {
+//       homePageParties: retriever.homePageParties()
+//     },
+//   };
+// };
+
 export const getStaticProps = async () => {
-  const retriever: SeedsJsonRetriever = new Retriever();
+  const prisma = new PrismaClient();
+  const queryResult = await prisma.party.findMany({
+    select: {
+      id: true,
+      name: true,
+      acronym: true,
+      photoFileName: true,
+      Candidates: {
+        select: {
+          ElectoralCircle: {
+            select: {
+              name: true
+            }
+          }
+        }
+      }
+    }
+  });
 
   return {
     props: {
-      homePageParties: retriever.homePageParties()
+      homePageParties: queryResult.map(party => ({
+        id: party.id,
+        name: party.name,
+        acronym: party.acronym,
+        logoFileName: party.photoFileName,
+        electoralDistrict: [...new Set<string>(party.Candidates.map(district => district.ElectoralCircle.name))]
+      }))
     },
   };
 };

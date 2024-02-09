@@ -23,7 +23,7 @@ const AvatarList = ({ theme, parties }: AvatarListProp) => {
       className={`avatar-list-container avatar-list-container avatar-list-container--${theme}`}
     >
       {parties.map(party => (
-        <RoundAvatar key={party.acronym} party={party} />
+        <RoundAvatar key={party.id} party={party} />
       ))}
     </div>
   );
