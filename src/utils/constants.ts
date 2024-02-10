@@ -52,7 +52,7 @@ export const CONTRIBUTORS: string[] = [
 ];
 
 // electoral circles
-export enum ElectoralCircle {
+export enum ElectoralDistrict {
   ACORES = "Açores",
   AVEIRO = "Aveiro",
   BEJA = "Beja",
@@ -76,28 +76,3 @@ export enum ElectoralCircle {
   VILA_REAL = "Vila Real",
   VISEU = "Viseu"
 }
-
-export const ELECTORAL_CIRCLES: ElectoralCircle[] = [
-  ElectoralCircle.ACORES,
-  ElectoralCircle.AVEIRO,
-  ElectoralCircle.BEJA,
-  ElectoralCircle.BRAGA,
-  ElectoralCircle.BRAGANCA,
-  ElectoralCircle.CASTELO_BRANCO,
-  ElectoralCircle.COIMBRA,
-  ElectoralCircle.EVORA,
-  ElectoralCircle.EUROPA,
-  ElectoralCircle.FARO,
-  ElectoralCircle.FORA_DA_EUROPA,
-  ElectoralCircle.GUARDA,
-  ElectoralCircle.LEIRIA,
-  ElectoralCircle.LISBOA,
-  ElectoralCircle.MADEIRA,
-  ElectoralCircle.PORTALEGRE,
-  ElectoralCircle.PORTO,
-  ElectoralCircle.SANATREM,
-  ElectoralCircle.SETUBAL,
-  ElectoralCircle.VIANA_DO_CASTELO,
-  ElectoralCircle.VILA_REAL,
-  ElectoralCircle.VISEU
-]
