@@ -11,41 +11,94 @@ datasource db {
 }
 
 model PartyAlliance {
-  id            Int     @id @db.Integer
-  name          String
-  acronym       String
-  photoFileName String
-  Parties       Party[]
+  id             Int              @id @db.Integer
+  name           String
+  acronym        String
+  photoFileName  String
+  Parties        Party[]
+  SocialPlatform SocialPlatform[]
 }
 
 model Party {
-  id            Int            @id @db.Integer
-  name          String
-  acronym       String
-  photoFileName String
-  Coligation    PartyAlliance? @relation(fields: [coligationId], references: [id])
-  coligationId  Int?
-  Candidates    Candidate[]
+  id                Int              @id @db.Integer
+  name              String
+  acronym           String
+  logoFileName      String?
+  description       String?
+  descriptionSource String?
+  Coligation        PartyAlliance?   @relation(fields: [coligationId], references: [id])
+  coligationId      Int?
+  Candidates        Candidate[]
+  SocialPlatform    SocialPlatform[]
+}
+
+model SocialPlatform {
+  id              Int                @id @db.Integer
+  platform        SocialPlatformName
+  link            String
+  Candidate       Candidate?         @relation(fields: [candidateId], references: [id])
+  candidateId     Int?               @db.Integer
+  Party           Party?             @relation(fields: [partyId], references: [id])
+  partyId         Int?               @db.Integer
+  PartyAlliance   PartyAlliance?     @relation(fields: [partyAllianceId], references: [id])
+  partyAllianceId Int?               @db.Integer
 }
 
 model Candidate {
-  id                Int               @id @db.Integer
-  shortName         String
-  fullName          String
-  birthdate         DateTime          @db.Date
-  photoFileName     String?
-  bio               String?
-  position          Int?
-  isSub             Boolean?
-  ElectoralCircle   ElectoralDistrict @relation(fields: [electoralCircleId], references: [id])
-  electoralCircleId Int
-  Party             Party             @relation(fields: [partyId], references: [id])
-  partyId           Int
+  id                  Int               @id @db.Integer
+  shortName           String
+  fullName            String
+  birthdate           DateTime          @db.Date
+  photoFileName       String?
+  bio                 String?
+  position            Int?
+  isSub               Boolean?
+  ElectoralDistrict   ElectoralDistrict @relation(fields: [electoralDistrictId], references: [id])
+  electoralDistrictId Int               @map("electoralCircleId")
+  Party               Party             @relation(fields: [partyId], references: [id])
+  partyId             Int
+  SocialPlatform      SocialPlatform[]
 }
 
 model ElectoralDistrict {
-  id              Int         @id @db.Integer
-  name            String
+  id              Int                   @id @db.Integer
+  name            ElectoralDistrictName
   electedDeputies Int
   Candidate       Candidate[]
+}
+
+enum ElectoralDistrictName {
+  ACORES
+  AVEIRO
+  BEJA
+  BRAGA
+  BRAGANCA
+  CASTELO_BRANCO
+  COIMBRA
+  EVORA
+  EUROPA
+  FARO
+  FORA_DA_EUROPA
+  GUARDA
+  LEIRIA
+  LISBOA
+  MADEIRA
+  PORTALEGRE
+  PORTO
+  SANTAREM
+  SETUBAL
+  VIANA_DO_CASTELO
+  VILA_REAL
+  VISEU
+}
+
+enum SocialPlatformName {
+  EMAIL
+  FACEBOOK
+  GITHUB
+  INSTAGRAM
+  MEDIUM
+  TWITTER
+  YOUTUBE
+  WEBSITE
 }

@@ -1,13 +1,20 @@
 import { Col, List, Row, Typography } from "antd";
 
 interface PartyCandidatesTableProps {
-  candidates: any;
+  candidates: {
+    id: number,
+    shortName: string,
+    fullName: string,
+    position: number,
+    isSub: boolean
+  }[]
 }
 
 const { Title } = Typography;
 
 const PartyCandidatesTable = ({ candidates }: PartyCandidatesTableProps) => {
-  const { main, secondary } = candidates;
+  const mainCandidates = candidates.filter(candidate => !candidate.isSub);
+  const subCandidates = candidates.filter(candidate => candidate.isSub);
 
   return (
     <section className="party-candidates-table">
@@ -19,9 +26,9 @@ const PartyCandidatesTable = ({ candidates }: PartyCandidatesTableProps) => {
           <Col span={24}>
             <List
               bordered={false}
-              dataSource={main}
-              renderItem={(canditate: any) => (
-                <List.Item>{`${canditate.position} - ${canditate.name}`}</List.Item>
+              dataSource={mainCandidates}
+              renderItem={canditate => (
+                <List.Item>{`${canditate.position} - ${canditate.fullName}`}</List.Item>
               )}
               className="party-candidates-table__items"
             />
@@ -36,7 +43,7 @@ const PartyCandidatesTable = ({ candidates }: PartyCandidatesTableProps) => {
           <Col span={24}>
             <List
               bordered={false}
-              dataSource={secondary}
+              dataSource={subCandidates}
               renderItem={(item: any) => (
                 <List.Item>{`${item.position} - ${item.name}`}</List.Item>
               )}

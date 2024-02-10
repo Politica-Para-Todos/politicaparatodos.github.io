@@ -28,22 +28,24 @@ export interface PartyHeader {
   description: string,
   descriptionSource: string,
   hasManifesto: boolean,
-  onlinePlatforms: OnlinePlatform[]
+  socialPlatforms: OnlinePlatform[]
 }
 
 export type PartyPage = {
+  id: number,
   name: string,
   acronym: string,
-  logoFileName: string,
-  description: string,
-  descriptionSource: string,
+  logoFileName?: string,
+  description?: string,
+  descriptionSource?: string,
   hasManifesto: boolean,
   onlinePlatforms: OnlinePlatform[],
   leadCandidates: PartyPageLeadCandidate[]
 }
 
 export type PartyPageLeadCandidate = {
-  name: string,
-  profileFileName: string,
-  electoralCircle: string
+  id: number,
+  shortName: string,
+  photoFileName: string,
+  electoralDistrict: string
 }
