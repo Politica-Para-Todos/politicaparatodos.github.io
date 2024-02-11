@@ -4,6 +4,7 @@ import { Fragment } from "react";
 import { PartyPage } from "../../src/retriever/dtos/party-dto";
 import { Conversion, acronymConversion } from "../../src/utils/manipuation";
 import { renderPartyLogo } from "../global/logos";
+import SocialSharing from "../global/social-sharing";
 
 interface PartyHeaderProps {
   party: PartyPage;
@@ -11,7 +12,7 @@ interface PartyHeaderProps {
 }
 
 const PartyHeader = ({ party, subtitle }: PartyHeaderProps) => {
-  const { name, acronym } = party;
+  const { name, acronym, logoFileName } = party;
   // const website = party.onlinePlatforms.filter(
   //   (op: OnlinePlatform) => op.type == OnlinePlatformType.WEBSITE
   // )[0];
@@ -31,7 +32,7 @@ const PartyHeader = ({ party, subtitle }: PartyHeaderProps) => {
       </Row>
       <Row typeof="flex" justify="center">
         <Col>
-          <Avatar size={200} src={renderPartyLogo(party.logoFileName)} icon="user" />
+          <Avatar size={200} src={renderPartyLogo(logoFileName || '')} icon="user" />
           <div className="party-header__program-cta">
             {party.hasManifesto && (
               <Button
@@ -64,7 +65,7 @@ const PartyHeader = ({ party, subtitle }: PartyHeaderProps) => {
         <a href={"website.address"} rel="noopener noreferrer" target="_blank">
           {"website.address"}
         </a>
-        {/* <SocialSharing onlinePlatforms={party.onlinePlatforms} theme={"#c4c4c4"} /> */}
+        <SocialSharing onlinePlatforms={party.onlinePlatforms} theme={"#c4c4c4"} />
       </Row>
     </section>
   );
