@@ -2,7 +2,7 @@ import seeds from "../../resources/seeds.json";
 import { ELECTORAL_CIRCLES } from "../utils/constants";
 import { acronymConversion, Conversion } from "../utils/manipuation";
 import { CandidatePage } from "./dtos/candidate-dto";
-import { electoralCircleDropdown } from "./dtos/electoral-circle-dto";
+import { electoralCircleDropdown } from "./dtos/electoral-district.dto";
 import { HomePageParty, OnlinePlatform, OnlinePlatformType, PartyHeader, PartyPage, PartyPageLeadCandidate } from "./dtos/party-dto";
 
 export interface SeedsJsonRetriever {
@@ -52,7 +52,7 @@ export class Retriever implements SeedsJsonRetriever {
       description: party.description,
       descriptionSource: party.description_source,
       hasManifesto: manifestos[partyAcronym] === undefined ? false : true,
-      onlinePlatforms: this.getOnlinePlatforms(party)
+      socialPlatforms: this.getOnlinePlatforms(party)
     }
   }
 
@@ -143,9 +143,9 @@ export class Retriever implements SeedsJsonRetriever {
 
       if (leadCandidate) {
         leadCandidates.push({
-          name: leadCandidate.name,
-          profileFileName: leadCandidate.photo,
-          electoralCircle: ELECTORAL_CIRCLES[i]
+          shortName: leadCandidate.name,
+          photoFileName: leadCandidate.photo,
+          electoralDistrict: ELECTORAL_CIRCLES[i]
         });
       }
     }

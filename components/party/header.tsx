@@ -1,10 +1,9 @@
 import { Avatar, Button, Col, Divider, Row } from "antd";
 import Link from "next/link";
 import { Fragment } from "react";
-import { OnlinePlatform, OnlinePlatformType, PartyPage } from "../../src/retriever/dtos/party-dto";
+import { PartyPage } from "../../src/retriever/dtos/party-dto";
 import { Conversion, acronymConversion } from "../../src/utils/manipuation";
 import { renderPartyLogo } from "../global/logos";
-import SocialSharing from "../global/social-sharing";
 
 interface PartyHeaderProps {
   party: PartyPage;
@@ -12,9 +11,10 @@ interface PartyHeaderProps {
 }
 
 const PartyHeader = ({ party, subtitle }: PartyHeaderProps) => {
-  const website = party.onlinePlatforms.filter(
-    (op: OnlinePlatform) => op.type == OnlinePlatformType.WEBSITE
-  )[0];
+  const { name, acronym } = party;
+  // const website = party.onlinePlatforms.filter(
+  //   (op: OnlinePlatform) => op.type == OnlinePlatformType.WEBSITE
+  // )[0];
 
   return (
     <section className="party-header">
@@ -61,10 +61,10 @@ const PartyHeader = ({ party, subtitle }: PartyHeaderProps) => {
         align="middle"
         className="party-header__social"
       >
-        <a href={website.address} rel="noopener noreferrer" target="_blank">
-          {website.address}
+        <a href={"website.address"} rel="noopener noreferrer" target="_blank">
+          {"website.address"}
         </a>
-        <SocialSharing onlinePlatforms={party.onlinePlatforms} theme={"#c4c4c4"} />
+        {/* <SocialSharing onlinePlatforms={party.onlinePlatforms} theme={"#c4c4c4"} /> */}
       </Row>
     </section>
   );
