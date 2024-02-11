@@ -8,9 +8,9 @@ import MetaTags from "../components/global/meta-tags";
 const PoliticalDebates: NextPage = () =>
   <Layout>
     <MetaTags
-      pageTitle="Debates Legislativas 2022"
+      pageTitle="Debates Legislativas 2024"
       pageDescription="A comunidade Política Para Todos nasceu no verão de 2019 com o objetivo de promover a participação ativa dos cidadãos nos processos eleitorais em Portugal. É composta por voluntários de várias partes do país e diferentes áreas profissionais."
-      socialTitle="Debates Legilativas 2022"
+      socialTitle="Debates Legilativas 2024"
       socialDescription="A comunidade Política Para Todos nasceu no verão de 2019 com o objetivo de promover a participação ativa dos cidadãos nos processos eleitorais em Portugal. É composta por voluntários de várias partes do país e diferentes áreas profissionais."
       socialImage="/horizontal_logo.svg"
     />
@@ -30,43 +30,29 @@ const PoliticalDebates: NextPage = () =>
           <Col span={24} lg={24} className="home-our-mission-text">
             <h1>Debates televisivos</h1>
             <p>Participam nos debates televisivos todos os partidos que, nas últimas eleições Legislativas (2019), conquistaram lugares parlamentares em várias rondas frente a frente. No final, ainda serão realizados dois debates com todos os partidos eleitos em 2019 (televisão e rádio) e outro com partidos não eleitos há dois anos.</p>
-            <p>Subscreve o nosso calendário com horários dos debates actualizados:
-              <a
-                href="https://bit.ly/debates22-PPT"
-                target="_blank"
-                rel="noopener noreferrer"> Calendário Google de debates 2022 <LinkOutlined />
-              </a>
-            </p>
             <Table dataSource={debateDates} columns={tableColumns} className="debates__table" />
             <Card title="Perdeste um debate?">
               <p>A RTP Play disponibiliza todos os debates independentemente do canal que tenha exibido. Aproveita para rever o debate que procuras:</p>
               <ul>
                 <li>
                   <a
-                    href="https://www.rtp.pt/play/p9711/legislativas-2022-debates-rtp"
+                    href="https://www.rtp.pt/play/p12900/debates-legislativas-2024"
                     target="_blank"
                     rel="noopener noreferrer">Debates RTP/RTP3 <LinkOutlined />
                   </a>
                 </li>
                 <li>
                   <a
-                    href="https://www.rtp.pt/play/p9787/legislativas-2022-debates-sic-sic-noticias"
+                    href="https://www.rtp.pt/play/p12899/debates-legislativas-2024-sicsic-noticias"
                     target="_blank"
                     rel="noopener noreferrer">Debates SIC/SIC Notícias <LinkOutlined />
                   </a>
                 </li>
                 <li>
                   <a
-                    href="https://www.rtp.pt/play/p9788/legislativas-2022-debates-tvi-cnn"
+                    href="https://www.rtp.pt/play/p12901/debates-legislativas-2024-tvicnn"
                     target="_blank"
                     rel="noopener noreferrer">Debates TVI/CNN Portugal <LinkOutlined />
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://www.rtp.pt/play/p9596/eleicoes-legislativas-2022-entrevistas-lideres-partidarios"
-                    target="_blank"
-                    rel="noopener noreferrer">Entrevista a lideres partidários <LinkOutlined />
                   </a>
                 </li>
               </ul>
@@ -81,201 +67,183 @@ const PoliticalDebates: NextPage = () =>
 const debateDates = [
   {
     key: "1",
-    data: "2 de Janeiro",
-    partidos: "PS x Livre",
-    canal: "RTP1/RTP3"
+    data: "5 de Fevereiro",
+    partidos: "PS x IL",
+    canal: "SIC"
   },
   {
     key: "2",
-    data: "2 de Janeiro",
-    partidos: "BE x Chega",
+    data: "5 de Fevereiro",
+    partidos: "Chega x PAN",
     canal: "SIC Notícias"
   },
   {
     key: "3",
-    data: "3 de Janeiro",
-    partidos: "PSD x Chega",
-    canal: "SIC"
+    data: "6 de Fevereiro",
+    partidos: "CDU x PAN",
+    canal: "RTP3"
   },
   {
     key: "4",
-    data: "4 de Janeiro",
+    data: "6 de Fevereiro",
+    partidos: "AD x BE",
+    canal: "TVI"
+  },
+  {
+    key: "5",
+    data: "6 de Fevereiro",
+    partidos: "Chega x IL",
+    canal: "SIC Notícias"
+  },
+  {
+    key: "6",
+    data: "7 de Fevereiro",
+    partidos: "IL x Livre",
+    canal: "CNN Portugal"
+  },
+  {
+    key: "7",
+    data: "8 de Fevereiro",
     partidos: "BE x Livre",
     canal: "SIC Notícias"
   },
   {
-    key: "5",
-    data: "4 de Janeiro",
-    partidos: "PS x CDU",
-    canal: "TVI"
-  },
-  {
-    key: "6",
-    data: "4 de Janeiro",
-    partidos: "CDS x PAN",
-    canal: "RTP3"
-  },
-  {
-    key: "7",
-    data: "5 de Janeiro",
-    partidos: "CDS x IL",
-    canal: "RTP3"
-  },
-  {
     key: "8",
-    data: "5 de Janeiro",
-    partidos: "PSD x BE",
-    canal: "SIC"
-  },
-  {
-    key: "9",
-    data: "5 de Janeiro",
-    partidos: "Chega x Livre",
-    canal: "CNN Portugal"
-  },
-  {
-    key: "10",
-    data: "6 de Janeiro",
-    partidos: "PS x Chega",
-    canal: "RTP1/RTP3"
-  },
-  {
-    key: "11",
-    data: "6 de Janeiro",
-    partidos: "BE x IL",
-    canal: "SIC Notícias"
-  },
-  {
-    key: "21",
-    data: "7 de Janeiro",
+    data: "9 de Fevereiro",
     partidos: "IL x PAN",
     canal: "SIC Notícias"
   },
   {
-    key: "12",
-    data: "7 de Janeiro",
-    partidos: "PSD x CDS",
-    canal: "TVI"
+    key: "9",
+    data: "9 de Fevereiro",
+    partidos: "PS x Livre",
+    canal: "RTP"
   },
   {
-    key: "13",
-    data: "8 de Janeiro",
+    key: "10",
+    data: "9 de Fevereiro",
+    partidos: "Chega x CDU",
+    canal: "CNN Portugal"
+  },
+  {
+    key: "11",
+    data: "10 de Fevereiro",
+    partidos: "AD x CDU",
+    canal: "RTP1"
+  },
+  {
+    key: "21",
+    data: "10 de Fevereiro",
     partidos: "PS x PAN",
     canal: "TVI"
   },
   {
-    key: "14",
-    data: "8 de Janeiro",
-    partidos: "PSD x Livre",
-    canal: "RTP1/RTP3"
-  },
-  {
-    key: "15",
-    data: "9 de Janeiro",
-    partidos: "PS x CDS",
+    key: "12",
+    data: "11 de Fevereiro",
+    partidos: "AD x PAN",
     canal: "SIC"
   },
   {
+    key: "13",
+    data: "11 de Fevereiro",
+    partidos: "BE x CDU",
+    canal: "SIC Notícias"
+  },
+  {
+    key: "14",
+    data: "12 de Fevereiro",
+    partidos: "AD x Chega",
+    canal: "RTP"
+  },
+  {
+    key: "15",
+    data: "13 de Fevereiro",
+    partidos: "CDU x Livre",
+    canal: "CNN Portugal"
+  },
+  {
     key: "16",
-    data: "9 de Janeiro",
-    partidos: "IL x Chega",
+    data: "13 de Fevereiro",
+    partidos: "Chega x BE",
     canal: "RTP3"
   },
   {
     key: "17",
-    data: "9 de Janeiro",
-    partidos: "PAN x Livre",
-    canal: "SIC Notícias"
+    data: "14 de Fevereiro",
+    partidos: "Livre x PAN",
+    canal: "RTP3"
   },
   {
     key: "18",
-    data: "10 de Janeiro",
-    partidos: "BE x PAN",
-    canal: "RTP3"
-  },
-  {
-    key: "19",
-    data: "10 de Janeiro",
-    partidos: "PSD x IL",
-    canal: "SIC"
-  },
-  {
-    key: "20",
-    data: "10 de Janeiro",
-    partidos: "CDS x Livre",
-    canal: "CNN"
-  },
-  {
-    key: "22",
-    data: "11 de Janeiro",
-    partidos: "PS x BE",
-    canal: "RTP1/RTP3"
-  },
-  {
-    key: "23",
-    data: "12 de Janeiro",
-    partidos: "CDS x Chega",
-    canal: "CNN"
-  },
-  {
-    key: "24",
-    data: "12 de Janeiro",
-    partidos: "PSD x CDU",
-    canal: "SIC"
-  },
-  {
-    key: "25",
-    data: "12 de Janeiro",
-    partidos: "IL x Livre",
-    canal: "SIC Notícias"
-  },
-  {
-    key: "26",
-    data: "13 de Janeiro",
-    partidos: "PS x PSD",
-    canal: "RTP1/SIC/TVI"
-  },
-  {
-    key: "27",
-    data: "14 de Janeiro",
-    partidos: "PAN x Chega",
-    canal: "SIC Notícias"
-  },
-  {
-    key: "28",
-    data: "14 de Janeiro",
-    partidos: "PS x IL",
+    data: "14 de Fevereiro",
+    partidos: "PS x Chega",
     canal: "TVI"
   },
   {
-    key: "29",
-    data: "14 de Janeiro",
-    partidos: "BE x CDS",
+    key: "19",
+    data: "14 de Fevereiro",
+    partidos: "IL x CDU",
     canal: "RTP3"
   },
   {
-    key: "30",
-    data: "15 de Janeiro",
-    partidos: "PSD x PAN",
-    canal: "RTP1/RTP3"
+    key: "20",
+    data: "15 de Fevereiro",
+    partidos: "IL x BE",
+    canal: "CNN Portugal"
   },
   {
-    key: "31",
-    data: "17 de Janeiro",
-    partidos: "Partidos com assento parlamentar (incluindo Livre)",
-    canal: "RTP1/RTP3"
+    key: "22",
+    data: "16 de Fevereiro",
+    partidos: "PS x BE",
+    canal: "RTP"
   },
   {
-    key: "32",
-    data: "18 de Janeiro",
+    key: "23",
+    data: "16 de Fevereiro",
+    partidos: "AD x IL",
+    canal: "SIC"
+  },
+  {
+    key: "24",
+    data: "16 de Fevereiro",
+    partidos: "Chega x Livre",
+    canal: "SIC Notícias"
+  },
+  {
+    key: "25",
+    data: "17 de Fevereiro",
+    partidos: "AD x Livre",
+    canal: "TVI"
+  },
+  {
+    key: "26",
+    data: "17 de Fevereiro",
+    partidos: "PS x CDU",
+    canal: "SIC"
+  },
+  {
+    key: "27",
+    data: "18 de Fevereiro",
+    partidos: "BE x PAN",
+    canal: "CNN Portugal"
+  },
+  {
+    key: "28",
+    data: "19 de Fevereiro",
+    partidos: "AD x PS",
+    canal: "TVI/RTP/SIC"
+  },
+  {
+    key: "29",
+    data: "20 de Fevereiro",
     partidos: "Partidos sem assento parlamentar",
     canal: "RTP1/RTP3"
   },
   {
-    key: "33",
-    data: "20 de Janeiro",
-    partidos: "Partidos com assento parlamentar (incluindo Livre)",
-    canal: "RR/Antena1/TSF"
+    key: "30",
+    data: "23 de Fevereiro",
+    partidos: "Partidos com assento parlamentar",
+    canal: "RTP1/RTP3"
   },
 ]
 
