@@ -13,7 +13,7 @@ const { Paragraph } = Typography;
 
 interface PartyCandidateProps {
   party: any,
-  candidates: { id: number, position: number, shortName: string, electoralDistrict: ElectoralDistrict, bio?: string, isSub: boolean }[]
+  candidates: { id: number, position: number, shortName: string, fullName: string, electoralDistrict: ElectoralDistrict, bio?: string, isSub: boolean }[]
 }
 
 const PartyCandidate = ({ party, candidates }: PartyCandidateProps) => {
