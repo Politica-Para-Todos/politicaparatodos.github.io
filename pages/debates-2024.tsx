@@ -29,7 +29,7 @@ const PoliticalDebates: NextPage = () =>
         <Row typeof="flex" justify="space-between" align="middle" className="debates_list">
           <Col span={24} lg={24} className="home-our-mission-text">
             <h1>Debates televisivos</h1>
-            <p>Participam nos debates televisivos todos os partidos que, nas últimas eleições Legislativas (2019), conquistaram lugares parlamentares em várias rondas frente a frente. No final, ainda serão realizados dois debates com todos os partidos eleitos em 2019 (televisão e rádio) e outro com partidos não eleitos há dois anos.</p>
+            <p>Participam nos debates televisivos todos os partidos que, nas últimas eleições Legislativas, conquistaram lugares parlamentares em várias rondas frente a frente. No final, ainda serão realizados dois debates com todos esses partidos eleitos (televisão e rádio) e outro com partidos correntemente sem assento parlamentar.</p>
             <Table dataSource={debateDates} columns={tableColumns} className="debates__table" />
             <Card title="Perdeste um debate?">
               <p>A RTP Play disponibiliza todos os debates independentemente do canal que tenha exibido. Aproveita para rever o debate que procuras:</p>
