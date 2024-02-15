@@ -65,7 +65,9 @@ const PartyHeader = ({ party, subtitle }: PartyHeaderProps) => {
         <a href={"website.address"} rel="noopener noreferrer" target="_blank">
           {"website.address"}
         </a>
-        <SocialSharing onlinePlatforms={party.onlinePlatforms} theme={"#c4c4c4"} />
+        {party.onlinePlatforms && (
+          <SocialSharing onlinePlatforms={party.onlinePlatforms} theme={"#c4c4c4"} />
+        )}
       </Row>
     </section>
   );

@@ -95,7 +95,7 @@ export const getStaticPaths = async () => {
       paths.push({
         params: {
           acronym: party.acronym.toLowerCase(),
-          electoralDistrict: convertElectoralDistrictToUrl(district)
+          electoralDistrict: convertElectoralDistrictToUrl(district as ElectoralDistrict)
         }
       })
     })
@@ -116,7 +116,7 @@ export const getStaticProps = async (context: any) => {
         acronym: context.params.acronym.toUpperCase()
       },
       ElectoralDistrict: {
-        name: context.params.electoralDistrict.toUpperCase()
+        name: context.params.electoralDistrict.toUpperCase().replace('-', ' ')
       },
     },
     include: {

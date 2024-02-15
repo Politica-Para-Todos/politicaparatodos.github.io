@@ -13,6 +13,8 @@ export const convertToLabel = (electoralDistrict: ElectoralDistrict) => electora
 export const convertToValue = (label: string) => label as ElectoralDistrict;
 // electoralCircleDropdown.filter(option => option.label == label)[0].value;
 
-export const convertElectoralDistrictToUrl = (district: string) => district.toLowerCase().replace('_', '-');
+export const convertElectoralDistrictToUrl = (district: ElectoralDistrict) => {
+  return district.toLowerCase().replace(' ', '-').replace('é', 'e').replace('ç', 'c').replace('ú', 'u');
+}
 
 export const electoralDistrictList = (): ElectoralDistrict[] => Object.values(ElectoralDistrict);

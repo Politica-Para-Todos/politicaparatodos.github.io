@@ -6,7 +6,7 @@ import MetaTags from "../../../components/global/meta-tags";
 import PartyHeader from "../../../components/party/header";
 import ManifestoSider from "../../../components/party/manifesto/sider";
 import { Retriever, SeedsJsonRetriever } from "../../../src/retriever/service";
-import { acronymConversion, Conversion } from "../../../src/utils/manipuation";
+import { Conversion, acronymConversion } from "../../../src/utils/manipuation";
 
 interface PartyManifestoProps {
   party: any,
