@@ -47,6 +47,128 @@ const Home: NextPage<HomePageProps> = ({ homePageParties }) =>
 
 export const getStaticProps = async () => {
   const prisma = new PrismaClient();
+
+  // temp create electoralDistricts
+  await prisma.electoralDistrict.createMany({
+    data: [
+      {
+        id: 0,
+        name: 'ACORES',
+        electedDeputies: 0
+      },
+      {
+        id: 1,
+        name: 'AVEIRO',
+        electedDeputies: 0
+      },
+      {
+        id: 2,
+        name: 'BEJA',
+        electedDeputies: 0
+      },
+      {
+        id: 3,
+        name: 'BRAGA',
+        electedDeputies: 0
+      },
+      {
+        id: 4,
+        name: 'BRAGANCA',
+        electedDeputies: 0
+      },
+      {
+        id: 5,
+        name: 'CASTELO_BRANCO',
+        electedDeputies: 0
+      },
+      {
+        id: 6,
+        name: 'COIMBRA',
+        electedDeputies: 0
+      },
+      {
+        id: 0,
+        name: 'ACORES',
+        electedDeputies: 0
+      },
+      {
+        id: 7,
+        name: 'EUROPA',
+        electedDeputies: 0
+      },
+      {
+        id: 8,
+        name: 'EVORA',
+        electedDeputies: 0
+      },
+      {
+        id: 9,
+        name: 'FARO',
+        electedDeputies: 0
+      },
+      {
+        id: 10,
+        name: 'FORA_DA_EUROPA',
+        electedDeputies: 0
+      },
+      {
+        id: 11,
+        name: 'GUARDA',
+        electedDeputies: 0
+      },
+      {
+        id: 12,
+        name: 'LEIRIA',
+        electedDeputies: 0
+      },
+      {
+        id: 13,
+        name: 'LISBOA',
+        electedDeputies: 0
+      },
+      {
+        id: 14,
+        name: 'MADEIRA',
+        electedDeputies: 0
+      },
+      {
+        id: 15,
+        name: 'PORTALEGRE',
+        electedDeputies: 0
+      },
+      {
+        id: 16,
+        name: 'PORTO',
+        electedDeputies: 0
+      },
+      {
+        id: 17,
+        name: 'SANTAREM',
+        electedDeputies: 0
+      },
+      {
+        id: 18,
+        name: 'SETUBAL',
+        electedDeputies: 0
+      },
+      {
+        id: 19,
+        name: 'VIANA_DO_CASTELO',
+        electedDeputies: 0
+      },
+      {
+        id: 20,
+        name: 'VILA_REAL',
+        electedDeputies: 0
+      },
+      {
+        id: 21,
+        name: 'VISEU',
+        electedDeputies: 0
+      }
+    ]
+  });
+
   const queryResult = await prisma.party.findMany({
     select: {
       id: true,
