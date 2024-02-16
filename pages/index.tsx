@@ -87,18 +87,13 @@ export const getStaticProps = async () => {
         electedDeputies: 0
       },
       {
-        id: 0,
-        name: 'ACORES',
-        electedDeputies: 0
-      },
-      {
         id: 7,
-        name: 'EUROPA',
+        name: 'EVORA',
         electedDeputies: 0
       },
       {
         id: 8,
-        name: 'EVORA',
+        name: 'EUROPA',
         electedDeputies: 0
       },
       {
