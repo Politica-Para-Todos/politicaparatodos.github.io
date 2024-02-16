@@ -12,7 +12,7 @@ interface PartyHeaderProps {
 }
 
 const PartyHeader = ({ party, subtitle }: PartyHeaderProps) => {
-  const { name, acronym, logoFileName } = party;
+  const { name, acronym, logoUrl } = party;
   // const website = party.onlinePlatforms.filter(
   //   (op: OnlinePlatform) => op.type == OnlinePlatformType.WEBSITE
   // )[0];
@@ -32,7 +32,7 @@ const PartyHeader = ({ party, subtitle }: PartyHeaderProps) => {
       </Row>
       <Row typeof="flex" justify="center">
         <Col>
-          <Avatar size={200} src={renderPartyLogo(logoFileName || '')} icon="user" />
+          <Avatar size={200} src={renderPartyLogo(logoUrl || '')} icon="user" />
           <div className="party-header__program-cta">
             {party.hasManifesto && (
               <Button

@@ -24,7 +24,7 @@ const PartyCandidate = ({ party, candidates }: PartyCandidateProps) => {
 
   const electoralDistrict = candidates[0].electoralDistrict;
   const leadCandidate = candidates.filter(candidate => candidate.position === 1 && !candidate.isSub)[0];
-  const { acronym, name, logoFileName } = party;
+  const { acronym, name, logoUrl } = party;
   const { bio, shortName } = leadCandidate;
 
   return (
@@ -35,7 +35,7 @@ const PartyCandidate = ({ party, candidates }: PartyCandidateProps) => {
           pageDescription={`Informações sobre o ${name} no círculo eleitoral de ${electoralDistrict}`}
           socialTitle={`${name} - Círculo eleitoral de ${electoralDistrict}`}
           socialDescription={`Informações sobre o ${name} no círculo eleitoral de ${electoralDistrict}`}
-          socialImage={`/party-logos/${logoFileName}`}
+          socialImage={`/party-logos/${logoUrl}`}
         />
       )}
       <LayoutHeader />
@@ -133,7 +133,7 @@ export const getStaticProps = async (context: any) => {
         id: party.id,
         name: party.name,
         acronym: party.acronym,
-        logoFileName: party.logoFileName,
+        logoUrl: party.logoUrl,
         description: party.description,
         descriptionSource: party.descriptionSource
       },

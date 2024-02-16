@@ -15,7 +15,7 @@ interface PartyHomeProps {
 }
 
 const PartyHome = ({ party }: PartyHomeProps) => {
-  const { name, acronym, description, descriptionSource, logoFileName, leadCandidates } = party;
+  const { name, acronym, description, descriptionSource, logoUrl, leadCandidates } = party;
 
   return (
     <Layout>
@@ -25,7 +25,7 @@ const PartyHome = ({ party }: PartyHomeProps) => {
           pageDescription={`Nesta página encontrarás o programa e os candidatos, por círculo eleitoral, do ${name}`}
           socialTitle={`Política Para Todos - Conhece o programa e os candidatos do ${acronym}`}
           socialDescription={`Nesta página encontrarás o programa e os candidatos, por círculo eleitoral, do ${name}`}
-          socialImage={`/party-logos/${logoFileName}`}
+          socialImage={`/party-logos/${logoUrl}`}
         />
       )}
       <LayoutHeader />
@@ -104,7 +104,7 @@ export const getStaticProps = async (context: any) => {
         acronym: party.acronym,
         description: party.description,
         descriptionSource: party.descriptionSource,
-        logoFileName: party.logoFileName,
+        logoUrl: party.logoUrl,
         socialPlatforms: socialPlatform.map(social => ({
           id: social.id,
           platform: social.platform,

@@ -17,14 +17,14 @@ export type HomePageParty = {
   id: number,
   name: string,
   acronym: string,
-  logoFileName: string,
+  logoUrl: string,
   electoralDistrict: Set<string>
 }
 
 export interface PartyHeader {
   name: string,
   acronym: string,
-  logoFileName: string,
+  logoUrl: string,
   description: string,
   descriptionSource: string,
   hasManifesto: boolean,
@@ -35,7 +35,7 @@ export type PartyPage = {
   id: number,
   name: string,
   acronym: string,
-  logoFileName?: string,
+  logoUrl?: string,
   description?: string,
   descriptionSource?: string,
   hasManifesto: boolean,

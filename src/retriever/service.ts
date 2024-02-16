@@ -55,7 +55,7 @@ export class Retriever implements SeedsJsonRetriever {
     return {
       name: party.name,
       acronym: partyAcronym,
-      logoFileName: party.logo,
+      logoUrl: party.logo,
       description: party.description,
       descriptionSource: party.description_source,
       hasManifesto: manifestos[partyAcronym] === undefined ? false : true,

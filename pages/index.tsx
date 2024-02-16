@@ -52,7 +52,7 @@ export const getStaticProps = async () => {
       id: true,
       name: true,
       acronym: true,
-      logoFileName: true,
+      logoUrl: true,
       Candidates: {
         select: {
           ElectoralDistrict: {
@@ -71,7 +71,7 @@ export const getStaticProps = async () => {
         id: party.id,
         name: party.name,
         acronym: party.acronym,
-        logoFileName: party.logoFileName,
+        logoUrl: party.logoUrl,
         electoralDistrict: [...new Set<string>(party.Candidates.map(candidate => candidate.ElectoralDistrict.name))]
       }))
     },
