@@ -80,8 +80,8 @@ const LayoutHeader = () => {
                   </Link>
                 </Menu.Item>
                 <Menu.Item key={3}>
-                  <Link href="/debates-2022" onClick={closeDrawer}>
-                    Debates 2022
+                  <Link href="/debates-2024" onClick={closeDrawer}>
+                    Debates 2024
                   </Link>
                 </Menu.Item>
                 <Menu.Item key={4}>
@@ -124,8 +124,8 @@ const LayoutHeader = () => {
               </Link>
             </Menu.Item>
             <Menu.Item>
-              <Link href="/debates-2022" onClick={closeDrawer}>
-                Debates 2022
+              <Link href="/debates-2024" onClick={closeDrawer}>
+                Debates 2024
               </Link>
             </Menu.Item>
             <Menu.Item>
