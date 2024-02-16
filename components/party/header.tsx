@@ -3,7 +3,6 @@ import Link from "next/link";
 import { Fragment } from "react";
 import { PartyPage } from "../../src/retriever/dtos/party-dto";
 import { Conversion, acronymConversion } from "../../src/utils/manipuation";
-import { renderPartyLogo } from "../global/logos";
 import SocialSharing from "../global/social-sharing";
 
 interface PartyHeaderProps {
@@ -32,7 +31,7 @@ const PartyHeader = ({ party, subtitle }: PartyHeaderProps) => {
       </Row>
       <Row typeof="flex" justify="center">
         <Col>
-          <Avatar size={200} src={renderPartyLogo(logoUrl || '')} icon="user" />
+          <Avatar size={200} src={logoUrl} icon="user" />
           <div className="party-header__program-cta">
             {party.hasManifesto && (
               <Button
