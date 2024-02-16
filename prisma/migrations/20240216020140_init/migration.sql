@@ -1,9 +1,3 @@
--- CreateEnum
-CREATE TYPE "ElectoralDistrictName" AS ENUM ('ACORES', 'AVEIRO', 'BEJA', 'BRAGA', 'BRAGANCA', 'CASTELO_BRANCO', 'COIMBRA', 'EVORA', 'EUROPA', 'FARO', 'FORA_DA_EUROPA', 'GUARDA', 'LEIRIA', 'LISBOA', 'MADEIRA', 'PORTALEGRE', 'PORTO', 'SANTAREM', 'SETUBAL', 'VIANA_DO_CASTELO', 'VILA_REAL', 'VISEU');
-
--- CreateEnum
-CREATE TYPE "SocialPlatformName" AS ENUM ('EMAIL', 'FACEBOOK', 'GITHUB', 'INSTAGRAM', 'MEDIUM', 'TWITTER', 'YOUTUBE', 'WEBSITE');
-
 -- CreateTable
 CREATE TABLE "PartyAlliance" (
     "id" INTEGER NOT NULL,
@@ -30,7 +24,7 @@ CREATE TABLE "Party" (
 -- CreateTable
 CREATE TABLE "SocialPlatform" (
     "id" INTEGER NOT NULL,
-    "platform" "SocialPlatformName" NOT NULL,
+    "platform" TEXT NOT NULL,
     "link" TEXT NOT NULL,
     "candidateId" INTEGER,
     "partyId" INTEGER,
@@ -58,7 +52,7 @@ CREATE TABLE "Candidate" (
 -- CreateTable
 CREATE TABLE "ElectoralDistrict" (
     "id" INTEGER NOT NULL,
-    "name" "ElectoralDistrictName" NOT NULL,
+    "name" TEXT NOT NULL,
     "electedDeputies" INTEGER NOT NULL,
 
     CONSTRAINT "ElectoralDistrict_pkey" PRIMARY KEY ("id")
