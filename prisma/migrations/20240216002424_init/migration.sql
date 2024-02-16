@@ -1,15 +1,15 @@
 -- CreateEnum
-CREATE TYPE "ElectoralDistrictName" AS ENUM ('AVEIRO', 'BEJA', 'BRAGANCA', 'COIMBRA', 'LEIRIA', 'LISBOA', 'EVORA', 'EUROPA', 'FARO', 'FORA_DA_EUROPA', 'GUARDA', 'PORTALEGRE', 'PORTO', 'SANTAREM', 'SETUBAL', 'VIANA_DO_CASTELO', 'VISEU');
+CREATE TYPE "ElectoralDistrictName" AS ENUM ('ACORES', 'AVEIRO', 'BEJA', 'BRAGA', 'BRAGANCA', 'CASTELO_BRANCO', 'COIMBRA', 'EVORA', 'EUROPA', 'FARO', 'FORA_DA_EUROPA', 'GUARDA', 'LEIRIA', 'LISBOA', 'MADEIRA', 'PORTALEGRE', 'PORTO', 'SANTAREM', 'SETUBAL', 'VIANA_DO_CASTELO', 'VILA_REAL', 'VISEU');
 
 -- CreateEnum
-CREATE TYPE "SocialPlatformName" AS ENUM ('EMAIL', 'FACEBOOK', 'INSTAGRAM', 'TWITTER', 'TIKTOK', 'YOUTUBE', 'WEBSITE');
+CREATE TYPE "SocialPlatformName" AS ENUM ('EMAIL', 'FACEBOOK', 'GITHUB', 'INSTAGRAM', 'MEDIUM', 'TWITTER', 'YOUTUBE', 'WEBSITE');
 
 -- CreateTable
 CREATE TABLE "PartyAlliance" (
     "id" INTEGER NOT NULL,
     "name" TEXT NOT NULL,
     "acronym" TEXT NOT NULL,
-    "photoFileName" TEXT NOT NULL,
+    "logoUrl" TEXT NOT NULL,
 
     CONSTRAINT "PartyAlliance_pkey" PRIMARY KEY ("id")
 );
@@ -19,7 +19,7 @@ CREATE TABLE "Party" (
     "id" INTEGER NOT NULL,
     "name" TEXT NOT NULL,
     "acronym" TEXT NOT NULL,
-    "logoFileName" TEXT,
+    "logoUrl" TEXT,
     "description" TEXT,
     "descriptionSource" TEXT,
     "coligationId" INTEGER,
@@ -45,7 +45,7 @@ CREATE TABLE "Candidate" (
     "shortName" TEXT NOT NULL,
     "fullName" TEXT NOT NULL,
     "birthdate" DATE NOT NULL,
-    "photoFileName" TEXT,
+    "profilePhotoUrl" TEXT,
     "bio" TEXT,
     "position" INTEGER,
     "isSub" BOOLEAN,

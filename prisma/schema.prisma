@@ -14,7 +14,7 @@ model PartyAlliance {
   id             Int              @id @db.Integer
   name           String
   acronym        String
-  photoFileName  String
+  logoUrl        String
   Parties        Party[]
   SocialPlatform SocialPlatform[]
 }
@@ -23,7 +23,7 @@ model Party {
   id                Int              @id @db.Integer
   name              String
   acronym           String
-  logoFileName      String?
+  logoUrl           String?
   description       String?
   descriptionSource String?
   Coligation        PartyAlliance?   @relation(fields: [coligationId], references: [id])
@@ -49,7 +49,7 @@ model Candidate {
   shortName           String
   fullName            String
   birthdate           DateTime          @db.Date
-  photoFileName       String?
+  profilePhotoUrl     String?
   bio                 String?
   position            Int?
   isSub               Boolean?
