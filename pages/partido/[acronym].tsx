@@ -104,7 +104,7 @@ export const getStaticProps = async (context: any) => {
     }
   })
 
-  if (!candidates) {
+  if (candidates.length === 0) {
     return {
       props: {
         party: null
