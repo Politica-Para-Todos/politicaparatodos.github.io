@@ -1,7 +1,7 @@
 import seeds from "../../resources/seeds.json";
 import { acronymConversion, Conversion } from "../utils/manipuation";
 import { CandidatePage } from "./dtos/candidate-dto";
-import { HomePageParty, OnlinePlatform, OnlinePlatformType, PartyHeader, PartyPage } from "./dtos/party-dto";
+import { HomePageParty, PartyHeader, PartyPage, SocialPlatform, SocialPlatformType } from "./dtos/party-dto";
 
 export interface SeedsJsonRetriever {
   partyAcronyms(): string[];
@@ -159,27 +159,27 @@ export class Retriever implements SeedsJsonRetriever {
   //   return leadCandidates;
   // }
 
-  private getOnlinePlatforms(party: any): OnlinePlatform[] {
+  private getOnlinePlatforms(party: any): SocialPlatform[] {
     return [
       {
-        type: OnlinePlatformType.EMAIL,
-        address: party.email
+        type: SocialPlatformType.EMAIL,
+        link: party.email
       },
       {
-        type: OnlinePlatformType.WEBSITE,
-        address: party.website
+        type: SocialPlatformType.WEBSITE,
+        link: party.website
       },
       {
-        type: OnlinePlatformType.FACEBOOK,
-        address: party.facebook
+        type: SocialPlatformType.FACEBOOK,
+        link: party.facebook
       },
       {
-        type: OnlinePlatformType.INSTAGRAM,
-        address: party.instagram
+        type: SocialPlatformType.INSTAGRAM,
+        link: party.instagram
       },
       {
-        type: OnlinePlatformType.TWITTER,
-        address: party.twitter
+        type: SocialPlatformType.TWITTER,
+        link: party.twitter
       }
     ]
   }

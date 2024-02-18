@@ -5,6 +5,7 @@ import LayoutHeader from "../../components/global/layout-header";
 import MetaTags from "../../components/global/meta-tags";
 import PartyCandidatesList from "../../components/party/candidate-list";
 import PartyHeader from "../../components/party/header";
+import PartyIntro from "../../components/party/intro";
 import { PartyPage } from "../../src/retriever/dtos/party-dto";
 import { Conversion, acronymConversion } from "../../src/utils/manipuation";
 
@@ -35,29 +36,26 @@ const PartyHome = ({ party }: PartyHomeProps) => {
       <LayoutHeader />
       <Layout.Content className="party-section">
         <PartyHeader party={party} subtitle="" />
-        {/* <PartyIntro spokesperson={null} title="Descrição do Partido">
-          {party}
-          {!description ? (
-            <Paragraph>Descrição não fornecida.</Paragraph>
-          ) : (
+        {description && descriptionSource && (
+          <PartyIntro spokesperson={null} title="Descrição do Partido">
             <Paragraph>{description}</Paragraph>
-            //     {descriptionSource
-            //   .split("\n")
-            //   .map((desc: string, index: number) => (
-            //     <Paragraph key={index}>
-            //       Fonte: <a href={desc} target="_blank" rel="noopener noreferrer"> Wikipedia</a>
-            //     </Paragraph>
-            //   ))
-            // }
-          )};
-        </PartyIntro> */}
+            {
+              descriptionSource.split("\n")
+                .map((desc: string, index: number) => (
+                  <Paragraph key={index}>
+                    Fonte: <a href={desc} target="_blank" rel="noopener noreferrer"> Wikipedia</a>
+                  </Paragraph>
+                ))
+            }
+          </PartyIntro>
+        )}
         <PartyCandidatesList
           candidates={leadCandidates}
           partyAcronym={acronym}
         />
       </Layout.Content>
       <LayoutFooter />
-    </Layout>
+    </Layout >
   )
 }
 
@@ -98,8 +96,11 @@ export const getStaticProps = async (context: any) => {
       }
     },
     include: {
-      Party: true,
-      SocialPlatform: true,
+      Party: {
+        include: {
+          SocialPlatform: true,
+        }
+      },
       ElectoralDistrict: true
     }
   })
@@ -113,7 +114,6 @@ export const getStaticProps = async (context: any) => {
   }
 
   const party = candidates[0].Party;
-  const socialPlatform = candidates[0].SocialPlatform;
 
   return {
     props: {
@@ -124,7 +124,7 @@ export const getStaticProps = async (context: any) => {
         description: party.description,
         descriptionSource: party.descriptionSource,
         logoUrl: party.logoUrl,
-        socialPlatforms: socialPlatform.map(social => ({
+        socialPlatforms: party.SocialPlatform.map(social => ({
           id: social.id,
           platform: social.platform,
           link: social.link

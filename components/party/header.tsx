@@ -12,9 +12,7 @@ interface PartyHeaderProps {
 
 const PartyHeader = ({ party, subtitle }: PartyHeaderProps) => {
   const { name, acronym, logoUrl } = party;
-  // const website = party.onlinePlatforms.filter(
-  //   (op: OnlinePlatform) => op.type == OnlinePlatformType.WEBSITE
-  // )[0];
+  const website = party.socialPlatforms.find(sp => sp.platform == 'WEBSITE');
 
   return (
     <section className="party-header">
@@ -61,15 +59,15 @@ const PartyHeader = ({ party, subtitle }: PartyHeaderProps) => {
         align="middle"
         className="party-header__social"
       >
-        <a href={"website.address"} rel="noopener noreferrer" target="_blank">
-          {"website.address"}
+        <a href={website?.link} rel="noopener noreferrer" target="_blank">
+          {website?.link}
         </a>
-        {party.onlinePlatforms && (
-          <SocialSharing onlinePlatforms={party.onlinePlatforms} theme={"#c4c4c4"} />
+        {party.socialPlatforms && (
+          <SocialSharing onlinePlatforms={party.socialPlatforms} theme={"#c4c4c4"} />
         )}
       </Row>
-    </section>
-  );
-};
+    </section >
+  )
+}
 
 export default PartyHeader;

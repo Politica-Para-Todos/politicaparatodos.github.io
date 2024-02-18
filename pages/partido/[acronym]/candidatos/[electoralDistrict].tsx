@@ -126,7 +126,11 @@ export const getStaticProps = async (context: any) => {
       },
     },
     include: {
-      Party: true,
+      Party: {
+        include: {
+          SocialPlatform: true
+        }
+      },
       ElectoralDistrict: true
     }
   })
@@ -150,7 +154,12 @@ export const getStaticProps = async (context: any) => {
         acronym: party.acronym,
         logoUrl: party.logoUrl,
         description: party.description,
-        descriptionSource: party.descriptionSource
+        descriptionSource: party.descriptionSource,
+        socialPlatforms: party.SocialPlatform.map(sp => ({
+          id: sp.id,
+          platform: sp.platform,
+          link: sp.link
+        }))
       },
       candidates: candidates.map(candidate => ({
         id: candidate.id,

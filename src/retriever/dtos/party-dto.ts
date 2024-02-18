@@ -1,9 +1,10 @@
-export interface OnlinePlatform {
-  type: OnlinePlatformType;
-  address: string;
+export interface SocialPlatform {
+  id: number,
+  platform: string;
+  link: string;
 }
 
-export enum OnlinePlatformType {
+export enum SocialPlatformType {
   WEBSITE = "Website",
   TWITTER = "Twitter",
   FACEBOOK = "Facebook",
@@ -28,7 +29,7 @@ export interface PartyHeader {
   description: string,
   descriptionSource: string,
   hasManifesto: boolean,
-  socialPlatforms: OnlinePlatform[]
+  socialPlatforms: SocialPlatform[]
 }
 
 export type PartyPage = {
@@ -39,7 +40,7 @@ export type PartyPage = {
   description?: string,
   descriptionSource?: string,
   hasManifesto: boolean,
-  onlinePlatforms: OnlinePlatform[],
+  socialPlatforms: SocialPlatform[],
   leadCandidates: PartyPageLeadCandidate[]
 }
 

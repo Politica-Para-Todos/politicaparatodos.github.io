@@ -1,7 +1,7 @@
 import { Col, Layout, Row } from "antd";
 import Link from "next/link";
 import { memo } from "react";
-import { socialMediaOptions } from "../../src/utils/online-platform";
+import { pptOnlinePlatforms } from "../../src/utils/online-platform";
 import ContributorsList from "./contributors-list";
 import { FooterLogo } from "./logos";
 import SocialSharing from "./social-sharing";
@@ -23,7 +23,7 @@ const HomeFooter = () => {
           className="footer-social"
         >
           <SocialSharing
-            onlinePlatforms={socialMediaOptions}
+            onlinePlatforms={pptOnlinePlatforms}
           />
           <FooterLogo />
         </Col>
