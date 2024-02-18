@@ -15,6 +15,10 @@ interface PartyHomeProps {
 }
 
 const PartyHome = ({ party }: PartyHomeProps) => {
+  if (party === undefined) {
+    return null;
+  }
+
   const { name, acronym, description, descriptionSource, logoUrl, leadCandidates } = party;
 
   return (
@@ -77,8 +81,9 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context: any) => {
   const prisma = new PrismaClient();
+  console.log(context.params.acronym.toUpperCase());
   // Doing query by candidates as by party fails because prisma can't query on a list of candidates
-  const queryResult = await prisma.candidate.findMany({
+  const candidates = await prisma.candidate.findMany({
     where: {
       position: 1,
       isSub: false,
@@ -93,8 +98,16 @@ export const getStaticProps = async (context: any) => {
     }
   })
 
-  const party = queryResult[0].Party;
-  const socialPlatform = queryResult[0].SocialPlatform;
+  if (candidates.length === 0) {
+    return {
+      props: {
+        party: {}
+      }
+    }
+  }
+
+  const party = candidates[0].Party;
+  const socialPlatform = candidates[0].SocialPlatform;
 
   return {
     props: {
@@ -110,7 +123,7 @@ export const getStaticProps = async (context: any) => {
           platform: social.platform,
           link: social.link
         })),
-        leadCandidates: queryResult.map(candidate => ({
+        leadCandidates: candidates.map(candidate => ({
           id: candidate.id,
           shortName: candidate.shortName,
           electoralDistrict: candidate.ElectoralDistrict.name
