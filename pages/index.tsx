@@ -11,7 +11,7 @@ import HomeParties from "../components/home/parties";
 import { HomePageParty } from "../src/retriever/dtos/party-dto";
 
 interface HomePageProps {
-  homePageParties: HomePageParty[];
+  homePageParties: HomePageParty[] | null;
 }
 
 const Home: NextPage<HomePageProps> = ({ homePageParties }) =>
@@ -29,7 +29,9 @@ const Home: NextPage<HomePageProps> = ({ homePageParties }) =>
       <HomeCountdown />
       <HomeMission />
       <HomeMedia />
-      <HomeParties parties={homePageParties} />
+      {homePageParties && (
+        <HomeParties parties={homePageParties} />
+      )}
       <div className="getsocial gs-inline-group"></div>
     </Layout.Content>
     <LayoutFooter />
@@ -47,7 +49,7 @@ const Home: NextPage<HomePageProps> = ({ homePageParties }) =>
 
 export const getStaticProps = async () => {
   const prisma = new PrismaClient();
-  const queryResult = await prisma.party.findMany({
+  const parties = await prisma.party.findMany({
     select: {
       id: true,
       name: true,
@@ -65,9 +67,9 @@ export const getStaticProps = async () => {
     }
   });
 
-  return {
+  return parties === undefined ? null : {
     props: {
-      homePageParties: queryResult.map(party => ({
+      homePageParties: parties.map(party => ({
         id: party.id,
         name: party.name,
         acronym: party.acronym,

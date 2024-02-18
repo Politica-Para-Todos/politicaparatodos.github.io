@@ -19,8 +19,6 @@ const isSameDistrict = (district: string, districtFilter: ElectoralDistrictFilte
   district === (districtFilter as string).toUpperCase();
 
 const HomeParties = ({ parties }: HomePartiesProps) => {
-  let filteredParties: HomePageParty[] = parties;
-
   const [state, setState] = useState({
     alphabeticalOrder: false,
     districtFilter: ElectoralDistrictFilter.TODOS,
@@ -39,6 +37,8 @@ const HomeParties = ({ parties }: HomePartiesProps) => {
       districtFilter: district as ElectoralDistrictFilter,
     });
   };
+
+  let filteredParties: HomePageParty[] = parties;
 
   if (state.districtFilter !== ElectoralDistrictFilter.TODOS) {
     filteredParties = parties.filter(party => [...party.electoralDistrict].find(district => isSameDistrict(district, state.districtFilter)));

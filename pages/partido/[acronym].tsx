@@ -11,11 +11,11 @@ import { Conversion, acronymConversion } from "../../src/utils/manipuation";
 const { Paragraph } = Typography;
 
 interface PartyHomeProps {
-  party: PartyPage;
+  party: PartyPage | null;
 }
 
 const PartyHome = ({ party }: PartyHomeProps) => {
-  if (party.name === undefined) {
+  if (!party) {
     return null;
   }
 
@@ -63,9 +63,16 @@ const PartyHome = ({ party }: PartyHomeProps) => {
 
 export const getStaticPaths = async () => {
   const prisma = new PrismaClient();
-  const queryResult = await prisma.party.findMany();
+  const parties = await prisma.party.findMany();
 
-  const params: object[] = queryResult.map(party => {
+  if (!parties) {
+    return {
+      paths: [],
+      fallback: false,
+    };
+  }
+
+  const params: object[] = parties.map(party => {
     return {
       params: {
         acronym: acronymConversion(party.acronym, Conversion.TO_URL)
@@ -97,10 +104,10 @@ export const getStaticProps = async (context: any) => {
     }
   })
 
-  if (candidates.length === 0) {
+  if (!candidates) {
     return {
       props: {
-        party: {}
+        party: null
       }
     }
   }
