@@ -79,8 +79,9 @@ const PartyCandidate = ({ party, candidates }: PartyCandidateProps) => {
   );
 };
 
+const prisma = new PrismaClient();
+
 export const getStaticPaths = async () => {
-  const prisma = new PrismaClient();
   const paths: object[] = [];
 
   const parties = await prisma.party.findMany({
@@ -114,16 +115,15 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async (context: any) => {
-  const prisma = new PrismaClient();
   // Doing query by candidates as by party fails because prisma can't query on a list of candidates
-  console.log("ELECTORAL DISTRICT >>>>", context.params.electoralDistrict.toUpperCase().replace('-', ' '))
+  console.log("ELECTORAL DISTRICT >>>>", context.params.electoralDistrict.toUpperCase().replace('-', '_'))
   const candidates = await prisma.candidate.findMany({
     where: {
       Party: {
         acronym: context.params.acronym.toUpperCase()
       },
       ElectoralDistrict: {
-        name: context.params.electoralDistrict.toUpperCase().replace('-', ' ')
+        name: context.params.electoralDistrict.toUpperCase().replace('-', '_')
       },
     },
     include: {
