@@ -1,6 +1,6 @@
 import { Col, Row, Select, Switch } from "antd";
 import { useState } from "react";
-import { electoralCircleDropdown } from "../../src/retriever/dtos/electoral-circle-dto";
+import { electoralDistrictDropdown } from "../../src/retriever/dtos/electoral-district.dto";
 import { HomePageParty } from "../../src/retriever/dtos/party-dto";
 import { shuffleParties } from "../../src/utils/manipuation";
 import AvatarList from "./avatar-list";
@@ -9,12 +9,19 @@ interface HomePartiesProps {
   parties: HomePageParty[];
 }
 
-const HomeParties = ({ parties }: HomePartiesProps) => {
-  let sortedParties: HomePageParty[];
+enum ElectoralDistrictFilter {
+  AVEIRO = "Aveiro",
+  TODOS = "Todos",
+  LISBOA = "Lisboa"
+}
 
+const isSameDistrict = (district: string, districtFilter: ElectoralDistrictFilter): boolean =>
+  district === (districtFilter as string).toUpperCase();
+
+const HomeParties = ({ parties }: HomePartiesProps) => {
   const [state, setState] = useState({
     alphabeticalOrder: false,
-    districtFilter: "Todos",
+    districtFilter: ElectoralDistrictFilter.TODOS,
   });
 
   const onChange = () => {
@@ -24,33 +31,24 @@ const HomeParties = ({ parties }: HomePartiesProps) => {
     });
   };
 
-  const filterDisctrict = (district: string) => {
+  const filterParties = (district: string) => {
     setState({
       alphabeticalOrder: state.alphabeticalOrder,
-      districtFilter: district,
+      districtFilter: district as ElectoralDistrictFilter,
     });
   };
 
-  // if (state.districtFilter !== "Todos") {
-  //   sortedParties = parties.filter((party: Party) => party.includes(district));
-  // }
+  let filteredParties: HomePageParty[] = parties;
+
+  if (state.districtFilter !== ElectoralDistrictFilter.TODOS) {
+    filteredParties = parties.filter(party => [...party.electoralDistrict].find(district => isSameDistrict(district, state.districtFilter)));
+  }
 
   if (state.alphabeticalOrder) {
-    const partiesToSort = [...parties];
-    sortedParties = partiesToSort.sort((party1, party2) => {
-      const partyName1 = party1.acronym.toLowerCase();
-      const partyName2 = party2.acronym.toLowerCase();
-
-      if (partyName1 > partyName2) {
-        return 1;
-      }
-      if (partyName1 < partyName2) {
-        return -1;
-      }
-      return 0;
-    });
-  } else {
-    sortedParties = shuffleParties(parties);
+    filteredParties = parties.sort((partyA, partyB) => partyA.acronym.toLowerCase().localeCompare(partyB.acronym.toLowerCase()));
+  }
+  else {
+    filteredParties = shuffleParties(filteredParties);
   }
 
   return (
@@ -85,17 +83,17 @@ const HomeParties = ({ parties }: HomePartiesProps) => {
               <Select
                 style={{ width: "100%" }}
                 placeholder="Escolha o Círculo Eleitoral"
-                onChange={filterDisctrict}
+                onChange={filterParties}
               >
-                {electoralCircleDropdown.map(element => (
-                  <Select.Option key={element.value} value={element.label}>
-                    {element.label}
+                {electoralDistrictDropdown().map((element, index) => (
+                  <Select.Option key={index} value={element}>
+                    {element}
                   </Select.Option>
                 ))}
               </Select>
             </Col>
           </Row>
-          <AvatarList theme={"4x3"} parties={sortedParties} />
+          <AvatarList theme={"4x3"} parties={filteredParties} />
         </Col>
       </Row>
     </section>

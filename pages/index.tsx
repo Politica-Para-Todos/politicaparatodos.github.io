@@ -1,3 +1,4 @@
+import { PrismaClient } from "@prisma/client";
 import { Layout } from "antd";
 import type { NextPage } from "next";
 import LayoutFooter from "../components/global/layout-footer";
@@ -8,10 +9,9 @@ import HomeMedia from "../components/home/media";
 import { HomeMission, HomeMissionInfographic } from "../components/home/mission";
 import HomeParties from "../components/home/parties";
 import { HomePageParty } from "../src/retriever/dtos/party-dto";
-import { Retriever, SeedsJsonRetriever } from "../src/retriever/service";
 
 interface HomePageProps {
-  homePageParties: HomePageParty[];
+  homePageParties: HomePageParty[] | null;
 }
 
 const Home: NextPage<HomePageProps> = ({ homePageParties }) =>
@@ -29,18 +29,44 @@ const Home: NextPage<HomePageProps> = ({ homePageParties }) =>
       <HomeCountdown />
       <HomeMission />
       <HomeMedia />
-      <HomeParties parties={homePageParties} />
+      {homePageParties && (
+        <HomeParties parties={homePageParties} />
+      )}
       <div className="getsocial gs-inline-group"></div>
     </Layout.Content>
     <LayoutFooter />
   </Layout>
 
-export const getStaticProps = async () => {
-  const retriever: SeedsJsonRetriever = new Retriever();
+const prisma = new PrismaClient();
 
-  return {
+export const getStaticProps = async () => {
+  const parties = await prisma.party.findMany({
+    select: {
+      id: true,
+      name: true,
+      acronym: true,
+      logoUrl: true,
+      Candidates: {
+        select: {
+          ElectoralDistrict: {
+            select: {
+              name: true
+            }
+          }
+        }
+      }
+    }
+  });
+
+  return parties === undefined ? null : {
     props: {
-      homePageParties: retriever.homePageParties()
+      homePageParties: parties.map(party => ({
+        id: party.id,
+        name: party.name,
+        acronym: party.acronym,
+        logoUrl: party.logoUrl,
+        electoralDistrict: [...new Set<string>(party.Candidates.map(candidate => candidate.ElectoralDistrict.name))]
+      }))
     },
   };
 };

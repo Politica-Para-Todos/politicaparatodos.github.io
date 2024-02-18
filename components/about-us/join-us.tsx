@@ -12,13 +12,7 @@ const AboutUsJoinUs = () =>
           transparência radical: todas as nossas decisões são públicas e é clara
           qual a contribuição de cada indivíduo. Toda a comunicação deste
           projecto passa pela nossa página na plataforma Loomio. Entra
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href={LOOMIO_PPT_URL}
-          >
-            neste link
-          </a>{" "}
+          <a target="_blank" rel="noopener noreferrer" href={LOOMIO_PPT_URL}> neste link </a>
           para ver toda a nossa comunicação, e caso queiras contribuir, vai até
           à conversa &quot;Como Contribuir&quot;. Ficamos à espera!
         </p>

@@ -1,9 +1,10 @@
-export interface OnlinePlatform {
-  type: OnlinePlatformType;
-  address: string;
+export interface SocialPlatform {
+  id: number,
+  platform: string;
+  link: string;
 }
 
-export enum OnlinePlatformType {
+export enum SocialPlatformType {
   WEBSITE = "Website",
   TWITTER = "Twitter",
   FACEBOOK = "Facebook",
@@ -14,34 +15,38 @@ export enum OnlinePlatformType {
 }
 
 export type HomePageParty = {
+  id: number,
   name: string,
   acronym: string,
-  logoFileName: string
+  logoUrl: string,
+  electoralDistrict: Set<string>
 }
 
 export interface PartyHeader {
   name: string,
   acronym: string,
-  logoFileName: string,
+  logoUrl: string,
   description: string,
   descriptionSource: string,
   hasManifesto: boolean,
-  onlinePlatforms: OnlinePlatform[]
+  socialPlatforms: SocialPlatform[]
 }
 
 export type PartyPage = {
+  id: number,
   name: string,
   acronym: string,
-  logoFileName: string,
-  description: string,
-  descriptionSource: string,
+  logoUrl?: string,
+  description?: string,
+  descriptionSource?: string,
   hasManifesto: boolean,
-  onlinePlatforms: OnlinePlatform[],
+  socialPlatforms: SocialPlatform[],
   leadCandidates: PartyPageLeadCandidate[]
 }
 
 export type PartyPageLeadCandidate = {
-  name: string,
-  profileFileName: string,
-  electoralCircle: string
+  id: number,
+  shortName: string,
+  photoFileName: string,
+  electoralDistrict: string
 }

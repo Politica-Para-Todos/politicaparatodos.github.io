@@ -1,7 +1,7 @@
 import { Col, Layout, Row } from "antd";
 import Link from "next/link";
 import { memo } from "react";
-import { socialMediaOptions } from "../../src/utils/online-platform";
+import { pptOnlinePlatforms } from "../../src/utils/online-platform";
 import ContributorsList from "./contributors-list";
 import { FooterLogo } from "./logos";
 import SocialSharing from "./social-sharing";
@@ -10,7 +10,7 @@ const HomeFooter = () => {
   const { Footer } = Layout;
 
   const TeamLink = () => (
-    <Link rel="noopener" href="/about-us">aqui</Link>
+    <Link rel="noopener" href="/quem-somos">aqui</Link>
   );
 
   return (
@@ -23,7 +23,7 @@ const HomeFooter = () => {
           className="footer-social"
         >
           <SocialSharing
-            onlinePlatforms={socialMediaOptions}
+            onlinePlatforms={pptOnlinePlatforms}
           />
           <FooterLogo />
         </Col>

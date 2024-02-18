@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Fragment, memo, useState } from "react";
 import { LOOMIO_PPT_URL } from "../../src/utils/constants";
-import { socialMediaOptions } from "../../src/utils/online-platform";
+import { pptOnlinePlatforms } from "../../src/utils/online-platform";
 import { HeaderLogo } from "./logos";
 import SocialSharing from "./social-sharing";
 
@@ -98,7 +98,7 @@ const LayoutHeader = () => {
               >Junta-te a Nós!
               </a>
               <div className="header-social-media">
-                <SocialSharing onlinePlatforms={socialMediaOptions} />
+                <SocialSharing onlinePlatforms={pptOnlinePlatforms} />
               </div>
             </nav>
           </Col>
@@ -141,7 +141,7 @@ const LayoutHeader = () => {
             rel="noopener noreferrer"
           >Junta-te a Nós!</a>
           <div className="header-social-media">
-            <SocialSharing onlinePlatforms={socialMediaOptions} theme="#666" />
+            <SocialSharing onlinePlatforms={pptOnlinePlatforms} theme="#666" />
           </div>
         </Drawer>
       </Layout.Header>

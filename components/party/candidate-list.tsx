@@ -1,9 +1,10 @@
 import { Avatar, Col, Row, Select, Typography } from "antd";
 import Link from "next/link";
 import { useState } from "react";
-import { convertToLabel, convertToValue, DropdownOption, electoralCircleDropdown, ElectoralCircleDropdownValue } from "../../src/retriever/dtos/electoral-circle-dto";
+import { convertElectoralDistrictToUrl, electoralDistrictDropdown } from "../../src/retriever/dtos/electoral-district.dto";
 import { PartyPageLeadCandidate } from "../../src/retriever/dtos/party-dto";
-import { acronymConversion, Conversion } from "../../src/utils/manipuation";
+import { ElectoralDistrict } from "../../src/utils/constants";
+import { Conversion, acronymConversion } from "../../src/utils/manipuation";
 
 const { Title, Paragraph } = Typography;
 const { Option } = Select;
@@ -14,13 +15,10 @@ interface PartyCandidatesListProps {
 }
 
 const PartyCandidatesList = ({ candidates, partyAcronym }: PartyCandidatesListProps) => {
-  const [
-    electoralCircleFilter,
-    setElectoralCircleFilter
-  ] = useState(ElectoralCircleDropdownValue.ALL);
+  const [electoralCircleFilter, setElectoralCircleFilter] = useState('Todos');
 
-  const filterCircle = (value: ElectoralCircleDropdownValue) =>
-    setElectoralCircleFilter(value ?? ElectoralCircleDropdownValue.ALL);
+  const filterCandidates = (value: string) =>
+    setElectoralCircleFilter(value ?? 'Todos');
 
   return (
     <section className="party-candidates">
@@ -32,11 +30,11 @@ const PartyCandidatesList = ({ candidates, partyAcronym }: PartyCandidatesListPr
           <Select
             style={{ width: "100%" }}
             placeholder="Escolha o Círculo Eleitoral"
-            onChange={filterCircle}
+            onChange={filterCandidates}
           >
-            {electoralCircleDropdown.map((option: DropdownOption, index: number) =>
-              <Option key={index} value={option.value}>
-                {option.label}
+            {electoralDistrictDropdown().map((option: string, index: number) =>
+              <Option key={index} value={option}>
+                {option}
               </Option>
             )}
           </Select>
@@ -52,12 +50,12 @@ const PartyCandidatesList = ({ candidates, partyAcronym }: PartyCandidatesListPr
 
         {candidates
           .filter(candidate =>
-            convertToLabel(electoralCircleFilter) === candidate.electoralCircle ||
-            electoralCircleFilter === ElectoralCircleDropdownValue.ALL
+            electoralCircleFilter === candidate.electoralDistrict ||
+            electoralCircleFilter === 'Todos'
           )
-          .map((candidate: PartyPageLeadCandidate, index: number) =>
+          .map(candidate =>
             <Col
-              key={index}
+              key={candidate.id}
               span={12}
               sm={8}
               lg={6}
@@ -67,27 +65,27 @@ const PartyCandidatesList = ({ candidates, partyAcronym }: PartyCandidatesListPr
               <Link
                 className="avatar-list-item"
                 href={`/partido/${acronymConversion(partyAcronym, Conversion.TO_URL)}/candidatos/${encodeURI(
-                  convertToValue(candidate.electoralCircle)
+                  convertElectoralDistrictToUrl(candidate.electoralDistrict as ElectoralDistrict)
                 )}`}
                 legacyBehavior={false}
               >
                 <div className="party-candidate__content">
                   <Avatar
                     size={120}
-                    src={`/party-candidates/${candidate.profileFileName}`}
+                    src={`/party-candidates/${candidate.photoFileName}`}
                     icon="user"
                   />
-                  {candidate.electoralCircle && (
+                  {candidate.electoralDistrict && (
                     <Paragraph className="party-candidate__content-circle">
-                      {candidate.electoralCircle}
+                      {candidate.electoralDistrict}
                     </Paragraph>
                   )}
-                  {candidate.name && (
+                  {candidate.shortName && (
                     <Title
                       className="party-candidate__content-title"
                       level={3}
                     >
-                      {candidate.name}
+                      {candidate.shortName}
                     </Title>
                   )}
                 </div>

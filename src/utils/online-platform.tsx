@@ -1,29 +1,35 @@
-import { OnlinePlatform, OnlinePlatformType } from "../retriever/dtos/party-dto";
+import { SocialPlatform } from "../retriever/dtos/party-dto";
 import { EMAIL_PPT, FACEBOOK_PPT, GITHUB_PPT, INSTAGRAM_PPT, MEDIUM_PPT, TWITTER_PPT } from "./constants";
 
-export const socialMediaOptions: OnlinePlatform[] = [
+export const pptOnlinePlatforms: SocialPlatform[] = [
   {
-    type: OnlinePlatformType.TWITTER,
-    address: TWITTER_PPT,
+    id: 1000,
+    platform: 'TWITTER',
+    link: TWITTER_PPT,
   },
   {
-    type: OnlinePlatformType.FACEBOOK,
-    address: FACEBOOK_PPT,
+    id: 1001,
+    platform: 'FACEBOOK',
+    link: FACEBOOK_PPT,
   },
   {
-    type: OnlinePlatformType.MEDIUM,
-    address: MEDIUM_PPT,
+    id: 1002,
+    platform: 'MEDIUM',
+    link: MEDIUM_PPT,
   },
   {
-    type: OnlinePlatformType.EMAIL,
-    address: EMAIL_PPT,
+    id: 1003,
+    platform: 'EMAIL',
+    link: EMAIL_PPT,
   },
   {
-    type: OnlinePlatformType.INSTAGRAM,
-    address: INSTAGRAM_PPT,
+    id: 1004,
+    platform: 'INSTAGRAM',
+    link: INSTAGRAM_PPT,
   },
   {
-    type: OnlinePlatformType.GITHUB,
-    address: GITHUB_PPT,
+    id: 1005,
+    platform: 'GITHUB',
+    link: GITHUB_PPT,
   },
 ];

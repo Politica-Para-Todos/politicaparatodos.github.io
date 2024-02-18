@@ -1,25 +1,24 @@
-import { OnlinePlatformType } from "../../src/retriever/dtos/party-dto";
 import { EmailSvgIcon, FacebookSvgIcon, GithubSvgIcon, InstagramSvgIcon, MediumSvgIcon, TwitterSvgIcon } from "./icons";
 
 interface SocialIconProps {
-  icon: OnlinePlatformType;
+  icon: string;
   theme?: string;
 }
 
 const SocialIcon = ({ icon, theme }: SocialIconProps) => {
 
   switch (icon) {
-    case OnlinePlatformType.TWITTER:
+    case 'TWITTER':
       return <TwitterSvgIcon theme={theme} />
-    case OnlinePlatformType.FACEBOOK:
+    case 'FACEBOOK':
       return <FacebookSvgIcon theme={theme} />
-    case OnlinePlatformType.MEDIUM:
+    case 'MEDIUM':
       return <MediumSvgIcon theme={theme} />
-    case OnlinePlatformType.EMAIL:
+    case 'EMAIL':
       return <EmailSvgIcon theme={theme} />
-    case OnlinePlatformType.INSTAGRAM:
+    case 'INSTAGRAM':
       return <InstagramSvgIcon theme={theme} />
-    case OnlinePlatformType.GITHUB:
+    case 'GITHUB':
       return <GithubSvgIcon theme={theme} />
     default:
       return null;
