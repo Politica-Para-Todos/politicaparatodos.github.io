@@ -84,13 +84,20 @@ export const getStaticPaths = async () => {
   const prisma = new PrismaClient();
   const paths: object[] = [];
 
-  const queryResult = await prisma.party.findMany({
+  const parties = await prisma.party.findMany({
     select: {
       acronym: true
     }
   });
 
-  queryResult.forEach(party => {
+  if (paths.length === 0) {
+    return {
+      paths,
+      fallback: false
+    }
+  }
+
+  parties.forEach(party => {
     electoralDistrictList().forEach(district => {
       paths.push({
         params: {
@@ -110,7 +117,7 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async (context: any) => {
   const prisma = new PrismaClient();
   // Doing query by candidates as by party fails because prisma can't query on a list of candidates
-  const query = await prisma.candidate.findMany({
+  const candidates = await prisma.candidate.findMany({
     where: {
       Party: {
         acronym: context.params.acronym.toUpperCase()
@@ -125,7 +132,16 @@ export const getStaticProps = async (context: any) => {
     }
   })
 
-  const party = query[0].Party;
+  if (candidates.length === 0) {
+    return {
+      props: {
+        party: null,
+        candidates: null
+      }
+    }
+  }
+
+  const party = candidates[0].Party;
 
   return {
     props: {
@@ -137,7 +153,7 @@ export const getStaticProps = async (context: any) => {
         description: party.description,
         descriptionSource: party.descriptionSource
       },
-      candidates: query.map(candidate => ({
+      candidates: candidates.map(candidate => ({
         id: candidate.id,
         shortName: candidate.shortName,
         fullName: candidate.fullName,
