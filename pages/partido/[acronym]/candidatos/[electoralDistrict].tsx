@@ -89,7 +89,7 @@ export const getStaticPaths = async () => {
     }
   });
 
-  if (paths.length === 0) {
+  if (parties.length === 0) {
     return {
       paths,
       fallback: false
