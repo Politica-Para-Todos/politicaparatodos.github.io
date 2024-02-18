@@ -37,18 +37,9 @@ const Home: NextPage<HomePageProps> = ({ homePageParties }) =>
     <LayoutFooter />
   </Layout>
 
-// export const getStaticProps = async () => {
-//   const retriever: SeedsJsonRetriever = new Retriever();
-
-//   return {
-//     props: {
-//       homePageParties: retriever.homePageParties()
-//     },
-//   };
-// };
+const prisma = new PrismaClient();
 
 export const getStaticProps = async () => {
-  const prisma = new PrismaClient();
   const parties = await prisma.party.findMany({
     select: {
       id: true,

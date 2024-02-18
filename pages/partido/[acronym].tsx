@@ -61,8 +61,9 @@ const PartyHome = ({ party }: PartyHomeProps) => {
   )
 }
 
+const prisma = new PrismaClient();
+
 export const getStaticPaths = async () => {
-  const prisma = new PrismaClient();
   const parties = await prisma.party.findMany();
 
   if (!parties) {
@@ -87,7 +88,6 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async (context: any) => {
-  const prisma = new PrismaClient();
   // Doing query by candidates as by party fails because prisma can't query on a list of candidates
   const candidates = await prisma.candidate.findMany({
     where: {

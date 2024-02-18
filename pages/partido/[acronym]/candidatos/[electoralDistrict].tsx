@@ -116,7 +116,6 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context: any) => {
   // Doing query by candidates as by party fails because prisma can't query on a list of candidates
-  console.log("ELECTORAL DISTRICT >>>>", context.params.electoralDistrict.toUpperCase().replace('-', '_'))
   const candidates = await prisma.candidate.findMany({
     where: {
       Party: {
