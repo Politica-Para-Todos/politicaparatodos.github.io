@@ -6,7 +6,6 @@ import MetaTags from "../../../../components/global/meta-tags";
 import PartyHeader from "../../../../components/party/header";
 import PartyIntro from "../../../../components/party/intro";
 import PartyCandidatesTable from "../../../../components/party/party-candidate-table";
-import { convertElectoralDistrictToUrl, electoralDistrictList } from "../../../../src/retriever/dtos/electoral-district.dto";
 import { ElectoralDistrict } from "../../../../src/utils/constants";
 
 const { Paragraph } = Typography;
@@ -98,11 +97,11 @@ export const getStaticPaths = async () => {
   }
 
   parties.forEach(party => {
-    electoralDistrictList().forEach(district => {
+    Object.keys(ElectoralDistrict).forEach(district => {
       paths.push({
         params: {
           acronym: party.acronym.toLowerCase(),
-          electoralDistrict: convertElectoralDistrictToUrl(district as ElectoralDistrict)
+          electoralDistrict: district.toLowerCase().replace('_', '-')
         }
       })
     })
