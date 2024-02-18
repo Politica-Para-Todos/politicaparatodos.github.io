@@ -51,7 +51,7 @@ export const CONTRIBUTORS: string[] = [
   "Catarina Tomé",
 ];
 
-// electoral circles
+// Electroral Districts
 export enum ElectoralDistrict {
   ACORES = "Açores",
   AVEIRO = "Aveiro",
