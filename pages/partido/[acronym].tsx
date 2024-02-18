@@ -15,7 +15,7 @@ interface PartyHomeProps {
 }
 
 const PartyHome = ({ party }: PartyHomeProps) => {
-  if (party === undefined) {
+  if (party.name === undefined) {
     return null;
   }
 
@@ -81,7 +81,6 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context: any) => {
   const prisma = new PrismaClient();
-  console.log(context.params.acronym.toUpperCase());
   // Doing query by candidates as by party fails because prisma can't query on a list of candidates
   const candidates = await prisma.candidate.findMany({
     where: {
