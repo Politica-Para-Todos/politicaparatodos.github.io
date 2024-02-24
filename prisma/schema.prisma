@@ -48,7 +48,7 @@ model Candidate {
   id                  Int               @id @db.Integer
   shortName           String
   fullName            String
-  birthdate           DateTime          @db.Date
+  birthdate           DateTime?         @db.Date
   profilePhotoUrl     String?
   bio                 String?
   position            Int?
