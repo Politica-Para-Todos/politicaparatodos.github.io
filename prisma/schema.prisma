@@ -26,6 +26,7 @@ model Party {
   logoUrl           String?
   description       String?
   descriptionSource String?
+  manifestoUrl      String?
   Coligation        PartyAlliance?   @relation(fields: [coligationId], references: [id])
   coligationId      Int?
   Candidates        Candidate[]
