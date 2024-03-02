@@ -11,7 +11,9 @@ interface ManifestoProps {
 
 const Manifesto = ({ manifesto }: ManifestoProps) => {
   const manifestoKeys = Object.keys(manifesto);
+  console.log(manifestoKeys);
   const firstManifestoElement = manifesto[manifestoKeys[0]][0];
+  console.log(manifesto[manifestoKeys[1]][0]);
 
   const [selectedSection, setSelectedSection] = useState({
     title: isManifestoTitle(firstManifestoElement) ? firstManifestoElement : '',
@@ -52,9 +54,8 @@ const Manifesto = ({ manifesto }: ManifestoProps) => {
             mode="inline"
             style={{ height: '100%', borderRight: 0 }}
           >
-            {/* {renderSectionItems()} */}
             {manifestoTopics.map(topic => {
-              if (topic.title.startsWith('<h1')) {
+              if (isManifestoTitle(topic.title)) {
                 return (
                   <Menu.Item key={topic.index} className={`section-${topic.index}`} onClick={onClickSection}>
                     Introdução
@@ -73,7 +74,6 @@ const Manifesto = ({ manifesto }: ManifestoProps) => {
                   title={topic.title}
                   className={`section-mobile-${topic.index}`}
                 >
-                  {/* {renderSubSectionItems(section.content!)} */}
                 </SubMenu>
               }
               else {

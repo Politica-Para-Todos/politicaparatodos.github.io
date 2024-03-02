@@ -124,6 +124,7 @@ export const getStaticProps = async (context: any) => {
         description: party.description,
         descriptionSource: party.descriptionSource,
         logoUrl: party.logoUrl,
+        manifesto: party.manifestoUrl,
         socialPlatforms: party.SocialPlatform.map(social => ({
           id: social.id,
           platform: social.platform,

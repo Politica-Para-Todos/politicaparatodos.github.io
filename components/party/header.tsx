@@ -31,7 +31,7 @@ const PartyHeader = ({ party, subtitle }: PartyHeaderProps) => {
         <Col>
           <Avatar size={200} src={logoUrl} icon="user" />
           <div className="party-header__program-cta">
-            {party.hasManifesto && (
+            {Object.keys(party.manifesto).length > 0 ? (
               <Button
                 className="button--grey party-header__program-button"
                 key={party.name}
@@ -40,17 +40,16 @@ const PartyHeader = ({ party, subtitle }: PartyHeaderProps) => {
                   {`Ver Programa ${party.acronym}`}
                 </Link>
               </Button>
+            ) : (
+              <div className="party-header__program-cta">
+                <p>
+                  Este partido ainda não apresentou programa eleitoral. <br />
+                  Para qualquer correção entra em contacto connosco via{" "}
+                  <a href="mailto:contacto@politicaparatodos.pt">e-mail.</a>
+                </p>
+              </div>
             )}
           </div>
-          {!party.hasManifesto && (
-            <div className="party-header__program-cta">
-              <p>
-                Este partido ainda não apresentou programa eleitoral. <br />
-                Para qualquer correção entra em contacto connosco via{" "}
-                <a href="mailto:contacto@politicaparatodos.pt">e-mail.</a>
-              </p>
-            </div>
-          )}
         </Col>
       </Row>
       <Row

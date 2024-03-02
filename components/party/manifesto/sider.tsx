@@ -1,6 +1,6 @@
 import { Layout, Menu } from "antd";
 import { Fragment, useState } from "react";
-import ManifestoSection from "./section";
+import ManifestoContent from "./ManifestoContent";
 
 interface ManifestoSiderProps {
   sections: any,
@@ -67,7 +67,7 @@ const ManifestoSider = ({ sections, title }: ManifestoSiderProps) => {
         </Fragment>
       </Sider>
       <Layout.Content>
-        <ManifestoSection title={title} section={selectedSection} />
+        <ManifestoContent title={title} section={selectedSection} />
       </Layout.Content>
     </Layout >
   );

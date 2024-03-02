@@ -39,7 +39,7 @@ export type PartyPage = {
   logoUrl?: string,
   description?: string,
   descriptionSource?: string,
-  hasManifesto: boolean,
+  manifesto: {},
   socialPlatforms: SocialPlatform[],
   leadCandidates: PartyPageLeadCandidate[]
 }
