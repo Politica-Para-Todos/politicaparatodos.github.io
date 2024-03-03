@@ -11,7 +11,8 @@ const nextConfig = {
   images: {
     unoptimized: true
   },
-  output: 'standalone'
+  output: 'standalone',
+  transpilePackages: ['antd', '@ant-design']
 }
 
 module.exports = nextConfig;
