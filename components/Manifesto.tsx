@@ -11,9 +11,7 @@ interface ManifestoProps {
 
 const Manifesto = ({ manifesto }: ManifestoProps) => {
   const manifestoKeys = Object.keys(manifesto);
-  console.log(manifestoKeys);
   const firstManifestoElement = manifesto[manifestoKeys[0]][0];
-  console.log(manifesto[manifestoKeys[1]][0]);
 
   const [selectedSection, setSelectedSection] = useState({
     title: isManifestoTitle(firstManifestoElement) ? firstManifestoElement : '',
