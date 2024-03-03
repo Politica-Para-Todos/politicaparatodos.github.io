@@ -10,41 +10,60 @@ interface HomePartiesProps {
 }
 
 enum ElectoralDistrictFilter {
-  AVEIRO = "Aveiro",
-  TODOS = "Todos",
-  LISBOA = "Lisboa"
+  TODOS = 'TODOS',
+  ACORES = "ACORES",
+  AVEIRO = "AVEIRO",
+  BEJA = "BEJA",
+  BRAGA = "BRAGA",
+  BRAGANCA = "BRAGANCA",
+  CASTELO_BRANCO = "CASTELO_BRANCO",
+  COIMBRA = "COIMBRA",
+  EVORA = "EVORA",
+  EUROPA = "EUROPA",
+  FARO = "FARO",
+  FORA_DA_EUROPA = "FORA_DA_EUROPA",
+  GUARDA = "GUARDA",
+  LEIRIA = "LEIRIA",
+  LISBOA = "LISBOA",
+  MADEIRA = "MADEIRA",
+  PORTALEGRE = "PORTALEGRE",
+  PORTO = "PORTO",
+  SANATREM = "SANTAREM",
+  SETUBAL = "SETUBAL",
+  VIANA_DO_CASTELO = "VIANA_DO_CASTELO",
+  VILA_REAL = "VILA_REAL",
+  VISEU = "VISEU"
 }
 
-const isSameDistrict = (district: string, districtFilter: ElectoralDistrictFilter): boolean =>
-  district === (districtFilter as string).toUpperCase();
-
 const HomeParties = ({ parties }: HomePartiesProps) => {
-  const [state, setState] = useState({
+  const [selectedParties, setSelectedParties] = useState({
     alphabeticalOrder: false,
     districtFilter: ElectoralDistrictFilter.TODOS,
   });
 
-  const onChange = () => {
-    setState({
-      alphabeticalOrder: !state.alphabeticalOrder,
-      districtFilter: state.districtFilter,
+  console.log(selectedParties.districtFilter);
+
+  const sortByAlphabeticalOrder = () => {
+    setSelectedParties({
+      alphabeticalOrder: !selectedParties.alphabeticalOrder,
+      districtFilter: selectedParties.districtFilter,
     });
   };
 
-  const filterParties = (district: string) => {
-    setState({
-      alphabeticalOrder: state.alphabeticalOrder,
-      districtFilter: district as ElectoralDistrictFilter,
+  const filterByElectoralDistrict = (district: string) => {
+    setSelectedParties({
+      alphabeticalOrder: selectedParties.alphabeticalOrder,
+      districtFilter: convert(district),
     });
   };
 
   let filteredParties: HomePageParty[] = parties;
 
-  if (state.districtFilter !== ElectoralDistrictFilter.TODOS) {
-    filteredParties = parties.filter(party => [...party.electoralDistrict].find(district => isSameDistrict(district, state.districtFilter)));
+  if (selectedParties.districtFilter !== ElectoralDistrictFilter.TODOS) {
+    filteredParties = parties.filter(party => [...party.electoralDistrict].find(district => isSameDistrict(district, selectedParties.districtFilter)));
   }
 
-  if (state.alphabeticalOrder) {
+  if (selectedParties.alphabeticalOrder) {
     filteredParties = parties.sort((partyA, partyB) => partyA.acronym.toLowerCase().localeCompare(partyB.acronym.toLowerCase()));
   }
   else {
@@ -72,7 +91,7 @@ const HomeParties = ({ parties }: HomePartiesProps) => {
                 <Switch
                   className="alphabetic-order__switch"
                   size="small"
-                  onChange={onChange}
+                  onChange={sortByAlphabeticalOrder}
                 />
                 Ordenar alfabeticamente
               </div>
@@ -83,7 +102,7 @@ const HomeParties = ({ parties }: HomePartiesProps) => {
               <Select
                 style={{ width: "100%" }}
                 placeholder="Escolha o Círculo Eleitoral"
-                onChange={filterParties}
+                onChange={filterByElectoralDistrict}
               >
                 {electoralDistrictDropdown().map((element, index) => (
                   <Select.Option key={index} value={element}>
@@ -97,7 +116,61 @@ const HomeParties = ({ parties }: HomePartiesProps) => {
         </Col>
       </Row>
     </section>
-  );
+  )
 };
+
+const isSameDistrict = (district: string, districtFilter: ElectoralDistrictFilter): boolean =>
+  district === (districtFilter as string).toUpperCase();
+
+const convert = (district: string): ElectoralDistrictFilter => {
+  switch (district) {
+    case 'Açores':
+      return ElectoralDistrictFilter.ACORES;
+    case 'Aveiro':
+      return ElectoralDistrictFilter.AVEIRO;
+    case "Beja":
+      return ElectoralDistrictFilter.BEJA;
+    case "Braga":
+      return ElectoralDistrictFilter.BRAGA;
+    case "Bragança":
+      return ElectoralDistrictFilter.BRAGANCA;
+    case "Castelo Branco":
+      return ElectoralDistrictFilter.CASTELO_BRANCO;
+    case "Coimbra":
+      return ElectoralDistrictFilter.COIMBRA;
+    case "Évora":
+      return ElectoralDistrictFilter.EVORA;
+    case "Europa":
+      return ElectoralDistrictFilter.EUROPA;
+    case "Faro":
+      return ElectoralDistrictFilter.FARO;
+    case "Fora da Europa":
+      return ElectoralDistrictFilter.FORA_DA_EUROPA;
+    case "Guarda":
+      return ElectoralDistrictFilter.GUARDA;
+    case "Leiria":
+      return ElectoralDistrictFilter.LEIRIA;
+    case "Lisboa":
+      return ElectoralDistrictFilter.LISBOA
+    case "Madeira":
+      return ElectoralDistrictFilter.MADEIRA;
+    case "PORTALEGRE":
+      return ElectoralDistrictFilter.PORTALEGRE;
+    case "PORTO":
+      return ElectoralDistrictFilter.PORTO;
+    case "SANTAREM":
+      return ElectoralDistrictFilter.SANATREM;
+    case "SETUBAL":
+      return ElectoralDistrictFilter.SETUBAL;
+    case "Viana do Castelo":
+      return ElectoralDistrictFilter.VIANA_DO_CASTELO;
+    case "Vila Real":
+      return ElectoralDistrictFilter.VILA_REAL;
+    case "Viseu":
+      return ElectoralDistrictFilter.VISEU;
+    default:
+      return ElectoralDistrictFilter.TODOS
+  }
+}
 
 export default HomeParties;
