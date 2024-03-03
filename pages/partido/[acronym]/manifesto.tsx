@@ -59,7 +59,9 @@ const PartyManifesto: NextPage<PartyManifestoProps> = ({ party }) => {
       <LayoutHeader />
       <Layout.Content>
         <PartyHeader party={party} subtitle={`${party.acronym} - Programa`} />
-        <Manifesto manifesto={party.manifesto} />
+        {Object.keys(party.manifesto).length > 0 && (
+          <Manifesto manifesto={party.manifesto} />
+        )}
       </Layout.Content>
       <LayoutFooter />
     </Layout>
@@ -149,8 +151,8 @@ export const getStaticProps = async (context: any) => {
   }
 };
 
-export default PartyManifesto;
-
 interface PptManifesto {
   [hKey: string]: any
 }
+
+export default PartyManifesto;

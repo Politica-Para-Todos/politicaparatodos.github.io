@@ -18,8 +18,8 @@ const PartyHeader = ({ party, subtitle }: PartyHeaderProps) => {
     <section className="party-header">
       <Row>
         <Col span={24}>
-          <h1 className="party-header-title">{party.name}</h1>
-          {party.acronym && (
+          <h1 className="party-header-title">{name}</h1>
+          {acronym && (
             <Fragment>
               <Divider />
               <p className="party-header-subtitle">{subtitle}</p>
@@ -31,10 +31,10 @@ const PartyHeader = ({ party, subtitle }: PartyHeaderProps) => {
         <Col>
           <Avatar size={200} src={logoUrl} icon="user" />
           <div className="party-header__program-cta">
-            {Object.keys(party.manifesto).length > 0 ? (
+            {party.manifesto ? (
               <Button
                 className="button--grey party-header__program-button"
-                key={party.name}
+                key={name}
               >
                 <Link href={`/partido/${acronymConversion(party.acronym, Conversion.TO_URL)}/manifesto`} rel="noopener">
                   {`Ver Programa ${party.acronym}`}

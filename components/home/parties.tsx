@@ -41,8 +41,6 @@ const HomeParties = ({ parties }: HomePartiesProps) => {
     districtFilter: ElectoralDistrictFilter.TODOS,
   });
 
-  console.log(selectedParties.districtFilter);
-
   const sortByAlphabeticalOrder = () => {
     setSelectedParties({
       alphabeticalOrder: !selectedParties.alphabeticalOrder,
