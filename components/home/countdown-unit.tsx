@@ -1,5 +1,4 @@
-import React from "react";
-import { zeroPad } from "react-countdown-now";
+import { zeroPad } from "react-countdown";
 
 const CountdownUnit = ({ label, value }: any) =>
   <div className="countdown-unit">
