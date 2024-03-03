@@ -11,7 +11,7 @@ const { Sider } = Layout;
 const { SubMenu } = Menu;
 
 const ManifestoSider = ({ sections, title }: ManifestoSiderProps) => {
-  const [selectedSection, setSelectedSection] = useState(null);
+  const [selectedSection, setSelectedSection] = useState([]);
 
   const onClickSection = (event: any) => {
     const keyPath: string[] = event.keyPath;
